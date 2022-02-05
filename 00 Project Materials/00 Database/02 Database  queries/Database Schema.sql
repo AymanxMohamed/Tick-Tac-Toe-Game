@@ -1,3 +1,8 @@
+
+CREATE DATABASE TicTacToe;
+
+GO
+
 USE TicTacToe;
 
 GO

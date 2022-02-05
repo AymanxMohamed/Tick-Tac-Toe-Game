@@ -10,11 +10,16 @@ import Database.Entities.Enums.DIFFICULTY;
  * @author ayman
  */
 public class SingleModeGame extends Game{
-    private String user_name;
+    private String playerName;
     private int playerScore;
     private DIFFICULTY difficulty;
     
     public SingleModeGame() {
 
     }
+    
+    public String getPlayerName() { return playerName; }
+    public int getPlayerScore() { return playerScore; }
+    public DIFFICULTY getDifficulty() { return difficulty; }
+    
 }

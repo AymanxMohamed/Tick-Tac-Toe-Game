@@ -11,10 +11,14 @@ import java.time.LocalDateTime;
  * @author ayman
  */
 public abstract class Game {
-    protected int game_number;
-    protected int numberOfRounds;
-    protected String gameResult;
+    protected int numberOfRounds = 0; // from database and final
+    protected String gameResult;  // from database and final
     // add the appropriate datatype to store the video 
 //  private video gameRecord;
     protected LocalDateTime gameDate;
+    
+    public void increaseNumberOfRounds() { numberOfRounds++; }
+    
+    public int getNumberOfRounds() { return numberOfRounds; }
+    public String getGameResult() { return gameResult; }
 }

@@ -4,12 +4,14 @@
  */
 package Database.Entities;
 
+import Database.Entities.Enums.PLAYER_RANK;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author ayman
  */
+
 public class Player {
     private final String userName;
     private int bonusPoints; 
@@ -54,6 +56,8 @@ public class Player {
         }
     }
     public void decreaseBonusPoints() {
+        if (bonusPoints == 0)
+            return;
         switch(playerRank) {
             case BRONZE:
                 bonusPoints -= 1;                

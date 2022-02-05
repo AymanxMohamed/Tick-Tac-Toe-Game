@@ -14,8 +14,8 @@ public class MultiModeGame {
     private Player firstPlayerName;
     private Player secondPlayerName;
     private GAME_TYPE gameType;
-    private int firstPlayerScore;
-    private int secondPlayerScore;
+    private int firstPlayerScore; 
+    private int secondPlayerScore; 
     
     public MultiModeGame() {
 
