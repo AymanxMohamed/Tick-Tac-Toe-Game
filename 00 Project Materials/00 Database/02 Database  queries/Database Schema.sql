@@ -31,10 +31,34 @@ RETURNS VARCHAR(4)
 	END;
 GO
 
+CREATE FUNCTION getPlayerRank(@playerPoints INT)
+RETURNS VARCHAR(15)
+	BEGIN 
+		DECLARE @rank VARCHAR(15)
+			IF @playerPoints >= 0 AND @playerPoints < 10
+				SET @rank = 'Bronze'
+			ELSE IF @playerPoints >= 10 AND @playerPoints < 20
+				SET @rank = 'Silver'
+			ELSE IF @playerPoints >= 20 AND @playerPoints < 30
+				SET @rank = 'Gold'
+			ELSE IF @playerPoints >= 30 AND @playerPoints < 40
+				SET @rank = 'Platinum'
+			ELSE IF @playerPoints >= 40 AND @playerPoints < 50
+				SET @rank = 'Master'
+			ELSE IF @playerPoints >= 50 AND @playerPoints < 60
+				SET @rank = 'Grand Master'
+			ELSE IF @playerPoints >= 60
+				SET @rank = 'Challenger'
+			ELSE  
+				SET  @rank ='Bronze'
+		RETURN @rank
+	END
+GO
 CREATE TABLE player (
 	user_name VARCHAR(50) CONSTRAINT PK_user_name_player PRIMARY KEY ,
 	password INT NOT NULL,
-	bonus_points INT NULL,
+	bonus_points INT NULL CONSTRAINT DK_bonus_points_player DEFAULT 0,
+	player_rank AS dbo.getPlayerRank(bonus_points),
 	register_date DATETIME CONSTRAINT DK_register_date_player DEFAULT GETDATE()
 );
 
