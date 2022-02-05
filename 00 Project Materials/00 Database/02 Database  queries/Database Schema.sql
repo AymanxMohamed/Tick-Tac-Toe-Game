@@ -94,3 +94,9 @@ CREATE TABLE multi_mode_game (
 );
 
 GO
+
+/**
+	DROP TABLE multi_mode_game;
+	DROP TABLE single_mode_game;
+	DROP TABLE player;
+*/
