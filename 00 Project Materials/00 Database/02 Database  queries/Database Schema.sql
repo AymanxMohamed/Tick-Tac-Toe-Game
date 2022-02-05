@@ -56,7 +56,7 @@ RETURNS VARCHAR(15)
 GO
 CREATE TABLE player (
 	user_name VARCHAR(50) CONSTRAINT PK_user_name_player PRIMARY KEY ,
-	password INT NOT NULL,
+	password VARCHAR(50) NOT NULL,
 	bonus_points INT NULL CONSTRAINT DK_bonus_points_player DEFAULT 0,
 	player_rank AS dbo.getPlayerRank(bonus_points),
 	register_date DATETIME CONSTRAINT DK_register_date_player DEFAULT GETDATE()
