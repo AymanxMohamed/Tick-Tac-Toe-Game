@@ -10,7 +10,6 @@ import static Database.Entities.Enums.PLAYER_CASE.*;
 import static Database.Entities.Enums.PLAYER_RANK.*;
 
 /**
- *
  * @author ayman
  */
 public class MappingFunctions {
