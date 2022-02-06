@@ -35,26 +35,31 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        try {
-             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        } catch(ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        try {
-            DatabaseManager.addMultiModeGameRecord("ahmed", "ahmed234", GAME_TYPE.LAN, 10, 6, null);
-            DatabaseManager.addSingleModeGameRecord("ayman", 9, 4, DIFFICULTY.MEDIUM, null);
-            DatabaseManager.closeDataBaseConnection();
-            System.out.println("database connected");
-            System.exit(0);
-        } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(0);
-        }
+        // uncomment this code to try the database connection
+        // note all database will be inside the server application 
+        // and will be removed from this client application
+        
+//        try {
+//             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//        } catch(ClassNotFoundException e) {
+//            e.printStackTrace();
+//            System.exit(0);
+//        }
+//        try {
+//            DatabaseManager.addMultiModeGameRecord("ahmed", "ahmed234", GAME_TYPE.LAN, 10, 6, null);
+//            DatabaseManager.addSingleModeGameRecord("ayman", 9, 4, DIFFICULTY.MEDIUM, null);
+//            DatabaseManager.closeDataBaseConnection();
+//            System.out.println("database connected");
+//            System.exit(0);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+//            System.exit(0);
+//        }
 
 
-//      
-//        launch();
+
+      // uncomment this code before using the client application
+        launch();
     }
 
 }
