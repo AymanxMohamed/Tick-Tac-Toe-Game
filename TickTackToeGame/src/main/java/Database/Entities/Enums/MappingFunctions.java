@@ -12,34 +12,51 @@ import static Database.Entities.Enums.PLAYER_RANK.*;
 /**
  * @author ayman
  */
+
 public class MappingFunctions {
     
     public static String mapPlayerCaseInSingle(PLAYER_CASE playerCase) {
         String databaseCase = null;
         switch (playerCase) {
             case WINNER:
-                databaseCase = "win";
+                databaseCase = "winner";
                 break;
             case LOSER:
-                databaseCase = "lose";
+                databaseCase = "loser";
                 break;
             case TIED:
-                databaseCase = "draw";
+                databaseCase = "tied";
                 break;
         }
         return databaseCase;
+    }
+    
+        public static PLAYER_CASE mapPlayerCaseInSingle(String databasePlayerCase) {
+        PLAYER_CASE playerCase = null;
+        switch (databasePlayerCase) {
+            case "winner":
+                playerCase = WINNER;
+                break;
+            case "loser":
+                playerCase = LOSER;
+                break;
+            case "tied":
+                playerCase = TIED;
+                break;
+        }
+        return playerCase;
     }
     public static String mapPlayerCaseInMulti(PLAYER_CASE firstPlayerCase, String firstPlayerName, String secondPLayerName) {
         String databaseCase = null;
         switch (firstPlayerCase) {
             case WINNER:
-                databaseCase = firstPlayerName + " won";
+                databaseCase = firstPlayerName;
                 break;
             case LOSER:
-                databaseCase = secondPLayerName + " won";
+                databaseCase = secondPLayerName;
                 break;
             case TIED:
-                databaseCase = "draw";
+                databaseCase = "tied";
                 break;
         }
         return databaseCase;

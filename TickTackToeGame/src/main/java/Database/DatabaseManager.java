@@ -5,13 +5,19 @@
 package Database;
 
 import Database.Entities.Enums.DIFFICULTY;
+import Database.Entities.Enums.GAME_TYPE;
+import Database.Entities.Enums.MappingFunctions;
 import Database.Entities.MultiModeGame;
 import Database.Entities.Enums.PLAYER_RANK;
 import Database.Entities.Player;
 import Database.Entities.SingleModeGame;
 import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,24 +25,43 @@ import java.util.ArrayList;
  */
 public class DatabaseManager {
     
-    public void openDataBaseConnection() {
-        
+    private static Connection sqlServerConnection;
+    
+    static  {
+        try {
+            openDataBaseConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void closeDataBaseConnection() {
-        
+    private static void openDataBaseConnection() throws SQLException {
+        String uname = "ayman";
+        String password = "@01208538504@";
+         String sqlServerUrl = "jdbc:sqlserver://localhost:1433;databaseName=TicTacToe;encrypt=true;trustServerCertificate=true;";
+        sqlServerConnection = DriverManager.getConnection(sqlServerUrl, uname, password);
+    }
+    
+    public static void closeDataBaseConnection() {
+        try {
+            sqlServerConnection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
     /*_____ *_____ Player Database Methods _____ * _____*/
     
-    public void addNewPlayer(String userName, String password) {
-        // this function will be just one query that add record to player table
-        // in the database 
-        // insert into player(user_name, password) values (userName, password);
+    public static void addNewPlayer(String userName, String password) throws SQLException {
+         PreparedStatement pst = 
+                 sqlServerConnection.prepareStatement("INSERT INTO PLAYER (user_name, password) VALUES(?, ?); ");
+         pst.setString(1, userName);
+         pst.setString(2, password);
+         pst.execute();
     }
     
-    public boolean isValidPlayer(String userName, String password) {
+    public static boolean isValidPlayer(String userName, String password) {
         
         // 1- check if the userName exists 
         // bool checkUserNameExistence(String userName);
@@ -46,7 +71,7 @@ public class DatabaseManager {
         //          return false;
         return true;
     }
-    public Player getPlayer(String userName) {
+    public static Player getPlayer(String userName) {
         // todo go to the data base and get the record for the corresponding player
         // then return the player object
         int bonusPoints = 10; // getBonusPoints() from database
@@ -61,7 +86,7 @@ public class DatabaseManager {
     
     // this function will update the player bonus in the data base and will
     // get the updated player rank from database 
-    public void updatePlayerData(Player player) {
+    public static void updatePlayerData(Player player) {
         
         // this function will 
         // first update the player bonus in the database
@@ -83,13 +108,18 @@ public class DatabaseManager {
     /*_____ *_____ End of Player Database Methods _____ * _____*/
     
       /*_____ *_____ Signle mode game Database Methods _____ * _____*/
-    public void addSingleModeGameRecord(String userName, int numberOfRounds, int playerScore, String difficulty, File gameRecord) {
-        // insert into single_mode_game(user_name, no_of_rounds, player_score, difficulty, game_Record)
-        // values(userName, numberOfRounds, playerScore, difficulty, gameRecord)
-        
+    public static void addSingleModeGameRecord(String userName, int numberOfRounds, int playerScore, DIFFICULTY difficulty, FileInputStream gameRecord) throws SQLException {
+        PreparedStatement pst = 
+                 sqlServerConnection.prepareStatement("INSERT INTO single_mode_game(user_name, no_of_rounds, player_score, difficulty, game_record) VALUES(?, ?, ?, ?, ?)");
+         pst.setString(1, userName);
+         pst.setInt(2, numberOfRounds);
+         pst.setInt(3, playerScore);
+         pst.setString(4, MappingFunctions.mapDifficulty(difficulty));
+         pst.setBlob(5, gameRecord);
+         pst.execute();
     }
     
-    public ArrayList<SingleModeGame> getSingleModeGameRecords() {
+    public static ArrayList<SingleModeGame> getSingleModeGameRecords() {
         
         ArrayList<SingleModeGame> singleModeGameArray = new ArrayList<>();
         
@@ -102,8 +132,16 @@ public class DatabaseManager {
       
      /*_____ *_____ Multi mode game Database Methods _____ * _____*/
     
-    public void addMultiModeGameRecord(String firstPlayerName, String secondPlayerName, String gameType, int numberOfRecords, int firstPlayerScore, File gameRecord) {
-        // insert into multi_mode_game(first_player_name, second_player_name, game_type, no_of_Records, first_player_score, game_record) values (firstPlayerName, secondPlayerName, gameType, numberOfRecords, firstPlayerScore, gameRecord);
+    public static void addMultiModeGameRecord(String firstPlayerName, String secondPlayerName, GAME_TYPE gameType, int numberOfRounds, int firstPlayerScore, FileInputStream gameRecord) throws SQLException {
+        PreparedStatement pst = 
+        sqlServerConnection.prepareStatement("INSERT INTO multi_mode_game(first_player_user_name, second_player_user_name, game_type, no_of_rounds, first_player_score, game_record) VALUES(?, ?, ?, ?, ?, ?)");
+         pst.setString(1, firstPlayerName);
+         pst.setString(2, secondPlayerName);
+         pst.setString(3, MappingFunctions.mapGameType(gameType));
+         pst.setInt(4, numberOfRounds);         
+         pst.setInt(5, firstPlayerScore);
+         pst.setBlob(6, gameRecord);
+         pst.execute();
     }
     
     

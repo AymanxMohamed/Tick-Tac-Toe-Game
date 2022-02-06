@@ -4,8 +4,12 @@
  */
 package Database.Entities;
 import Database.Entities.Enums.DIFFICULTY;
+import Database.Entities.Enums.MappingFunctions;
+import Database.Entities.Enums.PLAYER_CASE;
 import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
+
 
 /**
  *
@@ -16,19 +20,19 @@ public class SingleModeGame {
     private final String playerName;
     private final int numberOfRounds;
     private final int playerScore;
-    private final String difficulty;
-    private final String gameResult;
-    private final File gameRecord;
+    private final DIFFICULTY difficulty;
+    private final PLAYER_CASE playerCase;
+    private final FileInputStream gameRecord;
     private final LocalDateTime gameDate;
     
     
-    public SingleModeGame(int gameNumber, String playerName, int numberOfRounds, int playerScore, String difficulty, String gameResult, File gameRecord, LocalDateTime gameDate) {
+    public SingleModeGame(int gameNumber, String playerName, int numberOfRounds, int playerScore, String difficulty, String playerCase, FileInputStream gameRecord, LocalDateTime gameDate) {
         this.gameNumber = gameNumber;
         this.playerName = playerName;
         this.numberOfRounds = numberOfRounds;
         this.playerScore = playerScore;
-        this.difficulty = difficulty;
-        this.gameResult = gameResult;
+        this.difficulty = MappingFunctions.mapDifficulty(difficulty);
+        this.playerCase = MappingFunctions.mapPlayerCaseInSingle(playerCase);
         this.gameRecord = gameRecord;
         this.gameDate = gameDate;
     }
@@ -36,8 +40,8 @@ public class SingleModeGame {
     public String getPlayerName() { return playerName; }
     public int getNumberOfRounds() { return numberOfRounds; }
     public int getPlayerScore() { return playerScore; }
-    public String getDifficulty() { return difficulty; }
-    public String getGameResult() { return gameResult; }
-    public File getGameRecord() { return gameRecord; }
+    public DIFFICULTY getDifficulty() { return difficulty; }
+    public PLAYER_CASE getPlayerCase() { return playerCase; }
+    public FileInputStream getGameRecord() { return gameRecord; }
     public LocalDateTime getGameDate() { return gameDate; }    
 }

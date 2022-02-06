@@ -4,6 +4,7 @@
  */
 package Database.Entities;
 
+import Database.Entities.Enums.MappingFunctions;
 import Database.Entities.Enums.PLAYER_RANK;
 import java.time.LocalDateTime;
 
@@ -18,10 +19,10 @@ public class Player {
     private PLAYER_RANK playerRank;
     private final LocalDateTime registerDate; 
     
-    public Player(String userName, int bonusPoints, PLAYER_RANK playerRank, LocalDateTime registerDate) {
+    public Player(String userName, int bonusPoints, String playerRank, LocalDateTime registerDate) {
         this.userName = userName;
         this.bonusPoints = bonusPoints;
-        this.playerRank = playerRank;
+        this.playerRank = MappingFunctions.mapPlayerRank(playerRank);
         this.registerDate = registerDate;
     }
 
