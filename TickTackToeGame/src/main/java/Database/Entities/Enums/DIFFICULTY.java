@@ -10,6 +10,6 @@ package Database.Entities.Enums;
  */
 public enum DIFFICULTY {
     EASY,
-    MIDEUM,
+    MEDIUM,
     HARD
 }
