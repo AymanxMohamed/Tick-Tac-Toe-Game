@@ -1,0 +1,129 @@
+enum ResponseType{
+	playerNotExitsError,
+	WrongPasswordError,
+	ValidPlayer,
+	SendPlayerData,
+	userNameExists,
+	invalidUserName,
+	weakPasswordError,
+	sendPlayerData,
+	SendSingleModeHistoryResponse,
+	PlayerBusyError,
+	PlayerInGameError,
+	ChatConnected,
+	NoSingleModeGamesError,
+	SendSingleModeHitory,
+	NoMultiModeGameError,
+	SendMultiModeGameHistory,
+}
+
+RequestHandler(RequestType requestType, String requestdata) {
+	Switch(RequestType)
+	{
+		case Login:
+			handleLoginRequest(requestData);
+			break;
+		// todo the rest;
+	}
+}
+
+handleLoginRequest(String requestData, Socket s) {		
+	userName = getLoginUser();
+	password = getLoginPassowrd();
+	authonticatePlayer(userName, password, s);
+}
+
+// server
+public static void main(String[] args) {
+	while(true)
+	{
+		socket  s = new Socket();
+		s.accept();
+		String request = AcceptRequest();
+		requestype = getRequestype(request);
+		if (requetType == Login)
+			HanldeLoginRequqet(getRequestdata(request), s);
+		if (requestType == Register)
+	}
+}
+public void authonticatePlayer(String userName, String password) {
+	ResposeType response = isAuthorized(userName, password);
+	if (response = validPlayer) {
+		PLayer newPlayer = DatabaseManager.getPlayer(userName);
+		PlayerHandler(newPlayer, socket);
+	}
+	else {
+		sendResponse(response, "");
+		s.close();
+	}
+	
+}
+public void sendResponse(ResponseType response, String responseData) {
+	switch(resposne) {
+
+	}
+}
+ResponseType isAuthorized(String userName, String password) {
+	if (isPlayerExist(userName) == playerExist)
+	{
+		// return either wrongPasswordResponse or validPlayer
+		return isValidPasword(userName,password)
+	} else {
+		return playerNotExistError;
+	}
+}
+enum RequsetType {
+
+}
+
+class PlayerHandler immplements runnable {
+	static ArrayList<Player> onlinePlayers = new ArrayList<>();
+	
+
+	public PlayerHandler(Player player, Socket s) {
+		onlinePlayers.add(player);
+		sendRespnse(SendPlayerData, Player.getPlayerData())
+		
+	}
+	run () {
+		while(true) {
+			String request = AcceptRequest();
+			String response = HangleRequest(getRequestType(request), getRequestData(request));
+			SendResponse(response);
+			
+		}
+	}
+		
+	
+}
+AcceptRequest() {
+	return readline();
+	return "requestName, requestdata"	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

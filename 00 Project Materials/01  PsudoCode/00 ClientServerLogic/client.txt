@@ -1,0 +1,42 @@
+// in client application
+enum RequestType {
+	Login,
+	Register,
+	SaveSingleModeGame,
+	SaveMultiModeGame,
+	OpenChatRequset,
+	SingleModeHitory,
+	MultiModeHistory
+}
+
+ResponseHandler(Response, responseData) {
+	Switch(response)
+	{
+		
+	}
+
+}
+
+
+
+
+onLoginClick() {
+	if(isServerOnline()) {
+		sendLoginRequest("LOGIN, ahmed, 123");
+		// start timer
+		response = "";
+		while(timer <= 10000) {
+			response = ReciveResponse();
+			ResponseHandler(getResponstType(response), getResponseData(response));
+		}
+		if (response == "") 
+			errorMessage("server is busy");
+	}
+	
+}
+SendLoginRequest(String request) {
+	send "request requestData";
+}
+while(true) {
+	return ReciveResponse();
+}
