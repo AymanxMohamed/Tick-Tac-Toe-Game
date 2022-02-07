@@ -33,8 +33,8 @@ class ClientHandler implements Runnable {
     public void run() {
         try {
             request = in.readLine();
+            System.out.println(request);
             // TODO : work on "request" to run the game
-            // System.out.println("[SERVER] Data is sent successfully.");
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
