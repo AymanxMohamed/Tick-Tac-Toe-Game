@@ -32,9 +32,12 @@ class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
-            request = in.readLine();
-            System.out.println(request);
-            // TODO : work on "request" to run the game
+            while (true) {
+                request = in.readLine();
+                System.out.println("Client says: "+request);
+                // TODO : work on "request" to run the game
+                out.println("[Server] Acknowledgement.");
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {

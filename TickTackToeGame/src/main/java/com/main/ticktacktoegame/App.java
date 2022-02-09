@@ -3,6 +3,7 @@ package com.main.ticktacktoegame;
 import Database.DatabaseManager;
 import Database.Entities.Enums.DIFFICULTY;
 import Database.Entities.Enums.GAME_TYPE;
+import com.main.ticktacktoegame.Network.ConnectionStabilizer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,7 +35,8 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        new ConnectionStabilizer();
         // uncomment this code to try the database connection
         // note all database will be inside the server application 
         // and will be removed from this client application

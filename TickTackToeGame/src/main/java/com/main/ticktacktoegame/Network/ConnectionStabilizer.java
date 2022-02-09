@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -18,19 +19,31 @@ public class ConnectionStabilizer {
     private static final int SERVER_PORT = 9090;
     private Socket socket = null;
     
-    // private BufferedReader in;
+    private BufferedReader in;
+    private BufferedReader keyboard;
     private PrintWriter out;
-    
+    String string;
     public ConnectionStabilizer() throws IOException {
         socket = new Socket(SERVER_IP, SERVER_PORT);
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        keyboard = new BufferedReader(new InputStreamReader(System.in));
+        out = new PrintWriter(socket.getOutputStream(), true);
         // ServerConnectionHandler serverConnection = new ServerConnectionHandler(socket);
-        // new Thread(ServerConnectionHandler).start();
-        System.out.println("Hello from the client side.");
-        
-        System.out.close();
+        // new Thread(serverConnection).start();
+        while (true) {
+            string = keyboard.readLine();
+            if (string == "exit") break;
+            out.println(string);
+
+            string = in.readLine();
+            System.out.println(string);
+        }
+
+        out.close();
     }
-    
+    /*
     public static void main(String[] args) throws IOException {
         new ConnectionStabilizer();
     }
+    */
 }
