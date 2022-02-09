@@ -28,8 +28,8 @@ public class ConnectionStabilizer {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         keyboard = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(socket.getOutputStream(), true);
-        // ServerConnectionHandler serverConnection = new ServerConnectionHandler(socket);
-        // new Thread(serverConnection).start();
+        ServerConnectionHandler serverConnection = new ServerConnectionHandler(socket);
+        new Thread(serverConnection).start();
         while (true) {
             string = keyboard.readLine();
             if (string == "exit") break;

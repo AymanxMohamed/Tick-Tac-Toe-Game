@@ -36,7 +36,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        new ConnectionStabilizer();
+        
         // uncomment this code to try the database connection
         // note all database will be inside the server application 
         // and will be removed from this client application
@@ -62,6 +62,7 @@ public class App extends Application {
 
       // uncomment this code before using the client application
         launch();
+        new ConnectionStabilizer();
     }
 
 }
