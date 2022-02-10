@@ -25,9 +25,9 @@ public class ConnectionStabilizer {
         socket = new Socket(SERVER_IP, SERVER_PORT);
         // ServerConnectionHandler serverConnection = new ServerConnectionHandler(socket);
         // new Thread(ServerConnectionHandler).start();
-        out.println("Hello from the client side.");
+        System.out.println("Hello from the client side.");
         
-        out.close();
+        System.out.close();
     }
     
     public static void main(String[] args) throws IOException {

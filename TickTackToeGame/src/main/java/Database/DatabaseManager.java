@@ -71,19 +71,19 @@ public class DatabaseManager {
         //          return false;
         return true;
     }
-    public static Player getPlayer(String userName) {
-        // todo go to the data base and get the record for the corresponding player
-        // then return the player object
-        int bonusPoints = 10; // getBonusPoints() from database
-        
-        PLAYER_RANK playerRank = PLAYER_RANK.BRONZE; //getPlayerRank() from database
-        
-        LocalDateTime registerDate = LocalDateTime.now(); // get dateTime from database
-        
-        //Player(String userName, int bonusPoints, PLAYER_RANK playerRank, LocalDateTime registerDate)
-        return new Player(userName, bonusPoints, playerRank, registerDate);
-    }
-    
+//    public static Player getPlayer(String userName) {
+//        // todo go to the data base and get the record for the corresponding player
+//        // then return the player object
+//        int bonusPoints = 10; // getBonusPoints() from database
+//        
+//        PLAYER_RANK playerRank = PLAYER_RANK.BRONZE; //getPlayerRank() from database
+//        
+//        LocalDateTime registerDate = LocalDateTime.now(); // get dateTime from database
+//        
+//        //Player(String userName, int bonusPoints, PLAYER_RANK playerRank, LocalDateTime registerDate)
+////        return new Player(userName, bonusPoints, playerRank, registerDate);
+//    }
+//    
     // this function will update the player bonus in the data base and will
     // get the updated player rank from database 
     public static void updatePlayerData(Player player) {
