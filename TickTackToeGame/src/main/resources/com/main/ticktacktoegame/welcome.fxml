@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.main.ticktacktoegame.Controllers.WelcomeController">
+   <children>
+      <Button layoutX="277.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToPlayModeView" text="Play">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="248.0" layoutY="67.0" text="Welcome">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="125.0" text="User Name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="164.0" text="Bonus Points">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="204.0" text="Rank">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="246.0" text="Register Date">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel" layoutX="283.0" layoutY="130.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="bonusPointsLabel" layoutX="283.0" layoutY="169.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="rankLabel" layoutX="283.0" layoutY="209.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="registerDateLabel" layoutX="283.0" layoutY="251.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="456.0" layoutY="130.0" text="Online Plyaers">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="456.0" layoutY="161.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

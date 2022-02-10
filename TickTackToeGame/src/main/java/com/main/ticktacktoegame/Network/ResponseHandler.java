@@ -5,6 +5,7 @@
 package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Controllers.WelcomeController;
 import com.main.ticktacktoegame.Models.Player;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -45,16 +46,26 @@ public class ResponseHandler {
     }
 
     private static void handlePlayerNotExist() {
-        // todo
-        // you have to send an error message to the player view that say that he entered
-        // wrong username
+        try {
+            // todo
+            // you have to send an error message to the player view that say that he entered
+            // wrong username
+            App.setRoot("PlayerNotExist");
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("player not exist");
     }
 
     private static void handleWrongPassword() {
-        // todo
-        // you have to send an error message to the player login view that say that
-        // entered wrong password
+        try {
+            // todo
+            // you have to send an error message to the player login view that say that
+            // entered wrong password
+            App.setRoot("WrongPassword");
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("wrong password");
     }
 
@@ -69,7 +80,9 @@ public class ResponseHandler {
             // switch the player to his home page with it's corresponding information from and a nice welcome back messaage
             // his object
             System.out.println("player loged in successfuly");
-            App.setRoot("TicTackToe");
+            
+            App.setRoot("welcome");
+            WelcomeController.setText();
         } catch (IOException ex) {
             Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

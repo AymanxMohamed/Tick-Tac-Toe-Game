@@ -39,7 +39,7 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-      public static void main(String[] args) throws NoSuchAlgorithmException {
+      public static void main(String[] args) {
         try {
             Server.startServer();
         } catch (IOException ex) {
