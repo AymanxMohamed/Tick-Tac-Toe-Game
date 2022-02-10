@@ -31,5 +31,6 @@
       </Label>
       <PasswordField fx:id="passwordField" layoutX="307.0" layoutY="219.0" onAction="#sendLoginRequest" />
       <TextField fx:id="usernameField" layoutX="307.0" layoutY="166.0" onAction="#sendLoginRequest" />
+      <Label layoutX="184.0" layoutY="113.0" text="Username is already exists, you can login now!" textFill="RED" />
    </children>
 </AnchorPane>

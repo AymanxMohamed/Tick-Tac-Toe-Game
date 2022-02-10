@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.ChooseModeController">
+   <children>
+      <Button layoutX="213.0" layoutY="116.0" mnemonicParsing="false" onAction="#switchTicTacToe" text="Single Mode">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="219.0" layoutY="223.0" mnemonicParsing="false" onAction="#switchTicTacToe" text="Multi Mode">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -4,6 +4,7 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
+import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import com.main.ticktacktoegame.Network.RequestCreator;
 import java.io.IOException;
@@ -26,7 +27,15 @@ public class LoginController {
         try {
             Client.sendRequest(RequestCreator.createLoginJsonString(username, password));
         } catch (IOException ex) {
-            
+            ex.printStackTrace();
+        }
+    }
+    
+    public void switchToRegistrationView () {
+        try {
+            App.setRoot("RegistrationView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

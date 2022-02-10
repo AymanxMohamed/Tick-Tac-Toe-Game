@@ -52,58 +52,56 @@ public class ResponseHandler {
 
     private static void handlePlayerNotExist() {
         try {
-            // todo
-            // you have to send an error message to the player view that say that he entered
-            // wrong username
-            App.setRoot("PlayerNotExist");
+            App.setRoot("PlayerNotExistView");
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        System.out.println("player not exist");
     }
 
     private static void handleWrongPassword() {
         try {
-            // todo
-            // you have to send an error message to the player login view that say that
-            // entered wrong password
-            App.setRoot("WrongPassword");
+            App.setRoot("WrongPasswordView");
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        System.out.println("wrong password");
     }
 
     private static void handleLoginSuccess(JSONObject playerData) {
         try {
-            // todo
             Client.player = new Player(
-                    (String) playerData.get("username"),
+                    (String) playerData.get("userName"),
                     ((Long) playerData.get("bonusPoints")).intValue(),
                     (String) playerData.get("playerRank"),
                     (String) playerData.get("registerDate"));
-            // switch the player to his home page with it's corresponding information from and a nice welcome back messaage
-            // his object
-            System.out.println("player loged in successfuly");
-            
-            App.setRoot("welcome");
-            WelcomeController.setText();
+            System.out.println("player logged in successfuly");
+            App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
     private static void handlePlayerExist() {
-        // todo
-        // you have to show the register view again but with an error message that shows that the player exist before
-          System.out.println("please enter new player");
+        try {
+            // todo
+            // you have to show the register view again but with an error message that shows that the player exist before
+            App.setRoot("PlayerExistView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("please enter new player");
     }
 
     private static void handleRegisterSuccess() {
         // todo
         // you have to redirect the user to the login view and show a message that say that he register successfuly
+        try {
+            App.setRoot("RegisterSuccessView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         System.out.println("gratz u have registered");
     }
+    
     private static void handleUpdateOnlinePlayers(JSONObject data) {
         // todo
         // this function will manage reveal the player names that came in the data

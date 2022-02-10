@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 
 public class Player {
-    private final String userName;
+    private String userName;
     private int bonusPoints;
     private String playerRank;
     private final String registerDate;
@@ -39,7 +39,15 @@ public class Player {
     public int getBonusPoints() {
         return bonusPoints;
     }
-
+    
+    public String getPlayerRank() {
+        return MappingFunctions.mapPlayerRank(playerRank).toString();
+    }
+    
+    public String getRegisterDate() {
+        return registerDate;
+    }
+    
     public void printData() {
         System.out.println("############################################");
         System.out.println("userName: " + userName);
