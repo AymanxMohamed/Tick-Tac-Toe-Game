@@ -1,8 +1,12 @@
 package com.main.ticktacktoegame;
 
 import Database.DatabaseManager;
+import static Database.DatabaseManager.getPlayer;
 import Database.Entities.Enums.DIFFICULTY;
 import Database.Entities.Enums.GAME_TYPE;
+import Database.Entities.MultiModeGame;
+import Database.Entities.Player;
+import Database.Entities.SingleModeGame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,12 +16,15 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
     private static Scene scene;
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
@@ -34,32 +41,27 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         // uncomment this code to try the database connection
-        // note all database will be inside the server application 
+        // note all database will be inside the server application
         // and will be removed from this client application
-        
 //        try {
-//             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//        } catch(ClassNotFoundException e) {
-//            e.printStackTrace();
-//            System.exit(0);
-//        }
-//        try {
-//            DatabaseManager.addMultiModeGameRecord("ahmed", "ahmed234", GAME_TYPE.LAN, 10, 6, null);
-//            DatabaseManager.addSingleModeGameRecord("ayman", 9, 4, DIFFICULTY.MEDIUM, null);
-//            DatabaseManager.closeDataBaseConnection();
-//            System.out.println("database connected");
-//            System.exit(0);
+//            DatabaseManager.openDataBaseConnection();
+//            ArrayList<SingleModeGame> multiModeGameArray = DatabaseManager.getSingleModeGameRecords("ayman");
+//            for (SingleModeGame mmg : multiModeGameArray) {
+//                mmg.printData();
+//            }
 //        } catch (SQLException ex) {
 //            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
 //            System.exit(0);
+//        } catch (NullPointerException ex) {
+//            System.out.println("please Open the database connection first");
+//        } finally {
+//            DatabaseManager.closeDataBaseConnection();
+//            System.exit(0);
 //        }
 
-
-
-      // uncomment this code before using the client application
-        launch();
+        // uncomment this code before using the client application
+         launch();
     }
-
 }

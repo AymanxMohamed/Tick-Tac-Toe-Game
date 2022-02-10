@@ -37,7 +37,13 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>10.2.0.jre11</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.mindrot.bcrypt/bcrypt -->
+        <dependency>
+            <groupId>org.mindrot.bcrypt</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.3</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

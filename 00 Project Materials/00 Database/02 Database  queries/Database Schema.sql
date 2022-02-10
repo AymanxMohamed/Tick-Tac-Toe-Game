@@ -1,4 +1,3 @@
-
 CREATE DATABASE TicTacToe;
 
 GO
@@ -68,31 +67,32 @@ GO
 
 CREATE TABLE player (
 	user_name VARCHAR(50) CONSTRAINT PK_user_name_player PRIMARY KEY ,
-	password VARCHAR(50) NOT NULL,
+	password VARCHAR(MAX) NOT NULL,
 	bonus_points INT NULL CONSTRAINT DK_bonus_points_player DEFAULT 0,
 	player_rank AS dbo.getPlayerRank(bonus_points),
-	register_date DATETIME CONSTRAINT DK_register_date_player DEFAULT GETDATE()
+	register_date DATETIME CONSTRAINT DK_register_date_player DEFAULT GETDATE(),
+	player_status VARCHAR(MAX) NOT NULL CONSTRAINT CK_player_status_player CHECK (player_status IN ('Online', 'Offline'))
+	CONSTRAINT DK_player_status_player DEFAULT 'Offline'
 );
 
 GO
 
 CREATE TABLE single_mode_game (
-	game_number INT IDENTITY(1,1),
+	game_id INT PRIMARY KEY IDENTITY(1,1),
 	user_name VARCHAR(50),
 	no_of_rounds INT NOT NULL,
 	player_score INT NOT NULL,
 	difficulty VARCHAR(10) NOT NULL CONSTRAINT CK_difficulty_single_mode_game CHECK (difficulty IN ('easy', 'medium', 'hard')),
 	player_case AS(dbo.getSingleModeWinner(player_score, no_of_rounds)),
-	game_record VARBINARY(MAX) NULL,
+	game_record VARCHAR(MAX) NULL,
 	game_date DATETIME CONSTRAINT DK_register_date_single_mode_game DEFAULT GETDATE(),
-	CONSTRAINT PK_user_name_game_number_single_mode_game PRIMARY KEY (game_number, user_name),
 	CONSTRAINT FK_user_name_single_mode_game_player FOREIGN KEY (user_name) REFERENCES player(user_name)
 );
 
 GO
 
 CREATE TABLE multi_mode_game (
-	game_number INT IDENTITY(1,1),
+	game_id INT CONSTRAINT pk_game_number_multi_mode_game PRIMARY KEY,
 	first_player_user_name VARCHAR(50) CONSTRAINT FK_first_player_user_multi_mode_player REFERENCES player(user_name),
 	second_player_user_name VARCHAR(50) CONSTRAINT FK_second_player_user_multi_mode_player REFERENCES player(user_name),
 	game_type VARCHAR(5) CONSTRAINT CK_game_type_multi_mode_game CHECK (game_type IN('local', 'lan')),
@@ -100,9 +100,8 @@ CREATE TABLE multi_mode_game (
 	first_player_score INT NOT NULL,
 	second_player_score AS (no_of_rounds - first_player_Score) PERSISTED,
 	winner AS (dbo.getMultiModeGameWinner(first_player_score, no_of_rounds, first_player_user_name, second_player_user_name)),
-	game_record VARBINARY(MAX) NULL,
+	game_record VARCHAR(MAX) NULL,
 	game_date DATETIME CONSTRAINT DK_register_date_multi_mode_game DEFAULT GETDATE(),
-	CONSTRAINT PK_first_player_user_second_player_game_date_user_multi_mode PRIMARY KEY(game_number, first_player_user_name, second_player_user_name)
 );
 
 GO
@@ -111,4 +110,19 @@ GO
 	DROP TABLE multi_mode_game;
 	DROP TABLE single_mode_game;
 	DROP TABLE player;
+	
+	DELETE FROM multi_mode_game;
+	GO
+	DELETE FROM single_mode_game;
+	GO
+	DELETE FROM PLAYER;
 */
+
+select * from player;	
+go
+select * from single_mode_game;
+go
+select * from multi_mode_game;
+
+
+select password from player where user_name = 'ahmed';
