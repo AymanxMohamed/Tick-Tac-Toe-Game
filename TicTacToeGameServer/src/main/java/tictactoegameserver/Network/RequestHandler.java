@@ -4,10 +4,9 @@
  */
 package tictactoegameserver.Network;
 
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
@@ -20,7 +19,7 @@ import tictactoegameserver.Database.Entities.Player;
  */
 public class RequestHandler {
 
-    public static String handleRequest(String reqeustString) {
+    public static String handleRequest(String reqeustString, PlayerHandler playerHandler) {
         // this function will take a request and return a respons String
         String response = null;
 
@@ -30,85 +29,94 @@ public class RequestHandler {
 
         switch (request) {
             case "login":
-                return handleLogin(data);
+                return handleLogin(data, playerHandler);
             case "register":
                 return handleRegister(data);
         }
         return response;
     }
 
-    private static String handleLogin(JSONObject data) {
+    private static String handleLogin(JSONObject data, PlayerHandler playerHandler) {
 
         String userName = (String) data.get("username");
         String password = (String) data.get("password");
 
         JSONObject responseObject = new JSONObject();
-        try {
-            DatabaseManager.openDataBaseConnection();
-            if (!DatabaseManager.isPlayerExist(userName)) {
-                responseObject.put("response", "player not exists");
-                return JSONValue.toJSONString(responseObject);
-            }
-            if (!DatabaseManager.isValidPlayer(userName, password)) {
-                responseObject.put("response", "wrong password");
-                return JSONValue.toJSONString(responseObject);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-             DatabaseManager.closeDataBaseConnection();
+        DatabaseManager.openDataBaseConnection();
+        if (!DatabaseManager.isPlayerExist(userName)) {
+            responseObject.put("response", "player not exists");
+            return JSONValue.toJSONString(responseObject);
         }
+        if (!DatabaseManager.isValidPlayer(userName, password)) {
+            responseObject.put("response", "wrong password");
+            return JSONValue.toJSONString(responseObject);
+        }
+        playerHandler.player = DatabaseManager.getPlayer(userName);
+        DatabaseManager.togglePlayerStatus(playerHandler.player);
+        DatabaseManager.closeDataBaseConnection();
+        
         responseObject.put("response", "login success");
-        responseObject.put("data", getPlayerJsonObject(userName));
-
+        responseObject.put("data", getPlayerJsonObject(userName, playerHandler.player));
+        
+        sendUpdateOnlinePlayersResponse();
+        
         return JSONValue.toJSONString(responseObject);
+    }
+    
+    public static void sendUpdateOnlinePlayersResponse() {
+        JSONObject updateOnlinePlayersResponse = new JSONObject();
+        updateOnlinePlayersResponse.put("response", "update online players");
+        updateOnlinePlayersResponse.put("data", getOnlinePlayersJsonObject());
+        JSONValue.toJSONString(updateOnlinePlayersResponse);
+        PlayerHandler.broadcastResponse(JSONValue.toJSONString(updateOnlinePlayersResponse));
     }
 
     public static String handleRegister(JSONObject data) {
 
         String userName = (String) data.get("username");
         String password = (String) data.get("password");
-
         JSONObject responseObject = new JSONObject();
-        try {
-            DatabaseManager.openDataBaseConnection();
-            if (DatabaseManager.isPlayerExist(userName)) {
-                responseObject.put("response", "player exists");
-                return JSONValue.toJSONString(responseObject);
-            } else {
-                DatabaseManager.addNewPlayer(userName, password);
-                responseObject.put("response", "reqister sucsess");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-             DatabaseManager.closeDataBaseConnection();
+        DatabaseManager.openDataBaseConnection();
+        if (DatabaseManager.isPlayerExist(userName)) {
+            responseObject.put("response", "player exists");
+            return JSONValue.toJSONString(responseObject);
+        } else {
+            DatabaseManager.addNewPlayer(userName, password);
+            responseObject.put("response", "reqister sucsess");
         }
+        DatabaseManager.closeDataBaseConnection();
         return JSONValue.toJSONString(responseObject);
     }
 
-    public static JSONObject getPlayerJsonObject(String userName) {
-
-        Player player = null;
-        try {
-            DatabaseManager.openDataBaseConnection();
-            player = DatabaseManager.getPlayer(userName);
-        } catch (SQLException ex) {
-            Logger.getLogger(RequestHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-             DatabaseManager.closeDataBaseConnection();
-        }
-
+    public static JSONObject getPlayerJsonObject(String userName, Player player) {
+        
         JSONObject dataObject = new JSONObject();
-
-        if (player != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formatedDateTime = player.getRegisterDate().format(formatter);
-            dataObject.put("userName", player.getUserName());
-            dataObject.put("bonusPoints", player.getBonusPoints());
-            dataObject.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
-            dataObject.put("registerDate", formatedDateTime);
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatedDateTime = player.getRegisterDate().format(formatter);
+        dataObject.put("userName", player.getUserName());
+        dataObject.put("bonusPoints", player.getBonusPoints());
+        dataObject.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
+        dataObject.put("registerDate", formatedDateTime);
+        
+        return dataObject;
+    }
+    
+    public static JSONObject getOnlinePlayersJsonObject() {
+        ArrayList<Player> onlinePlayers = null;
+        
+        
+        DatabaseManager.openDataBaseConnection();
+        onlinePlayers = DatabaseManager.getOnlinePlayers();
+        DatabaseManager.closeDataBaseConnection();
+        
+        JSONArray onlinePlayersNames = new JSONArray();
+        for (var player : onlinePlayers) {
+            onlinePlayersNames.add(player.getUserName());
         }
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("onlinePlayers", onlinePlayersNames);
+        
         return dataObject;
     }
 
