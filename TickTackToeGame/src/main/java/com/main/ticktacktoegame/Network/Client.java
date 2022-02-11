@@ -4,6 +4,7 @@
  */
 package com.main.ticktacktoegame.Network;
 
+import com.main.ticktacktoegame.Models.Player;
 import java.net.Socket;
 import java.io.*;
 
@@ -18,6 +19,7 @@ public class Client {
     private static final int ServerPort = 9000;
     private static BufferedReader bufferReader;
     private static BufferedWriter bufferedWriter;
+    public static Player player;
     
         
     public static void openConnection(String userName,String password) throws IOException {
@@ -43,14 +45,15 @@ public class Client {
             while (socket.isConnected()) {
                 try {
                     response = bufferReader.readLine();
+                    ResponseHandler.handleResponse(response);
                 } catch (IOException e) {
                     closeEveryThing(socket, bufferReader, bufferedWriter);
                 }
             }
         }).start();
     }
-    public void sendRequest(String requestString) throws IOException {
-        bufferedWriter.write(requestString);
+    public void sendRequest(String request) throws IOException {
+        bufferedWriter.write(request);
         bufferedWriter.newLine();
         bufferedWriter.flush();
     }

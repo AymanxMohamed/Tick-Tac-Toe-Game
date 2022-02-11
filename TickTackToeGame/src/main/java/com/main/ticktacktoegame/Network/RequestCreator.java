@@ -4,19 +4,10 @@
  */
 package com.main.ticktacktoegame.Network;
 
-import org.json.JSONObject;
-
 /**
  *
- * @author Ayman, Shopaky
+ * @author ayman
  */
-public class RequestResponseHandler {
+public class RequestCreator {
     
-    public static void sendRequest(JSONObject requestObject) {
-        
-    }
-    
-    public static void handleResponse(String jsonString) {
-        
-    }
 }

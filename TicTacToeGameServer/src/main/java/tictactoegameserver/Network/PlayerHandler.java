@@ -36,12 +36,16 @@ public class PlayerHandler {
             while (socket.isConnected()) {
                 try {
                     playerRequest = bufferedReader.readLine();
-                    sendResponse(RequestHandler.handleRequest(playerRequest));
+                    //sendResponse();
                 } catch (IOException e) {
                     closeEveryThing(socket, bufferedReader, bufferedWriter);
                 }
             }
         }).start();
+    }
+    
+    public void getResponse(String request) {
+
     }
     public void sendResponse(String response) throws IOException {
         bufferedWriter.write(response);

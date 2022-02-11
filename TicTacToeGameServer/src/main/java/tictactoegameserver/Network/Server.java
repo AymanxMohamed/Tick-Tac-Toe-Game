@@ -15,24 +15,25 @@ import java.net.Socket;
 public class Server {
     private static ServerSocket serverSocket;
     private static int serverPort = 9000;
-    
+
     public static void startServer() throws IOException {
         serverSocket = new ServerSocket(serverPort);
         while (!serverSocket.isClosed()) {
             try {
-                    Socket socket = serverSocket.accept();
-                    PlayerHandler playerHandlder = new PlayerHandler(socket);
+                Socket socket = serverSocket.accept();
+                new PlayerHandler(socket);
             } catch (IOException e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
+
     public static void closeServer() {
         try {
             if (serverSocket != null)
                 serverSocket.close();
         } catch (IOException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }

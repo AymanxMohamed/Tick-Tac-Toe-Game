@@ -1,6 +1,5 @@
 package com.main.ticktacktoegame;
 
-import com.main.ticktacktoegame.Network.ConnectionStabilizer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
