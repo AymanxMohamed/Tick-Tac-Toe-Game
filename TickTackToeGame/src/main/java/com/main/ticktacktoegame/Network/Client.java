@@ -32,6 +32,7 @@ public class Client {
             // allowed requests login
             
             
+            
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch (IOException e) {
