@@ -13,7 +13,7 @@ import org.json.simple.JSONValue;
  */
 public class RequestCreator {
     
-    public static String createLoginJsonString(String userName, String password) {
+    public static String loginRequest(String userName, String password) {
         JSONObject data = new JSONObject();
         data.put("username", userName);
         data.put("password", password);
@@ -23,7 +23,7 @@ public class RequestCreator {
         return JSONValue.toJSONString(request);
     }
     
-    public static String createRegisterJsonString(String userName, String password) {
+    public static String registerRequest(String userName, String password) {
         JSONObject data = new JSONObject();
         data.put("username", userName);
         data.put("password", password);
@@ -32,7 +32,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
-    public static String createSendGameInvitationRequest(String invitedPlayerName) {
+    public static String gameInvitationRequest(String invitedPlayerName) {
         JSONObject data = new JSONObject();
         data.put("invitedPlayername", invitedPlayerName);
         data.put(data, data);
