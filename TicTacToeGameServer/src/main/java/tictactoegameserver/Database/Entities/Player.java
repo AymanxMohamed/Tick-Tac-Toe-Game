@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Database.Entities;
+package tictactoegameserver.Database.Entities;
 
-import Database.DatabaseManager;
-import Database.Entities.Enums.MappingFunctions;
-import Database.Entities.Enums.PLAYER_RANK;
+import tictactoegameserver.Database.DatabaseManager;
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
+import tictactoegameserver.Database.Entities.Enums.PLAYER_RANK;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;

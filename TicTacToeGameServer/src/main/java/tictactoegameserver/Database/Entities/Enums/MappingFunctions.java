@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Database.Entities.Enums;
+package tictactoegameserver.Database.Entities.Enums;
 
-import static Database.Entities.Enums.DIFFICULTY.*;
-import static Database.Entities.Enums.GAME_TYPE.*;
-import static Database.Entities.Enums.PLAYER_CASE.*;
-import static Database.Entities.Enums.PLAYER_RANK.*;
+import static tictactoegameserver.Database.Entities.Enums.DIFFICULTY.*;
+import static tictactoegameserver.Database.Entities.Enums.GAME_TYPE.*;
+import static tictactoegameserver.Database.Entities.Enums.PLAYER_CASE.*;
+import static tictactoegameserver.Database.Entities.Enums.PLAYER_RANK.*;
 
 /**
  * @author ayman

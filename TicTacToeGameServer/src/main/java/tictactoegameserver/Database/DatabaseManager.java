@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Database;
+package tictactoegameserver.Database;
 
-import Database.Entities.Enums.DIFFICULTY;
-import Database.Entities.Enums.GAME_TYPE;
-import Database.Entities.Enums.MappingFunctions;
-import Database.Entities.Enums.PLAYER_RANK;
-import Database.Entities.MultiModeGame;
-import Database.Entities.Player;
-import Database.Entities.SingleModeGame;
+import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
+import tictactoegameserver.Database.Entities.Enums.GAME_TYPE;
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
+import tictactoegameserver.Database.Entities.Enums.PLAYER_RANK;
+import tictactoegameserver.Database.Entities.MultiModeGame;
+import tictactoegameserver.Database.Entities.Player;
+import tictactoegameserver.Database.Entities.SingleModeGame;
 import java.util.ArrayList;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static Security.Password.ecryptPassword;
+import static tictactoegameserver.Security.Password.ecryptPassword;
 
 /**
  *
@@ -86,6 +86,41 @@ public class DatabaseManager {
                 resultSet.getTimestamp("register_date"),
                 resultSet.getString("player_status"));
     }
+    public static ArrayList<Player> getAllPlayers() throws SQLException {
+        
+        ArrayList<Player> playersArray = new ArrayList<>();
+
+        PreparedStatement pst = sqlServerConnection.prepareStatement("SELECT * FROM player");
+        ResultSet resultSet = pst.executeQuery();
+        while (resultSet.next()) {
+            playersArray.add(new Player(
+                resultSet.getString("user_name"),
+                resultSet.getString("password"),
+                resultSet.getInt("bonus_points"),
+                resultSet.getString("player_rank"),
+                resultSet.getTimestamp("register_date"),
+                resultSet.getString("player_status")));
+        }
+        return playersArray;
+    }
+    public static ArrayList<Player> getOnlinePlayers() throws SQLException {
+        
+        ArrayList<Player> onlinePlayers = new ArrayList<>();
+
+        PreparedStatement pst = sqlServerConnection.prepareStatement("SELECT * FROM player WHERE player_status = 'Online'");
+        ResultSet resultSet = pst.executeQuery();
+        while (resultSet.next()) {
+            onlinePlayers.add(new Player(
+                resultSet.getString("user_name"),
+                resultSet.getString("password"),
+                resultSet.getInt("bonus_points"),
+                resultSet.getString("player_rank"),
+                resultSet.getTimestamp("register_date"),
+                resultSet.getString("player_status")));
+        }
+        return onlinePlayers;
+    }
+
 
     public static void updatePlayerData(Player player) throws SQLException {
         updatePlayerBonusPoints(player);
@@ -105,6 +140,14 @@ public class DatabaseManager {
         PreparedStatement pst = sqlServerConnection
                 .prepareStatement("UPDATE PLAYER SET bonus_points = ? WHERE user_name = ?");
         pst.setInt(1, player.getBonusPoints());
+        pst.setString(2, player.getUserName());
+        pst.execute();
+    }
+    public static void togglePlayerStatus(Player player) throws SQLException {
+        String playerStatus = player.getPlayerStatus().equals("Offline") ? "Online" : "Offline";
+        PreparedStatement pst = sqlServerConnection
+                .prepareStatement("UPDATE PLAYER SET player_status = ? WHERE user_name = ?");
+        pst.setString(1, playerStatus);
         pst.setString(2, player.getUserName());
         pst.execute();
     }

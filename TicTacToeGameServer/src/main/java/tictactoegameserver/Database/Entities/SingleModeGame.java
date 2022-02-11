@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Database.Entities;
-import Database.Entities.Enums.DIFFICULTY;
-import Database.Entities.Enums.MappingFunctions;
-import Database.Entities.Enums.PLAYER_CASE;
+package tictactoegameserver.Database.Entities;
+import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
+import tictactoegameserver.Database.Entities.Enums.PLAYER_CASE;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
