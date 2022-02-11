@@ -6,6 +6,7 @@ package tictactoegameserver.Network;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import tictactoegameserver.Database.Entities.Player;
 
 /**
@@ -18,12 +19,14 @@ public class PlayerHandler {
     private BufferedWriter bufferedWriter;
     private Player player;
     private boolean inGame;
+    public static ArrayList<PlayerHandler> playerHandlers = new ArrayList<>();
     
     public PlayerHandler(Socket socket) {
         try {
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            playerHandlers.add(this);
            AcceptRequests();
         } catch (IOException e) {
             closeEveryThing(socket, bufferedReader, bufferedWriter);
@@ -43,7 +46,7 @@ public class PlayerHandler {
         }).start();
     }
     
-    private void sendResponse(String response) throws IOException {
+    public void sendResponse(String response) throws IOException {
         bufferedWriter.write(response);
         bufferedWriter.newLine();
         bufferedWriter.flush();

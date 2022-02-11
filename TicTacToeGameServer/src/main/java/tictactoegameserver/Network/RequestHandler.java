@@ -4,10 +4,13 @@
  */
 package tictactoegameserver.Network;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
@@ -53,6 +56,7 @@ public class RequestHandler {
                 responseObject.put("response", "wrong password");
                 return JSONValue.toJSONString(responseObject);
             }
+            DatabaseManager.togglePlayerStatus(DatabaseManager.getPlayer(userName));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -60,8 +64,23 @@ public class RequestHandler {
         }
         responseObject.put("response", "login success");
         responseObject.put("data", getPlayerJsonObject(userName));
-
+        
+        sendUpdateOnlinePlayersResponse();
+        
         return JSONValue.toJSONString(responseObject);
+    }
+    
+    private static void sendUpdateOnlinePlayersResponse() {
+        JSONObject updateOnlinePlayersResponse = new JSONObject();
+        updateOnlinePlayersResponse.put("response", "update online players");
+        updateOnlinePlayersResponse.put("data", getOnlinePlayersJsonObject());
+        try {
+            for (var playerHandler : PlayerHandler.playerHandlers) {
+                playerHandler.sendResponse(JSONValue.toJSONString(updateOnlinePlayersResponse));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(RequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static String handleRegister(JSONObject data) {
@@ -109,6 +128,27 @@ public class RequestHandler {
             dataObject.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
             dataObject.put("registerDate", formatedDateTime);
         }
+        return dataObject;
+    }
+    
+    public static JSONObject getOnlinePlayersJsonObject() {
+        ArrayList<Player> onlinePlayers = null;
+        
+        try {
+            DatabaseManager.openDataBaseConnection();
+            onlinePlayers = DatabaseManager.getOnlinePlayers();
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+             DatabaseManager.closeDataBaseConnection();
+        }
+        JSONArray onlinePlayersNames = new JSONArray();
+        for (var player : onlinePlayers) {
+            onlinePlayersNames.add(player.getUserName());
+        }
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("onlinePlayers", onlinePlayersNames);
+        
         return dataObject;
     }
 

@@ -21,6 +21,7 @@ public class ResponseHandler {
         
         JSONObject requestObject = (JSONObject) JSONValue.parse(responseString);
         String response = (String) requestObject.get("response");
+        JSONObject data;
 
         switch (response) {
             case "player not exists":
@@ -30,7 +31,7 @@ public class ResponseHandler {
                 handleWrongPassword();
                 break;
             case "login success":
-                JSONObject data = (JSONObject) requestObject.get("data");
+                data = (JSONObject) requestObject.get("data");
                 handleLoginSuccess(data);
                 break;
             case "player exists":
@@ -39,6 +40,10 @@ public class ResponseHandler {
                 break;
             case "reqister sucsess":
                 handleRegisterSuccess();
+                break;
+            case "update online players":
+                data = (JSONObject) requestObject.get("data");
+                handleUpdateOnlinePlayers(data);
                 break;
             
         }
@@ -73,7 +78,6 @@ public class ResponseHandler {
         } catch (IOException ex) {
             Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     private static void handlePlayerExist() {
@@ -86,5 +90,14 @@ public class ResponseHandler {
         // todo
         // you have to redirect the user to the login view and show a message that say that he register successfuly
         System.out.println("gratz u have registered");
+    }
+    private static void handleUpdateOnlinePlayers(JSONObject data) {
+        // todo
+        // this function will manage reveal the player names that came in the data
+        // in the online players area
+        JSONArray onlinePlayersNames = (JSONArray) data.get("onlinePlayers");
+        for (var player : onlinePlayersNames) {
+            System.out.println(player + " is online");
+        }
     }
 }
