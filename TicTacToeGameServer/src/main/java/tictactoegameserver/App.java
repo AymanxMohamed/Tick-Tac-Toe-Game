@@ -1,7 +1,6 @@
 package tictactoegameserver;
 
 import tictactoegameserver.Database.DatabaseManager;
-import tictactoegameserver.Database.Entities.SingleModeGame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,6 @@ import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.Entities.Player;
-import tictactoegameserver.Network.ConnectionStabilizer;
 
 /**
  * JavaFX App

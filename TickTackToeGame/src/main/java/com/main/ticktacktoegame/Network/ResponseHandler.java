@@ -13,7 +13,7 @@ import org.json.simple.*;
  * @author ayman
  */
 public class ResponseHandler {
-    public static String handleResponse(String responseString) {
+    public static void handleResponse(String responseString) {
         JSONObject requestObject = (JSONObject) JSONValue.parse(responseString);
         String response = (String) requestObject.get("response");
 
@@ -36,7 +36,6 @@ public class ResponseHandler {
                 handleRegisterSuccess();
                 break;
         }
-        return null;
     }
 
     private static void handlePlayerNotExist() {
