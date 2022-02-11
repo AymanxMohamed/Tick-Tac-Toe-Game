@@ -26,31 +26,19 @@
             <version>6.1.25</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>10.2.0.jre11</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mindrot.bcrypt/bcrypt -->
-        <dependency>
-            <groupId>org.mindrot.bcrypt</groupId>
-            <artifactId>bcrypt</artifactId>
-            <version>0.3</version>
-            <type>jar</type>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+<!--         https://mvnrepository.com/artifact/org.json/json 
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20211205</version>
             <type>jar</type>
-        </dependency>
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>

@@ -10,12 +10,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import tictactoegameserver.Database.Entities.Player;
 import tictactoegameserver.Network.Server;
 
 /**
