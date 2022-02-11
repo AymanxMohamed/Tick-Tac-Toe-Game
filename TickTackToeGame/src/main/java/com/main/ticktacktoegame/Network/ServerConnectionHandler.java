@@ -17,7 +17,7 @@ public class ServerConnectionHandler implements Runnable {
     private Socket socket;
     private BufferedReader in;
     String string = null;
-    ServerConnectionHandler(Socket socket) throws IOException {
+    public ServerConnectionHandler(Socket socket) throws IOException {
         this.socket = socket;
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }

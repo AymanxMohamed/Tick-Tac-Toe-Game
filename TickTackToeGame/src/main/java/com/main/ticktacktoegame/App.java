@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.main.ticktacktoegame.Network.ConnectionStabilizer;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import org.json.simple.*;
@@ -39,10 +42,14 @@ public class App extends Application {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
 
-        // launch();
-
+        launch();
+        try {
+            new ConnectionStabilizer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // use this function if you want to try database
-        tryDatabase();
+        // tryDatabase();
 
         // use this function if you want to try json manibulation
         // tryJson();
@@ -106,7 +113,6 @@ public class App extends Application {
         } finally {
             DatabaseManager.closeDataBaseConnection();
         }
-
     }
 
 }
