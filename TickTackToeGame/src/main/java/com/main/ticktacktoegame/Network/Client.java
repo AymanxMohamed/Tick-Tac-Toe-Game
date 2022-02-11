@@ -22,25 +22,19 @@ public class Client {
     public static Player player;
     
         
-    public static void openConnection(String userName,String password) throws IOException {
-        
+    public static void openConnection() throws IOException {
         socket = new Socket(serverIP, ServerPort);
         try {
             bufferReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            // Authontication stage
-            // allowed requests login
-            
-            
-            
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
+            System.out.println("connection opend");
+            AcceptResponses();
         } catch (IOException e) {
-            closeEveryThing(socket, bufferReader, bufferedWriter);
+            closeEveryThing();
         }
     }
     
-    public static void AcceptResponses() {
+    private static void AcceptResponses() {
         new Thread(() -> {
             String response;
             while (socket.isConnected()) {
@@ -48,20 +42,20 @@ public class Client {
                     response = bufferReader.readLine();
                     ResponseHandler.handleResponse(response);
                 } catch (IOException e) {
-                    closeEveryThing(socket, bufferReader, bufferedWriter);
+                    closeEveryThing();
                 }
             }
         }).start();
     }
-    public void sendRequest(String request) throws IOException {
+    public static void sendRequest(String request) throws IOException {
         bufferedWriter.write(request);
         bufferedWriter.newLine();
         bufferedWriter.flush();
     }
-    private static void closeEveryThing(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public static void closeEveryThing() {
         try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
+            if (bufferReader != null) {
+                bufferReader.close();
             }
             if (bufferedWriter != null) {
                 bufferedWriter.close();

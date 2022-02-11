@@ -24,19 +24,18 @@ public class PlayerHandler {
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            // authonticate user
-           
+           AcceptRequests();
         } catch (IOException e) {
             closeEveryThing(socket, bufferedReader, bufferedWriter);
         }
     }
-    public void AcceptRequests() {
+    private void AcceptRequests() {
         new Thread(() -> {
             String playerRequest;
             while (socket.isConnected()) {
                 try {
                     playerRequest = bufferedReader.readLine();
-                    //sendResponse();
+                    sendResponse(RequestHandler.handleRequest(playerRequest));
                 } catch (IOException e) {
                     closeEveryThing(socket, bufferedReader, bufferedWriter);
                 }
@@ -44,10 +43,7 @@ public class PlayerHandler {
         }).start();
     }
     
-    public void getResponse(String request) {
-
-    }
-    public void sendResponse(String response) throws IOException {
+    private void sendResponse(String response) throws IOException {
         bufferedWriter.write(response);
         bufferedWriter.newLine();
         bufferedWriter.flush();

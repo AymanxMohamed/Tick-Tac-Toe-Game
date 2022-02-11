@@ -12,6 +12,7 @@ import org.json.simple.JSONValue;
  * @author ayman
  */
 public class RequestCreator {
+    
     public static String createLoginJsonString(String userName, String password) {
         JSONObject data = new JSONObject();
         data.put("username", userName);
@@ -21,6 +22,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+    
     public static String createRegisterJsonString(String userName, String password) {
         JSONObject data = new JSONObject();
         data.put("username", userName);

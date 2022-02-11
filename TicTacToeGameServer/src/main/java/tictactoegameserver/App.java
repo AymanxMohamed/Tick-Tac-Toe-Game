@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.Entities.Player;
+import tictactoegameserver.Network.Server;
 
 /**
  * JavaFX App
@@ -41,22 +42,15 @@ public class App extends Application {
     }
 
       public static void main(String[] args) throws NoSuchAlgorithmException {
+        try {
+            Server.startServer();
+        } catch (IOException ex) {
+            Server.closeServer();
+            System.exit(0);
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        //launch();
-//        try {
-//            new ConnectionStabilizer();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        // use this function if you want to try database
-        tryDatabase();
-
-        // use this function if you want to try json manibulation
-        //tryJson();
-
-        // uncomment this code before using the client application
-
-        System.exit(0);
+//             tryDatabase();
     }
     /**
      * @author: Ayman
@@ -102,12 +96,7 @@ public class App extends Application {
     public static void tryDatabase() {
         try {
            DatabaseManager.openDataBaseConnection();
-           DatabaseManager.togglePlayerStatus(DatabaseManager.getPlayer("ayman"));
-           DatabaseManager.togglePlayerStatus(DatabaseManager.getPlayer("ahmed234"));
-            ArrayList<Player> onlinePlayers = DatabaseManager.getAllPlayers();
-            for (var player : onlinePlayers) {
-                player.printData();
-            }
+           DatabaseManager.addNewPlayer("shopaky", "123456");
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException ex) {

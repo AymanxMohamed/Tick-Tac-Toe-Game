@@ -44,6 +44,7 @@ public class RequestHandler {
 
         JSONObject responseObject = new JSONObject();
         try {
+            DatabaseManager.openDataBaseConnection();
             if (!DatabaseManager.isPlayerExist(userName)) {
                 responseObject.put("response", "player not exists");
                 return JSONValue.toJSONString(responseObject);
@@ -54,6 +55,8 @@ public class RequestHandler {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+             DatabaseManager.closeDataBaseConnection();
         }
         responseObject.put("response", "login success");
         responseObject.put("data", getPlayerJsonObject(userName));
@@ -68,6 +71,7 @@ public class RequestHandler {
 
         JSONObject responseObject = new JSONObject();
         try {
+            DatabaseManager.openDataBaseConnection();
             if (DatabaseManager.isPlayerExist(userName)) {
                 responseObject.put("response", "player exists");
                 return JSONValue.toJSONString(responseObject);
@@ -77,6 +81,8 @@ public class RequestHandler {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+             DatabaseManager.closeDataBaseConnection();
         }
         return JSONValue.toJSONString(responseObject);
     }
@@ -85,9 +91,12 @@ public class RequestHandler {
 
         Player player = null;
         try {
+            DatabaseManager.openDataBaseConnection();
             player = DatabaseManager.getPlayer(userName);
         } catch (SQLException ex) {
             Logger.getLogger(RequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+             DatabaseManager.closeDataBaseConnection();
         }
 
         JSONObject dataObject = new JSONObject();

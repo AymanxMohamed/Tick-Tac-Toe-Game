@@ -1,5 +1,7 @@
 package com.main.ticktacktoegame;
 
+import com.main.ticktacktoegame.Network.Client;
+import com.main.ticktacktoegame.Network.RequestCreator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * JavaFX App
@@ -21,7 +25,7 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
@@ -31,6 +35,14 @@ public class App extends Application {
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
-       launch();
+        try {
+            Client.openConnection();
+        } catch (IOException ex) {
+            Client.closeEveryThing();
+            System.exit(0);
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         launch();
+       
     }
 }

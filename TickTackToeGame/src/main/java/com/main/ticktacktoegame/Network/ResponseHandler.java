@@ -4,7 +4,11 @@
  */
 package com.main.ticktacktoegame.Network;
 
+import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Models.Player;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.simple.*;
 
@@ -14,12 +18,13 @@ import org.json.simple.*;
  */
 public class ResponseHandler {
     public static void handleResponse(String responseString) {
+        
         JSONObject requestObject = (JSONObject) JSONValue.parse(responseString);
         String response = (String) requestObject.get("response");
 
         switch (response) {
             case "player not exists":
-                handlePlayerExist();
+                handlePlayerNotExist();
                 break;
             case "wrong password":
                 handleWrongPassword();
@@ -35,6 +40,7 @@ public class ResponseHandler {
             case "reqister sucsess":
                 handleRegisterSuccess();
                 break;
+            
         }
     }
 
@@ -42,33 +48,43 @@ public class ResponseHandler {
         // todo
         // you have to send an error message to the player view that say that he entered
         // wrong username
+        System.out.println("player not exist");
     }
 
     private static void handleWrongPassword() {
         // todo
         // you have to send an error message to the player login view that say that
         // entered wrong password
+        System.out.println("wrong password");
     }
 
     private static void handleLoginSuccess(JSONObject playerData) {
-        // todo
-        Client.player = new Player(
-                (String) playerData.get("username"),
-                (int) playerData.get("bonusPoints"),
-                (String) playerData.get("playerRank"),
-                (String) playerData.get("registerDate"));
-        // switch the player to his home page with it's corresponding information from and a nice welcome back messaage
-        // his object
+        try {
+            // todo
+            Client.player = new Player(
+                    (String) playerData.get("username"),
+                    ((Long) playerData.get("bonusPoints")).intValue(),
+                    (String) playerData.get("playerRank"),
+                    (String) playerData.get("registerDate"));
+            // switch the player to his home page with it's corresponding information from and a nice welcome back messaage
+            // his object
+            System.out.println("player loged in successfuly");
+            App.setRoot("TicTackToe");
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private static void handlePlayerExist() {
         // todo
         // you have to show the register view again but with an error message that shows that the player exist before
+          System.out.println("please enter new player");
     }
 
     private static void handleRegisterSuccess() {
         // todo
         // you have to redirect the user to the login view and show a message that say that he register successfuly
-        
+        System.out.println("gratz u have registered");
     }
 }
