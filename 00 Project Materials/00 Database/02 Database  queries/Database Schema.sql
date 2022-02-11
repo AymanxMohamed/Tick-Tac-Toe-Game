@@ -108,7 +108,9 @@ GO
 
 /**
 	DROP TABLE multi_mode_game;
+	go
 	DROP TABLE single_mode_game;
+	go
 	DROP TABLE player;
 	
 	DELETE FROM multi_mode_game;
@@ -124,5 +126,6 @@ select * from single_mode_game;
 go
 select * from multi_mode_game;
 
-
+SELECT * FROM multi_mode_game WHERE first_player_user_name = 'ahmed' OR second_player_user_name = 'ahmed';
+SELECT * FROM single_mode_game WHERE  user_name = 'ayman';
 select password from player where user_name = 'ahmed';

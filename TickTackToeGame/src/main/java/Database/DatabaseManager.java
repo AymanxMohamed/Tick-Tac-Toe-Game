@@ -56,13 +56,13 @@ public class DatabaseManager {
         ResultSet resultSet = pst.executeQuery();
         return resultSet.next();
     }
-
-    public static boolean isValidPlayer(String userName, String password) throws SQLException {
-        return isPlayerExist(userName) && isValidPassword(userName, password);
-    }
-
+    
     private static boolean isValidPassword(String userName, String password) throws SQLException {
         return ecryptPassword(password).equals(getPlayerPassword(userName));
+    }
+    
+    public static boolean isValidPlayer(String userName, String password) throws SQLException {
+        return isPlayerExist(userName) && isValidPassword(userName, password);
     }
 
     private static String getPlayerPassword(String userName) throws SQLException {
@@ -108,6 +108,18 @@ public class DatabaseManager {
     /* _____ *_____ End of Player Database Methods _____ * _____ */
 
     /* _____ *_____ Signle mode game Database Methods _____ * _____ */
+    
+    /**
+     * @author ayman
+     * @description a method that used to add a single mode game record to the
+     * database
+     * @param userName
+     * @param numberOfRounds
+     * @param playerScore
+     * @param difficulty
+     * @param gameRecord
+     * @throws SQLException 
+     */
     public static void addSingleModeGameRecord(String userName, int numberOfRounds, int playerScore,
             DIFFICULTY difficulty, String gameRecord) throws SQLException {
         PreparedStatement pst = sqlServerConnection.prepareStatement(
@@ -141,6 +153,12 @@ public class DatabaseManager {
         return singleModeGameArray;
     }
 
+    /**
+     * @description an overloaded method that give you the single mode records for a certain player
+     * @param playerName
+     * @return
+     * @throws SQLException 
+     */
     public static ArrayList<SingleModeGame> getSingleModeGameRecords(String playerName) throws SQLException {
 
         ArrayList<SingleModeGame> singleModeGameArray = new ArrayList<>();
@@ -180,7 +198,12 @@ public class DatabaseManager {
         pst.setString(7, gameRecord);
         pst.execute();
     }
-
+    /**
+     * @author ayman
+     * @description an overloaded method that give you the single mode records for a certain player
+     * @return
+     * @throws SQLException 
+     */
     public static ArrayList<MultiModeGame> getMultiModeGameRecords() throws SQLException {
 
         ArrayList<MultiModeGame> multiModeGameArray = new ArrayList<>();
@@ -203,6 +226,13 @@ public class DatabaseManager {
         }
         return multiModeGameArray;
     }
+    /**
+     * @author ayman
+     * @description an overloaded method that give you the single mode records for a certain player
+     * @param playerName
+     * @return
+     * @throws SQLException 
+     */
     public static ArrayList<MultiModeGame> getMultiModeGameRecords(String playerName) throws SQLException {
 
         ArrayList<MultiModeGame> multiModeGameArray = new ArrayList<>();
