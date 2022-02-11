@@ -7,6 +7,9 @@ package tictactoegameserver.Network;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Player;
 
 /**
@@ -17,7 +20,7 @@ public class PlayerHandler {
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private Player player;
+    public Player player;
     private boolean inGame;
     public static ArrayList<PlayerHandler> playerHandlers = new ArrayList<>();
     
@@ -38,7 +41,7 @@ public class PlayerHandler {
             while (socket.isConnected()) {
                 try {
                     playerRequest = bufferedReader.readLine();
-                    sendResponse(RequestHandler.handleRequest(playerRequest));
+                    sendResponse(RequestHandler.handleRequest(playerRequest, this));
                 } catch (IOException e) {
                     closeEveryThing(socket, bufferedReader, bufferedWriter);
                 }
@@ -46,12 +49,25 @@ public class PlayerHandler {
         }).start();
     }
     
-    public void sendResponse(String response) throws IOException {
-        bufferedWriter.write(response);
-        bufferedWriter.newLine();
-        bufferedWriter.flush();
+    public void sendResponse(String response)  {
+        try {
+            bufferedWriter.write(response);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public static void broadcastResponse(String response) {
+        for (var playerHandler : playerHandlers) {
+            playerHandler.sendResponse(response);
+        }
     }
     private void closeEveryThing(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+        DatabaseManager.openDataBaseConnection();
+        DatabaseManager.togglePlayerStatus(player);
+        DatabaseManager.closeDataBaseConnection();
+        RequestHandler.sendUpdateOnlinePlayersResponse();
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
@@ -68,12 +84,3 @@ public class PlayerHandler {
     }
 }
 
-/*
-        Request --> login , reqister
-        RequestHandler(JsonString){
-            switch (
-        }
-        
-
-
-*/
