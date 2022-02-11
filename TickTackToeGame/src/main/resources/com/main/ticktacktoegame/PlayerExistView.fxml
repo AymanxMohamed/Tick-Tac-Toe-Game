@@ -9,9 +9,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.LoginController">
    <children>
-      <Button layoutX="279.0" layoutY="287.0" mnemonicParsing="false" onAction="#sendLoginRequest" text="Login" textAlignment="CENTER">
+      <Button layoutX="200.0" layoutY="280.0" mnemonicParsing="false" onAction="#sendLoginRequest" text="Login" textAlignment="CENTER">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </Button>
       <Label layoutX="216.0" layoutY="69.0" text="TicTacToe Game" textAlignment="CENTER">
@@ -32,5 +32,10 @@
       <PasswordField fx:id="passwordField" layoutX="307.0" layoutY="219.0" onAction="#sendLoginRequest" />
       <TextField fx:id="usernameField" layoutX="307.0" layoutY="166.0" onAction="#sendLoginRequest" />
       <Label layoutX="184.0" layoutY="113.0" text="Username is already exists, you can login now!" textFill="RED" />
+      <Button layoutX="333.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToRegistrationView" text="Register">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

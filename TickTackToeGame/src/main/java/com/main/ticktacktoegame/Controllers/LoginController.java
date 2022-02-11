@@ -5,8 +5,10 @@
 package com.main.ticktacktoegame.Controllers;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import com.main.ticktacktoegame.Network.RequestCreator;
+import com.main.ticktacktoegame.Utilites.Validator;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -25,12 +27,14 @@ public class LoginController {
         username = usernameField.getText();
         password = passwordField.getText();
         try {
-            Client.sendRequest(RequestCreator.createLoginJsonString(username, password));
-//            Client.sendRequest(RequestCreator.createRegisterJsonString(username, password));
-
+            if (Validator.isEmpty(username) && Validator.isEmpty(password)) {
+                App.setRoot("LoginView");
+            } else {
+                Client.sendRequest(RequestCreator.createLoginJsonString(username, password));
+            }
         } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+                ex.printStackTrace();
+            }
     }
     
     public void switchToRegistrationView () {

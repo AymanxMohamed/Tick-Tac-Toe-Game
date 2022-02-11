@@ -77,8 +77,6 @@ public class ResponseHandler {
 
     private static void handlePlayerExist() {
         try {
-            // todo
-            // you have to show the register view again but with an error message that shows that the player exist before
             App.setRoot("PlayerExistView");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -87,8 +85,6 @@ public class ResponseHandler {
     }
 
     private static void handleRegisterSuccess() {
-        // todo
-        // you have to redirect the user to the login view and show a message that say that he register successfuly
         try {
             App.setRoot("RegisterSuccessView");
         } catch (IOException ex) {
