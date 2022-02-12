@@ -9,6 +9,7 @@ import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
+import static tictactoegameserver.Network.Utility.getPlayerHandler;
 
 /**
  *
@@ -29,6 +30,14 @@ public class RequestHandler {
                 return handleLogin(data, playerHandler);
             case "register":
                 return handleRegister(data);
+            case "game invitation":
+                return handleGameInvitation(data);
+            case "acceptInvitation":
+                return handleAcceptInvitation(data);
+            case "rejectInvitation":
+                return handleRejectInvitation(data);
+                 
+                
         }
         return response;
     }
@@ -65,5 +74,29 @@ public class RequestHandler {
         }
         DatabaseManager.closeDataBaseConnection();
         return registerSuccessResponse();
+    }
+
+    private static String handleGameInvitation(JSONObject data) {
+        String invitationReciever = (String) data.get("invitationReciever");
+        PlayerHandler receiverHandler = getPlayerHandler(invitationReciever);
+        
+        if (receiverHandler.inGame) {
+            return playerInGameResponse(invitationReciever);
+        }
+        receiverHandler.sendResponse(invitationFromPlayerRequest(data));
+        return invitationSendedResponse(data);
+    }
+
+    private static String handleAcceptInvitation(JSONObject data) {
+        // todo
+        return null;
+    }
+
+    private static String handleRejectInvitation(JSONObject data) {
+        String invitationSender = (String) data.get("invitationSender");        
+        String invitationReciever = (String) data.get("invitationReciever");
+        PlayerHandler senderHandler = getPlayerHandler(invitationSender);
+        senderHandler.sendResponse(invitationRejectedResponse(data));
+        return doNothingResponse();
     }
 }

@@ -20,7 +20,7 @@ public class PlayerHandler {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     public Player player;
-    private boolean inGame;
+    public boolean inGame;
     public static ArrayList<PlayerHandler> playerHandlers = new ArrayList<>();
     
     public PlayerHandler(Socket socket) {

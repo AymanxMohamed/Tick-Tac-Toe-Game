@@ -80,6 +80,41 @@ public class ResponseCreator {
         responseObject.put("response", "reqister sucsess");
         return JSONValue.toJSONString(responseObject);
     }
+    public static String playerInGameResponse(String invitedPlayerName) {
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("invitedPlayer", invitedPlayerName);
+        
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player in game");
+        responseObject.put("data", dataObject);
 
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String invitationFromPlayerRequest(JSONObject data) {
+        
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "invitation");
+        responseObject.put("data", data);
+
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String invitationSendedResponse(JSONObject data) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "invitationSended"); 
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String invitationRejectedResponse(JSONObject data) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "invitationRejected"); 
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String doNothingResponse() {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "doNothing"); 
+        return JSONValue.toJSONString(responseObject);
+    }
+    // todo tommorow handle accept request 
 }
 

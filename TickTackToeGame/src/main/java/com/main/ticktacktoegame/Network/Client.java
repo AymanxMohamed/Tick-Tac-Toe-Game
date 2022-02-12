@@ -7,6 +7,8 @@ package com.main.ticktacktoegame.Network;
 import com.main.ticktacktoegame.Models.Player;
 import java.net.Socket;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,10 +49,14 @@ public class Client {
             }
         }).start();
     }
-    public static void sendRequest(String request) throws IOException {
-        bufferedWriter.write(request);
-        bufferedWriter.newLine();
-        bufferedWriter.flush();
+    public static void sendRequest(String request) {
+        try {
+            bufferedWriter.write(request);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public static void closeEveryThing() {
         try {

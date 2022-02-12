@@ -4,6 +4,7 @@
  */
 package com.main.ticktacktoegame.Network;
 
+import static com.main.ticktacktoegame.Network.Client.player;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -34,10 +35,30 @@ public class RequestCreator {
     }
     public static String invitePlayer(String invitedPlayerName) {
         JSONObject data = new JSONObject();
-        data.put("invitedPlayername", invitedPlayerName);
+        data.put("invitationSender", player.getUserName());
+        data.put("invitationReciever", invitedPlayerName);
         data.put(data, data);
         JSONObject request = new JSONObject();
-        request.put("request", " game invitation");
+        request.put("request", "game invitation");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    public static String acceptInvitation(String invitationSender, String invitationReciever) {
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", invitationSender);
+        data.put("invitationReciever", invitationReciever);
+        JSONObject request = new JSONObject();
+        request.put("request", "acceptInvitation");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    public static String rejectInvitation(String invitationSender, String invitationReciever) {
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", invitationSender);
+        data.put("invitationReciever", invitationReciever);
+        data.put(data, data);
+        JSONObject request = new JSONObject();
+        request.put("request", "rejectInvitation");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }

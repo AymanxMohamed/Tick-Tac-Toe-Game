@@ -6,13 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
 import tictactoegameserver.Network.Server;
 
@@ -57,11 +53,8 @@ public class App extends Application {
      */
     public static void tryDatabase() {
         DatabaseManager.openDataBaseConnection();
-//        DatabaseManager.addMultiModeGameRecord(1, "ayman", "shopaky", "ayman", null);
         DatabaseManager.addSingleModeGameRecord(1, "ayman", "X", DIFFICULTY.MEDIUM, "winner", null);
-
         DatabaseManager.closeDataBaseConnection();
         System.exit(0);
     }
-
 }
