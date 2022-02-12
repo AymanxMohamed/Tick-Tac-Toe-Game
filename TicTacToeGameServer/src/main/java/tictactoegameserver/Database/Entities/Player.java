@@ -137,13 +137,8 @@ public class Player {
     }
     
     private void updateData() {
-        try {
-            DatabaseManager.openDataBaseConnection();
-            DatabaseManager.updatePlayerData(this);
-        } catch (SQLException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            DatabaseManager.closeDataBaseConnection();
-        }
+        DatabaseManager.openDataBaseConnection();
+        DatabaseManager.updatePlayerData(this);
+        DatabaseManager.closeDataBaseConnection();
     }
 }

@@ -39,7 +39,7 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-      public static void main(String[] args) throws NoSuchAlgorithmException {
+      public static void main(String[] args) {
         try {
             Server.startServer();
         } catch (IOException ex) {
@@ -91,17 +91,17 @@ public class App extends Application {
      * @author: aymman
      *          use this function if you want to try database
      */
-    public static void tryDatabase() {
-        try {
-           DatabaseManager.openDataBaseConnection();
-           DatabaseManager.addNewPlayer("shopaky", "123456");
-        } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NullPointerException ex) {
-            System.out.println("please Open the database connection first");
-        } finally {
-            DatabaseManager.closeDataBaseConnection();
-        }
-    }
+//    public static void tryDatabase() {
+//        try {
+//           DatabaseManager.openDataBaseConnection();
+//           DatabaseManager.addNewPlayer("shopaky", "123456");
+//        } catch (SQLException ex) {
+//            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (NullPointerException ex) {
+//            System.out.println("please Open the database connection first");
+//        } finally {
+//            DatabaseManager.closeDataBaseConnection();
+//        }
+//    }
 
 }

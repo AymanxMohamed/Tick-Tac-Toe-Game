@@ -27,7 +27,7 @@ public class Client {
         try {
             bufferReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            System.out.println("connection opend");
+            System.out.println("connection opened");
             AcceptResponses();
         } catch (IOException e) {
             closeEveryThing();
