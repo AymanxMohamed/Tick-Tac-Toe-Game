@@ -4,14 +4,9 @@
  */
 package tictactoegameserver.Network;
 
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
-import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
-import tictactoegameserver.Database.Entities.Player;
 import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
 
@@ -64,6 +59,7 @@ public class RequestHandler {
         DatabaseManager.openDataBaseConnection();
         if (DatabaseManager.isPlayerExist(userName)) {
             return playerExistResponse();
+        
         } else {
             DatabaseManager.addNewPlayer(userName, password);
         }
