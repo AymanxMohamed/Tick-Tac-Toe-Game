@@ -5,6 +5,7 @@
 package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Controllers.WelcomeController;
 import com.main.ticktacktoegame.Models.Player;
 import java.io.IOException;
 import org.json.simple.*;
@@ -98,8 +99,9 @@ public class ResponseHandler {
         // this function will manage reveal the player names that came in the data
         // in the online players area
         JSONArray onlinePlayersNames = (JSONArray) data.get("onlinePlayers");
-        for (var player : onlinePlayersNames) {
-            System.out.println(player + " is online");
+        for (var playerName : onlinePlayersNames) {
+//            WelcomeController.printOnlinePlayers("TEST");
+            System.out.println(playerName + " is online");
         }
     }
     

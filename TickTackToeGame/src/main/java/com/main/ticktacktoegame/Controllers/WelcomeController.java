@@ -27,6 +27,8 @@ public class WelcomeController implements Initializable {
     @FXML Label rankLabel;
     @FXML Label registerDateLabel;
     
+//    @FXML static Label onlinePlayer0;
+    
     @FXML
     private void switchToPlayModeView() {
         try {
@@ -43,4 +45,8 @@ public class WelcomeController implements Initializable {
         rankLabel.setText(Client.player.getPlayerRank());
         registerDateLabel.setText(Client.player.getRegisterDate());
     }
+    
+//    public static void printOnlinePlayers(String player) {
+//        onlinePlayer0.setText(player);
+//    }
 }
