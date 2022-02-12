@@ -25,7 +25,9 @@ public class LoginController {
         username = usernameField.getText();
         password = passwordField.getText();
         try {
-            Client.sendRequest(RequestCreator.createLoginJsonString(username, password));
+            //Client.sendRequest(RequestCreator.createLoginJsonString(username, password));
+            Client.sendRequest(RequestCreator.createRegisterJsonString(username, password));
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }

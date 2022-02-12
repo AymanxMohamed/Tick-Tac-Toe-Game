@@ -37,14 +37,15 @@ public class PlayerHandler {
     }
     private void AcceptRequests() {
         new Thread(() -> {
-            String playerRequest;
-            while (socket.isConnected()) {
-                try {
-                    playerRequest = bufferedReader.readLine();
+            try {
+                String playerRequest;
+                while ((playerRequest = bufferedReader.readLine()) != null) {
                     sendResponse(RequestHandler.handleRequest(playerRequest, this));
-                } catch (IOException e) {
-                    closeEveryThing(socket, bufferedReader, bufferedWriter);
+                    if (!socket.isConnected())
+                        closeEveryThing(socket, bufferedReader, bufferedWriter);
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
     }
