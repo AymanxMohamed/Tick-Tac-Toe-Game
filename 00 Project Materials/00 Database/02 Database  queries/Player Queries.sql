@@ -16,6 +16,8 @@ GO
 INSERT INTO PLAYER (user_name, password)
 VALUES('ayman1', 'eff140be3f27b5012192fce5242dfe2ce6fb9379dd0b24635c6b0fb1e3c894f697467e604284fa151a760362a5f25ed84fa4b37547e935e57251b18c3dda491f');
 GO
+
+GO
 INSERT INTO 
 single_mode_game(user_name, no_of_rounds, player_score, difficulty, game_record)
 VALUES('AYMAN', 10, 5, 'easy', null);

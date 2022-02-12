@@ -224,16 +224,17 @@ public class DatabaseManager {
      * @param gameRecord
      * @throws SQLException
      */
-    public static void addSingleModeGameRecord(String userName, int numberOfRounds, int playerScore,
-            DIFFICULTY difficulty, String gameRecord) {
+    public static void addSingleModeGameRecord(int gameID, String userName, String playerType,
+            DIFFICULTY difficulty, String playerCase, String gameRecord) {
         try {
             PreparedStatement pst = sqlServerConnection.prepareStatement(
-                    "INSERT INTO single_mode_game(user_name, no_of_rounds, player_score, difficulty, game_record) VALUES(?, ?, ?, ?, ?)");
-            pst.setString(1, userName);
-            pst.setInt(2, numberOfRounds);
-            pst.setInt(3, playerScore);
+                    "INSERT INTO single_mode_game(game_id, user_name, player_type, difficulty, player_case, game_record) VALUES(?, ?, ?, ?, ?, ?)");
+            pst.setInt(1, gameID);
+            pst.setString(2, userName);
+            pst.setString(3, playerType);
             pst.setString(4, MappingFunctions.mapDifficulty(difficulty));
-            pst.setString(5, gameRecord);
+            pst.setString(5, playerCase);
+            pst.setString(6, gameRecord);
             pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,8 +252,7 @@ public class DatabaseManager {
                 singleModeGameArray.add(new SingleModeGame(
                         resultSet.getInt("game_id"),
                         resultSet.getString("user_name"),
-                        resultSet.getInt("no_of_rounds"),
-                        resultSet.getInt("player_score"),
+                        resultSet.getString("player_type"),
                         resultSet.getString("difficulty"),
                         resultSet.getString("player_case"),
                         resultSet.getString("game_record"),
@@ -285,8 +285,7 @@ public class DatabaseManager {
                 singleModeGameArray.add(new SingleModeGame(
                         resultSet.getInt("game_id"),
                         resultSet.getString("user_name"),
-                        resultSet.getInt("no_of_rounds"),
-                        resultSet.getInt("player_score"),
+                        resultSet.getString("player_type"),
                         resultSet.getString("difficulty"),
                         resultSet.getString("player_case"),
                         resultSet.getString("game_record"),
@@ -302,18 +301,16 @@ public class DatabaseManager {
 
     /* _____ *_____ Multi mode game Database Methods _____ * _____ */
 
-    public static void addMultiModeGameRecord(int gameID, String firstPlayerName, String secondPlayerName,
-            GAME_TYPE gameType, int numberOfRounds, int firstPlayerScore, String gameRecord){
+    public static void addMultiModeGameRecord(int gameID, String playerXUserName, String playerYUserName,
+            String winner, String gameRecord){
         try {
             PreparedStatement pst = sqlServerConnection.prepareStatement(
-                    "INSERT INTO multi_mode_game(game_id, first_player_user_name, second_player_user_name, game_type, no_of_rounds, first_player_score, game_record) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO multi_mode_game(game_id, player_x_user_name, player_y_user_name, winner, game_record) VALUES(?, ?, ?, ?, ?)");
             pst.setInt(1, gameID);
-            pst.setString(2, firstPlayerName);
-            pst.setString(3, secondPlayerName);
-            pst.setString(4, MappingFunctions.mapGameType(gameType));
-            pst.setInt(5, numberOfRounds);
-            pst.setInt(6, firstPlayerScore);
-            pst.setString(7, gameRecord);
+            pst.setString(2, playerXUserName);
+            pst.setString(3, playerYUserName);
+            pst.setString(4, winner);
+            pst.setString(5, gameRecord);
             pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,12 +334,8 @@ public class DatabaseManager {
             while (resultSet.next()) {
                 multiModeGameArray.add(new MultiModeGame(
                         resultSet.getInt("game_id"),
-                        resultSet.getString("first_player_user_name"),
-                        resultSet.getString("second_player_user_name"),
-                        resultSet.getString("game_type"),
-                        resultSet.getInt("no_of_rounds"),
-                        resultSet.getInt("first_player_score"),
-                        resultSet.getInt("second_player_score"),
+                        resultSet.getString("player_x_user_name"),
+                        resultSet.getString("player_y_user_name"),
                         resultSet.getString("winner"),
                         resultSet.getString("game_record"),
                         resultSet.getTimestamp("game_date")));
@@ -374,12 +367,8 @@ public class DatabaseManager {
             while (resultSet.next()) {
                 multiModeGameArray.add(new MultiModeGame(
                         resultSet.getInt("game_id"),
-                        resultSet.getString("first_player_user_name"),
-                        resultSet.getString("second_player_user_name"),
-                        resultSet.getString("game_type"),
-                        resultSet.getInt("no_of_rounds"),
-                        resultSet.getInt("first_player_score"),
-                        resultSet.getInt("second_player_score"),
+                        resultSet.getString("player_x_user_name"),
+                        resultSet.getString("player_y_user_name"),
                         resultSet.getString("winner"),
                         resultSet.getString("game_record"),
                         resultSet.getTimestamp("game_date")));
