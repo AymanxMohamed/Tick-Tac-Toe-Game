@@ -9,7 +9,6 @@ import com.main.ticktacktoegame.Models.Player;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.json.simple.*;
 
 /**
@@ -45,7 +44,6 @@ public class ResponseHandler {
                 data = (JSONObject) requestObject.get("data");
                 handleUpdateOnlinePlayers(data);
                 break;
-            
         }
     }
 

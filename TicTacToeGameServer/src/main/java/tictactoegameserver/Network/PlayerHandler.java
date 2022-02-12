@@ -64,20 +64,22 @@ public class PlayerHandler {
         }
     }
     private void closeEveryThing(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+        // System.out.println("why u closed me :(((");
+        playerHandlers.remove(this);
+        RequestHandler.sendUpdateOnlinePlayersResponse();
         DatabaseManager.openDataBaseConnection();
         DatabaseManager.togglePlayerStatus(player);
         DatabaseManager.closeDataBaseConnection();
-        RequestHandler.sendUpdateOnlinePlayersResponse();
         try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
-            }
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
-            }
-            if (socket != null) {
-                socket.close();
-            }
+          if (bufferedReader != null) {
+              bufferedReader.close();
+          }
+          if (bufferedWriter != null) {
+              bufferedWriter.close();
+          }
+          if (socket != null) {
+              socket.close();
+          }
         } catch (IOException e) {
             e.printStackTrace();
         }
