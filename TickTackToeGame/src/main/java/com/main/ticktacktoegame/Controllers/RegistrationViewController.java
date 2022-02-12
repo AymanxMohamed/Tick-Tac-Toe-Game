@@ -30,7 +30,7 @@ public class RegistrationViewController {
         confirmedPassword = confirmedPasswordField.getText();
         try {
             if (Validator.validatePassword(password, confirmedPassword) && Validator.validateUserName(username)) {
-                Client.sendRequest(RequestCreator.registerRequest(username, password));
+                Client.sendRequest(RequestCreator.register(username, password));
             } else {
                 App.setRoot("RegistrationView");
             }

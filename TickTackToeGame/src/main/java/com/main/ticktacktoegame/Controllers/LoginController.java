@@ -30,7 +30,7 @@ public class LoginController {
             if (Validator.isEmpty(username) && Validator.isEmpty(password)) {
                 App.setRoot("LoginView");
             } else {
-                Client.sendRequest(RequestCreator.loginRequest(username, password));
+                Client.sendRequest(RequestCreator.login(username, password));
             }
         } catch (IOException ex) {
                 ex.printStackTrace();
