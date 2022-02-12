@@ -183,14 +183,28 @@ public class DatabaseManager {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public static String getPlayerStatus(String playerName) {
+         try {
+            PreparedStatement pst = sqlServerConnection.prepareStatement("SELECT player_status FROM PLAYER WHERE user_name = ?");
+            pst.setString(1, playerName);
+            ResultSet resultSet = pst.executeQuery();
+            resultSet.next();
+            return resultSet.getString("player_status");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public static void togglePlayerStatus(Player player) {
         try {
             String playerStatus = player.getPlayerStatus().equals("Offline") ? "Online" : "Offline";
+            player.setPlayerStatus(playerStatus);
             PreparedStatement pst = sqlServerConnection
                     .prepareStatement("UPDATE PLAYER SET player_status = ? WHERE user_name = ?");
             pst.setString(1, playerStatus);
             pst.setString(2, player.getUserName());
             pst.execute();
+            
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }

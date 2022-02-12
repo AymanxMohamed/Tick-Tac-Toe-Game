@@ -12,6 +12,7 @@ import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Database.Entities.Player;
+import static tictactoegameserver.Network.PlayerHandler.sendUpdateOnlinePlayersResponse;
 
 /**
  *
@@ -41,36 +42,20 @@ public class RequestHandler {
         String userName = (String) data.get("username");
         String password = (String) data.get("password");
 
-        JSONObject responseObject = new JSONObject();
         DatabaseManager.openDataBaseConnection();
         if (!DatabaseManager.isPlayerExist(userName)) {
-            responseObject.put("response", "player not exists");
-            return JSONValue.toJSONString(responseObject);
+            return ResponseCreator.playerNotExistResponse();
         }
         if (!DatabaseManager.isValidPlayer(userName, password)) {
-            responseObject.put("response", "wrong password");
-            return JSONValue.toJSONString(responseObject);
+            return ResponseCreator.wrongPasswordResponse();
         }
         playerHandler.player = DatabaseManager.getPlayer(userName);
         DatabaseManager.togglePlayerStatus(playerHandler.player);
         DatabaseManager.closeDataBaseConnection();
-        
-        responseObject.put("response", "login success");
-        responseObject.put("data", getPlayerJsonObject(userName, playerHandler.player));
-        
         sendUpdateOnlinePlayersResponse();
-        
-        return JSONValue.toJSONString(responseObject);
+        return ResponseCreator.loginSuccessResponse(userName, playerHandler.player);
     }
     
-    public static void sendUpdateOnlinePlayersResponse() {
-        JSONObject updateOnlinePlayersResponse = new JSONObject();
-        updateOnlinePlayersResponse.put("response", "update online players");
-        updateOnlinePlayersResponse.put("data", getOnlinePlayersJsonObject());
-        JSONValue.toJSONString(updateOnlinePlayersResponse);
-        PlayerHandler.broadcastResponse(JSONValue.toJSONString(updateOnlinePlayersResponse));
-    }
-
     public static String handleRegister(JSONObject data) {
 
         String userName = (String) data.get("username");

@@ -6,11 +6,13 @@ package tictactoegameserver.Network;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Player;
+import static tictactoegameserver.Network.ResponseCreator.updateOnlinePlayersResponse;
 
 /**
  *
@@ -39,24 +41,24 @@ public class PlayerHandler {
         new Thread(() -> {
             try {
                 String playerRequest;
-                while ((playerRequest = bufferedReader.readLine()) != null) {
-                    sendResponse(RequestHandler.handleRequest(playerRequest, this));
-                    if (!socket.isConnected())
-                        closeEveryThing(socket, bufferedReader, bufferedWriter);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    while (!socket.isClosed() &&(playerRequest = bufferedReader.readLine()) != null) {
+                        sendResponse(RequestHandler.handleRequest(playerRequest, PlayerHandler.this));
+                    }
+            } catch (Exception e) {
+                closeEveryThing(socket, bufferedReader, bufferedWriter);
             }
         }).start();
     }
     
     public void sendResponse(String response)  {
         try {
-            bufferedWriter.write(response);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
+            if (!socket.isClosed()) {
+                bufferedWriter.write(response);
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            }
         } catch (IOException ex) {
-            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void broadcastResponse(String response) {
@@ -64,13 +66,21 @@ public class PlayerHandler {
             playerHandler.sendResponse(response);
         }
     }
-    private void closeEveryThing(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
-        // System.out.println("why u closed me :(((");
+    public static void sendUpdateOnlinePlayersResponse() {
+        broadcastResponse(updateOnlinePlayersResponse());
+    }
+    private void removePlayer() {
+        if (player != null) {
+            System.out.println(this.player.getUserName() + "left the server");
+            DatabaseManager.openDataBaseConnection();
+            DatabaseManager.togglePlayerStatus(this.player);
+            DatabaseManager.closeDataBaseConnection();
+            sendUpdateOnlinePlayersResponse();
+        }
         playerHandlers.remove(this);
-        RequestHandler.sendUpdateOnlinePlayersResponse();
-        DatabaseManager.openDataBaseConnection();
-        DatabaseManager.togglePlayerStatus(player);
-        DatabaseManager.closeDataBaseConnection();
+    } 
+    private void closeEveryThing(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+        removePlayer();
         try {
           if (bufferedReader != null) {
               bufferedReader.close();
@@ -81,8 +91,9 @@ public class PlayerHandler {
           if (socket != null) {
               socket.close();
           }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("exception");
+            //e.printStackTrace();
         }
     }
 }

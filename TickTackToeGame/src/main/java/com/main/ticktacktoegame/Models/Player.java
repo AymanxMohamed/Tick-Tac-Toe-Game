@@ -6,13 +6,6 @@ package com.main.ticktacktoegame.Models;
 
 
 import com.main.ticktacktoegame.Models.Enums.MappingFunctions;
-import com.main.ticktacktoegame.Models.Enums.PLAYER_RANK;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,9 +13,9 @@ import java.util.logging.Logger;
  */
 
 public class Player {
-    private String userName;
-    private int bonusPoints;
-    private String playerRank;
+    private final String userName;
+    private final int bonusPoints;
+    private final String playerRank;
     private final String registerDate;
 
     public Player(String userName, int bonusPoints, String playerRank, String registerDate) {

@@ -121,7 +121,9 @@ public class Player {
     public void setPlayerRank(PLAYER_RANK value) {
         playerRank = value;
     }
-    
+    public void setPlayerStatus(String value) {
+        playerStatus = value;
+    }
 
 
     public void printData() {

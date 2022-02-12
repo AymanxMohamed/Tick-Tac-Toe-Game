@@ -32,4 +32,13 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+    public static String createSendGameInvitationRequest(String invitedPlayerName) {
+        JSONObject data = new JSONObject();
+        data.put("invitedPlayername", invitedPlayerName);
+        data.put(data, data);
+        JSONObject request = new JSONObject();
+        request.put("request", "send game invitation");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
 }

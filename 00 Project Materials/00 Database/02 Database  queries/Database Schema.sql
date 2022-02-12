@@ -105,31 +105,3 @@ CREATE TABLE multi_mode_game (
 );
 
 GO
-
-/**
-	DROP TABLE multi_mode_game;
-	go
-	DROP TABLE single_mode_game;
-	go
-	DROP TABLE player;
-	
-	DELETE FROM multi_mode_game;
-	GO
-	DELETE FROM single_mode_game;
-	GO
-	DELETE FROM PLAYER;
-*/
-
-select * from player;	
-go
-select * from single_mode_game;
-go
-select * from multi_mode_game;
-
-SELECT * FROM player WHERE player_status = 'Online';
-UPDATE PLAYER SET player_status = 'Offline' WHERE user_name IN('ayman', 'amr', 'shopaky');
-UPDATE PLAYER SET player_status = 'Offline';
-
-SELECT * FROM multi_mode_game WHERE first_player_user_name = 'ahmed' OR second_player_user_name = 'ahmed';
-SELECT * FROM single_mode_game WHERE  user_name = 'ayman';
-select password from player where user_name = 'ahmed';
