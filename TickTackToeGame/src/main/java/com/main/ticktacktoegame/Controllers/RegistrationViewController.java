@@ -10,6 +10,7 @@ import com.main.ticktacktoegame.Network.RequestCreator;
 import com.main.ticktacktoegame.Utilites.Validator;
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -23,6 +24,10 @@ public class RegistrationViewController {
     private String username = null;
     private String password = null;
     private String confirmedPassword = null;
+    
+    @FXML
+    Label registerErrorLabel;
+    
     @FXML
     private void sendRegisterRequest() {
         username = usernameField.getText();

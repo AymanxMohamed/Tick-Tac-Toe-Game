@@ -5,12 +5,12 @@
 package com.main.ticktacktoegame.Controllers;
 
 import com.main.ticktacktoegame.App;
-import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import com.main.ticktacktoegame.Network.RequestCreator;
 import com.main.ticktacktoegame.Utilites.Validator;
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -18,10 +18,17 @@ import javafx.scene.control.TextField;
  * @author elsho
  */
 public class LoginController {
-    @FXML TextField usernameField;
-    @FXML TextField passwordField;
+
+    @FXML
+    TextField usernameField;
+    @FXML
+    TextField passwordField;
     private String username = null;
     private String password = null;
+
+    @FXML
+    Label loginErrorLabel;
+
     @FXML
     private void sendLoginRequest() {
         username = usernameField.getText();
@@ -33,11 +40,11 @@ public class LoginController {
                 Client.sendRequest(RequestCreator.login(username, password));
             }
         } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            ex.printStackTrace();
+        }
     }
-    
-    public void switchToRegistrationView () {
+
+    public void switchToRegistrationView() {
         try {
             App.setRoot("RegistrationView");
         } catch (IOException ex) {

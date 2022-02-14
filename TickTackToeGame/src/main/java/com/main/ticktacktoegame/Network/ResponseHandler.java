@@ -96,9 +96,12 @@ public class ResponseHandler {
     private static void handlePlayerNotExist() {
         try {
             App.setRoot("PlayerNotExistView");
+//              App.setRoot("popup");
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+//        Set Message In The Popout Label
     }
 
     private static void handleWrongPassword() {

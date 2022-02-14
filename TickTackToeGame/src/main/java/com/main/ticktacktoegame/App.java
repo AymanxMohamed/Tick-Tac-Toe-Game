@@ -15,11 +15,13 @@ import java.util.logging.Logger;
  * JavaFX App
  */
 public class App extends Application {
+
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("LoginView"), 640, 480);
+        scene = new Scene(loadFXML("LoginView"));
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
