@@ -76,13 +76,14 @@ public class App extends Application {
 //        request.put("data", intArray);
 //        ArrayList<Integer> invitationReciever = (ArrayList<Integer>) request.get("data");
 //        System.out.println(invitationReciever.get(0));
-        JSONObject data = new JSONObject();
-        data.put("invitationSender", "ayman");
-        data.put("invitationReciever", "ahmed");
-        JSONObject request = new JSONObject();
-        request.put("request", "game invitation");
-        request.put("data", data);
-        System.out.println(JSONValue.toJSONString(request));
+//        JSONObject data = new JSONObject();
+//        data.put("invitationSender", "ayman");
+//        data.put("invitationReciever", "ahmed");
+//        JSONObject request = new JSONObject();
+//        request.put("request", "game invitation");
+//        request.put("data", data);
+//        System.out.println(JSONValue.toJSONString(request));
+          // next test move
     }
 
 }

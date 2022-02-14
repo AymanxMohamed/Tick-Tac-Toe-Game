@@ -9,8 +9,7 @@ import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
-import static tictactoegameserver.Network.Utility.generateUniqueId;
-import static tictactoegameserver.Network.Utility.getPlayerHandler;
+import static tictactoegameserver.Network.Utility.*;
 import  tictactoegameserver.gamelogic.MultiModeGameHandler;
 /**
  *
@@ -38,7 +37,11 @@ public class RequestHandler {
             case "rejectInvitation":
                 return handleRejectInvitation(data);
             case "XorOChoise":
-                return handleXOrOChoise(data);     
+                return handleXOrOChoise(data);
+            case "multiMove":
+                handleMultiModeGameMove(data);
+            case "singleMove":
+                handleSingleModeGameMove(data);
                 
         }
         return response;
@@ -122,5 +125,14 @@ public class RequestHandler {
         recieverHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
         return startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName());
     }
-    
+    private static void handleMultiModeGameMove(JSONObject data) {
+        String gameID = (String) data.get("gameId");
+        int index = ((Long) data.get("index")).intValue();
+        // 1 - get multiModeGameHandler by ID
+        MultiModeGameHandler gameHandler = Utility.getMultiModeGameHandler(gameID);
+    }
+
+    private static void handleSingleModeGameMove(JSONObject data) {
+        //todo
+    }
 }

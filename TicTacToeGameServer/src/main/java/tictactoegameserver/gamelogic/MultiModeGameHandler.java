@@ -4,8 +4,6 @@
  */
 package tictactoegameserver.gamelogic;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import tictactoegameserver.Network.PlayerHandler;
 
@@ -28,6 +26,16 @@ public class MultiModeGameHandler {
         this.winner = "";
         this.gameMoves = new ArrayList<>();
         currentGames.add(this);
+    }
+    public void addMove(int index) {
+        if (!gameMoves.contains(index)) {
+            gameMoves.add(index);
+        }
+    }
+    public void getMoves(){
+        for (var move : gameMoves){
+            System.out.println(move);
+        }
     }
     public String getGameID() { return gameID; }
     public PlayerHandler getplayerXHandler() { return playerXHandler; }

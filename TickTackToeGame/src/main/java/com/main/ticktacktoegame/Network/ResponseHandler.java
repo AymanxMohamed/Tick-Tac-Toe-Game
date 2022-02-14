@@ -57,6 +57,10 @@ public class ResponseHandler {
                 handleChooseXOrO(data);
             case "start multi mode game":
                 handleStartMultiModeGame(data);
+            case "multiMove":
+                handleMultiModeGameMove(data);
+            case "singleMove":
+                handleSingleModeGameMove(data);
             default:
                 break;
         }
@@ -210,7 +214,16 @@ public class ResponseHandler {
         // you can also place any nice pic for each player on the left and 
         // the right
     }
-    
-    
-    
+
+    private static void handleMultiModeGameMove(JSONObject data) {
+        String gameID = (String) data.get("gameId");
+        int index = (int) data.get("index");
+        String playerO = (String) data.get("playerO");
+        // 1 - get multiModeGameHandler by ID
+        
+    }
+
+    private static void handleSingleModeGameMove(JSONObject data) {
+        //todo
+    }
 }

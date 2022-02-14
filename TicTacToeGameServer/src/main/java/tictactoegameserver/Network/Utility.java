@@ -6,6 +6,7 @@ package tictactoegameserver.Network;
 
 import java.util.UUID;
 import static tictactoegameserver.Network.PlayerHandler.playerHandlers;
+import tictactoegameserver.gamelogic.MultiModeGameHandler;
 
 /**
  *
@@ -23,5 +24,12 @@ public class Utility {
     }
     public static String generateUniqueId() {
         return UUID.randomUUID().toString();
+    }
+    public static MultiModeGameHandler getMultiModeGameHandler(String gameId) {
+        for (var multiModeGameHandler : MultiModeGameHandler.currentGames) {
+            if (multiModeGameHandler.getGameID().equals(gameId))
+                return multiModeGameHandler;
+        }
+        return null;
     }
 }

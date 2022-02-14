@@ -82,4 +82,22 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+    public static String multiMove(int index, String gameId) {
+        JSONObject data = new JSONObject();
+        data.put("gameId", gameId);
+        data.put("index", index);
+        JSONObject request = new JSONObject();
+        request.put("request", "multiMove");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);   
+    }
+    public static String singleMove(int index, String gameId) {
+        JSONObject data = new JSONObject();
+        data.put("gameId", gameId);
+        data.put("index", index);
+        JSONObject request = new JSONObject();
+        request.put("request", "singleMove");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);   
+    }
 }
