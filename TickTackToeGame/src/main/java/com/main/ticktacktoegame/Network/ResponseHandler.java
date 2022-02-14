@@ -19,7 +19,8 @@ public class ResponseHandler {
         
         JSONObject requestObject = (JSONObject) JSONValue.parse(responseString);
         String response = (String) requestObject.get("response");
-        JSONObject data;
+        JSONObject data = (JSONObject) requestObject.get("data");
+
 
         switch (response) {
             case "player not exists":
@@ -29,36 +30,33 @@ public class ResponseHandler {
                 handleWrongPassword();
                 break;
             case "login success":
-                data = (JSONObject) requestObject.get("data");
                 handleLoginSuccess(data);
                 break;
             case "player exists":
                 handlePlayerExist();
-                // this means that the player tried to reqister but the user name exists
                 break;
             case "reqister sucsess":
                 handleRegisterSuccess();
                 break;
             case "update online players":
-                data = (JSONObject) requestObject.get("data");
                 handleUpdateOnlinePlayers(data);
                 break;
             case "player in game":
-                data = (JSONObject) requestObject.get("data");
                 handlePlayerInGame(data);
                 break;
             case "invitation":
-                data = (JSONObject) requestObject.get("data");
                 handleInvitation(data);
                 break;
             case "invitationSended":
-                data = (JSONObject) requestObject.get("data");
                 handleInvitationSended(data);
                 break;
             case "invitationRejected":
-                data = (JSONObject) requestObject.get("data");
                 handleInvitationRejected(data);
                 break;
+            case "choose x or o":
+                handleChooseXOrO(data);
+            case "start multi mode game":
+                handleStartMultiModeGame(data);
             default:
                 break;
         }
@@ -169,6 +167,34 @@ public class ResponseHandler {
         // for example
         String invitationReciever = (String) data.get("invitationReciever");
         System.out.println(invitationReciever + " reject your game request");
+    }
+
+    private static void handleChooseXOrO(JSONObject data) {
+        // this function  will reveal a choose x or o view
+        String invitationSender = (String) data.get("invitationSender");
+        // you will have to store the sender and receiver data to be able
+        // to pass it 
+    }
+
+    private static void handleStartMultiModeGame(JSONObject data) {
+        String gameID = (String) data.get("gameId");
+        String playerX = (String) data.get("playerX");
+        String playerO = (String) data.get("playerO");
+        
+        if (playerX.equals(Client.player.getUserName())) {
+            // then this client is the player x
+            // highlight player X  label to inform the client that  he play
+            // with x
+        } else {
+            // this client is the player O
+            // highlight player y  label to inform the client that  he play
+            // with x
+        }
+        
+        // Switch to the game view with player X on the left with his name
+        // and player y on the right with his name also
+        // you can also place any nice pic for each player on the left and 
+        // the right
     }
     
     

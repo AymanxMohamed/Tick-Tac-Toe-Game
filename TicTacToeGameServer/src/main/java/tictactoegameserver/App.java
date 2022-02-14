@@ -7,8 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
 import tictactoegameserver.Network.Server;
 
@@ -36,6 +39,7 @@ public class App extends Application {
     }
 
       public static void main(String[] args) {
+          //tryJson();
         try {
             Server.startServer();
         } catch (IOException ex) {
@@ -43,8 +47,7 @@ public class App extends Application {
             System.exit(0);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-//             tryDatabase();
+             
     }
 
     /**
@@ -57,4 +60,29 @@ public class App extends Application {
         DatabaseManager.closeDataBaseConnection();
         System.exit(0);
     }
+    public static void tryJson() {
+//        ArrayList<Integer> intArray = new ArrayList<>();
+//        intArray.add(0);
+//        intArray.add(1);
+//        intArray.add(2);
+//        intArray.add(3);
+//        intArray.add(4);
+//        intArray.add(5);
+//        intArray.add(6);
+//        intArray.add(7);
+//        intArray.add(8);
+//        JSONObject request = new JSONObject();
+//        request.put("request", "XorOChoise");
+//        request.put("data", intArray);
+//        ArrayList<Integer> invitationReciever = (ArrayList<Integer>) request.get("data");
+//        System.out.println(invitationReciever.get(0));
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", "ayman");
+        data.put("invitationReciever", "ahmed");
+        JSONObject request = new JSONObject();
+        request.put("request", "game invitation");
+        request.put("data", data);
+        System.out.println(JSONValue.toJSONString(request));
+    }
+
 }

@@ -37,7 +37,6 @@ public class RequestCreator {
         JSONObject data = new JSONObject();
         data.put("invitationSender", player.getUserName());
         data.put("invitationReciever", invitedPlayerName);
-        data.put(data, data);
         JSONObject request = new JSONObject();
         request.put("request", "game invitation");
         request.put("data", data);
@@ -59,6 +58,26 @@ public class RequestCreator {
         data.put(data, data);
         JSONObject request = new JSONObject();
         request.put("request", "rejectInvitation");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    public static String xChoosen(String invitationSender, String invitationReciever) {
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", invitationSender);
+        data.put("invitationReciever", invitationReciever);
+        data.put("choise", "X");
+        JSONObject request = new JSONObject();
+        request.put("request", "XorOChoise");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    public static String yChoosen(String invitationSender, String invitationReciever) {
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", invitationSender);
+        data.put("invitationReciever", invitationReciever);
+        data.put("choise", "O");
+        JSONObject request = new JSONObject();
+        request.put("request", "XorOChoise");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }

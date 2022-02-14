@@ -9,8 +9,9 @@ import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
+import static tictactoegameserver.Network.Utility.generateUniqueId;
 import static tictactoegameserver.Network.Utility.getPlayerHandler;
-
+import  tictactoegameserver.gamelogic.MultiModeGameHandler;
 /**
  *
  * @author ayman, shopaky
@@ -36,7 +37,8 @@ public class RequestHandler {
                 return handleAcceptInvitation(data);
             case "rejectInvitation":
                 return handleRejectInvitation(data);
-                 
+            case "XorOChoise":
+                return handleXOrOChoise(data);     
                 
         }
         return response;
@@ -88,15 +90,37 @@ public class RequestHandler {
     }
 
     private static String handleAcceptInvitation(JSONObject data) {
-        // todo
-        return null;
+        String invitationSender = (String) data.get("invitationSender");
+        PlayerHandler senderHandler = getPlayerHandler(invitationSender);
+        senderHandler.sendResponse(chooseXOrOResponse(data));
+        return doNothingResponse();
     }
 
     private static String handleRejectInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");        
-        String invitationReciever = (String) data.get("invitationReciever");
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
         senderHandler.sendResponse(invitationRejectedResponse(data));
         return doNothingResponse();
     }
+
+    private static String handleXOrOChoise(JSONObject data) {
+        String invitationSender = (String) data.get("invitationSender");
+        String invitationReciever = (String) data.get("invitationReciever");
+        String choise = (String) data.get("choise");
+        PlayerHandler recieverHandler = getPlayerHandler(invitationReciever);
+        PlayerHandler playerXHandler;
+        PlayerHandler playerOHandler;
+        if (choise.equals("X")) {
+            playerXHandler = getPlayerHandler(invitationSender);
+            playerOHandler = getPlayerHandler(invitationReciever);
+        } else {
+            playerXHandler = getPlayerHandler(invitationReciever);
+            playerOHandler = getPlayerHandler(invitationSender);
+        }
+        String gameID = generateUniqueId();
+        new MultiModeGameHandler(gameID, playerXHandler, playerOHandler);
+        recieverHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
+        return startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName());
+    }
+    
 }

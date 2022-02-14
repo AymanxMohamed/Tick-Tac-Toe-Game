@@ -4,6 +4,7 @@
  */
 package tictactoegameserver.Network;
 
+import java.util.UUID;
 import static tictactoegameserver.Network.PlayerHandler.playerHandlers;
 
 /**
@@ -19,5 +20,8 @@ public class Utility {
                 return playerHandler;
         }
         return null;
+    }
+    public static String generateUniqueId() {
+        return UUID.randomUUID().toString();
     }
 }

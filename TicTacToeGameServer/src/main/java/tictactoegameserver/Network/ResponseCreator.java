@@ -115,6 +115,23 @@ public class ResponseCreator {
         responseObject.put("response", "doNothing"); 
         return JSONValue.toJSONString(responseObject);
     }
-    // todo tommorow handle accept request 
+    public static String chooseXOrOResponse(JSONObject data) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "choose x or o"); 
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String startMultiModeGameResponse(String gameId, String playerX, String playerO) {
+        JSONObject data = new JSONObject();
+        data.put("gameId", gameId);        
+        data.put("playerX", playerX);
+        data.put("playerO", playerO);
+        
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "start multi mode game");
+        responseObject.put("data", data);
+
+        return JSONValue.toJSONString(responseObject);
+    }
 }
 
