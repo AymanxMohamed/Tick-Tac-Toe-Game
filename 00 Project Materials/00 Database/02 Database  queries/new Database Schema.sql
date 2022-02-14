@@ -48,7 +48,7 @@ CREATE TABLE single_mode_game (
 	user_name VARCHAR(50),
 	player_type VARCHAR(1) CONSTRAINT CK_player_type_single_mode_game CHECK (player_type IN ('X', 'O')),
 	difficulty VARCHAR(10) NOT NULL CONSTRAINT CK_difficulty_single_mode_game CHECK (difficulty IN ('easy', 'medium', 'hard')),
-	player_case VARCHAR(MAX) CONSTRAINT CK_player_case_single_mode_game CHECK (player_case IN ('winner', 'loser')),
+	player_case VARCHAR(MAX) CONSTRAINT CK_player_case_single_mode_game CHECK (player_case IN ('winner', 'loser', 'draw')),
 	game_record VARCHAR(MAX) NULL,
 	game_date DATETIME CONSTRAINT DK_register_date_single_mode_game DEFAULT GETDATE(),
 	CONSTRAINT FK_user_name_single_mode_game_player FOREIGN KEY (user_name) REFERENCES player(user_name)

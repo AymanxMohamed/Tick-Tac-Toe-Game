@@ -79,6 +79,15 @@ public class ResponseHandler {
             case "updateAvilablePlayesList":
                 handleUpdateAvilablePlayersList(data);
                 break;
+            case "remove multi button":
+                handleRemoveMultiButtons(data);
+                break;
+            case "draw multi moves":
+                handleDrawMultiMovesHandler(data);
+                break;
+            case "enable multi buttons":
+                handleEnableMultiButtons();
+                break;
             default:
                 break;
         }
@@ -266,6 +275,8 @@ public class ResponseHandler {
         if (winner.equals(Client.player.getUserName())) {
             // display  winner view that Show a nice message to
             // the player and said that he is the winner
+        } else if(winner.equals("draw")) {
+            // display the draw view
         } else {
             // display the loser view with a button that have play again and on press play again you will send another game invitation to the current player
         }
@@ -300,12 +311,23 @@ public class ResponseHandler {
         ArrayList<Opponent> onlinePlayers = Opponent.onlinePlayers;
     }
 
+    private static void handleRemoveMultiButtons(JSONObject data) {
+        int index = ((Long) data.get("bonusPoints")).intValue();
+        // this handler will just remove the button From the buttons array
+        // in the controller
+    }
 
 
+    public static void handleDrawMultiMovesHandler(JSONObject data) {
+        ArrayList<Integer> gameMoves = (ArrayList<Integer>) data.get("gameMoves");
+        // this is an array of game moves start drawing the x and o
+        // draw x then o and notice that the array have the indexes of the buttons
+        // so always first index in the array represent x 
+    }
 
- 
-
-
-
-
+    private static void handleEnableMultiButtons() {
+        // this hanlder will just enable all buttons in the multimode controller 
+        // buttons array
+        
+    }
 }

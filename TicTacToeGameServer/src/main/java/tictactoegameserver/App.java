@@ -38,8 +38,6 @@ public class App extends Application {
     }
 
       public static void main(String[] args) {
-//          tryJson();
-        
         try {
             Server.startServer();
         } catch (IOException ex) {
@@ -47,7 +45,6 @@ public class App extends Application {
             System.exit(0);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-             
     }
 
     /**
@@ -104,5 +101,7 @@ public class App extends Application {
             System.out.println(move);
         }
     }
+        
+    
 
 }
