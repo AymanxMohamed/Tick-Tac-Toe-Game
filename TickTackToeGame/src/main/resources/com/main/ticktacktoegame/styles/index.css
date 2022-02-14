@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@font-face {
+    font-family: 'Righteous', cursive;
+    font-style: normal;
+    font-weight: bold;
+    src: local('Righteous'), url('https://fonts.googleapis.com/css2?family=Righteous&display=swap';) format('truetype');
+}
+
+*{
+    -fx-font-family: Righteous;
+}
+
+.body{
+    -fx-background-image: url(../images/mainbg.png);
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+.logo{
+    -fx-background-image: url(../images/logo.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+.loginBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/login.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

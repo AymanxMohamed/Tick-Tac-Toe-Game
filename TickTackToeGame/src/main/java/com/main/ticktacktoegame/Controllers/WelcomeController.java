@@ -4,7 +4,6 @@ package com.main.ticktacktoegame.Controllers;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import java.io.IOException;
@@ -22,17 +21,33 @@ import javafx.scene.control.Label;
  * @author elsho
  */
 public class WelcomeController implements Initializable {
-    @FXML Label usernameLabel;
-    @FXML Label bonusPointsLabel;
-    @FXML Label rankLabel;
-    @FXML Label registerDateLabel;
-    
+
+    @FXML
+    Label usernameLabel;
+    @FXML
+    Label bonusPointsLabel;
+    @FXML
+    Label rankLabel;
+//    @FXML Label registerDateLabel;
+
+    @FXML
+    Label usernameWelcomeLabel;
+
 //    @FXML static Label onlinePlayer0;
-    
     @FXML
     private void switchToPlayModeView() {
         try {
             App.setRoot("ChooseModeView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void switchToOnlineView() {
+        System.out.println("online view");
+        try {
+            App.setRoot("onlineHomeView");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -43,9 +58,11 @@ public class WelcomeController implements Initializable {
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
-        registerDateLabel.setText(Client.player.getRegisterDate());
+        usernameWelcomeLabel.setText(Client.player.getUserName());
+
+//        registerDateLabel.setText(Client.player.getRegisterDate());
     }
-    
+
 //    public static void printOnlinePlayers(String player) {
 //        onlinePlayer0.setText(player);
 //    }
