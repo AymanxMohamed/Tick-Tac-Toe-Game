@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Player;
+import static tictactoegameserver.Network.ResponseCreator.onlinePlayersListResponse;
+import static tictactoegameserver.Network.ResponseCreator.playerLeftTheGameResponse;
 import static tictactoegameserver.Network.ResponseCreator.updateOnlinePlayersResponse;
 
 /**
@@ -59,12 +61,9 @@ public class PlayerHandler {
         }
     }
     public static void broadcastResponse(String response) {
-        for (var playerHandler : playerHandlers) {
+        for (PlayerHandler playerHandler : playerHandlers) {
             playerHandler.sendResponse(response);
         }
-    }
-    public static void sendUpdateOnlinePlayersResponse() {
-        broadcastResponse(updateOnlinePlayersResponse());
     }
     private void removePlayer() {
         if (player != null) {
@@ -72,7 +71,7 @@ public class PlayerHandler {
             DatabaseManager.openDataBaseConnection();
             DatabaseManager.togglePlayerStatus(this.player);
             DatabaseManager.closeDataBaseConnection();
-            sendUpdateOnlinePlayersResponse();
+            broadcastResponse(playerLeftTheGameResponse(this.player.getUserName()));
         }
         playerHandlers.remove(this);
     } 

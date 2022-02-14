@@ -4,9 +4,10 @@
  */
 package com.main.ticktacktoegame.Network;
 
-import com.main.ticktacktoegame.Models.Player;
+import com.main.ticktacktoegame.Models.*;
 import java.net.Socket;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +26,7 @@ public class Client {
     public static String multiModeGameId;
     public static String opponnentName;
     public static String singleModeGameID;
-    
+
         
     public static void openConnection() throws IOException {
         socket = new Socket(serverIP, ServerPort);

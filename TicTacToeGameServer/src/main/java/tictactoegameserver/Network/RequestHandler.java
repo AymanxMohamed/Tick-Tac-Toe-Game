@@ -64,8 +64,9 @@ public class RequestHandler {
         playerHandler.player = DatabaseManager.getPlayer(userName);
         DatabaseManager.togglePlayerStatus(playerHandler.player);
         DatabaseManager.closeDataBaseConnection();
-        sendUpdateOnlinePlayersResponse();
-        return loginSuccessResponse(userName, playerHandler.player);
+        playerHandler.sendResponse(loginSuccessResponse(userName, playerHandler.player));
+        PlayerHandler.broadcastResponse(addNewPlayerResponse(userName));
+        return onlinePlayersListResponse();
     }
     
     public static String handleRegister(JSONObject data) {
@@ -132,12 +133,13 @@ public class RequestHandler {
         ArrayList<String> XOPlayers = new ArrayList<>();
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
-        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "remove"));
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers));
         
         recieverHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
         playerOHandler.sendResponse(disapleAllButtonsResponse());
         return startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName());
     }
+    
     private static String handleMultiModeGameMove(JSONObject data) {
         String gameID = (String) data.get("gameId");
         int index = ((Long) data.get("index")).intValue();

@@ -5,6 +5,7 @@
 package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.Player;
 import static com.main.ticktacktoegame.Network.RequestCreator.*;
 import java.io.IOException;
@@ -39,8 +40,14 @@ public class ResponseHandler {
             case "reqister sucsess":
                 handleRegisterSuccess();
                 break;
-            case "update online players":
-                handleUpdateOnlinePlayers(data);
+            case "online players list":
+                onlinePlayersList(data);
+                break;
+            case "add new player":
+                handleAddNewPlayer(data);
+                break;
+            case "player left the game":
+                handlePlayerLeftTheGame(data);
                 break;
             case "player in game":
                 handlePlayerInGame(data);
@@ -56,16 +63,22 @@ public class ResponseHandler {
                 break;
             case "choose x or o":
                 handleChooseXOrO(data);
+                break;
             case "start multi mode game":
                 handleStartMultiModeGame(data);
+                break;
             case "disaple all buttons":
                 handleDisapleAllButtons();
+                break;
             case "end multi mode game":
                 handleEndMultiModeGame(data);
+                break;
             case "update player data":
                 handleUpdatePlayerData(data);
+                break;
             case "updateAvilablePlayesList":
                 handleUpdateAvilablePlayersList(data);
+                break;
             default:
                 break;
         }
@@ -118,15 +131,36 @@ public class ResponseHandler {
         }
         System.out.println("gratz u have registered");
     }
-    
-    private static void handleUpdateOnlinePlayers(JSONObject data) {
-        // todo
-        // this function will manage reveal the player names that came in the data
-        // in the online players area
-        JSONArray onlinePlayersNames = (JSONArray) data.get("onlinePlayers");
-        for (var playerName : onlinePlayersNames) {
-//            WelcomeController.printOnlinePlayers("TEST");
-            System.out.println(playerName + " is online");
+    private static void onlinePlayersList(JSONObject data) {
+        // this function will be send in the beiggining when player logged in
+        JSONArray onlinePlayersDataObjects = (JSONArray) data.get("onlinePlayersDataObjects");
+        for (int i = 0; i < onlinePlayersDataObjects.size(); i++) {
+            JSONObject obj = (JSONObject)onlinePlayersDataObjects.get(i);
+            String name = (String) obj.get("name");
+            boolean status = (boolean) obj.get("status");
+            if (!name.equals(Client.player.getUserName())) {
+                Opponent.addOpponent(name, status);
+                updateAvilablePlayersList();
+                System.out.println(name + " is online");
+                System.out.println("is " + name + " in game " + status);
+            }
+        }
+    }
+    private static void handleAddNewPlayer(JSONObject data) {
+        String playerName = (String) data.get("playerName");
+        if (!playerName.equals(Client.player.getUserName())) {
+            Opponent.addOpponent(playerName, false);
+            updateAvilablePlayersList();
+            System.out.println(playerName + " is online now");
+        }
+    }
+
+    private static void handlePlayerLeftTheGame(JSONObject data) {
+        String playerName = (String) data.get("playerName");
+        if (!playerName.equals(Client.player.getUserName())) {
+            Opponent.removeOpponent(playerName);
+            updateAvilablePlayersList();
+            System.out.println(playerName + " left the game");
         }
     }
 
@@ -247,17 +281,31 @@ public class ResponseHandler {
     }
     private static void  handleUpdateAvilablePlayersList(JSONObject data) {
        ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
-       String command = (String) data.get("command");
-       if (command.equals("add")) {
-           for (var player : playerNames) {
-               // add the player in the avilable players list
-           }
-       } else {
-           for (var player : playerNames) {
-               // remove the player from the avilable players list
-           }
-       }
+        for (var playerName : playerNames) {
+            if (!playerName.equals(Client.player.getUserName())) {
+                 Opponent player = Opponent.getOpponent(playerName);
+                 player.togleInGameStatus();
+                 updateAvilablePlayersList();
+            }
+        }
     }
+
+    private static void updateAvilablePlayersList() {
+        // this function will loob on the Opponent.onlinePlayers arrayList
+        // every online player have 2 values name and inGame boolean
+        // you have rebuild the players list with inGame mark next too each one
+        // on every time this method called
+        // summary: this method will just rebuild the online players list 
+        // with in Game <true or false between every one of them>
+        ArrayList<Opponent> onlinePlayers = Opponent.onlinePlayers;
+    }
+
+
+
+
+ 
+
+
 
 
 }

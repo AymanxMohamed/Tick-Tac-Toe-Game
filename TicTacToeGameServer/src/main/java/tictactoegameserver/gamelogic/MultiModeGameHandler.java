@@ -81,7 +81,7 @@ public class MultiModeGameHandler {
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
         
-        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "add"));
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers));
         
         playerXHandler.sendResponse(updatePlayerDataResponse(playerXHandler.player));
         
@@ -89,6 +89,7 @@ public class MultiModeGameHandler {
 
         playerXHandler.sendResponse(endMultiModeGameResponse(winner));
         playerOHandler.sendResponse(endMultiModeGameResponse(winner));
+        currentGames.remove(this);
         
     }
       

@@ -39,6 +39,7 @@ public class App extends Application {
 
       public static void main(String[] args) {
 //          tryJson();
+        
         try {
             Server.startServer();
         } catch (IOException ex) {

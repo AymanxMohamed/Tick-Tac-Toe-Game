@@ -11,8 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
-import tictactoegameserver.Database.Entities.Enums.PLAYER_RANK;
 import tictactoegameserver.Database.Entities.Player;
+import static tictactoegameserver.Network.Utility.getPlayerHandler;
 
 /**
  *
@@ -49,20 +49,47 @@ public class ResponseCreator {
 
         return dataObject;
     }
+    public static String onlinePlayersListResponse() {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "online players list");
+        responseObject.put("data", getOnlinePlayersJsonObject());
+        return JSONValue.toJSONString(responseObject);
+    }
     public static JSONObject getOnlinePlayersJsonObject() {
         ArrayList<Player> onlinePlayers = null;
         DatabaseManager.openDataBaseConnection();
         onlinePlayers = DatabaseManager.getOnlinePlayers();
         DatabaseManager.closeDataBaseConnection();
 
-        JSONArray onlinePlayersNames = new JSONArray();
+        JSONArray onlinePlayersDataObjects = new JSONArray();
         for (var player : onlinePlayers) {
-            onlinePlayersNames.add(player.getUserName());
+            PlayerHandler playerHandler = getPlayerHandler(player.getUserName());
+            boolean inGame = playerHandler.inGame;
+            JSONObject data = new JSONObject();
+            data.put("name", player.getUserName());
+            data.put("status", inGame);
+            onlinePlayersDataObjects.add(data);
         }
         JSONObject dataObject = new JSONObject();
-        dataObject.put("onlinePlayers", onlinePlayersNames);
+        dataObject.put("onlinePlayersDataObjects", onlinePlayersDataObjects);
 
         return dataObject;
+    }
+    public static String addNewPlayerResponse(String userName) {
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("playerName", userName);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "add new player");
+        responseObject.put("data", dataObject);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String playerLeftTheGameResponse(String userName){
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("playerName", userName);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player left the game");
+        responseObject.put("data", dataObject);
+        return JSONValue.toJSONString(responseObject);
     }
     public static String updateOnlinePlayersResponse() {
         JSONObject responseObject = new JSONObject();
@@ -165,10 +192,9 @@ public class ResponseCreator {
         
     }
     
-    public static String updateAvilablePlayersList(ArrayList<String> playersNames, String command) {
+    public static String updateAvilablePlayersList(ArrayList<String> playersNames) {
         JSONObject data = new JSONObject();
         data.put("playersNames", playersNames);
-        data.put("command", command);
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "updateAvilablePlayesList");
         responseObject.put("data", data);
