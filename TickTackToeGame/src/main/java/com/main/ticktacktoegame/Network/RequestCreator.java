@@ -52,6 +52,7 @@ public class RequestCreator {
         return JSONValue.toJSONString(request);
     }
     public static String rejectInvitation(String invitationSender, String invitationReciever) {
+        Client.opponnentName = null;
         JSONObject data = new JSONObject();
         data.put("invitationSender", invitationSender);
         data.put("invitationReciever", invitationReciever);

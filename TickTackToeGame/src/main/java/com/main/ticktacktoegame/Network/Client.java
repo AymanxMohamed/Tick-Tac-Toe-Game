@@ -22,6 +22,9 @@ public class Client {
     private static BufferedReader bufferReader;
     private static BufferedWriter bufferedWriter;
     public static Player player;
+    public static String multiModeGameId;
+    public static String opponnentName;
+    public static String singleModeGameID;
     
         
     public static void openConnection() throws IOException {

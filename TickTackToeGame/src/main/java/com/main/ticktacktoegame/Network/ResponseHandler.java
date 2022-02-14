@@ -138,7 +138,7 @@ public class ResponseHandler {
     private static void handleInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");        
         String invitationReciever = (String) data.get("invitationReciever");
-  
+        Client.opponnentName = invitationSender;
         // todo 
         // this function should reveal a dialog box with a nice message
         // this message will have 2 buttons one accept and one reject
@@ -146,11 +146,15 @@ public class ResponseHandler {
         System.out.println(invitationSender + " want to play with you");
         // if he pressed on accept button you will send an accept invitation
         // request by copy and  paste the below line of code
-        //Client.sendRequest(acceptInvitation(invitationSender, invitationReciever));
+        
+        // when you send accept or reject you are the receiver and the client is the sender
+        // this below code is correct
+        
+        //Client.sendRequest(acceptInvitation(Client.opponnentName, Client.player.getUserName()));
         
         // if he pressed on reject buttoon you will send an reject invitation 
         // by copy and  paste the below line of code
-        // Client.sendRequest(rejectInvitation(invitationSender, invitationReciever));
+        // Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
     }
 
     private static void handleInvitationSended(JSONObject data) {
@@ -172,8 +176,16 @@ public class ResponseHandler {
     private static void handleChooseXOrO(JSONObject data) {
         // this function  will reveal a choose x or o view
         String invitationSender = (String) data.get("invitationSender");
+        String invitationReciever = (String) data.get("invitationSender");
+        Client.opponnentName = invitationReciever;
         // you will have to store the sender and receiver data to be able
         // to pass it 
+        // if the client pressed  on x
+        // note when you use this method XChoosen or YChoosen you are the sender
+        // and the Client.opponentName is The reciever
+        Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
+        // else if the client pressed on y
+        Client.sendRequest(yChoosen(Client.player.getUserName(), Client.opponnentName));
     }
 
     private static void handleStartMultiModeGame(JSONObject data) {
@@ -181,6 +193,8 @@ public class ResponseHandler {
         String playerX = (String) data.get("playerX");
         String playerO = (String) data.get("playerO");
         
+        // you will have to store the game id in the client
+        Client.multiModeGameId = gameID;
         if (playerX.equals(Client.player.getUserName())) {
             // then this client is the player x
             // highlight player X  label to inform the client that  he play
