@@ -5,7 +5,13 @@
 package tictactoegameserver.gamelogic;
 
 import java.util.ArrayList;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import tictactoegameserver.Network.PlayerHandler;
+import tictactoegameserver.Database.DatabaseManager;
+import tictactoegameserver.Database.Entities.Player;
+import tictactoegameserver.Network.ResponseCreator;
+import static tictactoegameserver.Network.ResponseCreator.*;
 
 /**
  *
@@ -15,9 +21,10 @@ public class MultiModeGameHandler {
     private final String gameID;
     private final PlayerHandler playerXHandler;
     private final PlayerHandler playerOHandler;
-    private final String winner;
+    private String winner;
     private final ArrayList<Integer> gameMoves;
     public static ArrayList<MultiModeGameHandler> currentGames = new ArrayList<>();
+    private boolean playerXTurn;
     
     public MultiModeGameHandler(String gameID, PlayerHandler playerXHandler, PlayerHandler playerOHandler) {
         this.gameID = gameID;
@@ -26,17 +33,66 @@ public class MultiModeGameHandler {
         this.winner = "";
         this.gameMoves = new ArrayList<>();
         currentGames.add(this);
+        playerXTurn = true;
     }
-    public void addMove(int index) {
+    private void addMove(int index) {
         if (!gameMoves.contains(index)) {
             gameMoves.add(index);
         }
     }
-    public void getMoves(){
+    private boolean isGameEnded() {
+        
+        return false;
+    }
+    public void getMovesJsonObject(){
         for (var move : gameMoves){
             System.out.println(move);
         }
     }
+    public void processMove(int index) {
+        addMove(index);
+        if (gameMoves.size() >= 5 && isGameEnded()) {
+            handleEndGame();
+        }
+        if (playerXTurn) {
+            
+            
+            
+        } else {
+            
+        }
+        
+    }
+    private void handleEndGame() {
+        if (playerXTurn) {
+            winner = playerXHandler.player.getUserName();
+            playerXHandler.player.increaseBonusPoints();
+            playerOHandler.player.decreaseBonusPoints();
+        } else {
+            winner = playerOHandler.player.getUserName();
+            playerOHandler.player.increaseBonusPoints();
+            playerXHandler.player.decreaseBonusPoints();
+        }
+        DatabaseManager.addMultiModeGameRecord(gameID, playerXHandler.player.getUserName(),playerOHandler.player.getUserName(), winner, ResponseCreator.createGameMovesJson(gameMoves));
+        playerXHandler.inGame = false;
+        playerOHandler.inGame = false;
+        // addPlayerX and playerO To the avilable players
+        ArrayList<String> XOPlayers = new ArrayList<>();
+        XOPlayers.add(playerXHandler.player.getUserName());
+        XOPlayers.add(playerOHandler.player.getUserName());
+        
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "add"));
+        
+        playerXHandler.sendResponse(updatePlayerDataResponse(playerXHandler.player));
+        
+        playerOHandler.sendResponse(updatePlayerDataResponse(playerOHandler.player));
+
+        playerXHandler.sendResponse(endMultiModeGameResponse(winner));
+        playerOHandler.sendResponse(endMultiModeGameResponse(winner));
+        
+    }
+      
+    
     public String getGameID() { return gameID; }
     public PlayerHandler getplayerXHandler() { return playerXHandler; }
     public PlayerHandler getplayerOHandler() { return playerOHandler; }

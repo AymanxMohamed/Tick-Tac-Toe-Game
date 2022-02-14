@@ -7,13 +7,10 @@ package tictactoegameserver.Database.Entities;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Database.Entities.Enums.PLAYER_RANK;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *

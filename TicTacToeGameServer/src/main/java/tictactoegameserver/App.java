@@ -10,9 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
+import static tictactoegameserver.Network.ResponseCreator.*;
 import tictactoegameserver.Network.Server;
 
 /**
@@ -39,7 +38,7 @@ public class App extends Application {
     }
 
       public static void main(String[] args) {
-          //tryJson();
+//          tryJson();
         try {
             Server.startServer();
         } catch (IOException ex) {
@@ -84,6 +83,25 @@ public class App extends Application {
 //        request.put("data", data);
 //        System.out.println(JSONValue.toJSONString(request));
           // next test move
+          ArrayList<Integer> gameMoves  = new ArrayList<>();
+          addMove(2, gameMoves);
+          addMove(2, gameMoves);
+          addMove(1, gameMoves);
+          addMove(1, gameMoves);
+          System.out.println(createGameMovesJson(gameMoves));
+          System.out.println(getGameMovesArrayList(createGameMovesJson(gameMoves)));
+          System.exit(0);
+    }
+        public static void addMove(int index, ArrayList<Integer> gameMoves) {
+            if (!gameMoves.contains(index)) {
+                gameMoves.add(index);
+            }
+
+        }
+        public static void getMoves(ArrayList<Integer> gameMoves){
+        for (var move : gameMoves){
+            System.out.println(move);
+        }
     }
 
 }

@@ -4,9 +4,11 @@
  */
 package tictactoegameserver.Network;
 
+import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
+import tictactoegameserver.Database.Entities.Player;
 import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import static tictactoegameserver.Network.Utility.*;
@@ -120,19 +122,33 @@ public class RequestHandler {
             playerXHandler = getPlayerHandler(invitationReciever);
             playerOHandler = getPlayerHandler(invitationSender);
         }
+        
         String gameID = generateUniqueId();
         new MultiModeGameHandler(gameID, playerXHandler, playerOHandler);
+        playerXHandler.inGame = true;
+        playerOHandler.inGame = true;
+        
+        // send update avilable players request
+        ArrayList<String> XOPlayers = new ArrayList<>();
+        XOPlayers.add(playerXHandler.player.getUserName());
+        XOPlayers.add(playerOHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "remove"));
+        
         recieverHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
+        playerOHandler.sendResponse(disapleAllButtonsResponse());
         return startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName());
     }
-    private static void handleMultiModeGameMove(JSONObject data) {
+    private static String handleMultiModeGameMove(JSONObject data) {
         String gameID = (String) data.get("gameId");
         int index = ((Long) data.get("index")).intValue();
-        // 1 - get multiModeGameHandler by ID
         MultiModeGameHandler gameHandler = Utility.getMultiModeGameHandler(gameID);
+        gameHandler.processMove(index);
+        return disapleAllButtonsResponse();
     }
 
-    private static void handleSingleModeGameMove(JSONObject data) {
+    private static String handleSingleModeGameMove(JSONObject data) {
         //todo
+        return null;
     }
+
 }

@@ -8,6 +8,7 @@ import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Models.Player;
 import static com.main.ticktacktoegame.Network.RequestCreator.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import org.json.simple.*;
 
 /**
@@ -57,10 +58,14 @@ public class ResponseHandler {
                 handleChooseXOrO(data);
             case "start multi mode game":
                 handleStartMultiModeGame(data);
-            case "multiMove":
-                handleMultiModeGameMove(data);
-            case "singleMove":
-                handleSingleModeGameMove(data);
+            case "disaple all buttons":
+                handleDisapleAllButtons();
+            case "end multi mode game":
+                handleEndMultiModeGame(data);
+            case "update player data":
+                handleUpdatePlayerData(data);
+            case "updateAvilablePlayesList":
+                handleUpdateAvilablePlayersList(data);
             default:
                 break;
         }
@@ -215,15 +220,44 @@ public class ResponseHandler {
         // the right
     }
 
-    private static void handleMultiModeGameMove(JSONObject data) {
-        String gameID = (String) data.get("gameId");
-        int index = (int) data.get("index");
-        String playerO = (String) data.get("playerO");
-        // 1 - get multiModeGameHandler by ID
-        
+    private static void handleDisapleAllButtons() {
+        // note: to make handle disaple moves and enable moves so ezz
+        // you will have to make an arraylist in the game controller
+        // this array list will have all buttons indexed from 0 to 8
+        // at disaple all buttons you will loop on the array and disaple all the buttons in it
     }
 
-    private static void handleSingleModeGameMove(JSONObject data) {
-        //todo
+    private static void handleEndMultiModeGame(JSONObject data) {
+        String winner = (String) data.get("winner");
+        if (winner.equals(Client.player.getUserName())) {
+            // display  winner view that Show a nice message to
+            // the player and said that he is the winner
+        } else {
+            // display the loser view with a button that have play again and on press play again you will send another game invitation to the current player
+        }
     }
+
+    private static void handleUpdatePlayerData(JSONObject data) {
+        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
+        Client.player.setPlayerRank((String) data.get("playerRank"));
+        // this is all what this handler do it only get the new data after the game
+        // ended and set it in the player data
+        // so when you switch to your home view you will be having the new rank
+        // and the new bonus points
+    }
+    private static void  handleUpdateAvilablePlayersList(JSONObject data) {
+       ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
+       String command = (String) data.get("command");
+       if (command.equals("add")) {
+           for (var player : playerNames) {
+               // add the player in the avilable players list
+           }
+       } else {
+           for (var player : playerNames) {
+               // remove the player from the avilable players list
+           }
+       }
+    }
+
+
 }

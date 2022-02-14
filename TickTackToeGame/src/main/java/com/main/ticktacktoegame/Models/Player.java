@@ -14,8 +14,8 @@ import com.main.ticktacktoegame.Models.Enums.MappingFunctions;
 
 public class Player {
     private final String userName;
-    private final int bonusPoints;
-    private final String playerRank;
+    private int bonusPoints;
+    private String playerRank;
     private final String registerDate;
 
     public Player(String userName, int bonusPoints, String playerRank, String registerDate) {
@@ -39,6 +39,12 @@ public class Player {
     
     public String getRegisterDate() {
         return registerDate;
+    }
+    public void setBonusPoints(int value) {
+        this.bonusPoints = value;
+    }
+    public void setPlayerRank(String value) {
+        this.playerRank = value;
     }
     
     public void printData() {

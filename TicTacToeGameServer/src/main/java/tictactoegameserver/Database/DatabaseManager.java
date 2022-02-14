@@ -299,14 +299,14 @@ public class DatabaseManager {
 
     /* _____ *_____ Multi mode game Database Methods _____ * _____ */
 
-    public static void addMultiModeGameRecord(String gameID, String playerXUserName, String playerYUserName,
+    public static void addMultiModeGameRecord(String gameID, String playerXUserName, String playerOUserName,
             String winner, String gameRecord){
         try {
             PreparedStatement pst = sqlServerConnection.prepareStatement(
                     "INSERT INTO multi_mode_game(game_id, player_x_user_name, player_y_user_name, winner, game_record) VALUES(?, ?, ?, ?, ?)");
             pst.setString(1, gameID);
             pst.setString(2, playerXUserName);
-            pst.setString(3, playerYUserName);
+            pst.setString(3, playerOUserName);
             pst.setString(4, winner);
             pst.setString(5, gameRecord);
             pst.execute();
@@ -332,7 +332,7 @@ public class DatabaseManager {
                 multiModeGameArray.add(new MultiModeGame(
                         resultSet.getString("game_id"),
                         resultSet.getString("player_x_user_name"),
-                        resultSet.getString("player_y_user_name"),
+                        resultSet.getString("player_o_user_name"),
                         resultSet.getString("winner"),
                         resultSet.getString("game_record"),
                         resultSet.getTimestamp("game_date")));
@@ -364,7 +364,7 @@ public class DatabaseManager {
                 multiModeGameArray.add(new MultiModeGame(
                         resultSet.getString("game_id"),
                         resultSet.getString("player_x_user_name"),
-                        resultSet.getString("player_y_user_name"),
+                        resultSet.getString("player_o_user_name"),
                         resultSet.getString("winner"),
                         resultSet.getString("game_record"),
                         resultSet.getTimestamp("game_date")));
