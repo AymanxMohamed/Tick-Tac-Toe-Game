@@ -53,7 +53,7 @@ public class App extends Application {
      */
     public static void tryDatabase() {
         DatabaseManager.openDataBaseConnection();
-        DatabaseManager.addSingleModeGameRecord(1, "ayman", "X", DIFFICULTY.MEDIUM, "winner", null);
+        DatabaseManager.addSingleModeGameRecord("1", "ayman", "X", DIFFICULTY.MEDIUM, "winner", null);
         DatabaseManager.closeDataBaseConnection();
         System.exit(0);
     }

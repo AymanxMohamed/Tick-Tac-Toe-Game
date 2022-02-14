@@ -4,8 +4,6 @@
  */
 package tictactoegameserver.Database.Entities;
 
-import tictactoegameserver.Database.Entities.Enums.GAME_TYPE;
-import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,24 +13,24 @@ import java.time.format.DateTimeFormatter;
  * @author ayman
  */
 public class MultiModeGame {
-    private final int gameID;
+    private final String gameID;
     private final String playerXUserName;
-    private final String playerYUserName;
+    private final String playerOUserName;
     private final String winner;
     private final String gameRecord;
     private final LocalDateTime gameDate;
     
-    public MultiModeGame(int gameID, String playerXUserName, String playerYUserName, String winner, String gameRecord, Timestamp gameDate) {
+    public MultiModeGame(String gameID, String playerXUserName, String playerOUserName, String winner, String gameRecord, Timestamp gameDate) {
         this.gameID = gameID;
         this.playerXUserName = playerXUserName;
-        this.playerYUserName = playerYUserName;
+        this.playerOUserName = playerOUserName;
         this.winner = winner;
         this.gameRecord = gameRecord;
         this.gameDate = gameDate.toLocalDateTime();
     }
-    public int getGameNumber() { return gameID; }
+    public String getGameID() { return gameID; }
     public String getPlayerXUserName() { return playerXUserName; }
-    public String getPlayerYUserName() { return playerYUserName; }
+    public String getPlayerOUserName() { return playerOUserName; }
     public String getWinner() { return winner; }
     public String getGameRecord() { return gameRecord; }
     public LocalDateTime getGameDate() { return gameDate; }
@@ -43,7 +41,7 @@ public class MultiModeGame {
         System.out.println("############################################");
         System.out.println("gameId: " + gameID);
         System.out.println("playerXUserName: "  + playerXUserName);
-        System.out.println("playerYUserName: "  + playerYUserName);
+        System.out.println("playerYUserName: "  + playerOUserName);
         System.out.println("winner: "  + winner);
         System.out.println("gameRecord: "  + gameRecord);
         System.out.println("gameDate: "  + formatedDateTime);

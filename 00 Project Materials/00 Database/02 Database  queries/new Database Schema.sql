@@ -44,7 +44,7 @@ CREATE TABLE player (
 GO
 
 CREATE TABLE single_mode_game (
-	game_id INT PRIMARY KEY,
+	game_id VARCHAR(50) CONSTRAINT pk_game_id_single_mode_game PRIMARY KEY,
 	user_name VARCHAR(50),
 	player_type VARCHAR(1) CONSTRAINT CK_player_type_single_mode_game CHECK (player_type IN ('X', 'O')),
 	difficulty VARCHAR(10) NOT NULL CONSTRAINT CK_difficulty_single_mode_game CHECK (difficulty IN ('easy', 'medium', 'hard')),
@@ -57,9 +57,9 @@ CREATE TABLE single_mode_game (
 GO
 
 CREATE TABLE multi_mode_game (
-	game_id INT CONSTRAINT pk_game_number_multi_mode_game PRIMARY KEY,
+	game_id INT CONSTRAINT pk_game_id_multi_mode_game PRIMARY KEY,
 	player_x_user_name VARCHAR(50) CONSTRAINT FK_player_x_user_multi_mode_player REFERENCES player(user_name),
-	player_y_user_name VARCHAR(50) CONSTRAINT FK_player_y_user_multi_mode_player REFERENCES player(user_name),
+	player_o_user_name VARCHAR(50) CONSTRAINT FK_player_y_user_multi_mode_player REFERENCES player(user_name),
 	winner VARCHAR(MAX),
 	game_record VARCHAR(MAX) NULL,
 	game_date DATETIME CONSTRAINT DK_register_date_multi_mode_game DEFAULT GETDATE(),

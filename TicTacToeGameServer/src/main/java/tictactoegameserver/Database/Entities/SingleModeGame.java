@@ -5,7 +5,6 @@
 package tictactoegameserver.Database.Entities;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
-import tictactoegameserver.Database.Entities.Enums.PLAYER_CASE;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  * @author ayman
  */
 public class SingleModeGame {
-    private final int gameID;
+    private final String gameID;
     private final String playerName;
     private final String playerType;
     private final DIFFICULTY difficulty;
@@ -25,7 +24,7 @@ public class SingleModeGame {
     private final LocalDateTime gameDate;
     
     
-    public SingleModeGame(int gameID, String playerName, String playerType, String difficulty, String playerCase, String gameRecord, Timestamp gameDate) {
+    public SingleModeGame(String gameID, String playerName, String playerType, String difficulty, String playerCase, String gameRecord, Timestamp gameDate) {
         this.gameID = gameID;
         this.playerName = playerName;
         this.playerType = playerType;
@@ -34,7 +33,7 @@ public class SingleModeGame {
         this.gameRecord = gameRecord;
         this.gameDate = gameDate.toLocalDateTime();
     }
-    public int getGameNumber() { return gameID; }
+    public String getGameID() { return gameID; }
     public String getPlayerName() { return playerName; }
     public String getPlayerType() { return playerType; }
     public DIFFICULTY getDifficulty() { return difficulty; }

@@ -5,7 +5,6 @@
 package tictactoegameserver.Database;
 
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
-import tictactoegameserver.Database.Entities.Enums.GAME_TYPE;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Database.Entities.Enums.PLAYER_RANK;
 import tictactoegameserver.Database.Entities.MultiModeGame;
@@ -217,19 +216,19 @@ public class DatabaseManager {
      * @author ayman
      * @description a method that used to add a single mode game record to the
      *              database
+     * @param gameID
      * @param userName
-     * @param numberOfRounds
-     * @param playerScore
+     * @param playerType
      * @param difficulty
+     * @param playerCase
      * @param gameRecord
-     * @throws SQLException
      */
-    public static void addSingleModeGameRecord(int gameID, String userName, String playerType,
+    public static void addSingleModeGameRecord(String gameID, String userName, String playerType,
             DIFFICULTY difficulty, String playerCase, String gameRecord) {
         try {
             PreparedStatement pst = sqlServerConnection.prepareStatement(
                     "INSERT INTO single_mode_game(game_id, user_name, player_type, difficulty, player_case, game_record) VALUES(?, ?, ?, ?, ?, ?)");
-            pst.setInt(1, gameID);
+            pst.setString(1, gameID);
             pst.setString(2, userName);
             pst.setString(3, playerType);
             pst.setString(4, MappingFunctions.mapDifficulty(difficulty));
@@ -250,7 +249,7 @@ public class DatabaseManager {
             ResultSet resultSet = pst.executeQuery();
             while (resultSet.next()) {
                 singleModeGameArray.add(new SingleModeGame(
-                        resultSet.getInt("game_id"),
+                        resultSet.getString("game_id"),
                         resultSet.getString("user_name"),
                         resultSet.getString("player_type"),
                         resultSet.getString("difficulty"),
@@ -269,7 +268,6 @@ public class DatabaseManager {
      *              certain player
      * @param playerName
      * @return
-     * @throws SQLException
      */
     public static ArrayList<SingleModeGame> getSingleModeGameRecords(String playerName) {
 
@@ -283,7 +281,7 @@ public class DatabaseManager {
             
             while (resultSet.next()) {
                 singleModeGameArray.add(new SingleModeGame(
-                        resultSet.getInt("game_id"),
+                        resultSet.getString("game_id"),
                         resultSet.getString("user_name"),
                         resultSet.getString("player_type"),
                         resultSet.getString("difficulty"),
@@ -301,12 +299,12 @@ public class DatabaseManager {
 
     /* _____ *_____ Multi mode game Database Methods _____ * _____ */
 
-    public static void addMultiModeGameRecord(int gameID, String playerXUserName, String playerYUserName,
+    public static void addMultiModeGameRecord(String gameID, String playerXUserName, String playerYUserName,
             String winner, String gameRecord){
         try {
             PreparedStatement pst = sqlServerConnection.prepareStatement(
                     "INSERT INTO multi_mode_game(game_id, player_x_user_name, player_y_user_name, winner, game_record) VALUES(?, ?, ?, ?, ?)");
-            pst.setInt(1, gameID);
+            pst.setString(1, gameID);
             pst.setString(2, playerXUserName);
             pst.setString(3, playerYUserName);
             pst.setString(4, winner);
@@ -321,8 +319,7 @@ public class DatabaseManager {
      * @author ayman
      * @description an overloaded method that give you the single mode records for a
      *              certain player
-     * @return
-     * @throws SQLException
+     * @return ArrayList<MultiModeGame>
      */
     public static ArrayList<MultiModeGame> getMultiModeGameRecords() {
         
@@ -333,7 +330,7 @@ public class DatabaseManager {
             ResultSet resultSet = pst.executeQuery();
             while (resultSet.next()) {
                 multiModeGameArray.add(new MultiModeGame(
-                        resultSet.getInt("game_id"),
+                        resultSet.getString("game_id"),
                         resultSet.getString("player_x_user_name"),
                         resultSet.getString("player_y_user_name"),
                         resultSet.getString("winner"),
@@ -353,7 +350,6 @@ public class DatabaseManager {
      *              certain player
      * @param playerName
      * @return
-     * @throws SQLException
      */
     public static ArrayList<MultiModeGame> getMultiModeGameRecords(String playerName) {
         
@@ -366,7 +362,7 @@ public class DatabaseManager {
             ResultSet resultSet = pst.executeQuery();
             while (resultSet.next()) {
                 multiModeGameArray.add(new MultiModeGame(
-                        resultSet.getInt("game_id"),
+                        resultSet.getString("game_id"),
                         resultSet.getString("player_x_user_name"),
                         resultSet.getString("player_y_user_name"),
                         resultSet.getString("winner"),
