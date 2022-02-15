@@ -112,9 +112,10 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);   
     }
-    public static String playSingleModeGame(DIFFICULTY difficultyEnum) {
+    public static String playSingleModeGame(String difficulty, String choice) {
         JSONObject data = new JSONObject();
-        data.put("difficulty", MappingFunctions.mapDifficulty(difficultyEnum));
+        data.put("difficulty", difficulty);
+        data.put("choice", choice);
         JSONObject request = new JSONObject();
         request.put("request", "play single mode game");
         request.put("data", data);

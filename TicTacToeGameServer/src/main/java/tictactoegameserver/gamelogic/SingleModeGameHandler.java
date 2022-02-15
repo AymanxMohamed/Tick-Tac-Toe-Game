@@ -6,7 +6,7 @@ package tictactoegameserver.gamelogic;
 import java.util.ArrayList;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
-
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Network.ResponseCreator;
 import static tictactoegameserver.Network.ResponseCreator.*;
@@ -26,11 +26,11 @@ public class SingleModeGameHandler {
     public static ArrayList<SingleModeGameHandler> currentGames = new ArrayList<>();
     private ArrayList<Integer> avilableMoves;
     
-    public SingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, DIFFICULTY difficulty) {
+    public SingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, String difficulty) {
         this.gameID = gameID;
         this.playerHandler = playerHandler;
         this.playerType = playerType;
-        this.difficulty = difficulty;
+        this.difficulty = MappingFunctions.mapDifficulty(difficulty);
         this.playerCase = "";
         this.gameMoves = new ArrayList<>();
         avilableMoves = new ArrayList<>();
@@ -199,4 +199,5 @@ public class SingleModeGameHandler {
         removeMove(index);
         return move;
     }
+    public String getGameID() { return this.gameID; }
 }

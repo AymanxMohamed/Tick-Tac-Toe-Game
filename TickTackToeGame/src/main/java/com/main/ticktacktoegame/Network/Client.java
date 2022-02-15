@@ -26,6 +26,7 @@ public class Client {
     public static String multiModeGameId;
     public static String opponnentName;
     public static String singleModeGameID;
+    public static String difficulty;
 
         
     public static void openConnection() throws IOException {
