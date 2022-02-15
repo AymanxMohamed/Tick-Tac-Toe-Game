@@ -85,7 +85,6 @@ public class ResponseHandler {
             case "draw multi moves":
                 handleDrawMultiMovesHandler(data);
                 break;
-           
             case "enable multi buttons":
                 handleEnableMultiButtons();
                 break;
@@ -218,7 +217,7 @@ public class ResponseHandler {
         
         // if he pressed on reject buttoon you will send an reject invitation 
         // by copy and  paste the below line of code
-        // Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
+        //Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
     }
 
     private static void handleInvitationSended(JSONObject data) {
@@ -246,7 +245,7 @@ public class ResponseHandler {
         // to pass it 
         // if the client pressed  on x
         // note when you use this method XChoosen or YChoosen you are the sender
-        // and the Client.opponentName is The reciever
+        // and the Client.oppxChoosenonentName is The reciever
         Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
         // else if the client pressed on y
         Client.sendRequest(yChoosen(Client.player.getUserName(), Client.opponnentName));
@@ -265,12 +264,12 @@ public class ResponseHandler {
             // with x
         } else {
             // this client is the player O
-            // highlight player y  label to inform the client that  he play
+            // highlight player o  label to inform the client that  he play
             // with x
         }
         
         // Switch to the game view with player X on the left with his name
-        // and player y on the right with his name also
+        // and player o on the right with his name also
         // you can also place any nice pic for each player on the left and 
         // the right
     }
@@ -340,7 +339,6 @@ public class ResponseHandler {
     private static void handleEnableMultiButtons() {
         // this hanlder will just enable all buttons in the multimode controller 
         // buttons array
-        
     }
 
     private static void handleDrawSingleMoves(JSONObject data) {
