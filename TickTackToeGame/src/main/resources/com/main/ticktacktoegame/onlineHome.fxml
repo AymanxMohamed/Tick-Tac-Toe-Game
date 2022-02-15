@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/onlinehome.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.OnlineHomeController">
+    <children>
+        <Button layoutX="1426.0" layoutY="223.0" mnemonicParsing="false" onAction="#switchToWelcomeView" prefHeight="106.0" prefWidth="289.0" styleClass="onlineBtn">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        
+        <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
+            <ImageView fitHeight="78.0" fitWidth="261.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/Rectangle%203.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="275.0" layoutX="1.0" layoutY="6.0" pickOnBounds="true">
+                <image>
+                    <Image url="@images/upperContainer.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="68.0" fitWidth="67.0" layoutX="17.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/playerIcon.png" />
+                </image>
+            </ImageView>
+            <Label fx:id="usernameLabel" layoutX="113.0" layoutY="26.0" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+        </Pane>
+        
+        <Pane layoutX="488.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
+            <ImageView fitHeight="78.0" fitWidth="261.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/Rectangle%203.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="275.0" layoutX="1.0" layoutY="6.0" pickOnBounds="true">
+                <image>
+                    <Image url="@images/upperContainer.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="68.0" fitWidth="67.0" layoutX="23.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/pointsIcon.png" />
+                </image>
+            </ImageView>
+            <Label fx:id="bonusPointsLabel" layoutX="104.0" layoutY="26.0" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+        </Pane>
+        
+        <Pane layoutX="858.0" layoutY="77.0" prefHeight="90.0" prefWidth="275.0">
+         
+            <ImageView fitHeight="78.0" fitWidth="261.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/Rectangle%203.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="275.0" layoutX="1.0" layoutY="6.0" pickOnBounds="true">
+                <image>
+                    <Image url="@images/upperContainer.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="68.0" fitWidth="67.0" layoutX="21.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/historyIcon.png" />
+                </image>
+            </ImageView>
+            <Label fx:id="rankLabel" layoutX="109.0" layoutY="26.0" text="History" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+        </Pane>
+        
+        <Pane layoutX="1219.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">   
+            <ImageView fitHeight="78.0" fitWidth="261.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/Rectangle%203.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="275.0" layoutX="1.0" layoutY="6.0" pickOnBounds="true">
+                <image>
+                    <Image url="@images/upperContainer.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="67.0" fitWidth="53.0" layoutX="31.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/exitIcon.png" />
+                </image>
+            </ImageView>
+            <Button layoutX="104.0" layoutY="15.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="93.0" styleClass="exitBtn" text="Exit" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="30.0" />
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>     
+        </Pane>
+        
+        <Pane layoutX="210.0" layoutY="263.0" prefHeight="457.0" prefWidth="1159.0">
+            <Label layoutX="5.0" layoutY="3.0" styleClass="fontStyle" text="Online Players :" textFill="#00b4ff">
+                <font>
+                    <Font name="System Bold" size="60.0" />
+                </font>
+            </Label>
+         <Line endX="-100.0" endY="328.39996337890625" layoutX="671.0" layoutY="66.0" startX="-100.0" stroke="#00b4ff" strokeLineCap="ROUND" strokeWidth="2.0" />
+         <Button alignment="CENTER" layoutX="699.0" layoutY="104.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Chat With" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="40.0" />
+            </font>
+         </Button>
+         <Button alignment="CENTER" layoutX="699.0" layoutY="244.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play With" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="40.0" />
+            </font>
+         </Button>
+         <TableView fx:id="onlinePlayersTable" layoutX="22.0" layoutY="95.0" prefHeight="303.0" prefWidth="490.0">
+           <columns>
+             <TableColumn prefWidth="75.0" text="Player" />
+             <TableColumn prefWidth="75.0" text="Status" />
+               <TableColumn prefWidth="75.0" text="Rank" />
+           </columns>
+         </TableView>
+        </Pane>
+    </children>
+</AnchorPane>

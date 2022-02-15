@@ -1,27 +1,29 @@
-package com.main.ticktacktoegame.Controllers;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
+package com.main.ticktacktoegame.Controllers;
+
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
  *
- * @author elsho
+ * @author Roo
  */
-public class WelcomeController implements Initializable {
+public class OnlineHomeController implements Initializable {
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     Label usernameLabel;
     @FXML
@@ -31,23 +33,12 @@ public class WelcomeController implements Initializable {
 //    @FXML Label registerDateLabel;
 
     @FXML
-    Label usernameWelcomeLabel;
-
-//    @FXML static Label onlinePlayer0;
-    @FXML
-    private void switchToPlayModeView() {
-        try {
-            App.setRoot("ChooseModeView");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+    TableView onlinePlayersTable;
 
     @FXML
-    private void switchToOnlineView() {
-//        System.out.println("online view");
+    public void switchToWelcomeView() {
         try {
-            App.setRoot("onlineHome");
+            App.setRoot("WelcomeView");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -58,12 +49,9 @@ public class WelcomeController implements Initializable {
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
-        usernameWelcomeLabel.setText(Client.player.getUserName());
-
+        onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
+        
 //        registerDateLabel.setText(Client.player.getRegisterDate());
     }
 
-//    public static void printOnlinePlayers(String player) {
-//        onlinePlayer0.setText(player);
-//    }
 }
