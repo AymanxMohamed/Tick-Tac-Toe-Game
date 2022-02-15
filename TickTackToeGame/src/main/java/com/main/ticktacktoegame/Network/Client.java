@@ -7,7 +7,6 @@ package com.main.ticktacktoegame.Network;
 import com.main.ticktacktoegame.Models.*;
 import java.net.Socket;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,9 +22,9 @@ public class Client {
     private static BufferedReader bufferReader;
     private static BufferedWriter bufferedWriter;
     public static Player player;
-    public static String multiModeGameId;
+    public static String multiModeGameId = "";
     public static String opponnentName;
-    public static String singleModeGameID;
+    public static String singleModeGameID = "";
     public static String difficulty;
 
         

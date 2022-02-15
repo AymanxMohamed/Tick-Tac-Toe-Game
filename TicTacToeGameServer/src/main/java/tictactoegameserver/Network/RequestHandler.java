@@ -45,6 +45,15 @@ public class RequestHandler {
                 return handlePlaySingleModeGame(data, playerHandler);
             case "singleMove":
                 return handleSingleModeGameMove(data, playerHandler);
+            case "logout":
+                handleLogout(data, playerHandler);
+                break;
+            case "force end multi mode game":
+                handleForceEndMultiModeGame(data, playerHandler);
+                break;
+            case "force end single mode game":
+                handleForceEndSingleModeGame(data);
+                break;
         }
         return response;
     }
@@ -55,7 +64,9 @@ public class RequestHandler {
 
         String userName = (String) data.get("username");
         String password = (String) data.get("password");
-
+        if (getPlayerHandler(userName) != null) {
+            return playerAlreadyOnlineResponse(userName);
+        }
         DatabaseManager.openDataBaseConnection();
         if (!DatabaseManager.isPlayerExist(userName)) {
             return playerNotExistResponse();
@@ -155,6 +166,19 @@ public class RequestHandler {
         gameHandler.processMove(index);
         return disapleAllButtonsResponse();
     }
+
+
+
+    private static void handleForceEndMultiModeGameOnLogout(String multiGameId, String playerName) {
+        MultiModeGameHandler gameHandler = getMultiModeGameHandler(multiGameId);
+        gameHandler.forceEndGameOnlogout(playerName);
+    }
+
+    private static void handleForceEndMultiModeGame(JSONObject data, PlayerHandler playerHandler) {
+        String gameId = (String) data.get("gameId");
+        MultiModeGameHandler gameHandler = getMultiModeGameHandler(gameId);
+        gameHandler.forceEndGame(playerHandler.player.getUserName());
+    }
     /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
     
     /*_____ * _____  Single Mode Game Requests _____ * _____ */
@@ -177,6 +201,35 @@ public class RequestHandler {
         gameHandler.processMove(index);
         return disapleAllButtonsResponse();
     }
+    private static void handleForceEndSingleModeGame(JSONObject data) {
+        String gameId = (String) data.get("gameId");
+        SingleModeGameHandler gameHandler = getSingleModeGameHandler(gameId);
+        gameHandler.forceEndGame();
+    }
     
     /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
+    
+    /*_____ * _____  Logout Requests _____ * _____ */
+    private static void handleLogout(JSONObject data, PlayerHandler playerHandler) {
+        String playerName = (String) data.get("playerName");
+        String singleGameId = (String) data.get("singleGameId");
+        String multiGameId = (String) data.get("multiGameId");
+        if (playerHandler.inGame) {
+            // 1- check if it's single mode game
+            if (getSingleModeGameHandler(singleGameId) != null) {
+                SingleModeGameHandler.currentGames.remove(getSingleModeGameHandler(singleGameId));
+            } else if (getMultiModeGameHandler(multiGameId) != null) {
+                handleForceEndMultiModeGameOnLogout(multiGameId, playerName);
+            }
+        }
+        playerHandler.closeEveryThing();
+        
+        
+
+
+    }
+    /*_*____ * _____  end of Logout Requests _____ * _____ */
+
+
+
 }

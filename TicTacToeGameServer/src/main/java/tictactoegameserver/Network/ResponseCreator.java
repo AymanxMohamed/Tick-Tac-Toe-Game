@@ -26,7 +26,14 @@ public class ResponseCreator {
         responseObject.put("response", "player not exists");
         return JSONValue.toJSONString(responseObject);
     }
-
+    public static String playerAlreadyOnlineResponse(String userName) {
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("playerName", userName);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player already online");
+        responseObject.put("data", dataObject);
+        return JSONValue.toJSONString(responseObject);
+    }
     public static String wrongPasswordResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "wrong password");
@@ -169,7 +176,19 @@ public class ResponseCreator {
         responseObject.put("response", "enable multi buttons");
         return JSONValue.toJSONString(responseObject);
     }
-    
+    public static String playerLeftMultiGameResponse(String playerName) {
+        JSONObject data = new JSONObject();
+        data.put("playerName", playerName);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player left multi game");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String goToWelcomeViewResponse(){
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "go to welcome view");
+        return JSONValue.toJSONString(responseObject);
+    }
     /*_____ * _____ Single Mode Game Responses _____ * _____ */
     
     public static String startSingleModeGameResponse(String gameId, String choice) {

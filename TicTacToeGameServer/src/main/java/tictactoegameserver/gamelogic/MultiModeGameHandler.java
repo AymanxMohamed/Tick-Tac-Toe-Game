@@ -146,6 +146,42 @@ public class MultiModeGameHandler {
         playerOHandler.sendResponse(endMultiModeGameResponse(winner));
         currentGames.remove(this);
     }
+
+    public void forceEndGameOnlogout(String playerName) {
+        PlayerHandler winnerHandler = null;
+        PlayerHandler leaverHandler = null;
+        
+        if (!playerXHandler.equals(playerName)) {
+            winnerHandler = playerXHandler;
+            leaverHandler = playerOHandler;
+        } else {
+            winnerHandler = playerOHandler;
+            leaverHandler = playerXHandler;
+        }
+        winnerHandler.player.increaseBonusPoints();
+        leaverHandler.player.decreaseBonusPoints();
+        winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
+        winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
+        currentGames.remove(this);
+    }
+    public void forceEndGame(String playerName) {
+        PlayerHandler winnerHandler = null;
+        PlayerHandler leaverHandler = null;
+        if (!playerXHandler.equals(playerName)) {
+            winnerHandler = playerXHandler;
+            leaverHandler = playerOHandler;
+        } else {
+            winnerHandler = playerOHandler;
+            leaverHandler = playerXHandler;
+        }
+        winnerHandler.player.increaseBonusPoints();
+        leaverHandler.player.decreaseBonusPoints();
+        winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
+        leaverHandler.sendResponse(updatePlayerDataResponse(leaverHandler.player));
+        leaverHandler.sendResponse(goToWelcomeViewResponse());
+        winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
+        currentGames.remove(this);
+    }
     public String getGameID() { return gameID; }
     public PlayerHandler getplayerXHandler() { return playerXHandler; }
     public PlayerHandler getplayerOHandler() { return playerOHandler; }

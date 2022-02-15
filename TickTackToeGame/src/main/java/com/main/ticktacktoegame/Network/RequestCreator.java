@@ -92,14 +92,22 @@ public class RequestCreator {
     }
              /*_____ * _____ game process _____ * _____ */
     
-    public static String multiMove(int index, String gameId) {
+    public static String multiMove(int index) {
         JSONObject data = new JSONObject();
-        data.put("gameId", gameId);
+        data.put("gameId", Client.multiModeGameId);
         data.put("index", index);
         JSONObject request = new JSONObject();
         request.put("request", "multiMove");
         request.put("data", data);
         return JSONValue.toJSONString(request);   
+    }
+    public static String forceEndMultiGaame() {
+        JSONObject data = new JSONObject();
+        data.put("gameId", Client.multiModeGameId);
+        JSONObject request = new JSONObject();
+        request.put("request", "force end multi mode game");
+        request.put("data", data);
+        return JSONValue.toJSONString(request); 
     }
     /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
     
@@ -124,5 +132,27 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);   
     }
+    public static String forceEndSingleGaame() {
+        JSONObject data = new JSONObject();
+        data.put("gameId", Client.multiModeGameId);
+        JSONObject request = new JSONObject();
+        request.put("request", "force end single mode game");
+        request.put("data", data);
+        return JSONValue.toJSONString(request); 
+    }
     /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
+    /*_____ * _____  Logout Requests _____ * _____ */
+    public static String logout() {
+        JSONObject data = new JSONObject();
+        data.put("playerName", Client.player.getUserName());
+        data.put("singleGameId", Client.singleModeGameID);
+        data.put("multiGameId", Client.multiModeGameId);
+        JSONObject request = new JSONObject();
+        request.put("request", "logout");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);  
+    }
+    /*_____ * _____  end of Logout Requests _____ * _____ */
+
+
 }

@@ -34,6 +34,9 @@ public class ResponseHandler {
             case "login success":
                 handleLoginSuccess(data);
                 break;
+            case "player already online":
+                handlePlayerAlreadyOnline(data);
+                break;
             case "player exists":
                 handlePlayerExist();
                 break;
@@ -97,7 +100,9 @@ public class ResponseHandler {
             case "enable single buttons":
                 handleEnableSingleButtons();
                 break;
-                
+            case "player left multi game":
+                handlePlayerLeftMultiGame(data);
+                break;
             case "disaple all buttons single":
                 handleDisapleAllButtonsSingle();
                 break;
@@ -107,6 +112,8 @@ public class ResponseHandler {
             case "end single mode game":
                 handleEndSingleModeGame(data);
                 break;
+            case "go to welcome view":
+                handleGoToWelcomeView();
             default:
                 break;
         }
@@ -165,6 +172,12 @@ public class ResponseHandler {
             updateAvilablePlayersList();
             System.out.println(playerName + " is online now");
         }
+    }
+    private static void handlePlayerAlreadyOnline(JSONObject data) {
+        // this method will reveal an error message that 
+        // say that the playerName is already online
+        String playerName = (String) data.get("playerName");
+        System.out.println(playerName + " is already online");
     }
     /*_____ * _____ end of Login  Responses _____ * _____ */
     
@@ -320,6 +333,15 @@ public class ResponseHandler {
         // this hanlder will just enable all buttons in the multimode controller 
         // buttons array
     }
+    private static void handlePlayerLeftMultiGame(JSONObject data) {
+        String playerName = (String) data.get("playerName");
+        // this method will show up a message that say that
+        System.out.println("unfortunatly " + playerName + " has left the game");
+        // and switch the player to his home page
+    }
+    private static void handleGoToWelcomeView() {
+        // this handler will just go to the welcome view
+    }
     /*_____ * _____ end of multi Mode Game Responses _____ * _____ */   
     
     /*_____ * _____ Single Mode Game Responses _____ * _____ */
@@ -421,4 +443,8 @@ public class ResponseHandler {
         }
     }
          /*_____ * _____ end of Responses _____ * _____ */
+
+
+
+
 }

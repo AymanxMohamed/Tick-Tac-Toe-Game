@@ -37,7 +37,7 @@ public class Opponent {
     public static void removeOpponent(String playerName) {
         onlinePlayers.remove(getOpponent(playerName));
     }
-    
+
     public String getPlayerName() { return playerName; }
     public void togleInGameStatus() { inGame = !inGame; }
 }

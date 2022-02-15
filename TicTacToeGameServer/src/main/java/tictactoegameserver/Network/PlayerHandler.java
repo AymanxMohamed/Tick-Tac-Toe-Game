@@ -31,7 +31,7 @@ public class PlayerHandler {
             playerHandlers.add(this);
            AcceptRequests();
         } catch (IOException e) {
-            closeEveryThing(socket, bufferedReader, bufferedWriter);
+            closeEveryThing();
         }
     }
     private void AcceptRequests() {
@@ -44,7 +44,7 @@ public class PlayerHandler {
             } catch (Exception e) {
                 System.out.println("exception in accept response");
                 //e.printStackTrace();
-                closeEveryThing(socket, bufferedReader, bufferedWriter);
+                closeEveryThing();
             }
         }).start();
     }
@@ -75,17 +75,17 @@ public class PlayerHandler {
         }
         playerHandlers.remove(this);
     } 
-    private void closeEveryThing(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public void closeEveryThing() {
         removePlayer();
         try {
-          if (bufferedReader != null) {
-              bufferedReader.close();
+          if (this.bufferedReader != null) {
+              this.bufferedReader.close();
           }
-          if (bufferedWriter != null) {
-              bufferedWriter.close();
+          if (this.bufferedWriter != null) {
+              this.bufferedWriter.close();
           }
-          if (socket != null) {
-              socket.close();
+          if (this.socket != null) {
+              this.socket.close();
           }
         } catch (Exception e) {
             System.out.println("exception");
