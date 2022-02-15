@@ -258,6 +258,7 @@ public class ResponseHandler {
         //Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
     }
 
+
     /*_____ * _____ Multi Mode Game Responses _____ * _____ */
     
     private static void handleStartMultiModeGame(JSONObject data) {
@@ -318,7 +319,6 @@ public class ResponseHandler {
     private static void handleEnableMultiButtons() {
         // this hanlder will just enable all buttons in the multimode controller 
         // buttons array
-        
     }
     /*_____ * _____ end of multi Mode Game Responses _____ * _____ */   
     
