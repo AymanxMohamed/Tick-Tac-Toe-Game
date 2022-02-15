@@ -3,13 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tictactoegameserver.gamelogic;
+import static tictactoegameserver.Network.ResponseCreator.*;
 import java.util.ArrayList;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Network.ResponseCreator;
-import static tictactoegameserver.Network.ResponseCreator.*;
+
 
 
 /**
