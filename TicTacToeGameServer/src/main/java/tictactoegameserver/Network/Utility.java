@@ -18,7 +18,7 @@ public class Utility {
     public static PlayerHandler getPlayerHandler(String playerName) {
         
         for (var playerHandler : playerHandlers) {
-            if (playerHandler.player.getUserName().equals(playerName))
+            if (playerHandler.player != null && playerHandler.player.getUserName().equals(playerName))
                 return playerHandler;
         }
         return null;

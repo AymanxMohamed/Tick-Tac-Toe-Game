@@ -42,8 +42,8 @@ public class PlayerHandler {
                         sendResponse(RequestHandler.handleRequest(playerRequest, PlayerHandler.this));
                     }
             } catch (Exception e) {
-                System.out.println("exception in accept response");
-                //e.printStackTrace();
+                //System.out.println("exception in accept response");
+                e.printStackTrace();
                 closeEveryThing();
             }
         }).start();
