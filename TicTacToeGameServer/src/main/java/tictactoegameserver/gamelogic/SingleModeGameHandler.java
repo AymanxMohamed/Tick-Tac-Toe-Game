@@ -3,24 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tictactoegameserver.gamelogic;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
-import tictactoegameserver.Database.Entities.Enums.DIFFICULTY.*;
 
 import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Network.ResponseCreator;
-import static tictactoegameserver.Network.ResponseCreator.drawMultiMovesResponse;
-import static tictactoegameserver.Network.ResponseCreator.drawSingleMovesResponse;
-import static tictactoegameserver.Network.ResponseCreator.enableMultiButtonsResponse;
-import static tictactoegameserver.Network.ResponseCreator.enableSingleButtonsResponse;
-import static tictactoegameserver.Network.ResponseCreator.endMultiModeGameResponse;
-import static tictactoegameserver.Network.ResponseCreator.removeMultiButtonResponse;
-import static tictactoegameserver.Network.ResponseCreator.removeSingleButtonResponse;
-import static tictactoegameserver.Network.ResponseCreator.updateAvilablePlayersList;
-import static tictactoegameserver.Network.ResponseCreator.updatePlayerDataResponse;
+import static tictactoegameserver.Network.ResponseCreator.*;
+
 
 /**
  *

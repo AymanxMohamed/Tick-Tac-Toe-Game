@@ -149,6 +149,12 @@ public class ResponseCreator {
         responseObject.put("data", data);
         return JSONValue.toJSONString(responseObject);
     }
+    public static String chooseXOrOSingleResponse(JSONObject data) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "choose x or o single");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
     public static String startMultiModeGameResponse(String gameId, String playerX, String playerO) {
         JSONObject data = new JSONObject();
         data.put("gameId", gameId);

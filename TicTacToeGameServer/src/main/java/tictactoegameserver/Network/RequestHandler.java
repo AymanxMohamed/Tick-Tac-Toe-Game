@@ -44,8 +44,10 @@ public class RequestHandler {
                 return handleMultiModeGameMove(data);
             case "play single mode game":
                 return handlePlaySingleModeGame(data);
+            case "XorOChoiseSingle":
+                return handleXOrOChoiseSingle(data);
             case "singleMove":
-                return handleSingleModeGameMove(data);
+                return handleSingleModeGameMove(data, playerHandler);
                 
         }
         return response;
@@ -151,11 +153,16 @@ public class RequestHandler {
     }
     
     private static String handlePlaySingleModeGame(JSONObject data) {
+        return chooseXOrOResponse(data);
+    }
+
+
+    private static String handleXOrOChoiseSingle(JSONObject data) {
         
         return null;
     }
-    private static String handleSingleModeGameMove(JSONObject data) {
-        //todo
+    private static String handleSingleModeGameMove(JSONObject data, PlayerHandler playerHandler) {
+        
         return null;
     }
 

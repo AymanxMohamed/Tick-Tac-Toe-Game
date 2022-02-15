@@ -85,7 +85,6 @@ public class ResponseHandler {
             case "draw multi moves":
                 handleDrawMultiMovesHandler(data);
                 break;
-           
             case "enable multi buttons":
                 handleEnableMultiButtons();
                 break;
@@ -246,7 +245,7 @@ public class ResponseHandler {
         // and the Client.opponentName is The reciever
         Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
         // else if the client pressed on y
-        Client.sendRequest(yChoosen(Client.player.getUserName(), Client.opponnentName));
+        Client.sendRequest(oChoosen(Client.player.getUserName(), Client.opponnentName));
     }
 
     private static void handleStartMultiModeGame(JSONObject data) {
