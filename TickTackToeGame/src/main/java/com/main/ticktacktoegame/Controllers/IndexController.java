@@ -23,11 +23,11 @@ public class IndexController {
             Client.openConnection();
             App.setRoot("LoginView");
         } catch (IOException ex) {
-            // If the server is down -> close everything and pop-up a a failure message
+            // If the server is down -> close everything and pop-up a failure message
             Client.closeEveryThing();
-//            ex.printStackTrace();
+            // ex.printStackTrace();
             try {
-                App.setRoot("index");
+                App.setRoot("ServerIsDownPopUp");
             } catch (IOException ex1) {
                 ex1.printStackTrace();
             }

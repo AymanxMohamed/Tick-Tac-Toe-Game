@@ -4,23 +4,28 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import com.main.ticktacktoegame.App;
+import java.io.IOException;
 
 /**
  * FXML Controller class
  *
  * @author Roo
  */
-public class ChooseXorOController implements Initializable {
+public class ChooseXorOController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void startTheGame() {
+        try {
+            App.setRoot("TicTackToe");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void playerXHandler(){
+        startTheGame();
+    }
+    public void playerOHandler() {
+        startTheGame();
+    }
     
 }
