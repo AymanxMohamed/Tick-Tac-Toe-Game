@@ -94,12 +94,10 @@ public class App extends Application {
             if (!gameMoves.contains(index)) {
                 gameMoves.add(index);
             }
-
         }
     public static void getMoves(ArrayList<Integer> gameMoves){
         for (var move : gameMoves){
             System.out.println(move);
         }
     }
-
 }
