@@ -286,6 +286,8 @@ public class ResponseCreator {
         JSONArray onlinePlayersDataObjects = new JSONArray();
         for (var player : onlinePlayers) {
             PlayerHandler playerHandler = getPlayerHandler(player.getUserName());
+            if (playerHandler == null)
+                continue;
             boolean inGame = playerHandler.inGame;
             JSONObject data = new JSONObject();
             data.put("name", player.getUserName());
