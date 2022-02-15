@@ -128,12 +128,12 @@ public class TicTackToeController implements Initializable {
             }
             //X winner
             if (line.equals("XXX")) {
-                winnerText.setText("X won!");
+                winnerText.setText("X WON!");
            }
 
             //O winner
            else if (line.equals("OOO")) {
-                winnerText.setText("O won!");
+                winnerText.setText("O WON!");
             }
         }
     }
