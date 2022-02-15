@@ -9,9 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Player;
-import static tictactoegameserver.Network.ResponseCreator.onlinePlayersListResponse;
 import static tictactoegameserver.Network.ResponseCreator.playerLeftTheGameResponse;
-import static tictactoegameserver.Network.ResponseCreator.updateOnlinePlayersResponse;
 
 /**
  *
@@ -44,6 +42,8 @@ public class PlayerHandler {
                         sendResponse(RequestHandler.handleRequest(playerRequest, PlayerHandler.this));
                     }
             } catch (Exception e) {
+                System.out.println("exception in accept response");
+                //e.printStackTrace();
                 closeEveryThing(socket, bufferedReader, bufferedWriter);
             }
         }).start();
