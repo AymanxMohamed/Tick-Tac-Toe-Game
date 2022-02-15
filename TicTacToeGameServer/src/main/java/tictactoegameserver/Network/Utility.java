@@ -7,6 +7,7 @@ package tictactoegameserver.Network;
 import java.util.UUID;
 import static tictactoegameserver.Network.PlayerHandler.playerHandlers;
 import tictactoegameserver.gamelogic.MultiModeGameHandler;
+import tictactoegameserver.gamelogic.SingleModeGameHandler;
 
 /**
  *
@@ -29,6 +30,13 @@ public class Utility {
         for (var multiModeGameHandler : MultiModeGameHandler.currentGames) {
             if (multiModeGameHandler.getGameID().equals(gameId))
                 return multiModeGameHandler;
+        }
+        return null;
+    }
+    public static SingleModeGameHandler getSingleModeGameHandler(String gameId) {
+        for (var singleModeGameHandler : SingleModeGameHandler.currentGames) {
+            if (singleModeGameHandler.getGameID().equals(gameId))
+                return singleModeGameHandler;
         }
         return null;
     }

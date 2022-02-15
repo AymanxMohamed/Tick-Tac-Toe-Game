@@ -85,7 +85,6 @@ public class ResponseHandler {
             case "draw multi moves":
                 handleDrawMultiMovesHandler(data);
                 break;
-           
             case "enable multi buttons":
                 handleEnableMultiButtons();
                 break;
@@ -97,6 +96,17 @@ public class ResponseHandler {
                 break;
             case "enable single buttons":
                 handleEnableSingleButtons();
+                break;
+                
+            case "disaple all buttons single":
+                handleDisapleAllButtonsSingle();
+                break;
+            case "start single mode game":
+                handleStartSingleModeGame(data);
+                break;
+            case "end single mode game":
+                handleEndSingleModeGame(data);
+                break;
             default:
                 break;
         }
@@ -249,7 +259,7 @@ public class ResponseHandler {
         // and the Client.opponentName is The reciever
         Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
         // else if the client pressed on y
-        Client.sendRequest(yChoosen(Client.player.getUserName(), Client.opponnentName));
+        Client.sendRequest(oChoosen(Client.player.getUserName(), Client.opponnentName));
     }
 
     private static void handleStartMultiModeGame(JSONObject data) {
@@ -360,4 +370,48 @@ public class ResponseHandler {
         // buttons array
         
     }
+
+    private static void handleDisapleAllButtonsSingle() {
+        // note: to make handle disaple moves and enable moves so ezz
+        // you will have to make an arraylist in the game controller
+        // this array list will have all buttons indexed from 0 to 8
+        // at disaple all buttons you will loop on the array and disaple all the buttons in it 
+    }
+
+    private static void handleStartSingleModeGame(JSONObject data) {
+        String gameID = (String) data.get("gameId");
+        String choice = (String) data.get("choice");
+        
+        // you will have to store the game id in the client
+        Client.singleModeGameID = gameID;
+        if (choice.equals("x")) {
+            // then this client is the player x
+            // highlight player X  label to inform the client that  he play
+            // with x
+        } else {
+            // this client is the player O
+            // highlight player y  label to inform the client that  he play
+            // with x
+        }
+        
+        // Switch to the game view with player X on the left with his name
+        // and the computer on the right
+        // you will deside the computer side according to the choice
+        // you can also place any nice pic for each player on the left and 
+        // the right
+    }
+
+    private static void handleEndSingleModeGame(JSONObject data) {
+        String winner = (String) data.get("winner");
+        if (winner.equals(Client.player.getUserName())) {
+            // display  winner view that Show a nice message to
+            // the player and said that he is the winner
+        } else if(winner.equals("draw")) {
+            // display the draw view
+        } else {
+            // display the loser view with a button that have play again and on press play again you will send another game invitation to the current player
+        }
+    }
+
+ 
 }

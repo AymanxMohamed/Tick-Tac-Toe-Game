@@ -3,24 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tictactoegameserver.gamelogic;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
-import tictactoegameserver.Database.Entities.Enums.DIFFICULTY.*;
-
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Network.ResponseCreator;
-import static tictactoegameserver.Network.ResponseCreator.drawMultiMovesResponse;
-import static tictactoegameserver.Network.ResponseCreator.drawSingleMovesResponse;
-import static tictactoegameserver.Network.ResponseCreator.enableMultiButtonsResponse;
-import static tictactoegameserver.Network.ResponseCreator.enableSingleButtonsResponse;
-import static tictactoegameserver.Network.ResponseCreator.endMultiModeGameResponse;
-import static tictactoegameserver.Network.ResponseCreator.removeMultiButtonResponse;
-import static tictactoegameserver.Network.ResponseCreator.removeSingleButtonResponse;
-import static tictactoegameserver.Network.ResponseCreator.updateAvilablePlayersList;
-import static tictactoegameserver.Network.ResponseCreator.updatePlayerDataResponse;
+import static tictactoegameserver.Network.ResponseCreator.*;
+
 
 /**
  *
@@ -36,11 +26,11 @@ public class SingleModeGameHandler {
     public static ArrayList<SingleModeGameHandler> currentGames = new ArrayList<>();
     private ArrayList<Integer> avilableMoves;
     
-    public SingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, DIFFICULTY difficulty) {
+    public SingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, String difficulty) {
         this.gameID = gameID;
         this.playerHandler = playerHandler;
         this.playerType = playerType;
-        this.difficulty = difficulty;
+        this.difficulty = MappingFunctions.mapDifficulty(difficulty);
         this.playerCase = "";
         this.gameMoves = new ArrayList<>();
         avilableMoves = new ArrayList<>();
@@ -209,4 +199,5 @@ public class SingleModeGameHandler {
         removeMove(index);
         return move;
     }
+    public String getGameID() { return this.gameID; }
 }
