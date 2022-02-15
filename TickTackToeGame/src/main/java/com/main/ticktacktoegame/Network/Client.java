@@ -43,14 +43,15 @@ public class Client {
     
     private static void AcceptResponses() {
         new Thread(() -> {
-            String response;
-            while (socket.isConnected()) {
-                try {
-                    response = bufferReader.readLine();
+            try {
+                String response;
+                while (socket.isConnected() && (response = bufferReader.readLine()) != null) {
                     ResponseHandler.handleResponse(response);
-                } catch (IOException e) {
-                    closeEveryThing();
                 }
+            } catch (IOException ex) {
+                System.out.println("connection lost");
+                closeEveryThing();
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
     }

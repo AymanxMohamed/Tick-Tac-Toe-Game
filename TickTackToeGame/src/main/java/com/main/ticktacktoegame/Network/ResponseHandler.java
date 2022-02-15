@@ -131,17 +131,17 @@ public class ResponseHandler {
         }
     }
     private static void handleLoginSuccess(JSONObject playerData) {
-        try {
+        //try {
             Client.player = new Player(
                     (String) playerData.get("userName"),
                     ((Long) playerData.get("bonusPoints")).intValue(),
                     (String) playerData.get("playerRank"),
                     (String) playerData.get("registerDate"));
             System.out.println("player logged in successfuly");
-            App.setRoot("WelcomeView");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+            //App.setRoot("WelcomeView");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
     }
     private static void onlinePlayersList(JSONObject data) {
         // this function will be send in the beiggining when player logged in
