@@ -161,7 +161,7 @@ public class RequestHandler {
     
     private static String handleMultiModeGameMove(JSONObject data) {
         String gameID = (String) data.get("gameId");
-        int index = ((Long) data.get("index")).intValue();
+        int index = Integer.parseInt((String)data.get("index"));
         MultiModeGameHandler gameHandler = Utility.getMultiModeGameHandler(gameID);
         gameHandler.processMove(index);
         return disapleAllButtonsResponse();

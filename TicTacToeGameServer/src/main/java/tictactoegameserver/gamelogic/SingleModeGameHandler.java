@@ -154,6 +154,7 @@ public class SingleModeGameHandler {
         else if (playerCase.equals("loser")) {
             playerHandler.player.decreaseBonusPoints();
         }
+        DatabaseManager.openDataBaseConnection();
         DatabaseManager.addSingleModeGameRecord(gameID, playerHandler.player.getUserName(), playerType, difficulty, playerCase, ResponseCreator.createGameMovesJson(gameMoves));
 
         playerHandler.inGame = false;
@@ -169,6 +170,7 @@ public class SingleModeGameHandler {
 
         playerHandler.sendResponse(endMultiModeGameResponse(playerCase));
         currentGames.remove(this);
+        DatabaseManager.closeDataBaseConnection();
     }
 
     private int generateMove() {
@@ -209,9 +211,11 @@ public class SingleModeGameHandler {
     public String getGameID() { return this.gameID; }
 
      public void forceEndGame() {
+        DatabaseManager.openDataBaseConnection();
         playerHandler.player.decreaseBonusPoints();
         playerHandler.sendResponse(updatePlayerDataResponse(playerHandler.player));
         playerHandler.sendResponse(goToWelcomeViewResponse());
         currentGames.remove(this);
+        DatabaseManager.closeDataBaseConnection();
     }
 }

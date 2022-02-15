@@ -128,6 +128,7 @@ public class MultiModeGameHandler {
             playerOHandler.player.increaseBonusPoints();
             playerXHandler.player.decreaseBonusPoints();
         }
+        DatabaseManager.openDataBaseConnection();
         DatabaseManager.addMultiModeGameRecord(gameID, playerXHandler.player.getUserName(),playerOHandler.player.getUserName(), winner, ResponseCreator.createGameMovesJson(gameMoves));
         playerXHandler.inGame = false;
         playerOHandler.inGame = false;
@@ -145,6 +146,7 @@ public class MultiModeGameHandler {
         playerXHandler.sendResponse(endMultiModeGameResponse(winner));
         playerOHandler.sendResponse(endMultiModeGameResponse(winner));
         currentGames.remove(this);
+        DatabaseManager.closeDataBaseConnection();
     }
 
     public void forceEndGameOnlogout(String playerName) {
@@ -158,11 +160,13 @@ public class MultiModeGameHandler {
             winnerHandler = playerOHandler;
             leaverHandler = playerXHandler;
         }
+        DatabaseManager.openDataBaseConnection();
         winnerHandler.player.increaseBonusPoints();
         leaverHandler.player.decreaseBonusPoints();
         winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
+        DatabaseManager.closeDataBaseConnection();
     }
     public void forceEndGame(String playerName) {
         PlayerHandler winnerHandler = null;
@@ -174,6 +178,7 @@ public class MultiModeGameHandler {
             winnerHandler = playerOHandler;
             leaverHandler = playerXHandler;
         }
+        DatabaseManager.openDataBaseConnection();
         winnerHandler.player.increaseBonusPoints();
         leaverHandler.player.decreaseBonusPoints();
         winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
@@ -181,6 +186,7 @@ public class MultiModeGameHandler {
         leaverHandler.sendResponse(goToWelcomeViewResponse());
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
+        DatabaseManager.closeDataBaseConnection();
     }
     public String getGameID() { return gameID; }
     public PlayerHandler getplayerXHandler() { return playerXHandler; }

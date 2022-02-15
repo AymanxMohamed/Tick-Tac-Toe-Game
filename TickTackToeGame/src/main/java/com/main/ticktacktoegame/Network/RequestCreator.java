@@ -47,6 +47,7 @@ public class RequestCreator {
         request.put("request", "game invitation");
         request.put("data", data);
         return JSONValue.toJSONString(request);
+        // 
     }
     public static String xChoosen(String invitationSender, String invitationReciever) {
         JSONObject data = new JSONObject();

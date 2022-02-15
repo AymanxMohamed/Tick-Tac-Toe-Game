@@ -148,10 +148,11 @@ public class ResponseCreator {
     }
     
     public static String endMultiModeGameResponse(String winner) {
+        JSONObject data = new JSONObject();
+        data.put("winner", winner);
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "end multi mode game");
-        JSONObject data = new JSONObject();
-        data.put("winner", "winner");
+        responseObject.put("data", data);
         return JSONValue.toJSONString(responseObject);
     }
     public static String removeMultiButtonResponse(int index) {
@@ -215,10 +216,11 @@ public class ResponseCreator {
     }
     
     public static String endSingleModeGameResponse(String winner) {
+        JSONObject data = new JSONObject();
+        data.put("winner", winner);
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "end single mode game");
-        JSONObject data = new JSONObject();
-        data.put("winner", "winner");
+        responseObject.put("data", data);
         return JSONValue.toJSONString(responseObject);
     }
     public static String drawSingleMovesResponse(ArrayList<Integer> gameMoves) {
@@ -239,11 +241,12 @@ public class ResponseCreator {
     
      /*_____ * _____ general Responses _____ * _____ */
     public static String updatePlayerDataResponse(Player player) {
-        JSONObject responseObject = new JSONObject();
-        responseObject.put("response", "update player data");
         JSONObject data = new JSONObject();
         data.put("bonusPoints", player.getBonusPoints());
         data.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "update player data");
+        responseObject.put("data", data);
         return JSONValue.toJSONString(responseObject);
         
     }

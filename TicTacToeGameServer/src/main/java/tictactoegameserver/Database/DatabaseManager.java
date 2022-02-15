@@ -303,7 +303,7 @@ public class DatabaseManager {
             String winner, String gameRecord){
         try {
             PreparedStatement pst = sqlServerConnection.prepareStatement(
-                    "INSERT INTO multi_mode_game(game_id, player_x_user_name, player_y_user_name, winner, game_record) VALUES(?, ?, ?, ?, ?)");
+                    "INSERT INTO multi_mode_game(game_id, player_x_user_name, player_o_user_name, winner, game_record) VALUES(?, ?, ?, ?, ?)");
             pst.setString(1, gameID);
             pst.setString(2, playerXUserName);
             pst.setString(3, playerOUserName);
