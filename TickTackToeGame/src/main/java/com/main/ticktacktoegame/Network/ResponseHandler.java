@@ -255,10 +255,8 @@ public class ResponseHandler {
         
         // if he pressed on reject buttoon you will send an reject invitation 
         // by copy and  paste the below line of code
-        // Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
+        //Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
     }
-
-
 
     /*_____ * _____ Multi Mode Game Responses _____ * _____ */
     
@@ -275,12 +273,12 @@ public class ResponseHandler {
             // with x
         } else {
             // this client is the player O
-            // highlight player y  label to inform the client that  he play
+            // highlight player o  label to inform the client that  he play
             // with x
         }
         
         // Switch to the game view with player X on the left with his name
-        // and player y on the right with his name also
+        // and player o on the right with his name also
         // you can also place any nice pic for each player on the left and 
         // the right
     }
