@@ -46,7 +46,7 @@ public class TicTackToeController implements Initializable {
     private Button button8;
 
     @FXML
-    private Button button9;
+    private Button button0;
 
     @FXML
     private Text winnerText;
@@ -58,11 +58,15 @@ public class TicTackToeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
+        buttons = new ArrayList<>(Arrays.asList(button0,button1,button2,button3,button4,button5,button6,button7,button8));
         buttons.forEach(button ->{
             setupButton(button);
             button.setFocusTraversable(false);
         });
+        button0.setStyle("xMove");
+        button0.setText("XX");
+        button1.setStyle("oMove");
+        button1.setText("OO");
     }
 
     @FXML
@@ -99,28 +103,28 @@ public class TicTackToeController implements Initializable {
             String line;
               switch(a) {
                 case 0:
-                    line = button1.getText() + button2.getText() + button3.getText();
+                    line = button0.getText() + button2.getText() + button1.getText();
                     break;
                 case 1:
-                    line = button4.getText() + button5.getText() + button6.getText();
+                    line = button4.getText() + button5.getText() + button3.getText();
                     break;
                 case 2:
-                    line = button7.getText() + button8.getText() + button9.getText();
+                    line = button7.getText() + button8.getText() + button6.getText();
                     break;
                 case 3:
-                    line = button1.getText() + button5.getText() + button9.getText();
+                    line = button0.getText() + button4.getText() + button8.getText();
                     break;
                 case 4:
-                    line = button3.getText() + button5.getText() + button7.getText();
+                    line = button2.getText() + button4.getText() + button6.getText();
                     break;
                 case 5:
-                    line = button1.getText() + button4.getText() + button7.getText();
+                    line = button0.getText() + button3.getText() + button6.getText();
                     break;
                 case 6:
-                    line = button2.getText() + button5.getText() + button8.getText();
+                    line = button1.getText() + button4.getText() + button7.getText();
                     break;
                 case 7:
-                    line =  button3.getText() + button6.getText() + button9.getText();
+                    line =  button2.getText() + button5.getText() + button8.getText();
                     break;
                 default:
                     line = null;
