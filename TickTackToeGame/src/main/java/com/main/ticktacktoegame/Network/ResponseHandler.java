@@ -111,7 +111,8 @@ public class ResponseHandler {
                 break;
         }
     }
-
+/*_____ * _____ Login  Responses _____ * _____ */
+    
     private static void handlePlayerNotExist() {
         try {
             App.setRoot("PlayerNotExistView");
@@ -119,7 +120,6 @@ public class ResponseHandler {
             ex.printStackTrace();
         }
     }
-
     private static void handleWrongPassword() {
         try {
             App.setRoot("WrongPasswordView");
@@ -127,7 +127,6 @@ public class ResponseHandler {
             ex.printStackTrace();
         }
     }
-
     private static void handleLoginSuccess(JSONObject playerData) {
         try {
             Client.player = new Player(
@@ -140,24 +139,6 @@ public class ResponseHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    private static void handlePlayerExist() {
-        try {
-            App.setRoot("PlayerExistView");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        System.out.println("please enter new player");
-    }
-
-    private static void handleRegisterSuccess() {
-        try {
-            App.setRoot("RegisterSuccessView");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        System.out.println("gratz u have registered");
     }
     private static void onlinePlayersList(JSONObject data) {
         // this function will be send in the beiggining when player logged in
@@ -182,16 +163,29 @@ public class ResponseHandler {
             System.out.println(playerName + " is online now");
         }
     }
-
-    private static void handlePlayerLeftTheGame(JSONObject data) {
-        String playerName = (String) data.get("playerName");
-        if (!playerName.equals(Client.player.getUserName())) {
-            Opponent.removeOpponent(playerName);
-            updateAvilablePlayersList();
-            System.out.println(playerName + " left the game");
+    /*_____ * _____ end of Login  Responses _____ * _____ */
+    
+    /*_____ * _____ Register Responses _____ * _____ */  
+    private static void handlePlayerExist() {
+        try {
+            App.setRoot("PlayerExistView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+        System.out.println("please enter new player");
     }
 
+    private static void handleRegisterSuccess() {
+        try {
+            App.setRoot("RegisterSuccessView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("gratz u have registered");
+    }
+    /*_____ * _____ end of Register Responses _____ * _____ */
+
+    /*_____ * _____ Game invitation for sender Responses _____ * _____ */
     private static void handlePlayerInGame(JSONObject data) {
         // todo
         // this function will reveal an info message that tell the player
@@ -205,7 +199,40 @@ public class ResponseHandler {
         // sending invitation request to the players that is in game
         
     }
+    
+        private static void handleInvitationSended(JSONObject data) {
+        // todo
+        // we can show a little info that tell the client that his invitation has been sended
+        String invitationReciever = (String) data.get("invitationReciever");
+        System.out.println("The invitation to " + invitationReciever + " has been sent successfuly");
+    }
 
+    private static void handleInvitationRejected(JSONObject data) {
+        // todo
+        // we will display a nice message or dialog or any thing that tell the
+        // client that the invitation rejected
+        // for example
+        String invitationReciever = (String) data.get("invitationReciever");
+        System.out.println(invitationReciever + " reject your game request");
+    }
+    
+    private static void handleChooseXOrO(JSONObject data) {
+        // this function  will reveal a choose x or o view
+        String invitationSender = (String) data.get("invitationSender");
+        String invitationReciever = (String) data.get("invitationSender");
+        Client.opponnentName = invitationReciever;
+        // you will have to store the sender and receiver data to be able
+        // to pass it 
+        // if the client pressed  on x
+        // note when you use this method XChoosen or YChoosen you are the sender
+        // and the Client.opponentName is The reciever
+        Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
+        // else if the client pressed on y
+        Client.sendRequest(oChoosen(Client.player.getUserName(), Client.opponnentName));
+    }
+    
+    /*_____ * _____ Game invitation for receiver Responses _____ * _____ */
+    
     private static void handleInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");        
         String invitationReciever = (String) data.get("invitationReciever");
@@ -228,37 +255,10 @@ public class ResponseHandler {
         // Client.sendRequest(rejectInvitation(Client.opponnentName, Client.player.getUserName()));
     }
 
-    private static void handleInvitationSended(JSONObject data) {
-        // todo
-        // we can show a little info that tell the client that his invitation has been sended
-        String invitationReciever = (String) data.get("invitationReciever");
-        System.out.println("The invitation to " + invitationReciever + " has been sent successfuly");
-    }
 
-    private static void handleInvitationRejected(JSONObject data) {
-        // todo
-        // we will display a nice message or dialog or any thing that tell the
-        // client that the invitation rejected
-        // for example
-        String invitationReciever = (String) data.get("invitationReciever");
-        System.out.println(invitationReciever + " reject your game request");
-    }
 
-    private static void handleChooseXOrO(JSONObject data) {
-        // this function  will reveal a choose x or o view
-        String invitationSender = (String) data.get("invitationSender");
-        String invitationReciever = (String) data.get("invitationSender");
-        Client.opponnentName = invitationReciever;
-        // you will have to store the sender and receiver data to be able
-        // to pass it 
-        // if the client pressed  on x
-        // note when you use this method XChoosen or YChoosen you are the sender
-        // and the Client.opponentName is The reciever
-        Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
-        // else if the client pressed on y
-        Client.sendRequest(oChoosen(Client.player.getUserName(), Client.opponnentName));
-    }
-
+    /*_____ * _____ Multi Mode Game Responses _____ * _____ */
+    
     private static void handleStartMultiModeGame(JSONObject data) {
         String gameID = (String) data.get("gameId");
         String playerX = (String) data.get("playerX");
@@ -300,56 +300,50 @@ public class ResponseHandler {
             // display the loser view with a button that have play again and on press play again you will send another game invitation to the current player
         }
     }
-
-    private static void handleUpdatePlayerData(JSONObject data) {
-        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
-        Client.player.setPlayerRank((String) data.get("playerRank"));
-        // this is all what this handler do it only get the new data after the game
-        // ended and set it in the player data
-        // so when you switch to your home view you will be having the new rank
-        // and the new bonus points
-    }
-    private static void  handleUpdateAvilablePlayersList(JSONObject data) {
-       ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
-        for (var playerName : playerNames) {
-            if (!playerName.equals(Client.player.getUserName())) {
-                 Opponent player = Opponent.getOpponent(playerName);
-                 player.togleInGameStatus();
-                 updateAvilablePlayersList();
-            }
-        }
-    }
-
-    private static void updateAvilablePlayersList() {
-        // this function will loob on the Opponent.onlinePlayers arrayList
-        // every online player have 2 values name and inGame boolean
-        // you have rebuild the players list with inGame mark next too each one
-        // on every time this method called
-        // summary: this method will just rebuild the online players list 
-        // with in Game <true or false between every one of them>
-        ArrayList<Opponent> onlinePlayers = Opponent.onlinePlayers;
-    }
-
-    private static void handleRemoveMultiButtons(JSONObject data) {
-        int index = ((Long) data.get("bonusPoints")).intValue();
-        // this handler will just remove the button From the buttons array
-        // in the controller
-    }
-
-
+    
     public static void handleDrawMultiMovesHandler(JSONObject data) {
         ArrayList<Integer> gameMoves = (ArrayList<Integer>) data.get("gameMoves");
         // this is an array of game moves start drawing the x and o
         // draw x then o and notice that the array have the indexes of the buttons
         // so always first index in the array represent x 
     }
-
+    
+    private static void handleRemoveMultiButtons(JSONObject data) {
+        int index = ((Long) data.get("bonusPoints")).intValue();
+        // this handler will just remove the button From the buttons array
+        // in the controller
+    }
+    
     private static void handleEnableMultiButtons() {
         // this hanlder will just enable all buttons in the multimode controller 
         // buttons array
         
     }
-
+    /*_____ * _____ end of multi Mode Game Responses _____ * _____ */   
+    
+    /*_____ * _____ Single Mode Game Responses _____ * _____ */
+    private static void handleStartSingleModeGame(JSONObject data) {
+        String gameID = (String) data.get("gameId");
+        String choice = (String) data.get("choice");
+        
+        // you will have to store the game id in the client
+        Client.singleModeGameID = gameID;
+        if (choice.equals("x")) {
+            // then this client is the player x
+            // highlight player X  label to inform the client that  he play
+            // with x
+        } else {
+            // this client is the player O
+            // highlight player y  label to inform the client that  he play
+            // with x
+        }
+        
+        // Switch to the game view with player X on the left with his name
+        // and the computer on the right
+        // you will deside the computer side according to the choice
+        // you can also place any nice pic for each player on the left and 
+        // the right
+    }
     private static void handleDrawSingleMoves(JSONObject data) {
         ArrayList<Integer> gameMoves = (ArrayList<Integer>) data.get("gameMoves");
         // this is an array of game moves start drawing the x and o
@@ -375,28 +369,7 @@ public class ResponseHandler {
         // at disaple all buttons you will loop on the array and disaple all the buttons in it 
     }
 
-    private static void handleStartSingleModeGame(JSONObject data) {
-        String gameID = (String) data.get("gameId");
-        String choice = (String) data.get("choice");
-        
-        // you will have to store the game id in the client
-        Client.singleModeGameID = gameID;
-        if (choice.equals("x")) {
-            // then this client is the player x
-            // highlight player X  label to inform the client that  he play
-            // with x
-        } else {
-            // this client is the player O
-            // highlight player y  label to inform the client that  he play
-            // with x
-        }
-        
-        // Switch to the game view with player X on the left with his name
-        // and the computer on the right
-        // you will deside the computer side according to the choice
-        // you can also place any nice pic for each player on the left and 
-        // the right
-    }
+
 
     private static void handleEndSingleModeGame(JSONObject data) {
         String winner = (String) data.get("winner");
@@ -409,6 +382,42 @@ public class ResponseHandler {
             // display the loser view with a button that have play again and on press play again you will send another game invitation to the current player
         }
     }
-
- 
+     /*_____ * _____ end of Single Mode Game Responses _____ * _____ */
+                /*_____ * _____ general Responses _____ * _____ */
+    private static void handleUpdatePlayerData(JSONObject data) {
+        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
+        Client.player.setPlayerRank((String) data.get("playerRank"));
+        // this is all what this handler do it only get the new data after the game
+        // ended and set it in the player data
+        // so when you switch to your home view you will be having the new rank
+        // and the new bonus points
+    }
+    private static void  handleUpdateAvilablePlayersList(JSONObject data) {
+       ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
+        for (var playerName : playerNames) {
+            if (!playerName.equals(Client.player.getUserName())) {
+                 Opponent player = Opponent.getOpponent(playerName);
+                 player.togleInGameStatus();
+                 updateAvilablePlayersList();
+            }
+        }
+    }
+    private static void updateAvilablePlayersList() {
+        // this function will loob on the Opponent.onlinePlayers arrayList
+        // every online player have 2 values name and inGame boolean
+        // you have rebuild the players list with inGame mark next too each one
+        // on every time this method called
+        // summary: this method will just rebuild the online players list 
+        // with in Game <true or false between every one of them>
+        ArrayList<Opponent> onlinePlayers = Opponent.onlinePlayers;
+    }
+    private static void handlePlayerLeftTheGame(JSONObject data) {
+        String playerName = (String) data.get("playerName");
+        if (!playerName.equals(Client.player.getUserName())) {
+            Opponent.removeOpponent(playerName);
+            updateAvilablePlayersList();
+            System.out.println(playerName + " left the game");
+        }
+    }
+         /*_____ * _____ end of Responses _____ * _____ */
 }

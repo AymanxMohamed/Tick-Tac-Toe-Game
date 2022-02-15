@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
-import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
-import tictactoegameserver.Database.Entities.Player;
-import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import static tictactoegameserver.Network.Utility.*;
 import  tictactoegameserver.gamelogic.MultiModeGameHandler;
@@ -51,7 +48,9 @@ public class RequestHandler {
         }
         return response;
     }
-
+    
+    /*_____ * _____ Login & Register Requests _____ * _____ */
+    
     private static String handleLogin(JSONObject data, PlayerHandler playerHandler) {
 
         String userName = (String) data.get("username");
@@ -86,7 +85,10 @@ public class RequestHandler {
         DatabaseManager.closeDataBaseConnection();
         return registerSuccessResponse();
     }
-
+    /*_____ * _____ end of Login & Register Requests _____ * _____ */
+    
+    /*_____ * _____ Multi Mode Game Requests _____ * _____ */
+    
     private static String handleGameInvitation(JSONObject data) {
         String invitationReciever = (String) data.get("invitationReciever");
         PlayerHandler receiverHandler = getPlayerHandler(invitationReciever);
@@ -97,7 +99,8 @@ public class RequestHandler {
         receiverHandler.sendResponse(invitationFromPlayerRequest(data));
         return invitationSendedResponse(data);
     }
-
+             /*_____ * _____ receiver _____ * _____ */
+    
     private static String handleAcceptInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
@@ -111,6 +114,7 @@ public class RequestHandler {
         senderHandler.sendResponse(invitationRejectedResponse(data));
         return doNothingResponse();
     }
+                /*_____ * _____ sender _____ * _____ */
     
     private static String handleXOrOChoise(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");
@@ -142,6 +146,7 @@ public class RequestHandler {
         playerOHandler.sendResponse(disapleAllButtonsResponse());
         return startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName());
     }
+                    /*_____ * _____ game process _____ * _____ */
     
     private static String handleMultiModeGameMove(JSONObject data) {
         String gameID = (String) data.get("gameId");
@@ -150,6 +155,9 @@ public class RequestHandler {
         gameHandler.processMove(index);
         return disapleAllButtonsResponse();
     }
+    /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
+    
+    /*_____ * _____  Single Mode Game Requests _____ * _____ */
     
     private static String handlePlaySingleModeGame(JSONObject data, PlayerHandler playerHandler) {
         String difficulty = (String) data.get("difficulty");
@@ -169,4 +177,6 @@ public class RequestHandler {
         gameHandler.processMove(index);
         return disapleAllButtonsResponse();
     }
+    
+    /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
 }

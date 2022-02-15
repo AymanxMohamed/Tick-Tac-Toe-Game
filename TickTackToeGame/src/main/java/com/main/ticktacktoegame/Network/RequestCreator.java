@@ -3,9 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.main.ticktacktoegame.Network;
-
-import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
-import com.main.ticktacktoegame.Models.Enums.MappingFunctions;
 import static com.main.ticktacktoegame.Network.Client.player;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -16,6 +13,7 @@ import org.json.simple.JSONValue;
  */
 public class RequestCreator {
     
+    /*_____ * _____ Login & Register Requests _____ * _____ */
     public static String login(String userName, String password) {
         JSONObject data = new JSONObject();
         data.put("username", userName);
@@ -35,33 +33,18 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+    /*_____ * _____ end of Login & Register Requests _____ * _____ */
+    
+    /*_____ * _____ Multi Mode Game Requests _____ * _____ */
+    
+                /*_____ * _____ sender _____ * _____ */
+    
     public static String invitePlayer(String invitedPlayerName) {
         JSONObject data = new JSONObject();
         data.put("invitationSender", player.getUserName());
         data.put("invitationReciever", invitedPlayerName);
         JSONObject request = new JSONObject();
         request.put("request", "game invitation");
-        request.put("data", data);
-        return JSONValue.toJSONString(request);
-    }
-    
-    public static String acceptInvitation(String invitationSender, String invitationReciever) {
-        JSONObject data = new JSONObject();
-        data.put("invitationSender", invitationSender);
-        data.put("invitationReciever", invitationReciever);
-        JSONObject request = new JSONObject();
-        request.put("request", "acceptInvitation");
-        request.put("data", data);
-        return JSONValue.toJSONString(request);
-    }
-    public static String rejectInvitation(String invitationSender, String invitationReciever) {
-        Client.opponnentName = null;
-        JSONObject data = new JSONObject();
-        data.put("invitationSender", invitationSender);
-        data.put("invitationReciever", invitationReciever);
-        data.put(data, data);
-        JSONObject request = new JSONObject();
-        request.put("request", "rejectInvitation");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
@@ -85,24 +68,30 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
-        public static String xChoosenSingle(String difficulty) {
+                /*_____ * _____ receiver _____ * _____ */
+    
+    public static String acceptInvitation(String invitationSender, String invitationReciever) {
         JSONObject data = new JSONObject();
-        data.put("difficulty", difficulty);
-        data.put("choise", "X");
+        data.put("invitationSender", invitationSender);
+        data.put("invitationReciever", invitationReciever);
         JSONObject request = new JSONObject();
-        request.put("request", "XorOChoiseSingle");
+        request.put("request", "acceptInvitation");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
-    public static String oChoosenSingle(String difficulty) {
+    public static String rejectInvitation(String invitationSender, String invitationReciever) {
+        Client.opponnentName = null;
         JSONObject data = new JSONObject();
-        data.put("difficulty", difficulty);
-        data.put("choise", "O");
+        data.put("invitationSender", invitationSender);
+        data.put("invitationReciever", invitationReciever);
+        data.put(data, data);
         JSONObject request = new JSONObject();
-        request.put("request", "XorOChoiseSingle");
+        request.put("request", "rejectInvitation");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+             /*_____ * _____ game process _____ * _____ */
+    
     public static String multiMove(int index, String gameId) {
         JSONObject data = new JSONObject();
         data.put("gameId", gameId);
@@ -112,6 +101,10 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);   
     }
+    /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
+    
+    /*_____ * _____  Single Mode Game Requests _____ * _____ */
+    
     public static String playSingleModeGame(String difficulty, String choice) {
         JSONObject data = new JSONObject();
         data.put("difficulty", difficulty);
@@ -121,6 +114,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+  
     public static String singleMove(int index, String gameId) {
         JSONObject data = new JSONObject();
         data.put("gameId", gameId);
@@ -130,4 +124,5 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);   
     }
+    /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
 }
