@@ -136,7 +136,7 @@ public class ResponseHandler {
                     (String) playerData.get("playerRank"),
                     (String) playerData.get("registerDate"));
             System.out.println("player logged in successfuly");
-            App.setRoot("WelcomeView");
+            App.setRoot("onlineHome");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
