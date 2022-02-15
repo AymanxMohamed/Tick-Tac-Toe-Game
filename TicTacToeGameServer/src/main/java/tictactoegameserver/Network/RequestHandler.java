@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Database.Entities.Player;
 import static tictactoegameserver.Network.PlayerHandler.*;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import static tictactoegameserver.Network.Utility.*;
 import  tictactoegameserver.gamelogic.MultiModeGameHandler;
+import tictactoegameserver.gamelogic.SingleModeGameHandler;
 /**
  *
  * @author ayman, shopaky
@@ -43,10 +45,9 @@ public class RequestHandler {
             case "multiMove":
                 return handleMultiModeGameMove(data);
             case "play single mode game":
-                return handlePlaySingleModeGame(data);
+                return handlePlaySingleModeGame(data, playerHandler);
             case "singleMove":
-                return handleSingleModeGameMove(data);
-                
+                return handleSingleModeGameMove(data, playerHandler);
         }
         return response;
     }
@@ -103,14 +104,14 @@ public class RequestHandler {
         senderHandler.sendResponse(chooseXOrOResponse(data));
         return doNothingResponse();
     }
-
+    
     private static String handleRejectInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");        
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
         senderHandler.sendResponse(invitationRejectedResponse(data));
         return doNothingResponse();
     }
-
+    
     private static String handleXOrOChoise(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");
         String invitationReciever = (String) data.get("invitationReciever");
@@ -150,15 +151,22 @@ public class RequestHandler {
         return disapleAllButtonsResponse();
     }
     
-    private static String handlePlaySingleModeGame(JSONObject data) {
-        
-        return null;
+    private static String handlePlaySingleModeGame(JSONObject data, PlayerHandler playerHandler) {
+        String difficulty = (String) data.get("difficulty");
+        String choice = (String) data.get("choice");
+        String gameID = generateUniqueId();
+        new SingleModeGameHandler(gameID, playerHandler, choice, difficulty);
+        if (choice.equals("o")) {
+            playerHandler.sendResponse(disapleAllButtonsSingleResponse());
+        }
+        return startSingleModeGameResponse(gameID, choice);
     }
-    private static String handleSingleModeGameMove(JSONObject data) {
-        //todo
-        return null;
+    
+    private static String handleSingleModeGameMove(JSONObject data, PlayerHandler playerHandler) {
+        String gameID = (String) data.get("gameId");
+        int index = ((Long) data.get("index")).intValue();
+        SingleModeGameHandler gameHandler = Utility.getSingleModeGameHandler(gameID);
+        gameHandler.processMove(index);
+        return disapleAllButtonsResponse();
     }
-
-
-
 }

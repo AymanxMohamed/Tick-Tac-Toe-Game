@@ -75,13 +75,31 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
-    public static String yChoosen(String invitationSender, String invitationReciever) {
+    public static String oChoosen(String invitationSender, String invitationReciever) {
         JSONObject data = new JSONObject();
         data.put("invitationSender", invitationSender);
         data.put("invitationReciever", invitationReciever);
         data.put("choise", "O");
         JSONObject request = new JSONObject();
         request.put("request", "XorOChoise");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+        public static String xChoosenSingle(String difficulty) {
+        JSONObject data = new JSONObject();
+        data.put("difficulty", difficulty);
+        data.put("choise", "X");
+        JSONObject request = new JSONObject();
+        request.put("request", "XorOChoiseSingle");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    public static String oChoosenSingle(String difficulty) {
+        JSONObject data = new JSONObject();
+        data.put("difficulty", difficulty);
+        data.put("choise", "O");
+        JSONObject request = new JSONObject();
+        request.put("request", "XorOChoiseSingle");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
@@ -94,9 +112,10 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);   
     }
-    public static String playSingleModeGame(DIFFICULTY difficultyEnum) {
+    public static String playSingleModeGame(String difficulty, String choice) {
         JSONObject data = new JSONObject();
-        data.put("difficulty", MappingFunctions.mapDifficulty(difficultyEnum));
+        data.put("difficulty", difficulty);
+        data.put("choice", choice);
         JSONObject request = new JSONObject();
         request.put("request", "play single mode game");
         request.put("data", data);

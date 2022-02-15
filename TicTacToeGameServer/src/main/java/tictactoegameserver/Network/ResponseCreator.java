@@ -161,9 +161,23 @@ public class ResponseCreator {
 
         return JSONValue.toJSONString(responseObject);
     }
+    public static String startSingleModeGameResponse(String gameId, String choice) {
+        JSONObject data = new JSONObject();
+        data.put("gameId", gameId);
+        data.put("choice", choice);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "start single mode game");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
     public static String disapleAllButtonsResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "disaple all buttons");
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String disapleAllButtonsSingleResponse() {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "disaple all buttons single");
         return JSONValue.toJSONString(responseObject);
     }
     public static String createGameMovesJson(ArrayList<Integer> gameMoves) {
@@ -191,7 +205,13 @@ public class ResponseCreator {
         return JSONValue.toJSONString(responseObject);
         
     }
-    
+    public static String endSingleModeGameResponse(String winner) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "end single mode game");
+        JSONObject data = new JSONObject();
+        data.put("winner", "winner");
+        return JSONValue.toJSONString(responseObject);
+    }
     public static String updateAvilablePlayersList(ArrayList<String> playersNames) {
         JSONObject data = new JSONObject();
         data.put("playersNames", playersNames);
