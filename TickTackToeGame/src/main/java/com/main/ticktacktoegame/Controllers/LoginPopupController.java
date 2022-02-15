@@ -6,25 +6,20 @@ package com.main.ticktacktoegame.Controllers;
 
 import com.main.ticktacktoegame.App;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-//import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
  *
- * @author Roo
+ * @author elsho
  */
-public class PopupController {
+public class LoginPopupController {
 
-    @FXML
-    Label popupLabel;
-
-    @FXML
-    private void closePopup() {
-
+    public void closePopup() {
+        try {
+            App.setRoot("LoginView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

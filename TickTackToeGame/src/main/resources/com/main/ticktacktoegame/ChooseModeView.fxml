@@ -7,12 +7,12 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/chooseMode.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.ChooseModeController">
    <children>
-      <Button layoutX="618.0" layoutY="311.0" mnemonicParsing="false" onAction="#switchTicTacToe" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Single Mode" textFill="WHITE">
+      <Button layoutX="618.0" layoutY="311.0" mnemonicParsing="false" onAction="#switchToSingleMode" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Single Mode" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
-      <Button layoutX="618.0" layoutY="481.0" mnemonicParsing="false" onAction="#switchTicTacToe" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Multi Mode" textFill="WHITE">
+      <Button layoutX="618.0" layoutY="481.0" mnemonicParsing="false" onAction="#switchToMultiMode" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Multi Mode" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>

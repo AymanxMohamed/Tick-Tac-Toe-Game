@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.PopupController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.ServerIsDownPopUpController">
    <children>
       <Pane layoutX="422.0" layoutY="116.0" prefHeight="351.0" prefWidth="731.0" styleClass="container">
          <children>
-            <Label fx:id="popupLabel" layoutX="210.0" layoutY="83.0" text="Player Not Exist" textFill="WHITE">
+            <Label fx:id="popupLabel" layoutX="220.0" layoutY="83.0" text="Server Is Down" textFill="WHITE">
                <font>
                   <Font size="45.0" />
                </font>

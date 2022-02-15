@@ -15,8 +15,20 @@ import java.io.IOException;
  */
 public class ChooseModeController {
 
-    public void switchTicTacToe() throws IOException {
-        App.setRoot("TicTackToe");
+    public void switchToSingleMode() {
+        switchToXOView();
     }
+    
+    public void switchToMultiMode() {
+        switchToXOView();
+    }
+    public void switchToXOView() {
+        try {
+            App.setRoot("chooseXorO");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     
 }
