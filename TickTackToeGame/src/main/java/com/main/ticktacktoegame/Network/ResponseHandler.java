@@ -85,9 +85,18 @@ public class ResponseHandler {
             case "draw multi moves":
                 handleDrawMultiMovesHandler(data);
                 break;
+           
             case "enable multi buttons":
                 handleEnableMultiButtons();
                 break;
+            case "draw single moves":
+                handleDrawSingleMoves(data);
+                break;
+            case "remove single moves":
+                handleRemoveSingleMoves(data);
+                break;
+            case "enable single buttons":
+                handleEnableSingleButtons();
             default:
                 break;
         }
@@ -327,6 +336,24 @@ public class ResponseHandler {
 
     private static void handleEnableMultiButtons() {
         // this hanlder will just enable all buttons in the multimode controller 
+        // buttons array
+        
+    }
+
+    private static void handleDrawSingleMoves(JSONObject data) {
+        ArrayList<Integer> gameMoves = (ArrayList<Integer>) data.get("gameMoves");
+        // this is an array of game moves start drawing the x and o
+        // draw x then o and notice that the array have the indexes of the buttons
+        // so always first index in the array represent x 
+    }
+
+    private static void handleRemoveSingleMoves(JSONObject data) {
+        int index = ((Long) data.get("bonusPoints")).intValue();
+        // this handler will just remove the button From the buttons array
+        // in the controller
+    }
+    private static void handleEnableSingleButtons() {
+        // this hanlder will just enable all buttons in the singleMode controller 
         // buttons array
         
     }

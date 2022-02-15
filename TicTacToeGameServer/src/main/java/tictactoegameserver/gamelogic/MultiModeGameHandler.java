@@ -38,6 +38,7 @@ public class MultiModeGameHandler {
         }
     }
     private  boolean isGameEnded() {
+        if (gameMoves.size() < 5) { return false; }
         ArrayList<String> moves = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             moves.add(i, "");
@@ -83,7 +84,14 @@ public class MultiModeGameHandler {
                     line = null;
                     break;
             }
-            if (line.equals("xxx") || line.equals("ooo")) {
+            if (line.equals("xxx")) {
+                winner = playerXHandler.player.getUserName();
+                return true;
+            } else if (line.equals("ooo")) {
+                winner = playerOHandler.player.getUserName();
+                return true;
+            } else if (gameMoves.size() == 9) {
+                winner = "draw";
                 return true;
             }
         }
@@ -98,11 +106,7 @@ public class MultiModeGameHandler {
         addMove(index);
         playerXHandler.sendResponse(drawMultiMovesResponse(gameMoves));
         playerOHandler.sendResponse(drawMultiMovesResponse(gameMoves));
-        if (gameMoves.size() >= 5 && isGameEnded()) {
-            handleEndGame();
-            return;
-        }
-        if (gameMoves.size() == 9) {
+        if (isGameEnded()) {
             handleEndGame();
             return;
         }
@@ -116,19 +120,14 @@ public class MultiModeGameHandler {
         playerXTurn = !playerXTurn;
     }
     private void handleEndGame() {
-        if (!isGameEnded()) {
-            winner = "draw";
-        }
-        else if (playerXTurn) {
-            winner = playerXHandler.player.getUserName();
+
+        if (winner.equals(playerXHandler.player.getUserName())) {
             playerXHandler.player.increaseBonusPoints();
             playerOHandler.player.decreaseBonusPoints();
-        } else {
-            winner = playerOHandler.player.getUserName();
+        } else if(winner.equals(playerOHandler.player.getUserName())) {
             playerOHandler.player.increaseBonusPoints();
             playerXHandler.player.decreaseBonusPoints();
         }
-        
         DatabaseManager.addMultiModeGameRecord(gameID, playerXHandler.player.getUserName(),playerOHandler.player.getUserName(), winner, ResponseCreator.createGameMovesJson(gameMoves));
         playerXHandler.inGame = false;
         playerOHandler.inGame = false;

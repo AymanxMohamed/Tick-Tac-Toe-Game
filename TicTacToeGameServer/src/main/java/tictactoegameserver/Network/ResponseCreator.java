@@ -208,6 +208,14 @@ public class ResponseCreator {
         responseObject.put("data", data);
         return JSONValue.toJSONString(responseObject);
     }
+    public static String removeSingleButtonResponse(int index) {
+        JSONObject data = new JSONObject();
+        data.put("index", index);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "remove single button");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
     public static String drawMultiMovesResponse(ArrayList<Integer> gameMoves) {
         JSONObject data = new JSONObject();
         data.put("gameMoves", gameMoves);
@@ -216,9 +224,22 @@ public class ResponseCreator {
         responseObject.put("data", data);
         return JSONValue.toJSONString(responseObject);
     }
+    public static String drawSingleMovesResponse(ArrayList<Integer> gameMoves) {
+        JSONObject data = new JSONObject();
+        data.put("gameMoves", gameMoves);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "draw single moves");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
     public static String enableMultiButtonsResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "enable multi buttons");
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String enableSingleButtonsResponse() {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "enable single buttons");
         return JSONValue.toJSONString(responseObject);
     }
 
