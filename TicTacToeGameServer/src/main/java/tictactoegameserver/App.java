@@ -38,13 +38,42 @@ public class App extends Application {
     }
 
       public static void main(String[] args) {
-        try {
-            Server.startServer();
-        } catch (IOException ex) {
-            Server.closeServer();
-            System.exit(0);
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            Server.startServer();
+//        } catch (IOException ex) {
+//            Server.closeServer();
+//            System.exit(0);
+//            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        initialize();
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.out.println("avilable before: " + avilableMoves);
+        System.out.println(generateEasyMove());
+        System.out.println("avilable after: " + avilableMoves);
+        System.exit(0);
     }
 
     /**
@@ -90,16 +119,38 @@ public class App extends Application {
           System.out.println(getGameMovesArrayList(createGameMovesJson(gameMoves)));
           System.exit(0);
     }
-        public static void addMove(int index, ArrayList<Integer> gameMoves) {
+    public static void addMove(int index, ArrayList<Integer> gameMoves) {
             if (!gameMoves.contains(index)) {
                 gameMoves.add(index);
             }
 
         }
-        public static void getMoves(ArrayList<Integer> gameMoves){
+    public static void getMoves(ArrayList<Integer> gameMoves){
         for (var move : gameMoves){
             System.out.println(move);
         }
+    }
+
+    private static ArrayList<Integer> avilableMoves = new ArrayList<>();
+    private static void initialize() {
+        avilableMoves.add(0);
+        avilableMoves.add(1);
+        avilableMoves.add(2);
+        avilableMoves.add(3);
+        avilableMoves.add(4);
+        avilableMoves.add(5);
+        avilableMoves.add(6);
+        avilableMoves.add(7);
+        avilableMoves.add(8);
+    }
+    private static void removeMove(int move) {
+        avilableMoves.remove((Integer) move);
+    }
+    private static int generateEasyMove() {
+        int index = (int)(Math.random() * avilableMoves.size());
+        int move = avilableMoves.get(index);
+        removeMove(move);
+        return move;
     }
         
     

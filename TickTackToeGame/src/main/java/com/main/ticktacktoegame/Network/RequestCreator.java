@@ -4,6 +4,8 @@
  */
 package com.main.ticktacktoegame.Network;
 
+import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
+import com.main.ticktacktoegame.Models.Enums.MappingFunctions;
 import static com.main.ticktacktoegame.Network.Client.player;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -42,6 +44,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
+    
     public static String acceptInvitation(String invitationSender, String invitationReciever) {
         JSONObject data = new JSONObject();
         data.put("invitationSender", invitationSender);
@@ -90,6 +93,14 @@ public class RequestCreator {
         request.put("request", "multiMove");
         request.put("data", data);
         return JSONValue.toJSONString(request);   
+    }
+    public static String playSingleModeGame(DIFFICULTY difficultyEnum) {
+        JSONObject data = new JSONObject();
+        data.put("difficulty", MappingFunctions.mapDifficulty(difficultyEnum));
+        JSONObject request = new JSONObject();
+        request.put("request", "play single mode game");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
     }
     public static String singleMove(int index, String gameId) {
         JSONObject data = new JSONObject();
