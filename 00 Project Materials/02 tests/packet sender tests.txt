@@ -1,0 +1,12 @@
+// login requst
+{"request":"login","data":{"username":"shopaky","password":"123456"}}\r
+// invite player Request
+{"request":"game invitation","data":{"invitationSender":"ayman","invitationReciever":"shopaky"}}
+// accept invitation
+{"request":"acceptInvitation","data":{"invitationSender":"ayman","invitationReciever":"shopaky"}}
+// xChoosen or o
+{"request":"XorOChoise","data":{"invitationSender":"ayman","invitationReciever":"shopaky","choise":"X"}}
+// send move
+{"request":"multiMove","data":{"gameId":"ab62363a-c342-4fae-93aa-a722127c3e39","index":"0"}}
+
+java.lang.ClassCastException: class java.lang.String cannot be cast to class java.lang.Long (java.lang.String and java.lang.Long are in module java.base of loader 'bootstrap')
