@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.LoginController">
     <children>
         <Pane layoutX="936.0" layoutY="107.0" prefHeight="583.0" prefWidth="538.0" styleClass="container">
@@ -49,7 +48,7 @@
                     <Font size="15.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                   <Cursor fx:constant="HAND" />
                 </cursor>
             </Button>
          <Label fx:id="loginErrorLabel" layoutX="208.0" layoutY="368.0" textFill="#ff3c3c">

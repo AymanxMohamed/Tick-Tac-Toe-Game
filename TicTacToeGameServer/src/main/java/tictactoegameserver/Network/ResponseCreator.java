@@ -236,6 +236,7 @@ public class ResponseCreator {
         return JSONValue.toJSONString(responseObject);
     }
     public static String drawSingleMovesResponse(ArrayList<Integer> gameMoves) {
+        gameMoves.forEach(move -> System.out.println(move));
         JSONObject data = new JSONObject();
         data.put("gameMoves", gameMoves);
         JSONObject responseObject = new JSONObject();

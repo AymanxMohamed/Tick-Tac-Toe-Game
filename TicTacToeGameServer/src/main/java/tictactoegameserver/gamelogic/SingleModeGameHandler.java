@@ -13,11 +13,9 @@ import static tictactoegameserver.Network.ResponseCreator.drawSingleMovesRespons
 import static tictactoegameserver.Network.ResponseCreator.enableSingleButtonsResponse;
 import static tictactoegameserver.Network.ResponseCreator.endMultiModeGameResponse;
 import static tictactoegameserver.Network.ResponseCreator.goToWelcomeViewResponse;
-import static tictactoegameserver.Network.ResponseCreator.playerLeftMultiGameResponse;
 import static tictactoegameserver.Network.ResponseCreator.removeSingleButtonResponse;
 import static tictactoegameserver.Network.ResponseCreator.updateAvilablePlayersList;
 import static tictactoegameserver.Network.ResponseCreator.updatePlayerDataResponse;
-import static tictactoegameserver.gamelogic.MultiModeGameHandler.currentGames;
 
 /**
  *
@@ -54,7 +52,7 @@ public class SingleModeGameHandler {
         avilableMoves.add(7);
         avilableMoves.add(8);
         
-        if (playerType.equals("o")) {
+        if (playerType.equals("O")) {
             processAiMove();
         }
     }

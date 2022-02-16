@@ -13,7 +13,9 @@ import java.util.logging.Logger;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import tictactoegameserver.Network.Server;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 /**
  * JavaFX App
  */
@@ -45,6 +47,7 @@ public class App extends Application {
             System.exit(0);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        printArray(tryJson());
     }
 
     /**
@@ -57,38 +60,53 @@ public class App extends Application {
         DatabaseManager.closeDataBaseConnection();
         System.exit(0);
     }
-    public static void tryJson() {
-//        ArrayList<Integer> intArray = new ArrayList<>();
-//        intArray.add(0);
-//        intArray.add(1);
-//        intArray.add(2);
-//        intArray.add(3);
-//        intArray.add(4);
-//        intArray.add(5);
-//        intArray.add(6);
-//        intArray.add(7);
-//        intArray.add(8);
-//        JSONObject request = new JSONObject();
-//        request.put("request", "XorOChoise");
-//        request.put("data", intArray);
-//        ArrayList<Integer> invitationReciever = (ArrayList<Integer>) request.get("data");
-//        System.out.println(invitationReciever.get(0));
-//        JSONObject data = new JSONObject();
-//        data.put("invitationSender", "ayman");
-//        data.put("invitationReciever", "ahmed");
-//        JSONObject request = new JSONObject();
-//        request.put("request", "game invitation");
-//        request.put("data", data);
-//        System.out.println(JSONValue.toJSONString(request));
-          // next test move
-          ArrayList<Integer> gameMoves  = new ArrayList<>();
-          addMove(2, gameMoves);
-          addMove(2, gameMoves);
-          addMove(1, gameMoves);
-          addMove(1, gameMoves);
-          System.out.println(createGameMovesJson(gameMoves));
-          System.out.println(getGameMovesArrayList(createGameMovesJson(gameMoves)));
-          System.exit(0);
+    public static String tryJson() {
+        ArrayList<Integer> gameMoves = new ArrayList<>();
+        gameMoves.add(0);
+        gameMoves.add(1);
+        gameMoves.add(2);
+        gameMoves.add(3);
+        gameMoves.add(4);
+        gameMoves.add(5);
+        gameMoves.add(6);
+        gameMoves.add(7);
+        gameMoves.add(8);
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(gameMoves);
+        JSONObject data = new JSONObject();
+        data.put("jsonArray", jsonArray);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "draw single moves");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static void printArray(String responseString) {
+        JSONObject responseObject = (JSONObject) JSONValue.parse(responseString);
+        String response = (String) responseObject.get("response");
+        JSONObject data = (JSONObject) responseObject.get("data");
+        
+        System.out.println(data);
+       JSONArray jsonArray = (JSONArray) data.get("jsonArray");
+        System.out.println(jsonArray);
+        ArrayList<Object> gameMoves = (ArrayList<Object>)jsonArray.get(0);
+        //int inx = ((Long) gameMoves.get(0)).intValue();
+//        ArrayList<Integer> newGameMoves = new ArrayList<>();
+        ArrayList<Integer> newGameMoves = getIntegerArray(gameMoves);
+
+//        for (var move : gameMoves) {
+//            newGameMoves.add(((Long) move).intValue());
+//        }
+        
+//        int inx = (Integer) index;
+//        System.out.println(inx);
+        newGameMoves.forEach(move -> System.out.println(move));
+    }
+    public static ArrayList<Integer> getIntegerArray(ArrayList<Object> objArray) {
+        ArrayList<Integer> newGameMoves = new ArrayList<>();
+        for (var obj : objArray) {
+            newGameMoves.add(((Long) obj).intValue());
+        }
+        return newGameMoves;
     }
     public static void addMove(int index, ArrayList<Integer> gameMoves) {
             if (!gameMoves.contains(index)) {

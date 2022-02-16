@@ -36,9 +36,8 @@ public class RegistrationViewController {
         try {
             if (Validator.validatePassword(password, confirmedPassword) && Validator.validateUserName(username)) {
                 Client.sendRequest(RequestCreator.register(username, password));
-                App.setRoot("LoginView");
             } else {
-                App.setRoot("RegistrationView");
+                App.setRoot("PasswordDoseNotMatchView");
             }
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -7,6 +7,7 @@ package com.main.ticktacktoegame.Controllers;
 
 import com.main.ticktacktoegame.App;
 import java.io.IOException;
+import javafx.fxml.FXML;
 
 /**
  * FXML Controller class
@@ -15,16 +16,27 @@ import java.io.IOException;
  */
 public class ChooseModeController {
 
+    @FXML
     public void switchToSingleMode() {
-        switchToXOView();
+        switchToChooseDifficultyView();
     }
     
+    @FXML
     public void switchToMultiMode() {
-        switchToXOView();
+        switchToAvilablePlayersView();
     }
-    public void switchToXOView() {
+    
+    public void switchToChooseDifficultyView() {
         try {
-            App.setRoot("chooseXorO");
+            App.setRoot("chooseLevelView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void switchToAvilablePlayersView() {
+        try {
+            App.setRoot("AvilablePlayersView");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

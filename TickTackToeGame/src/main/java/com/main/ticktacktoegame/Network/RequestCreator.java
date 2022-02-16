@@ -171,7 +171,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);   
     }
-    public static String forceEndSingleGaame() {
+    public static String forceEndSingleGame() {
         JSONObject data = new JSONObject();
         data.put("gameId", Client.multiModeGameId);
         JSONObject request = new JSONObject();

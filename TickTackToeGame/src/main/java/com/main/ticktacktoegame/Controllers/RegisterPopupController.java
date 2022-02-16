@@ -10,22 +10,16 @@ import java.io.IOException;
 /**
  * FXML Controller class
  *
- * @author Roo
+ * @author elsho
  */
-public class ChooseXorOController {
+public class RegisterPopupController {
 
-    public void startTheGame() {
+    public void closePopup() {
         try {
-            App.setRoot("TicTackToe");
+            App.setRoot("RegistrationView");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-    public void playerXHandler(){
-        startTheGame();
-    }
-    public void playerOHandler() {
-        startTheGame();
-    }
-    
+
 }

@@ -5,11 +5,15 @@
 package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.Player;
 import static com.main.ticktacktoegame.Network.RequestCreator.*;
+import static com.main.ticktacktoegame.Network.Utility.getIntegerArray;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.*;
 
 /**
@@ -139,12 +143,10 @@ public class ResponseHandler {
     private static void handlePlayerNotExist() {
         try {
             App.setRoot("PlayerNotExistView");
-//              App.setRoot("popup");
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-//        Set Message In The Popout Label
     }
     private static void handleWrongPassword() {
         try {
@@ -167,6 +169,7 @@ public class ResponseHandler {
         }
     }
     private static void onlinePlayersList(JSONObject data) {
+         // todo
         // this function will be send in the beiggining when player logged in
         JSONArray onlinePlayersDataObjects = (JSONArray) data.get("onlinePlayersDataObjects");
         for (int i = 0; i < onlinePlayersDataObjects.size(); i++) {
@@ -185,6 +188,7 @@ public class ResponseHandler {
         }
     }
     private static void handleAddNewPlayer(JSONObject data) {
+        // todo
         String playerName = (String) data.get("playerName");
         if (!playerName.equals(Client.player.getUserName())) {
             Opponent.addOpponent(playerName, false, false);
@@ -193,10 +197,11 @@ public class ResponseHandler {
         }
     }
     private static void handlePlayerAlreadyOnline(JSONObject data) {
-        // this method will reveal an error message that 
-        // say that the playerName is already online
-        String playerName = (String) data.get("playerName");
-        System.out.println(playerName + " is already online");
+        try {
+            App.setRoot("PlayerAlreadyOnlineView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     /*_____ * _____ end of Login  Responses _____ * _____ */
     
@@ -207,7 +212,6 @@ public class ResponseHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        System.out.println("please enter new player");
     }
 
     private static void handleRegisterSuccess() {
@@ -216,7 +220,6 @@ public class ResponseHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        System.out.println("gratz u have registered");
     }
     /*_____ * _____ end of Register Responses _____ * _____ */
 
@@ -235,7 +238,7 @@ public class ResponseHandler {
         
     }
     
-        private static void handleInvitationSended(JSONObject data) {
+    private static void handleInvitationSended(JSONObject data) {
         // todo
         // we can show a little info that tell the client that his invitation has been sended
         String invitationReciever = (String) data.get("invitationReciever");
@@ -336,7 +339,8 @@ public class ResponseHandler {
     }
     
     public static void handleDrawMultiMovesHandler(JSONObject data) {
-        ArrayList<Integer> gameMoves = (ArrayList<Integer>) data.get("gameMoves");
+        ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
+        ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
         // this is an array of game moves start drawing the x and o
         // draw x then o and notice that the array have the indexes of the buttons
         // so always first index in the array represent x 
@@ -370,7 +374,7 @@ public class ResponseHandler {
         
         // you will have to store the game id in the client
         Client.singleModeGameID = gameID;
-        if (choice.equals("x")) {
+        if (choice.equals("X")) {
             // then this client is the player x
             // highlight player X  label to inform the client that  he play
             // with x
@@ -379,29 +383,40 @@ public class ResponseHandler {
             // highlight player y  label to inform the client that  he play
             // with x
         }
-        
-        // Switch to the game view with player X on the left with his name
-        // and the computer on the right
-        // you will deside the computer side according to the choice
-        // you can also place any nice pic for each player on the left and 
-        // the right
+        try {
+            App.setRoot("TicTackToe");
+            
+            // Switch to the game view with player X on the left with his name
+            // and the computer on the right
+            // you will deside the computer side according to the choice
+            // you can also place any nice pic for each player on the left and
+            // the right
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private static void handleDrawSingleMoves(JSONObject data) {
-        ArrayList<Integer> gameMoves = (ArrayList<Integer>) data.get("gameMoves");
+        ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
+        ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
+//        gameMoves.forEach(move -> System.out.println(move));
         // this is an array of game moves start drawing the x and o
         // draw x then o and notice that the array have the indexes of the buttons
         // so always first index in the array represent x 
+        TicTackToeController.drawMoves(gameMoves);
     }
-
+    
     private static void handleRemoveSingleMoves(JSONObject data) {
-        int index = ((Long) data.get("bonusPoints")).intValue();
+//        int index = ((Long) data.get("bonusPoints")).intValue();
+        int index = Integer.parseInt((String)data.get("index"));
         // this handler will just remove the button From the buttons array
         // in the controller
+        //TicTackToeController.removeButton(index);
+
     }
     private static void handleEnableSingleButtons() {
         // this hanlder will just enable all buttons in the singleMode controller 
         // buttons array
-        
+        TicTackToeController.enableAllButtons();
     }
 
     private static void handleDisapleAllButtonsSingle() {
