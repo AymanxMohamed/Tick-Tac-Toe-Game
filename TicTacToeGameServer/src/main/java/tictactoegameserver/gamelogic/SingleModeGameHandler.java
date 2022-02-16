@@ -54,6 +54,7 @@ public class SingleModeGameHandler {
         
         if (playerType.equals("O")) {
             processAiMove();
+            playerHandler.sendResponse(drawSingleMovesResponse(gameMoves));
         }
     }
     

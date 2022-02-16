@@ -4,6 +4,7 @@
  */
 package com.main.ticktacktoegame.Network;
 
+import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.*;
 import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
 import java.net.Socket;
@@ -28,6 +29,7 @@ public class Client {
     public static String singleModeGameID = "";
     public static String chatRoomId = "";
     public static DIFFICULTY difficulty;
+    public static TicTackToeController currentGame;
 
         
     public static void openConnection() throws IOException {

@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -24,7 +24,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
