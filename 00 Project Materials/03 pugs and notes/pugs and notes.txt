@@ -1,0 +1,9 @@
+on register view 
+1=> on errors like player exists you have to redirect the client to the register again 
+1=> not to login view
+_____________________________
+2=> on password not match display a pop up again with a message that say that the passwords dosn't match
+3=> change the text on the play button on the register view to be register insted of play
+_____________________________-
+on login view
+1=> change the text of the play button to be Login
