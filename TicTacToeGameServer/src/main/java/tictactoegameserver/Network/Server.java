@@ -7,6 +7,7 @@ package tictactoegameserver.Network;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import static tictactoegameserver.Network.PlayerHandler.addPlayerHandler;
 
 /**
  *
@@ -14,16 +15,17 @@ import java.net.Socket;
  */
 public class Server {
     private static ServerSocket serverSocket;
-    private static int serverPort = 9000;
+    private static final int SERVER_PORT = 9000;
 
     public static void startServer() throws IOException {
-        serverSocket = new ServerSocket(serverPort);
+        serverSocket = new ServerSocket(SERVER_PORT);
         while (!serverSocket.isClosed()) {
             try {
                 Socket socket = serverSocket.accept();
-                new PlayerHandler(socket);
+                addPlayerHandler(socket);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Cann't launch the server on This port");
+                System.out.println("May be this port is used by another program");
             }
         }
     }

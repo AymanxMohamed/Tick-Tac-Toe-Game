@@ -33,6 +33,9 @@ public class SingleModeGameHandler {
     public static ArrayList<SingleModeGameHandler> currentGames = new ArrayList<>();
     private ArrayList<Integer> avilableMoves;
     
+    public static void  addSingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, String difficulty) {
+        currentGames.add(new SingleModeGameHandler(gameID, playerHandler, playerType, difficulty));
+    }
     public SingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, String difficulty) {
         this.gameID = gameID;
         this.playerHandler = playerHandler;
@@ -50,7 +53,7 @@ public class SingleModeGameHandler {
         avilableMoves.add(6);
         avilableMoves.add(7);
         avilableMoves.add(8);
-        currentGames.add(this);
+        
         if (playerType.equals("o")) {
             processAiMove();
         }
@@ -163,7 +166,7 @@ public class SingleModeGameHandler {
         ArrayList<String> XOPlayers = new ArrayList<>();
         XOPlayers.add(playerHandler.player.getUserName());
         
-        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers));
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
         playerHandler.sendResponse(updatePlayerDataResponse(playerHandler.player));
         

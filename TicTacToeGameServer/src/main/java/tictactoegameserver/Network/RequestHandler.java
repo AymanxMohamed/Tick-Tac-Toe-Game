@@ -10,8 +10,11 @@ import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import static tictactoegameserver.Network.Utility.*;
+import static tictactoegameserver.chat.ChatRoomHandler.addChatRoomHandler;
 import  tictactoegameserver.gamelogic.MultiModeGameHandler;
+import static tictactoegameserver.gamelogic.MultiModeGameHandler.addMultiModeGameHandler;
 import tictactoegameserver.gamelogic.SingleModeGameHandler;
+import static tictactoegameserver.gamelogic.SingleModeGameHandler.addSingleModeGameHandler;
 /**
  *
  * @author ayman, shopaky
@@ -33,10 +36,16 @@ public class RequestHandler {
                 return handleRegister(data);
             case "game invitation":
                 return handleGameInvitation(data);
+            case "chat invitation":
+                return handleChatInvitation(data);
             case "acceptInvitation":
                 return handleAcceptInvitation(data);
             case "rejectInvitation":
                 return handleRejectInvitation(data);
+            case "acceptChatInvitation":
+                return handleAcceptChatInvitation(data);
+            case "rejectChatInvitation":
+                return handleRejectChatInvitation(data);
             case "XorOChoise":
                 return handleXOrOChoise(data);
             case "multiMove":
@@ -44,7 +53,7 @@ public class RequestHandler {
             case "play single mode game":
                 return handlePlaySingleModeGame(data, playerHandler);
             case "singleMove":
-                return handleSingleModeGameMove(data, playerHandler);
+                return handleSingleModeGameMove(data);
             case "logout":
                 handleLogout(data, playerHandler);
                 break;
@@ -53,6 +62,9 @@ public class RequestHandler {
                 break;
             case "force end single mode game":
                 handleForceEndSingleModeGame(data);
+                break;
+            case "leave chat":
+                handleEndChatRoom(data, playerHandler);
                 break;
         }
         return response;
@@ -107,6 +119,9 @@ public class RequestHandler {
         if (receiverHandler.inGame) {
             return playerInGameResponse(invitationReciever);
         }
+        if (receiverHandler.inChat) {
+            return playerInChatResponse(invitationReciever);
+        }
         receiverHandler.sendResponse(invitationFromPlayerRequest(data));
         return invitationSendedResponse(data);
     }
@@ -143,7 +158,7 @@ public class RequestHandler {
         }
         
         String gameID = generateUniqueId();
-        new MultiModeGameHandler(gameID, playerXHandler, playerOHandler);
+        addMultiModeGameHandler(gameID, playerXHandler, playerOHandler);
         playerXHandler.inGame = true;
         playerOHandler.inGame = true;
         
@@ -151,7 +166,7 @@ public class RequestHandler {
         ArrayList<String> XOPlayers = new ArrayList<>();
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
-        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers));
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
         recieverHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
         playerOHandler.sendResponse(disapleAllButtonsResponse());
@@ -167,17 +182,13 @@ public class RequestHandler {
         return disapleAllButtonsResponse();
     }
 
-
-
     private static void handleForceEndMultiModeGameOnLogout(String multiGameId, String playerName) {
-        MultiModeGameHandler gameHandler = getMultiModeGameHandler(multiGameId);
-        gameHandler.forceEndGameOnlogout(playerName);
+        getMultiModeGameHandler(multiGameId).forceEndGameOnlogout(playerName);
     }
 
     private static void handleForceEndMultiModeGame(JSONObject data, PlayerHandler playerHandler) {
         String gameId = (String) data.get("gameId");
-        MultiModeGameHandler gameHandler = getMultiModeGameHandler(gameId);
-        gameHandler.forceEndGame(playerHandler.player.getUserName());
+        getMultiModeGameHandler(gameId).forceEndGame(playerHandler.player.getUserName());
     }
     /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
     
@@ -187,33 +198,96 @@ public class RequestHandler {
         String difficulty = (String) data.get("difficulty");
         String choice = (String) data.get("choice");
         String gameID = generateUniqueId();
-        new SingleModeGameHandler(gameID, playerHandler, choice, difficulty);
+        addSingleModeGameHandler(gameID, playerHandler, choice, difficulty);
         if (choice.equals("o")) {
             playerHandler.sendResponse(disapleAllButtonsSingleResponse());
         }
         return startSingleModeGameResponse(gameID, choice);
     }
     
-    private static String handleSingleModeGameMove(JSONObject data, PlayerHandler playerHandler) {
+    private static String handleSingleModeGameMove(JSONObject data) {
         String gameID = (String) data.get("gameId");
         int index = ((Long) data.get("index")).intValue();
-        SingleModeGameHandler gameHandler = Utility.getSingleModeGameHandler(gameID);
-        gameHandler.processMove(index);
+        getSingleModeGameHandler(gameID).processMove(index);
         return disapleAllButtonsResponse();
     }
     private static void handleForceEndSingleModeGame(JSONObject data) {
         String gameId = (String) data.get("gameId");
-        SingleModeGameHandler gameHandler = getSingleModeGameHandler(gameId);
-        gameHandler.forceEndGame();
+        getSingleModeGameHandler(gameId).forceEndGame();
     }
     
     /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
+    
+    /*_____ * _____  Chat Rooms Requests _____ * _____ */
+    
+                /*_____ * _____ sender _____ * _____ */
+    
+    private static String handleChatInvitation(JSONObject data) {
+        String invitationReciever = (String) data.get("invitationReciever");
+        PlayerHandler receiverHandler = getPlayerHandler(invitationReciever);
+
+        if (receiverHandler.inGame) {
+            return playerInGameResponse(invitationReciever);
+        }
+        if (receiverHandler.inChat) {
+            return playerInChatResponse(invitationReciever);
+        }
+        receiverHandler.sendResponse(chatInvitationFromPlayerRequest(data));
+        return invitationSendedResponse(data);
+    }
+    
+               /*_____ * _____ receiver _____ * _____ */   
+    
+    private static String handleAcceptChatInvitation(JSONObject data) {
+        String invitationSender = (String) data.get("invitationSender");
+        String invitationReciever = (String) data.get("invitationReciever");
+        PlayerHandler senderHandler = getPlayerHandler(invitationSender);
+        PlayerHandler recieverHandler = getPlayerHandler(invitationReciever);
+        
+        String chatID = generateUniqueId();
+        addChatRoomHandler(chatID, senderHandler, recieverHandler);
+        senderHandler.inChat = true;
+        recieverHandler.inChat = true;
+        
+        // send update avilable players request
+        ArrayList<String> chatPlayers = new ArrayList<>();
+        chatPlayers.add(senderHandler.player.getUserName());
+        chatPlayers.add(recieverHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(chatPlayers, "inChat"));
+        
+        senderHandler.sendResponse(openChatRoomResponse(chatID, senderHandler.player.getUserName(), recieverHandler.player.getUserName()));
+        return openChatRoomResponse(chatID, senderHandler.player.getUserName(), recieverHandler.player.getUserName());
+    }
+    
+    private static String handleRejectChatInvitation(JSONObject data) {
+        String invitationSender = (String) data.get("invitationSender");        
+        PlayerHandler senderHandler = getPlayerHandler(invitationSender);
+        senderHandler.sendResponse(invitationRejectedResponse(data));
+        return doNothingResponse();
+    }
+
+    private static void handleEndChatRoom(JSONObject data, PlayerHandler playerHandler) {
+        String chatId = (String) data.get("chatId");
+        getChatRoomHandler(chatId).endChat(playerHandler.player.getUserName());
+    }
+    
+    private static void handleForceEndChatOnLogout(String chatId, String playerName) {
+        getChatRoomHandler(chatId).forceEndChat(playerName);
+    }
+
+    /*_____ * _____  end of Chat Rooms Requests _____ * _____ */
+    
+
+    
+    
+    
     
     /*_____ * _____  Logout Requests _____ * _____ */
     private static void handleLogout(JSONObject data, PlayerHandler playerHandler) {
         String playerName = (String) data.get("playerName");
         String singleGameId = (String) data.get("singleGameId");
         String multiGameId = (String) data.get("multiGameId");
+        String chatRoomId = (String) data.get("chatRoomId");
         if (playerHandler.inGame) {
             // 1- check if it's single mode game
             if (getSingleModeGameHandler(singleGameId) != null) {
@@ -222,14 +296,12 @@ public class RequestHandler {
                 handleForceEndMultiModeGameOnLogout(multiGameId, playerName);
             }
         }
+        if (playerHandler.inChat) {
+            handleForceEndChatOnLogout(chatRoomId, playerName);
+        }
         playerHandler.closeEveryThing();
-        
-        
-
-
     }
     /*_*____ * _____  end of Logout Requests _____ * _____ */
-
 
 
 }

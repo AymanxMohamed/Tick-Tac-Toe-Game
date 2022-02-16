@@ -89,6 +89,16 @@ public class ResponseCreator {
 
         return JSONValue.toJSONString(responseObject);
     }
+    public static String playerInChatResponse(String invitedPlayerName) {
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("invitedPlayer", invitedPlayerName);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player in chat");
+        responseObject.put("data", dataObject);
+
+        return JSONValue.toJSONString(responseObject);
+    }
     
     public static String invitationSendedResponse(JSONObject data) {
         JSONObject responseObject = new JSONObject();
@@ -115,11 +125,13 @@ public class ResponseCreator {
     public static String invitationFromPlayerRequest(JSONObject data) {
 
         JSONObject responseObject = new JSONObject();
-        responseObject.put("response", "invitation");
+        responseObject.put("response", "game invitation");
         responseObject.put("data", data);
 
         return JSONValue.toJSONString(responseObject);
     }
+
+        
 
     public static String doNothingResponse() {
         JSONObject responseObject = new JSONObject();
@@ -237,6 +249,47 @@ public class ResponseCreator {
         return JSONValue.toJSONString(responseObject);
     }
     
+    /*_____ * _____ Chat Rooms Responses _____ * _____ */
+    
+    public static String chatInvitationFromPlayerRequest(JSONObject data) {
+        
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "chat invitation");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+        
+    }
+    
+    public static String openChatRoomResponse(String chatID, String sender, String receiver) {
+        JSONObject data = new JSONObject();
+        data.put("chatID", chatID);
+        data.put("sender", sender);
+        data.put("receiver", receiver);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "open chat room");
+        responseObject.put("data", data);
+
+        return JSONValue.toJSONString(responseObject);
+    }
+    
+    public static String addNewMessage(String message, String sender) {
+        JSONObject data = new JSONObject();
+        data.put("message", message);
+        data.put("sender", sender);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "add new message");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String playerLeftChatResponse(String playerName) {
+        JSONObject data = new JSONObject();
+        data.put("playerName", playerName);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player left chat");
+        responseObject.put("data", data);
+        return JSONValue.toJSONString(responseObject);
+    }
     
     
      /*_____ * _____ general Responses _____ * _____ */
@@ -250,9 +303,10 @@ public class ResponseCreator {
         return JSONValue.toJSONString(responseObject);
         
     }
-    public static String updateAvilablePlayersList(ArrayList<String> playersNames) {
+    public static String updateAvilablePlayersList(ArrayList<String> playersNames, String update) {
         JSONObject data = new JSONObject();
         data.put("playersNames", playersNames);
+        data.put("update", update);
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "updateAvilablePlayesList");
         responseObject.put("data", data);
@@ -299,7 +353,7 @@ public class ResponseCreator {
 
         return dataObject;
     }
-        public static JSONObject getOnlinePlayersJsonObject() {
+    public static JSONObject getOnlinePlayersJsonObject() {
         ArrayList<Player> onlinePlayers = null;
         DatabaseManager.openDataBaseConnection();
         onlinePlayers = DatabaseManager.getOnlinePlayers();
@@ -311,9 +365,11 @@ public class ResponseCreator {
             if (playerHandler == null)
                 continue;
             boolean inGame = playerHandler.inGame;
+            boolean inChat = playerHandler.inChat;
             JSONObject data = new JSONObject();
             data.put("name", player.getUserName());
-            data.put("status", inGame);
+            data.put("inGame", inGame);
+            data.put("inChat", inChat);
             onlinePlayersDataObjects.add(data);
         }
         JSONObject dataObject = new JSONObject();

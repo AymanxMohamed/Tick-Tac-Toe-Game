@@ -25,6 +25,7 @@ public class Client {
     public static String multiModeGameId = "";
     public static String opponnentName;
     public static String singleModeGameID = "";
+    public static String chatRoomId = "";
     public static String difficulty;
 
         

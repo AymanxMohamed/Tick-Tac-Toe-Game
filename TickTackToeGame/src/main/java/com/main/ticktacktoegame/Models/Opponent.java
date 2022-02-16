@@ -13,11 +13,13 @@ import java.util.ArrayList;
 public class Opponent {
     private String playerName;
     private boolean inGame;
+    private boolean inChat;
     
     
-    public Opponent(String playerName, boolean status) {
+    public Opponent(String playerName, boolean inGame, boolean inChat) {
         this.playerName = playerName;
-        this.inGame = status;
+        this.inGame = inGame;
+        this.inChat = inChat;
     }
     
     public static ArrayList<Opponent> onlinePlayers = new ArrayList<>();
@@ -31,8 +33,8 @@ public class Opponent {
         return null;
     }
     
-    public static void addOpponent(String playerName, boolean status) {
-       onlinePlayers.add(new Opponent(playerName, status));
+    public static void addOpponent(String playerName, boolean inGame, boolean inChat) {
+       onlinePlayers.add(new Opponent(playerName, inGame, inChat));
     }
     public static void removeOpponent(String playerName) {
         onlinePlayers.remove(getOpponent(playerName));
@@ -40,4 +42,5 @@ public class Opponent {
 
     public String getPlayerName() { return playerName; }
     public void togleInGameStatus() { inGame = !inGame; }
+    public void toogleInChatStatus() { inChat = !inChat; }
 }

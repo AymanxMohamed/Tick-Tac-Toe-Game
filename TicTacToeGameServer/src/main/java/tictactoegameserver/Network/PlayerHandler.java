@@ -21,14 +21,20 @@ public class PlayerHandler {
     private BufferedWriter bufferedWriter;
     public Player player;
     public boolean inGame;
+    public boolean inChat;
     public static ArrayList<PlayerHandler> playerHandlers = new ArrayList<>();
+    
+    public static void addPlayerHandler(Socket socket) {
+        playerHandlers.add(new PlayerHandler(socket));
+    }
     
     public PlayerHandler(Socket socket) {
         try {
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            playerHandlers.add(this);
+            this.inGame = false;
+            this.inChat = false;
            AcceptRequests();
         } catch (IOException e) {
             closeEveryThing();
@@ -43,7 +49,7 @@ public class PlayerHandler {
                     }
             } catch (Exception e) {
                 //System.out.println("exception in accept response");
-                e.printStackTrace();
+                //e.printStackTrace();
                 closeEveryThing();
             }
         }).start();

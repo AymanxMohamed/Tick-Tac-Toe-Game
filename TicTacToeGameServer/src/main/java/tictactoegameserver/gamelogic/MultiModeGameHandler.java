@@ -23,13 +23,17 @@ public class MultiModeGameHandler {
     public static ArrayList<MultiModeGameHandler> currentGames = new ArrayList<>();
     private boolean playerXTurn;
     
+    public static void addMultiModeGameHandler(String gameID, PlayerHandler playerXHandler, PlayerHandler playerOHandler){
+        currentGames.add(new MultiModeGameHandler(gameID, playerXHandler, playerOHandler));
+    }
+    
     public MultiModeGameHandler(String gameID, PlayerHandler playerXHandler, PlayerHandler playerOHandler) {
         this.gameID = gameID;
         this.playerXHandler = playerXHandler;
         this.playerOHandler = playerOHandler;
         this.winner = "";
         this.gameMoves = new ArrayList<>();
-        currentGames.add(this);
+        //currentGames.add(this);
         playerXTurn = true;
     }
     private void addMove(int index) {
@@ -81,7 +85,7 @@ public class MultiModeGameHandler {
                      line = moves.get(6) + moves.get(4) + moves.get(2);
                     break;
                 default:
-                    line = null;
+                    line = "";
                     break;
             }
             if (line.equals("xxx")) {
@@ -130,14 +134,14 @@ public class MultiModeGameHandler {
         }
         DatabaseManager.openDataBaseConnection();
         DatabaseManager.addMultiModeGameRecord(gameID, playerXHandler.player.getUserName(),playerOHandler.player.getUserName(), winner, ResponseCreator.createGameMovesJson(gameMoves));
+        
         playerXHandler.inGame = false;
         playerOHandler.inGame = false;
         // addPlayerX and playerO To the avilable players
         ArrayList<String> XOPlayers = new ArrayList<>();
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
-        
-        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers));
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
         playerXHandler.sendResponse(updatePlayerDataResponse(playerXHandler.player));
         
@@ -150,10 +154,10 @@ public class MultiModeGameHandler {
     }
 
     public void forceEndGameOnlogout(String playerName) {
-        PlayerHandler winnerHandler = null;
-        PlayerHandler leaverHandler = null;
+        PlayerHandler winnerHandler;
+        PlayerHandler leaverHandler;
         
-        if (!playerXHandler.equals(playerName)) {
+        if (!playerXHandler.player.getUserName().equals(playerName)) {
             winnerHandler = playerXHandler;
             leaverHandler = playerOHandler;
         } else {
@@ -163,21 +167,37 @@ public class MultiModeGameHandler {
         DatabaseManager.openDataBaseConnection();
         winnerHandler.player.increaseBonusPoints();
         leaverHandler.player.decreaseBonusPoints();
+        
+        leaverHandler.inGame = false;
+        ArrayList<String> XOPlayers = new ArrayList<>();
+        XOPlayers.add(winnerHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        
         winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
         DatabaseManager.closeDataBaseConnection();
     }
     public void forceEndGame(String playerName) {
-        PlayerHandler winnerHandler = null;
-        PlayerHandler leaverHandler = null;
-        if (!playerXHandler.equals(playerName)) {
+        PlayerHandler winnerHandler;
+        PlayerHandler leaverHandler;
+        if (!playerXHandler.player.getUserName().equals(playerName)) {
             winnerHandler = playerXHandler;
             leaverHandler = playerOHandler;
         } else {
             winnerHandler = playerOHandler;
             leaverHandler = playerXHandler;
         }
+        
+        winnerHandler.inGame = false;
+        leaverHandler.inGame = false;
+        // addPlayerX and playerO To the avilable players
+        ArrayList<String> XOPlayers = new ArrayList<>();
+        XOPlayers.add(winnerHandler.player.getUserName());
+        XOPlayers.add(leaverHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        
+        
         DatabaseManager.openDataBaseConnection();
         winnerHandler.player.increaseBonusPoints();
         leaverHandler.player.decreaseBonusPoints();

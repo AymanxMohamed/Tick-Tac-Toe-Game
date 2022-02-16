@@ -55,8 +55,11 @@ public class ResponseHandler {
             case "player in game":
                 handlePlayerInGame(data);
                 break;
-            case "invitation":
-                handleInvitation(data);
+            case "game invitation":
+                handleGameInvitation(data);
+                break;
+            case "chat invitation":
+                handleChatInvitation(data);
                 break;
             case "invitationSended":
                 handleInvitationSended(data);
@@ -114,6 +117,19 @@ public class ResponseHandler {
                 break;
             case "go to welcome view":
                 handleGoToWelcomeView();
+                break;
+            case "player left chat":
+                handlePlayerLeftChatRoom(data);
+                break;
+            case "add new message":
+                handleAddNewMessage(data);
+                break;
+            case "open chat room":
+                 handleOpenChatRoom(data);
+                 break;
+            case "player in chat":
+                handlePlayerInChat(data);
+                break;
             default:
                 break;
         }
@@ -156,19 +172,22 @@ public class ResponseHandler {
         for (int i = 0; i < onlinePlayersDataObjects.size(); i++) {
             JSONObject obj = (JSONObject)onlinePlayersDataObjects.get(i);
             String name = (String) obj.get("name");
-            boolean status = (boolean) obj.get("status");
+            boolean inGame = (boolean) obj.get("inGame");
+            boolean inChat = (boolean) obj.get("inChat");            
             if (!name.equals(Client.player.getUserName())) {
-                Opponent.addOpponent(name, status);
+                Opponent.addOpponent(name, inGame, inChat);
                 updateAvilablePlayersList();
                 System.out.println(name + " is online");
-                System.out.println("is " + name + " in game " + status);
+                System.out.println("is " + name + " in game " + inGame);
+                System.out.println("is " + name + " in chat " + inChat);
+
             }
         }
     }
     private static void handleAddNewPlayer(JSONObject data) {
         String playerName = (String) data.get("playerName");
         if (!playerName.equals(Client.player.getUserName())) {
-            Opponent.addOpponent(playerName, false);
+            Opponent.addOpponent(playerName, false, false);
             updateAvilablePlayersList();
             System.out.println(playerName + " is online now");
         }
@@ -229,7 +248,7 @@ public class ResponseHandler {
         // client that the invitation rejected
         // for example
         String invitationReciever = (String) data.get("invitationReciever");
-        System.out.println(invitationReciever + " reject your game request");
+        System.out.println(invitationReciever + " reject your invitation");
     }
     
     private static void handleChooseXOrO(JSONObject data) {
@@ -249,7 +268,7 @@ public class ResponseHandler {
     
     /*_____ * _____ Game invitation for receiver Responses _____ * _____ */
     
-    private static void handleInvitation(JSONObject data) {
+    private static void handleGameInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");        
         String invitationReciever = (String) data.get("invitationReciever");
         Client.opponnentName = invitationSender;
@@ -405,7 +424,69 @@ public class ResponseHandler {
             // display the loser view with a button that have play again and on press play again you will send another game invitation to the current player
         }
     }
-     /*_____ * _____ end of Single Mode Game Responses _____ * _____ */
+    /*_____ * _____ end of Single Mode Game Responses _____ * _____ */
+    
+    /*_____ * _____ start of Chat Room  Responses _____ * _____ */
+
+    private static void handleAddNewMessage(JSONObject data) {
+        String message = (String) data.get("message");
+        String sender = (String) data.get("sender");
+        // This method will just add this message in the text area
+        String messageToAdd;
+        if (sender.equals(Client.player.getUserName())) {
+            messageToAdd = "me: " + message.trim();
+        } else {
+            messageToAdd = sender + ": " + message.trim(); 
+        }
+        // just add the message the message box area in the chat view
+    }
+   
+    private static void handleOpenChatRoom(JSONObject data) {
+        String chatID = (String) data.get("chatID");
+        String sender = (String) data.get("sender");
+        String receiver = (String) data.get("receiver");
+        
+        // you will have to store the game id in the client
+        Client.chatRoomId = chatID;
+        if (sender.equals(Client.player.getUserName())) {
+            // then this client is sender
+            // highlight player label to inform the client
+        } else {
+            // this client is the reciver
+            // highlight recieverName 
+        }
+        
+        // Switch to the chat view with sender on the left with his name
+        // and receiveron the right with his name also
+        // you can also place any nice pic for each player on the left and 
+        // the right
+    }
+    
+    
+    private static void handlePlayerLeftChatRoom(JSONObject data) {
+        String playerName = (String) data.get("playerName");
+        // this method will show up a message that say that
+        System.out.println("unfortunatly " + playerName + " has left the chat");
+        // and switch the player home page
+    }
+    
+    private static void handlePlayerInChat(JSONObject data) {
+        // todo
+        // this function will reveal an info message that tell the player
+        // that the player that he invinted is currentlty in chat
+        String invitedPlayer = (String) data.get("invitedPlayer");
+        System.out.println(invitedPlayer + " is currently in chat");
+        
+        // todo later 
+        // we can send a list of current players names and update it frequently
+        // with the same logic of the online players and prevent the client from
+        // sending invitation request to the players that is in game
+        
+    }
+    
+    
+    
+    /*_____ * _____ end of Chat Room  Responses _____ * _____ */
                 /*_____ * _____ general Responses _____ * _____ */
     private static void handleUpdatePlayerData(JSONObject data) {
         Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
@@ -415,15 +496,20 @@ public class ResponseHandler {
         // so when you switch to your home view you will be having the new rank
         // and the new bonus points
     }
-    private static void  handleUpdateAvilablePlayersList(JSONObject data) {
+    private static void handleUpdateAvilablePlayersList(JSONObject data) {
        ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
+       String update = (String) data.get("update");
         for (var playerName : playerNames) {
             if (!playerName.equals(Client.player.getUserName())) {
                  Opponent player = Opponent.getOpponent(playerName);
-                 player.togleInGameStatus();
-                 updateAvilablePlayersList();
+                 if (update.equals("inGame")) {
+                    player.togleInGameStatus();
+                 } else {
+                    player.toogleInChatStatus();
+                 }
             }
         }
+        updateAvilablePlayersList();
     }
     private static void updateAvilablePlayersList() {
         // this function will loob on the Opponent.onlinePlayers arrayList
@@ -432,6 +518,7 @@ public class ResponseHandler {
         // on every time this method called
         // summary: this method will just rebuild the online players list 
         // with in Game <true or false between every one of them>
+        // with also in Chat <true or false between every one of them>
         ArrayList<Opponent> onlinePlayers = Opponent.onlinePlayers;
     }
     private static void handlePlayerLeftTheGame(JSONObject data) {
@@ -442,7 +529,30 @@ public class ResponseHandler {
             System.out.println(playerName + " left the game");
         }
     }
-         /*_____ * _____ end of Responses _____ * _____ */
+         /*_____ * _____ end of general Responses _____ * _____ */
+
+    private static void handleChatInvitation(JSONObject data) {
+        String invitationSender = (String) data.get("invitationSender");        
+        String invitationReciever = (String) data.get("invitationReciever");
+        Client.opponnentName = invitationSender;
+        // todo 
+        // this function should reveal a dialog box with a nice message
+        // this message will have 2 buttons one accept and one reject
+        // example for the message 
+        System.out.println(invitationSender + " want to have a private chat with you");
+        // if he pressed on accept button you will send an accept invitation
+        // request by copy and  paste the below line of code
+        
+        // when you send accept or reject you are the receiver and the client is the sender
+        // this below code is correct
+        
+        //Client.sendRequest(acceptChatInvitation(Client.opponnentName, Client.player.getUserName()));
+        
+        // if he pressed on reject buttoon you will send an reject invitation 
+        // by copy and  paste the below line of code
+        //Client.sendRequest(rejectChatInvitation(Client.opponnentName, Client.player.getUserName()));
+    }
+
 
 
 
