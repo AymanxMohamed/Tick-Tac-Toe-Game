@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
 import javax.swing.SwingUtilities;
 
 /**
@@ -53,14 +54,19 @@ public class TicTackToeController implements Initializable {
 
     @FXML
     private Button button8;
-
+    
     @FXML
-    private Text winnerText;
-
-    public ArrayList<Button> buttons;
+    private Label playerX;
+    
+    @FXML
+    private Label playerO;
+    
+    public static ArrayList<Button> buttons;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        playerX.setText("");
+//        playerO.setText("");
         buttons = new ArrayList<>();
         buttons.add(button0);
         buttons.add(button1);
@@ -75,24 +81,16 @@ public class TicTackToeController implements Initializable {
             setupButton(button);
             button.setFocusTraversable(false);
         });
-        Client.currentGame = this;
     }
 
-    @FXML
-    void restartGame(ActionEvent event) {
-        buttons.forEach(this::resetButton);
-        winnerText.setText("Tic-Tac-Toe");
-    }
+
 
     @FXML
     void quitGame() {
         Client.sendRequest(forceEndSingleGame());
     }
 
-    public void resetButton(Button button) {
-        button.setDisable(false);
-        button.setText("");
-    }
+   
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
@@ -100,20 +98,11 @@ public class TicTackToeController implements Initializable {
         });
     }
 
-    public void setButtonText(Button button, String text) {
-        button.setText(text);
-    }
-
-    public void disapleAllButtons() {
+    public static void disapleAllButtons() {
         buttons.forEach(button -> button.setDisable(true));
     }
 
-    public void disableButton(int index) {
-        System.out.println("button " + index + " disabled");
-//        buttons.get(index).setDisable(true);
-    }
-
-    public void enableAllButtons() {
+    public static  void enableAllButtons() {
         buttons.forEach(button -> {
             if (button.getText().equals("")) {
                 button.setDisable(false);
@@ -123,7 +112,7 @@ public class TicTackToeController implements Initializable {
         });
     }
 
-    public void drawMoves(ArrayList<Integer> gameMoves) {
+    public static void drawMoves(ArrayList<Integer> gameMoves) {
         int buttonIndex;
         for (int i = 0; i < gameMoves.size(); i++) {
             if (i % 2 == 0) {

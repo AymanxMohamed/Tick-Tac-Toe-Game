@@ -54,7 +54,6 @@ public class SingleModeGameHandler {
         
         if (playerType.equals("O")) {
             processAiMove();
-            playerHandler.sendResponse(drawSingleMovesResponse(gameMoves));
         }
     }
     
@@ -131,7 +130,6 @@ public class SingleModeGameHandler {
         addMove(index);
         removeMove(index);
         playerHandler.sendResponse(drawSingleMovesResponse(gameMoves));
-        playerHandler.sendResponse(removeSingleButtonResponse(index));
         if (isGameEnded()) {
             handleEndGame();
             return;
@@ -146,7 +144,6 @@ public class SingleModeGameHandler {
             return;
         }
         playerHandler.sendResponse(drawSingleMovesResponse(gameMoves));
-        playerHandler.sendResponse(removeSingleButtonResponse(aiIndex));
         playerHandler.sendResponse(enableSingleButtonsResponse());
     }
     private void handleEndGame() {
@@ -188,26 +185,27 @@ public class SingleModeGameHandler {
     }
     private void removeMove(int move) {
         avilableMoves.remove((Integer) move);
+        System.out.println("move " + move + " is removed");
     }
 
     private int generateEasyMove() {
         int index = (int)(Math.random() * avilableMoves.size());
         int move = avilableMoves.get(index);
-        removeMove(index);
+        removeMove(move);
         return move;
     }
 
     private int generateMediumMove() {
         int index = (int)(Math.random() * avilableMoves.size());
         int move = avilableMoves.get(index);
-        removeMove(index);
+        removeMove(move);
         return move;
     }
 
     private int generateHardMove() {
         int index = (int)(Math.random() * avilableMoves.size());
         int move = avilableMoves.get(index);
-        removeMove(index);
+        removeMove(move);
         return move;
     }
     public String getGameID() { return this.gameID; }

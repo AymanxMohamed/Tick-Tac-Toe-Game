@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import org.json.simple.*;
 
@@ -134,9 +135,6 @@ public class ResponseHandler {
                 break;
             case "draw single moves":
                 handleDrawSingleMoves(data);
-                break;
-            case "remove single moves":
-                handleRemoveSingleMoves(data);
                 break;
             case "enable single buttons":
                 handleEnableSingleButtons();
@@ -415,28 +413,22 @@ public class ResponseHandler {
 
     /* _____ * _____ Single Mode Game Responses _____ * _____ */
     private static void handleStartSingleModeGame(JSONObject data) {
-        
         String gameID = (String) data.get("gameId");
         String choice = (String) data.get("choice");
-
-        // you will have to store the game id in the client
         Client.singleModeGameID = gameID;
-        if (choice.equals("X")) {
-            // then this client is the player x
-            // highlight player X label to inform the client that he play
-            // with x
-        } else {
-            // this client is the player O
-            // highlight player y label to inform the client that he play
-            // with x
-        }
         try {
             App.setRoot("TicTackToe");
-            // Switch to the game view with player X on the left with his name
-            // and the computer on the right
-            // you will deside the computer side according to the choice
-            // you can also place any nice pic for each player on the ```````left and
-            // the right
+            if (choice.equals("X")) {
+                Label playerXLabel = (Label)App.scene.lookup("#playerX");
+                Label playerOLabel = (Label)App.scene.lookup("#playerO");
+                playerXLabel.setText(Client.player.getUserName());
+                playerOLabel.setText("Computer");
+            } else {
+                Label playerXLabel = (Label)App.scene.lookup("#playerX");
+                Label playerOLabel = (Label)App.scene.lookup("#playerO");
+                playerXLabel.setText("Computer");
+                playerOLabel.setText(Client.player.getUserName());
+            }
         } catch (IOException ex) {
             Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -445,18 +437,17 @@ public class ResponseHandler {
     private static void handleDrawSingleMoves(JSONObject data) {
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
-        Platform.runLater(()-> Client.currentGame.drawMoves(gameMoves));
+        Platform.runLater(()-> TicTackToeController.drawMoves(gameMoves));
     }
-    private static void handleRemoveSingleMoves(JSONObject data) {
-        int index = Integer.parseInt((String) data.get("index"));
-        Platform.runLater(()-> Client.currentGame.disableButton(index));
-    }
+
     private static void handleEnableSingleButtons() {
-        Platform.runLater(()-> Client.currentGame.enableAllButtons());
+//        Platform.runLater(()-> Client.currentGame.enableAllButtons());
+        Platform.runLater(()-> TicTackToeController.enableAllButtons());
     }
 
     private static void handleDisapleAllButtonsSingle() {
-        Platform.runLater(()-> Client.currentGame.disapleAllButtons());
+//        Platform.runLater(()-> Client.currentGame.disapleAllButtons());
+        Platform.runLater(()-> TicTackToeController.disapleAllButtons());
     }
 
     private static void handleEndSingleModeGame(JSONObject data) {

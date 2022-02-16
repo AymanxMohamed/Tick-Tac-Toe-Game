@@ -198,11 +198,12 @@ public class RequestHandler {
         String difficulty = (String) data.get("difficulty");
         String choice = (String) data.get("choice");
         String gameID = generateUniqueId();
+        playerHandler.sendResponse(startSingleModeGameResponse(gameID, choice));
         addSingleModeGameHandler(gameID, playerHandler, choice, difficulty);
         if (choice.equals("o")) {
             playerHandler.sendResponse(disapleAllButtonsSingleResponse());
         }
-        return startSingleModeGameResponse(gameID, choice);
+        return doNothingResponse();
     }
     
     private static String handleSingleModeGameMove(JSONObject data) {

@@ -114,8 +114,8 @@ public class MultiModeGameHandler {
             handleEndGame();
             return;
         }
-        playerXHandler.sendResponse(removeMultiButtonResponse(index));
-        playerOHandler.sendResponse(removeMultiButtonResponse(index));
+        //playerXHandler.sendResponse(removeMultiButtonResponse(index));
+        //playerOHandler.sendResponse(removeMultiButtonResponse(index));
         if (playerXTurn) {
              playerOHandler.sendResponse(enableMultiButtonsResponse());
         } else {
