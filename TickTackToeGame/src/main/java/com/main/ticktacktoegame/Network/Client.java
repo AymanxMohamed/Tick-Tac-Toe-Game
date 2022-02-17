@@ -6,7 +6,6 @@ package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
-import com.main.ticktacktoegame.Controllers.TicTackToeMultiController;
 import com.main.ticktacktoegame.Models.*;
 import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
 import java.net.Socket;
@@ -31,7 +30,8 @@ public class Client {
     public static String singleModeGameID = "";
     public static String chatRoomId = "";
     public static DIFFICULTY difficulty;
-    public static TicTackToeMultiController currentGame;
+    public static String cuurentCase = "";
+    //public static TicTackToeMultiController currentGame;
 
         
     public static void openConnection() throws IOException {
@@ -59,11 +59,13 @@ public class Client {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception e) {
                 closeEveryThing();
-                
+                e.printStackTrace();
             }
         }).start();
     }
     public static void sendRequest(String request) {
+        if (request == null)
+            return;
         try {
             bufferedWriter.write(request);
             bufferedWriter.newLine();

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -22,8 +21,13 @@ public class quitGameController {
 
     @FXML 
     void sendForceEndSingleGame() {
-        Client.sendRequest(forceEndSingleGame());
-        Client.singleModeGameID = "";
+        if (!Client.singleModeGameID.equals("")) {
+            Client.sendRequest(forceEndSingleGame());
+            Client.singleModeGameID = "";
+        } else {
+            Client.sendRequest(forceEndMultiGaame());
+            Client.multiModeGameId = "";
+        }
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
@@ -32,11 +36,16 @@ public class quitGameController {
     }
     @FXML
     public void cancel() {
-        try {
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(cancelEndSingleGame());
-            App.setRoot("TicTackToe");
-        } catch (IOException ex) {
-            Logger.getLogger(quitGameController.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            Client.sendRequest(cancelEndMultiGame());
         }
+//        try {
+//            
+//            App.setRoot("TicTackToe");
+//        } catch (IOException ex) {
+//            Logger.getLogger(quitGameController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

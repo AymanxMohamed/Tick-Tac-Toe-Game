@@ -145,6 +145,16 @@ public class RequestCreator {
         return JSONValue.toJSONString(request); 
     }
     
+    public static String cancelEndMultiGame() {
+        JSONObject data = new JSONObject();
+        data.put("gameId", Client.multiModeGameId);
+        JSONObject request = new JSONObject();
+        request.put("request", "cancelEndMultiGame");
+        request.put("data", data);
+        System.out.println("cancelEndMultiGame request sended: " + JSONValue.toJSONString(request));
+        return JSONValue.toJSONString(request);   
+    }
+    
     public static String leaveChat() {
         JSONObject data = new JSONObject();
         data.put("chatId", Client.chatRoomId);
@@ -153,6 +163,8 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request); 
     }
+    
+    
     /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
     
     /*_____ * _____  Single Mode Game Requests _____ * _____ */

@@ -83,6 +83,9 @@ public class TicTackToeController implements Initializable {
     @FXML
     void quitGame() {
         try {
+        if (!Client.singleModeGameID.equals(""))
+            App.setRoot("Force End Game");
+        else
             App.setRoot("Force End Game");
         } catch (IOException ex) {
             Logger.getLogger(TicTackToeController.class.getName()).log(Level.SEVERE, null, ex);

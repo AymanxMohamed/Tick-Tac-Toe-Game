@@ -25,14 +25,22 @@ public class EndSingleModeGameController {
     
     @FXML
     public void sendRequestAgain() {
-        try {
-            App.setRoot("chooseXorOSingle");
-        } catch (IOException ex) {
-            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+        if (!Client.multiModeGameId.equals("")) {
+            Client.sendRequest(invitePlayer(Client.opponnentName));
+        }
+        if (!Client.singleModeGameID.equals("")) {
+            try {
+                App.setRoot("chooseXorOSingle");
+            } catch (IOException ex) {
+                Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     @FXML void goToOnlineView() {
-        Client.singleModeGameID = "";
+        if (!Client.singleModeGameID.equals(""))
+            Client.singleModeGameID = "";
+        if (!Client.multiModeGameId.equals(""))
+            Client.multiModeGameId = "";
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {

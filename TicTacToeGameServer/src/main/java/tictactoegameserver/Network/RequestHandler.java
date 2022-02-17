@@ -66,6 +66,9 @@ public class RequestHandler {
             case "cancelEndSingleGame":
                 handelCancelEndSingleGame(data, playerHandler);
                 break;
+            case "cancelEndMultiGame":
+                 handelCancelEndMultiGame(data, playerHandler);
+                break;
             case "leave chat":
                 handleEndChatRoom(data, playerHandler);
                 break;
@@ -193,7 +196,7 @@ public class RequestHandler {
         int index = ((Long) data.get("index")).intValue();
         MultiModeGameHandler gameHandler = Utility.getMultiModeGameHandler(gameID);
         gameHandler.processMove(index);
-        return disapleAllButtonsResponse();
+        return doNothingResponse();
     }
 
     private static void handleForceEndMultiModeGameOnLogout(String multiGameId, String playerName) {
@@ -203,9 +206,10 @@ public class RequestHandler {
     }
 
     private static void handleForceEndMultiModeGame(JSONObject data, PlayerHandler playerHandler) {
-        
-         System.out.println("in handel endMultiModeGame");
+        System.out.println("in handel endMultiModeGame");
         String gameId = (String) data.get("gameId");
+        if (getMultiModeGameHandler(gameId) == null)
+            return;
         getMultiModeGameHandler(gameId).forceEndGame(playerHandler.player.getUserName());
     }
     /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
@@ -335,6 +339,26 @@ public class RequestHandler {
         playerHandler.closeEveryThing();
     }
     /*_*____ * _____  end of Logout Requests _____ * _____ */
+
+    private static String handelCancelEndMultiGame(JSONObject data, PlayerHandler playerHandler) {
+        System.out.println("in handel cancel end multi mode game");
+        String gameID = (String) data.get("gameId");
+        MultiModeGameHandler gameHandler = getMultiModeGameHandler(gameID);
+        playerHandler.sendResponse(continueGameResponse(gameHandler.getGameRecord()));
+//        playerHandler.sendResponse(drawSingleMovesResponse(gameHandler.getGameRecord()));
+        if (gameHandler.getplayerXHandler() == playerHandler) {
+            // the player was X
+            if (!gameHandler.getPlayerXTurn()) {
+                playerHandler.sendResponse(disapleAllButtonsResponse());
+            }
+        } else {
+            // the player was O
+            if (gameHandler.getPlayerXTurn()) {
+                playerHandler.sendResponse(disapleAllButtonsResponse());
+            }
+        }
+        return doNothingResponse();
+    }
 
 
 }

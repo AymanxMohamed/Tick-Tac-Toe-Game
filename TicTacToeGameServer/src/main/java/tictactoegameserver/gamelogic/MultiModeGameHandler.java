@@ -116,8 +116,10 @@ public class MultiModeGameHandler {
         }
         if (playerXTurn) {
              playerOHandler.sendResponse(enableMultiButtonsResponse());
+             playerXHandler.sendResponse(disapleAllButtonsResponse());
         } else {
              playerXHandler.sendResponse(enableMultiButtonsResponse());
+             playerOHandler.sendResponse(disapleAllButtonsResponse());
         }
         playerXTurn = !playerXTurn;
     }
@@ -201,7 +203,6 @@ public class MultiModeGameHandler {
         leaverHandler.player.decreaseBonusPoints();
         winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
         leaverHandler.sendResponse(updatePlayerDataResponse(leaverHandler.player));
-        leaverHandler.sendResponse(goToWelcomeViewResponse());
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
         DatabaseManager.closeDataBaseConnection();
@@ -211,4 +212,6 @@ public class MultiModeGameHandler {
     public PlayerHandler getplayerOHandler() { return playerOHandler; }
     public String getWinner() { return winner; }
     public ArrayList<Integer> getGameRecord() { return gameMoves; }
+    public boolean getPlayerXTurn() { return playerXTurn; }
+    
 }
