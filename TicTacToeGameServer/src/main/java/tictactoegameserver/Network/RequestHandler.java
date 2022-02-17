@@ -188,10 +188,9 @@ public class RequestHandler {
                     /*_____ * _____ game process _____ * _____ */
     
     private static String handleMultiModeGameMove(JSONObject data) {
-        
-         System.out.println("in handel multiModeGameMove");
+        System.out.println("in handel multiModeGameMove");
         String gameID = (String) data.get("gameId");
-        int index = Integer.parseInt((String)data.get("index"));
+        int index = ((Long) data.get("index")).intValue();
         MultiModeGameHandler gameHandler = Utility.getMultiModeGameHandler(gameID);
         gameHandler.processMove(index);
         return disapleAllButtonsResponse();

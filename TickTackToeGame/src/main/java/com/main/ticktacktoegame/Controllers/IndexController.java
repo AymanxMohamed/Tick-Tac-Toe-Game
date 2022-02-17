@@ -25,7 +25,7 @@ public class IndexController {
         } catch (IOException ex) {
             // If the server is down -> close everything and pop-up a failure message
             Client.closeEveryThing();
-            // ex.printStackTrace();
+            ex.printStackTrace();
             try {
                 App.setRoot("ServerIsDownPopUp");
             } catch (IOException ex1) {
