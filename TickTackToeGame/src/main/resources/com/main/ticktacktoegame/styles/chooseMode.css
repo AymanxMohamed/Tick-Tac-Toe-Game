@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 /* 
     Author     : Roo
 */
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @font-face {
     font-family: 'Righteous', cursive;
     font-style: normal;
@@ -15,7 +15,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 *{
     -fx-font-family: Righteous;
-}
+}*/
 
 .body{
     -fx-background-image: url(../images/bg.png);
