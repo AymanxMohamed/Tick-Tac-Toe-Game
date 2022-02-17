@@ -10,9 +10,9 @@
    <children>
       <Pane layoutX="402.0" layoutY="81.0" prefHeight="474.0" prefWidth="816.0" styleClass="container">
          <children>
-            <Label fx:id="popupLabel" layoutX="211.0" layoutY="230.0" text="is currently in Game" textFill="WHITE">
+            <Label fx:id="popupLabel" layoutX="127.0" layoutY="247.0" text=" Left The Game But You are the winner" textFill="WHITE">
                <font>
-                  <Font size="45.0" />
+                  <Font size="33.0" />
                </font>
             </Label>
             <Button layoutX="306.0" layoutY="356.0" mnemonicParsing="false" onAction="#goToOnlinePlayersView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="OK" textFill="#cf3ee8">

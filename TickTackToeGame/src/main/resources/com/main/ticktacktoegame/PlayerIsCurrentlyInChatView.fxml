@@ -10,7 +10,7 @@
    <children>
       <Pane layoutX="402.0" layoutY="81.0" prefHeight="474.0" prefWidth="816.0" styleClass="container">
          <children>
-            <Label fx:id="popupLabel" layoutX="211.0" layoutY="230.0" text="is currently in Game" textFill="WHITE">
+            <Label fx:id="popupLabel" layoutX="231.0" layoutY="230.0" text="is currently in Chat" textFill="WHITE">
                <font>
                   <Font size="45.0" />
                </font>

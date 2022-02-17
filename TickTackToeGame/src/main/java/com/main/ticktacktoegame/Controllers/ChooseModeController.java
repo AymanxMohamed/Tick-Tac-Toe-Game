@@ -46,8 +46,7 @@ public class ChooseModeController {
     }
     @FXML
     private void sendMultiModeGameInvitation() {
-        Client.opponnentName = "shopaky";
-        Client.sendRequest(invitePlayer(Client.opponnentName));
+
     }
     
     

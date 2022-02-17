@@ -244,7 +244,6 @@ public class ResponseHandler {
     }
 
     private static void handleInvitationRejected(JSONObject data) {
-        System.out.println("in handle invitation rejected multi single mode game");
         try {
             String invitationReciever = (String) data.get("invitationReciever");
             System.out.println(invitationReciever + " reject your invitation");
@@ -257,7 +256,6 @@ public class ResponseHandler {
     }
 
     private static void handleChooseXOrO(JSONObject data) {
-        System.out.println("in handle chooseXorO multi single mode game");
         try {
             String invitationReciever = (String) data.get("invitationReciever");
             Client.opponnentName = invitationReciever;
@@ -270,7 +268,6 @@ public class ResponseHandler {
     /* _____ * _____ Game invitation for receiver Responses _____ * _____ */
 
     private static void handleGameInvitation(JSONObject data) {
-        System.out.println("in handle gane invitation multi single mode game");
         String invitationSender = (String) data.get("invitationSender");
         Client.opponnentName = invitationSender;
         try {
@@ -311,7 +308,6 @@ public class ResponseHandler {
         System.out.println("in handle end  multi mode game");
         String winner = (String) data.get("winner");
         try {
-            String playerCase = (String) data.get("playerCase");
             App.setRoot("End  Game View");
             Label endGameMessage = (Label)App.scene.lookup("#endGameMessage");
             if (winner.equals(Client.player.getUserName())) {
@@ -326,25 +322,23 @@ public class ResponseHandler {
         }
     }
 
-//    public static void handleDrawMultiMovesHandler(JSONObject data) {
-//        System.out.println("in handle draw multi single mode game");
-//        ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
-//        ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
-//       // .runLater(()-> Client.currentGame.drawMoves(gameMoves));
-//    }
-
-
     private static void handlePlayerLeftMultiGame(JSONObject data) {
-        System.out.println("in handle player left multi mode game");
-        String playerName = (String) data.get("playerName");
-        // this method will show up a message that say that
-        System.out.println("unfortunatly " + playerName + " has left the game");
-        // and switch the player to his home page
+        try {
+            Client.opponnentName = "";
+            String playerName = (String) data.get("playerName");
+            App.setRoot("PlayerLeftGameView");
+            Label playerNameLabel = (Label)App.scene.lookup("#playerName");
+            playerNameLabel.setText(playerName);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
     private static void handleGoToWelcomeView() {
-        // this handler will just go to the welcome view
-        System.out.println("from go to welceme");
+        try {
+            App.setRoot("WelcomeView");
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /* _____ * _____ end of multi Mode Game Responses _____ * _____ */
 
@@ -353,7 +347,6 @@ public class ResponseHandler {
         System.out.println("in handle start single mode game");
         String gameID = (String) data.get("gameId");
         String choice = (String) data.get("choice");
-        
         Client.singleModeGameID = gameID;
         Client.multiModeGameId  = "";
         Client.opponnentName = "Computer";
@@ -378,19 +371,16 @@ public class ResponseHandler {
     }
 
     private static void handleDrawSingleMoves(JSONObject data) {
-        System.out.println("in handle draw single moves");
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
         Platform.runLater(()-> TicTackToeController.drawMoves(gameMoves));
     }
 
     private static void handleEnableSingleButtons() {
-        System.out.println("in handle enable buttons");
         Platform.runLater(()-> TicTackToeController.enableAllButtons());
     }
     private static void handleContinueGame(JSONObject data) {
         try {
-            System.out.println("in handle continue Gmae");
             ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
             ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
             App.setRoot("TicTackToe");
@@ -412,12 +402,10 @@ public class ResponseHandler {
         }
     }
     private static void handleDisapleAllButtonsSingle() {
-        System.out.println("in handle disable all buttons");
         Platform.runLater(()-> TicTackToeController.disapleAllButtons());
     }
 
     private static void handleEndSingleModeGame(JSONObject data) {
-        System.out.println("in handle end single mode game");
         try {
             String playerCase = (String) data.get("playerCase");
             App.setRoot("End  Game View");
@@ -499,6 +487,7 @@ public class ResponseHandler {
     }
 
     /* _____ * _____ end of Chat Room Responses _____ * _____ */
+    
     /* _____ * _____ general Responses _____ * _____ */
     private static void handleUpdatePlayerData(JSONObject data) {
         System.out.println("in updatePlayerData ");
@@ -509,9 +498,7 @@ public class ResponseHandler {
         // so when you switch to your home view you will be having the new rank
         // and the new bonus points
     }
-
     private static void handleUpdateAvilablePlayersList(JSONObject data) {
-        
         System.out.println("in handle update avilable players list");
         ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
         String update = (String) data.get("update");
@@ -532,7 +519,6 @@ public class ResponseHandler {
     }
 
     private static void updateAvilablePlayersList() {
-        
         System.out.println("in updateAvilableplayersListFunction");
         // this function will loob on the Opponent.onlinePlayers arrayList
         // every online player have 2 values name and inGame boolean

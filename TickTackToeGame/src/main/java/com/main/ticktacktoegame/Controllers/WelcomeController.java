@@ -68,7 +68,6 @@ public class WelcomeController implements Initializable {
         rankLabel.setText(Client.player.getPlayerRank());
         usernameWelcomeLabel.setText(Client.player.getUserName());
 
-//        registerDateLabel.setText(Client.player.getRegisterDate());
     }
 
 //    public static void printOnlinePlayers(String player) {

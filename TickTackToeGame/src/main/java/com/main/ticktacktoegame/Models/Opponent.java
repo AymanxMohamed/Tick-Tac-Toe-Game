@@ -14,12 +14,15 @@ public class Opponent {
     private String playerName;
     private boolean inGame;
     private boolean inChat;
-    
+    private String inGameText;
+    private String inChatText;
     
     public Opponent(String playerName, boolean inGame, boolean inChat) {
         this.playerName = playerName;
         this.inGame = inGame;
         this.inChat = inChat;
+        this.inGameText = inGame ? "yes" : "No";
+        this.inChatText = inGame ? "yes" : "No";
     }
     
     public static ArrayList<Opponent> onlinePlayers = new ArrayList<>();
@@ -41,6 +44,16 @@ public class Opponent {
     }
 
     public String getPlayerName() { return playerName; }
-    public void togleInGameStatus() { inGame = !inGame; }
-    public void toogleInChatStatus() { inChat = !inChat; }
+    public void togleInGameStatus() { 
+        inGame = !inGame; 
+        this.inGameText = inGame ? "yes" : "No";
+    }
+    public void toogleInChatStatus() { 
+        inChat = !inChat; 
+        this.inChatText = inGame ? "yes" : "No";
+    }
+    public String getInGameText() { return inGameText; }
+    public String getInChatText() { return inChatText; }
+    public boolean isInGame() { return inGame; }
+    public boolean isInChat() { return inChat; }
 }

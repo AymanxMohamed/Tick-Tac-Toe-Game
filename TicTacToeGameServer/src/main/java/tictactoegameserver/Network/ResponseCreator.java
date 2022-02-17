@@ -365,16 +365,13 @@ public class ResponseCreator {
         return (ArrayList<Integer>) gameMovesObject.get("gameMoves");
     }
     public static JSONObject getPlayerJsonObject(String userName, Player player) {
-
         JSONObject dataObject = new JSONObject();
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formatedDateTime = player.getRegisterDate().format(formatter);
         dataObject.put("userName", player.getUserName());
         dataObject.put("bonusPoints", player.getBonusPoints());
         dataObject.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
         dataObject.put("registerDate", formatedDateTime);
-
         return dataObject;
     }
     public static JSONObject getOnlinePlayersJsonObject() {

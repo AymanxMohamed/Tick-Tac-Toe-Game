@@ -123,21 +123,21 @@
                 </font>
             </Label>
          <Line endX="-100.0" endY="328.39996337890625" layoutX="671.0" layoutY="66.0" startX="-100.0" stroke="#00b4ff" strokeLineCap="ROUND" strokeWidth="2.0" />
-         <Button alignment="CENTER" layoutX="699.0" layoutY="104.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Chat With" textFill="WHITE">
+         <Button alignment="CENTER" layoutX="699.0" layoutY="104.0" mnemonicParsing="false" onAction="#goToAvilableToChatWith" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Chat With" textFill="WHITE">
             <font>
                <Font name="System Bold" size="40.0" />
             </font>
          </Button>
-         <Button alignment="CENTER" layoutX="699.0" layoutY="244.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play With" textFill="WHITE">
+         <Button alignment="CENTER" layoutX="699.0" layoutY="244.0" mnemonicParsing="false" onAction="#goToAvilableToPlayWith" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play With" textFill="WHITE">
             <font>
                <Font name="System Bold" size="40.0" />
             </font>
          </Button>
-         <TableView fx:id="onlinePlayersTable" layoutX="22.0" layoutY="95.0" prefHeight="303.0" prefWidth="490.0">
+         <TableView fx:id="onlinePlayersTable" layoutX="22.0" layoutY="95.0" prefHeight="303.0" prefWidth="390.0">
            <columns>
-             <TableColumn prefWidth="75.0" text="Player" />
-             <TableColumn prefWidth="75.0" text="Status" />
-               <TableColumn prefWidth="75.0" text="Rank" />
+             <TableColumn fx:id="playerName" prefWidth="120.0" text="PlayerName" />
+             <TableColumn fx:id="InGame" prefWidth="143.20001220703125" text="InGame" />
+               <TableColumn fx:id="InChat" prefWidth="135.20013427734375" text="InChat" />
            </columns>
          </TableView>
         </Pane>
