@@ -5,6 +5,7 @@
 package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Controllers.ChatController;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.*;
 import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
@@ -31,6 +32,7 @@ public class Client {
     public static String chatRoomId = "";
     public static DIFFICULTY difficulty;
     public static String cuurentCase = "";
+    public static ChatController chatRoom;
     //public static TicTackToeMultiController currentGame;
 
         

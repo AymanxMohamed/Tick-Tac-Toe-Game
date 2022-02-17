@@ -4,6 +4,10 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
+import com.main.ticktacktoegame.Network.Client;
+import static com.main.ticktacktoegame.Network.RequestCreator.leaveChat;
+import static com.main.ticktacktoegame.Network.RequestCreator.sendNewMessage;
+import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -31,22 +35,30 @@ public class ChatController implements Initializable {
     @FXML
     private TextArea textArea;
     
+    private StringBuilder fieldContent = new StringBuilder("");
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Client.chatRoom = this;
+        textArea.setDisable(true);
     }
     
     @FXML
     public void sendMessage() {
-        
+        Client.sendRequest(sendNewMessage(messageToSendField.getText()));
+        messageToSendField.setText("");
+    }
+    public void addMessageToTextArea(String message) {
+        fieldContent.append(message).append("\n");
+        textArea.setText(fieldContent.toString());
     }
     
     @FXML
-    public void  leaveChat() {
-        
+    public void  leave() {
+        Client.sendRequest(leaveChat());
     }
     
 }

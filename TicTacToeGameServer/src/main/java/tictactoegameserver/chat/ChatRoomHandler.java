@@ -6,8 +6,6 @@ package tictactoegameserver.chat;
 
 import java.util.ArrayList;
 import tictactoegameserver.Network.PlayerHandler;
-import tictactoegameserver.Database.DatabaseManager;
-import tictactoegameserver.Network.ResponseCreator;
 import static tictactoegameserver.Network.ResponseCreator.*;
 
 /**

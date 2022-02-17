@@ -50,7 +50,7 @@
          </font>
       </Label>
       <Line endX="161.4000244140625" endY="-3.0517578125E-5" layoutX="238.0" layoutY="501.0" startX="-100.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.0" />
-      <Button layoutX="178.0" layoutY="554.0" mnemonicParsing="false" onAction="#leaveChat" prefHeight="68.0" prefWidth="181.0" styleClass="leaveBtn" text="Leave" textFill="WHITE">
+      <Button layoutX="178.0" layoutY="554.0" mnemonicParsing="false" onAction="#leave" prefHeight="68.0" prefWidth="181.0" styleClass="leaveBtn" text="Leave" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

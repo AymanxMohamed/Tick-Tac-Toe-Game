@@ -1,9 +1,10 @@
 1- history view
-2- Audio
+2- Chat
+3- Audio
 	1- background audio in the client app start 
 	2- backgreound audio in tic tac toe view
 	3- toogle Audio
-3-Video
+4-Video
 	1- demo ( (30 sec : 60 min max) )
 	2- youtube video (3 min : 5 min);
 	2- game process parts
@@ -20,7 +21,8 @@
 	3- hide all erros and exceptions in any way
 6- creating jar files
 
-----------------------------------------------------------------------------------------
+_________________________________________________________________________________________
+
 
 7- photos -> (youtube ------- linked in)
 

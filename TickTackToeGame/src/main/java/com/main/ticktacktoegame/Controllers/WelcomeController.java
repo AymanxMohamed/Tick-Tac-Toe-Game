@@ -45,7 +45,6 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void switchToOnlineView() {
-//        System.out.println("online view");
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
@@ -60,17 +59,11 @@ public class WelcomeController implements Initializable {
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         usernameWelcomeLabel.setText(Client.player.getUserName());
-
     }
-
-//    public static void printOnlinePlayers(String player) {
-//        onlinePlayer0.setText(player);
-//    }
 }

@@ -123,12 +123,12 @@
                 </font>
             </Label>
          <Line endX="-100.0" endY="328.39996337890625" layoutX="671.0" layoutY="66.0" startX="-100.0" stroke="#00b4ff" strokeLineCap="ROUND" strokeWidth="2.0" />
-         <Button alignment="CENTER" layoutX="699.0" layoutY="104.0" mnemonicParsing="false" onAction="#goToAvilableToChatWith" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Chat With" textFill="WHITE">
+         <Button alignment="CENTER" layoutX="699.0" layoutY="104.0" mnemonicParsing="false" onAction="#sendInvitationForChat" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Chat With" textFill="WHITE">
             <font>
                <Font name="System Bold" size="40.0" />
             </font>
          </Button>
-         <Button alignment="CENTER" layoutX="699.0" layoutY="244.0" mnemonicParsing="false" onAction="#goToAvilableToPlayWith" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play With" textFill="WHITE">
+         <Button alignment="CENTER" layoutX="699.0" layoutY="244.0" mnemonicParsing="false" onAction="#sendInvitationForPlay" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play With" textFill="WHITE">
             <font>
                <Font name="System Bold" size="40.0" />
             </font>

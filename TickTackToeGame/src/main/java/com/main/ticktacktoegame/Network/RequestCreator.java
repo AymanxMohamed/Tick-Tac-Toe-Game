@@ -48,15 +48,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
-    public static String invitePlayerForChat(String invitedPlayerName) {
-        JSONObject data = new JSONObject();
-        data.put("invitationSender", player.getUserName());
-        data.put("invitationReciever", invitedPlayerName);
-        JSONObject request = new JSONObject();
-        request.put("request", "chat invitation");
-        request.put("data", data);
-        return JSONValue.toJSONString(request);
-    }
+
     
     public static String xChoosen() {
         JSONObject data = new JSONObject();
@@ -103,26 +95,7 @@ public class RequestCreator {
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
-    public static String acceptChatInvitation(String invitationSender, String invitationReciever) {
-        JSONObject data = new JSONObject();
-        data.put("invitationSender", invitationSender);
-        data.put("invitationReciever", invitationReciever);
-        JSONObject request = new JSONObject();
-        request.put("request", "acceptChatInvitation");
-        request.put("data", data);
-        return JSONValue.toJSONString(request);
-    }
-    public static String rejectChatInvitation(String invitationSender, String invitationReciever) {
-        Client.opponnentName = null;
-        JSONObject data = new JSONObject();
-        data.put("invitationSender", invitationSender);
-        data.put("invitationReciever", invitationReciever);
-        data.put(data, data);
-        JSONObject request = new JSONObject();
-        request.put("request", "rejectChatInvitation");
-        request.put("data", data);
-        return JSONValue.toJSONString(request);
-    }
+
              /*_____ * _____ game process _____ * _____ */
     
     public static String multiMove(int index) {
@@ -155,14 +128,7 @@ public class RequestCreator {
         return JSONValue.toJSONString(request);   
     }
     
-    public static String leaveChat() {
-        JSONObject data = new JSONObject();
-        data.put("chatId", Client.chatRoomId);
-        JSONObject request = new JSONObject();
-        request.put("request", "leave chat");
-        request.put("data", data);
-        return JSONValue.toJSONString(request); 
-    }
+
     
     
     /*_____ * _____ end of  Multi Mode Game Requests _____ * _____ */
@@ -210,6 +176,63 @@ public class RequestCreator {
         return JSONValue.toJSONString(request); 
     }
     /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
+    
+    /*_____ * _____  start of Chat Requests _____ * _____ */
+    public static String invitePlayerForChat(String invitedPlayerName) {
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", player.getUserName());
+        data.put("invitationReciever", invitedPlayerName);
+        JSONObject request = new JSONObject();
+        request.put("request", "chat invitation");
+        request.put("data", data);
+        System.out.println("invitation for chat sended");
+        return JSONValue.toJSONString(request);
+    }
+    public static String sendNewMessage(String message){
+        JSONObject data = new JSONObject();
+        data.put("message", message);
+        data.put("chatId", Client.chatRoomId);
+        data.put("sender", Client.player.getUserName());
+        JSONObject request = new JSONObject();
+        request.put("request", "send new message");
+        request.put("data", data);
+        System.out.println("invitation for chat sended");
+        System.out.println("send new message sended: " + JSONValue.toJSONString(request));
+        return JSONValue.toJSONString(request);
+    }
+    
+    public static String acceptChatInvitation() {
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", Client.opponnentName);
+        data.put("invitationReciever", Client.player.getUserName());
+        JSONObject request = new JSONObject();
+        request.put("request", "acceptChatInvitation");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    
+    public static String rejectChatInvitation() {
+        Client.opponnentName = null;
+        JSONObject data = new JSONObject();
+        data.put("invitationSender", Client.opponnentName);
+        data.put("invitationReciever", Client.player.getUserName());
+        data.put(data, data);
+        JSONObject request = new JSONObject();
+        request.put("request", "rejectChatInvitation");
+        request.put("data", data);
+        return JSONValue.toJSONString(request);
+    }
+    
+    public static String leaveChat() {
+        JSONObject data = new JSONObject();
+        data.put("chatId", Client.chatRoomId);
+        JSONObject request = new JSONObject();
+        request.put("request", "leave chat");
+        request.put("data", data);
+        return JSONValue.toJSONString(request); 
+    }
+    /*_____ * _____  end of Chat Requests _____ * _____ */
+    
     /*_____ * _____  Logout Requests _____ * _____ */
     public static String logout() {
         JSONObject data = new JSONObject();

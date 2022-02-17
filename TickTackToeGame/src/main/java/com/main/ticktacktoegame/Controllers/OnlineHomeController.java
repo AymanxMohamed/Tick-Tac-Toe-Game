@@ -8,6 +8,7 @@ import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayer;
+import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayerForChat;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -87,12 +88,13 @@ public class OnlineHomeController implements Initializable {
     }  
     
     @FXML
-    public void goToAvilableToChatWith() {
+    public void sendInvitationForChat() {
         Opponent selectedOpponent = onlinePlayersTable.getSelectionModel().getSelectedItem();
         if (selectedOpponent != null) {
             System.out.println(selectedOpponent.getPlayerName());
               if (!selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
-                Client.opponnentName = selectedOpponent.getPlayerName();
+                    Client.opponnentName = selectedOpponent.getPlayerName();
+                    Client.sendRequest(invitePlayerForChat(selectedOpponent.getPlayerName()));
             } else {
                 try {
                     if (selectedOpponent.isInGame()) {
@@ -105,12 +107,13 @@ public class OnlineHomeController implements Initializable {
                 } catch (IOException ex) {
                     Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
             }
         }
     }
     
     @FXML
-    public void goToAvilableToPlayWith() {
+    public void sendInvitationForPlay() {
         Opponent selectedOpponent = onlinePlayersTable.getSelectionModel().getSelectedItem();
         if (selectedOpponent != null) {
             System.out.println(selectedOpponent.getPlayerName());

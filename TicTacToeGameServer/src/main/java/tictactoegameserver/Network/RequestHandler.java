@@ -10,6 +10,7 @@ import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import static tictactoegameserver.Network.Utility.*;
+import tictactoegameserver.chat.ChatRoomHandler;
 import static tictactoegameserver.chat.ChatRoomHandler.addChatRoomHandler;
 import  tictactoegameserver.gamelogic.MultiModeGameHandler;
 import static tictactoegameserver.gamelogic.MultiModeGameHandler.addMultiModeGameHandler;
@@ -63,6 +64,9 @@ public class RequestHandler {
                 break;
             case "end single mode game":
                 handleEndSingleModeGame(data);
+                break;
+            case "send new message":
+                handleSendNewMessage(data);
                 break;
             case "cancelEndSingleGame":
                 handelCancelEndSingleGame(data, playerHandler);
@@ -246,8 +250,8 @@ public class RequestHandler {
         String gameID = (String) data.get("gameId");
         SingleModeGameHandler gameHandler = getSingleModeGameHandler(gameID);
         playerHandler.sendResponse(continueGameResponse(gameHandler.getGameMoves()));
-        playerHandler.sendResponse(drawSingleMovesResponse(gameHandler.getGameMoves()));
-        return enableSingleButtonsResponse();
+        //playerHandler.sendResponse(drawSingleMovesResponse(gameHandler.getGameMoves()));
+        return doNothingResponse();
     }
     
     private static void handleEndSingleModeGame(JSONObject data) {
@@ -275,10 +279,19 @@ public class RequestHandler {
         receiverHandler.sendResponse(chatInvitationFromPlayerRequest(data));
         return invitationSendedResponse(data);
     }
+    private static void handleSendNewMessage(JSONObject data) {
+        System.out.println("in handel SendNewMessage");
+        String chatId = (String) data.get("chatId");
+        String sender = (String) data.get("sender");
+        String message = (String) data.get("message");
+        ChatRoomHandler chatHandler = Utility.getChatRoomHandler(chatId);
+        chatHandler.processMessage(message, sender);
+    }
     
                /*_____ * _____ receiver _____ * _____ */   
     
     private static String handleAcceptChatInvitation(JSONObject data) {
+        System.out.println("in handel accept chat invitation");
         String invitationSender = (String) data.get("invitationSender");
         String invitationReciever = (String) data.get("invitationReciever");
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
@@ -362,6 +375,8 @@ public class RequestHandler {
         }
         return doNothingResponse();
     }
+
+
 
 
 }

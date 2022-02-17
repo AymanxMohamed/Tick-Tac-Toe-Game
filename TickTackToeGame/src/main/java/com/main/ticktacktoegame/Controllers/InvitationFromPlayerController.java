@@ -32,6 +32,15 @@ public class InvitationFromPlayerController {
             Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+       @FXML
+    public void sendRejectChatInvitation() {
+        Client.sendRequest(rejectChatInvitation());
+        try {
+            App.setRoot("onlineHome");
+        } catch (IOException ex) {
+            Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @FXML
     public void acceptGameInvitation() {
@@ -41,6 +50,10 @@ public class InvitationFromPlayerController {
         } catch (IOException ex) {
             Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    @FXML
+    public void sendAcceptChatInvitation() {
+        Client.sendRequest(acceptChatInvitation());
     }
     @FXML void goToOnlinePlayersView() {
         try {
