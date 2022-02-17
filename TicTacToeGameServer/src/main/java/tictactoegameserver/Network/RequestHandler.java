@@ -15,6 +15,7 @@ import  tictactoegameserver.gamelogic.MultiModeGameHandler;
 import static tictactoegameserver.gamelogic.MultiModeGameHandler.addMultiModeGameHandler;
 import tictactoegameserver.gamelogic.SingleModeGameHandler;
 import static tictactoegameserver.gamelogic.SingleModeGameHandler.addSingleModeGameHandler;
+
 /**
  *
  * @author ayman, shopaky
@@ -239,14 +240,16 @@ public class RequestHandler {
         getSingleModeGameHandler(gameID).processMove(index);
         return doNothingResponse();
     }
+    
     private static String handelCancelEndSingleGame(JSONObject data, PlayerHandler playerHandler) {
         System.out.println("in handel cancel end singlemode game");
         String gameID = (String) data.get("gameId");
         SingleModeGameHandler gameHandler = getSingleModeGameHandler(gameID);
-        playerHandler.sendResponse(drawSingleMovesResponse(gameHandler.getGameMoves()));
         playerHandler.sendResponse(continueGameResponse(gameHandler.getGameMoves()));
+        playerHandler.sendResponse(drawSingleMovesResponse(gameHandler.getGameMoves()));
         return enableSingleButtonsResponse();
     }
+    
     private static void handleEndSingleModeGame(JSONObject data) {
         System.out.println("in handel end single game");
         String gameId = (String) data.get("gameId");

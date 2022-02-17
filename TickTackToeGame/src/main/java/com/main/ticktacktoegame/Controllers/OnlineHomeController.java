@@ -93,8 +93,6 @@ public class OnlineHomeController implements Initializable {
             System.out.println(selectedOpponent.getPlayerName());
               if (!selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
                 Client.opponnentName = selectedOpponent.getPlayerName();
-                // send chat request
-                //Client.sendRequest(invitePlayer(selectedOpponent.getPlayerName()));
             } else {
                 try {
                     if (selectedOpponent.isInGame()) {

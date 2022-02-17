@@ -322,7 +322,7 @@ public class DatabaseManager {
      * @return ArrayList<MultiModeGame>
      */
     public static ArrayList<MultiModeGame> getMultiModeGameRecords() {
-        
+       
         ArrayList<MultiModeGame> multiModeGameArray = new ArrayList<>();
         try {
             

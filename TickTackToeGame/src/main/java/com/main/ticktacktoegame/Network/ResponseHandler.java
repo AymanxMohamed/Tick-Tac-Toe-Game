@@ -442,33 +442,35 @@ public class ResponseHandler {
 
     private static void handleOpenChatRoom(JSONObject data) {
         System.out.println("in handle open chat room");
-
         String chatID = (String) data.get("chatID");
         String sender = (String) data.get("sender");
         String receiver = (String) data.get("receiver");
-
-        // you will have to store the game id in the client
+        Client.opponnentName = Client.player.getUserName().equals(sender) ? receiver : sender;
         Client.chatRoomId = chatID;
-        if (sender.equals(Client.player.getUserName())) {
-            // then this client is sender
-            // highlight player label to inform the client
-        } else {
-            // this client is the reciver
-            // highlight recieverName
+        Client.multiModeGameId = "";
+        Client.singleModeGameID = "";
+        try {
+            App.setRoot("chat");
+            Label playerOneLabel = (Label)App.scene.lookup("#playerOneLabel");
+            playerOneLabel.setText(Client.player.getUserName());
+            Label PlayerTwoLabel = (Label)App.scene.lookup("#PlayerTwoLabel");
+            PlayerTwoLabel.setText(Client.opponnentName);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // Switch to the chat view with sender on the left with his name
-        // and receiveron the right with his name also
-        // you can also place any nice pic for each player on the left and
-        // the right
     }
 
     private static void handlePlayerLeftChatRoom(JSONObject data) {
         System.out.println("in handle player left chat");
         String playerName = (String) data.get("playerName");
-        // this method will show up a message that say that
-        System.out.println("unfortunatly " + playerName + " has left the chat");
-        // and switch the player home page
+        try {
+            Client.opponnentName = "";
+            App.setRoot("PlayerLeftChatView");
+            Label playerNameLabel = (Label)App.scene.lookup("#playerName");
+            playerNameLabel.setText(playerName);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void handlePlayerInChat(JSONObject data) {

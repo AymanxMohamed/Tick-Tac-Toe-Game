@@ -41,11 +41,5 @@ public class quitGameController {
         } else {
             Client.sendRequest(cancelEndMultiGame());
         }
-//        try {
-//            
-//            App.setRoot("TicTackToe");
-//        } catch (IOException ex) {
-//            Logger.getLogger(quitGameController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 }
