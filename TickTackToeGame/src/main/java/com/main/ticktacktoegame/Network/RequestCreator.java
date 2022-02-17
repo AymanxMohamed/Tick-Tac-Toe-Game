@@ -93,11 +93,11 @@ public class RequestCreator {
         return JSONValue.toJSONString(request);
     }
     public static String rejectInvitation() {
+        System.out.println("in reject invitation function");
         JSONObject data = new JSONObject();
         data.put("invitationSender", Client.opponnentName);
         data.put("invitationReciever", Client.player.getUserName());
         Client.opponnentName = "";
-        data.put(data, data);
         JSONObject request = new JSONObject();
         request.put("request", "rejectInvitation");
         request.put("data", data);

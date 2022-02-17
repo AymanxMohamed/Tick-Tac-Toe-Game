@@ -8,18 +8,13 @@ import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.Player;
-import static com.main.ticktacktoegame.Network.RequestCreator.*;
 import static com.main.ticktacktoegame.Network.Utility.getIntegerArray;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import org.json.simple.*;
 
 /**
@@ -27,36 +22,6 @@ import org.json.simple.*;
  * @author ayman
  */
 public class ResponseHandler {
-
-    @FXML
-    private Text winnerText;
-
-    public static ArrayList<Button> singleGameModeButtons;
-
-    public static void inializeSingleModeGameButtons(ArrayList<Button> multiModeGameButtons) {
-        Button button0 = (Button) App.scene.lookup("#button0");
-        Button button1 = (Button) App.scene.lookup("#button1");
-        Button button2 = (Button) App.scene.lookup("#button2");
-        Button button3 = (Button) App.scene.lookup("#button3");
-        Button button4 = (Button) App.scene.lookup("#button4");
-        Button button5 = (Button) App.scene.lookup("#button5");
-        Button button6 = (Button) App.scene.lookup("#button6");
-        Button button7 = (Button) App.scene.lookup("#button7");
-        Button button8 = (Button) App.scene.lookup("#button8");
-        multiModeGameButtons = new ArrayList<>() {
-            {
-                add(button0);
-                add(button1);
-                add(button2);
-                add(button3);
-                add(button4);
-                add(button5);
-                add(button6);
-                add(button7);
-                add(button8);
-            }
-        };
-    }
 
     public static void handleResponse(String responseString) {
 
@@ -175,7 +140,6 @@ public class ResponseHandler {
     private static void handlePlayerNotExist() {
         try {
             App.setRoot("PlayerNotExistView");
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -250,7 +214,6 @@ public class ResponseHandler {
             ex.printStackTrace();
         }
     }
-
     private static void handleRegisterSuccess() {
         try {
             App.setRoot("RegisterSuccessView");
@@ -335,7 +298,6 @@ public class ResponseHandler {
         Client.singleModeGameID = "";
         try {
             App.setRoot("TicTackToe");
-//            inializeSingleModeGameButtons(Client.currentGame.buttons);
             Label playerXLabel = (Label)App.scene.lookup("#playerX");
             playerXLabel.setText(playerX);
             Label playerOLabel = (Label)App.scene.lookup("#playerO");

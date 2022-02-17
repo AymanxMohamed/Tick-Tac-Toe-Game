@@ -15,7 +15,7 @@
                   <Font size="45.0" />
                </font>
             </Label>
-            <Button layoutX="306.0" layoutY="356.0" mnemonicParsing="false" onAction="#goToOnlinePlayersViiew" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="OK" textFill="#cf3ee8">
+            <Button layoutX="306.0" layoutY="356.0" mnemonicParsing="false" onAction="#goToOnlinePlayersView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="OK" textFill="#cf3ee8">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
