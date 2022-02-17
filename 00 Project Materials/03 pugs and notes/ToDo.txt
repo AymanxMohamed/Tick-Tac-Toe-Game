@@ -1,0 +1,27 @@
+1- history view
+2- Audio
+	1- background audio in the client app start 
+	2- backgreound audio in tic tac toe view
+	3- toogle Audio
+3-Video
+	1- demo ( (30 sec : 60 min max) )
+	2- youtube video (3 min : 5 min);
+	2- game process parts
+		1- login  & register process 
+		2- single game & multi game process
+		3- chat process
+4- Documentation
+	1- prepare readme file
+	2- prepare javaDocs
+	3- UML -------------------> if their is time
+5- Testing
+	1- test all senarios
+	2- on any error screen shot --> add it to the erros folder in github 
+	3- hide all erros and exceptions in any way
+6- creating jar files
+
+----------------------------------------------------------------------------------------
+
+7- photos -> (youtube ------- linked in)
+
+_________________________________________________________________________________________

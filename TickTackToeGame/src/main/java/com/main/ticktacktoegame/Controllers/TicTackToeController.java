@@ -125,6 +125,7 @@ public class TicTackToeController implements Initializable {
                 buttonIndex = gameMoves.get(i);
                 System.out.println("place X on Button " + buttonIndex);
                 buttons.get(buttonIndex).setText("X");
+                
                 buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
             } else {
                 // O moves
