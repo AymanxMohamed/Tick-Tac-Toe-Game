@@ -1,0 +1,45 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Author     : Roo
+*/
+
+.body{
+    -fx-background-image: url(../images/gameBG.png);
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.text-area,.text-field{
+    -fx-background-color: linear-gradient(to right,rgba(0,0,0,0.3),rgba(0,0,0,0.6));
+    -fx-background-radius: 10,5,5,10;
+    -fx-background-insets: 0,1,2,0;
+    -fx-border-color: #ffffff3d;
+    -fx-border-radius: 10;
+    -fx-border-width: 3;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-padding: 10 20 10 20;
+    -fx-margin: 10 20 10 20;
+    -fx-control-inner-background:#000000;
+    -fx-text-fill: #00b4ff;
+
+}
+
+.sendBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/send.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.leaveBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/border.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

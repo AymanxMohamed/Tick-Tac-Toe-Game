@@ -1,0 +1,103 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Author     : Roo
+*/
+
+
+.body{
+    -fx-background-image: url(../images/bg.png);
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.switchBtn{
+    -fx-background-color: transparent;
+}
+
+.table-view{
+    -fx-background-color:#0000002d;
+    -fx-background-radius: 20px;
+    -fx-fill: white;
+}
+.table-view .column-header-background{
+    -fx-background-color:none;
+
+}
+.table-view .column-header{
+    -fx-background-color:transparent;
+    -fx-background-insets: 0 0 10 0;
+    -fx-background-radius: 20px;
+    /*-fx-fill:white;*/
+}
+.table-view .column-header .filler{
+    -fx-background-color:transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.withBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/border.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #00b4ff44, #CF3EE844);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, #00b4ff44, #CF3EE844);
+}
+
+.table-row-cell: highlighted {
+    -fx-border-color: #00b4ff;
+    -fx-border-width:2px;
+    -fx-border-radius: 15px;
+}
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-text-fill:#00b4ff;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size:15.0;
+    -fx-font-weight: bold;
+    -fx-padding:10 10 10 10;
+
+}
+
+.table-view .placeholder .label {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}

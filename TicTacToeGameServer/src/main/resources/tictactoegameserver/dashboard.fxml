@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@../styles/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoegameserver.DashboardController">
+   <children>
+      <ImageView fx:id="switchImage" fitHeight="71.0" fitWidth="116.0" layoutX="730.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/off.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="729.0" layoutY="71.0" mnemonicParsing="false" onAction="#switchClicked" prefHeight="71.0" prefWidth="116.0" styleClass="switchBtn" />
+      <TableView fx:id="playersTable" layoutX="109.0" layoutY="194.0" prefHeight="500.0" prefWidth="726.0">
+        <columns>
+          <TableColumn prefWidth="289.59996032714844" text="Player" />
+          <TableColumn minWidth="0.0" prefWidth="82.4000244140625" text="Status" />
+            <TableColumn prefWidth="126.400146484375" text="in Game" />
+            <TableColumn prefWidth="127.2000732421875" text="Points" />
+            <TableColumn prefWidth="95.2000732421875" text="Badge" />
+        </columns>
+      </TableView>
+      <Label layoutX="975.0" layoutY="335.0" text="● Number of Players :" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="1318.0" layoutY="336.0" text="10" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="975.0" layoutY="415.0" text="● Number of Online Players :" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="1418.0" layoutY="416.0" text="4" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="975.0" layoutY="495.0" text="● Number of Players in Game :" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="1448.0" layoutY="498.0" text="2" textFill="WHITE">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
