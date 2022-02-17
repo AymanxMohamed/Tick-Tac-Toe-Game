@@ -177,13 +177,24 @@ public class RequestCreator {
         request.put("data", data);
         System.out.println("singleMove request sended: " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request);   
+    }    
+    public static String cancelEndSingleGame() {
+        JSONObject data = new JSONObject();
+        data.put("gameId", Client.singleModeGameID);
+        JSONObject request = new JSONObject();
+        request.put("request", "cancelEndSingleGame");
+        request.put("data", data);
+        System.out.println("cancelEndSingleGame request sended: " + JSONValue.toJSONString(request));
+        
+        return JSONValue.toJSONString(request);   
     }
     public static String forceEndSingleGame() {
         JSONObject data = new JSONObject();
-        data.put("gameId", Client.multiModeGameId);
+        data.put("gameId", Client.singleModeGameID);
         JSONObject request = new JSONObject();
-        request.put("request", "force end single mode game");
+        request.put("request", "end single mode game");
         request.put("data", data);
+        System.out.println("End Game has been sended " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request); 
     }
     /*_____ * _____  end of Single Mode Game Requests _____ * _____ */

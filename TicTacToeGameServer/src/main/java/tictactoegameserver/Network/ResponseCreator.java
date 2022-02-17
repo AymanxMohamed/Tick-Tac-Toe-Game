@@ -230,7 +230,16 @@ public class ResponseCreator {
         System.out.println("disaple all buttons single: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
-    
+    public static String continueGameResponse(ArrayList<Integer> gameMoves) {
+        JSONObject data = new JSONObject();
+        data.put("gameMoves", gameMoves);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "ContinueGame");
+        responseObject.put("data", data);
+        System.out.println("Request ContinueGame sended: " + JSONValue.toJSONString(responseObject));
+        return JSONValue.toJSONString(responseObject);
+        
+    }
     public static String endSingleModeGameResponse(String winner) {
         JSONObject data = new JSONObject();
         data.put("playerCase", winner);

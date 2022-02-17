@@ -69,6 +69,7 @@ public class Client {
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch (IOException ex) {
+            closeEveryThing();
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

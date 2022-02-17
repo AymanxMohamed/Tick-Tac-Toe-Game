@@ -7,6 +7,8 @@ package tictactoegameserver.Network;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Player;
 import static tictactoegameserver.Network.ResponseCreator.playerLeftTheGameResponse;
@@ -48,14 +50,17 @@ public class PlayerHandler {
                         sendResponse(RequestHandler.handleRequest(playerRequest, PlayerHandler.this));
                     }
             } catch (Exception e) {
-                //System.out.println("exception in accept response");
-                //e.printStackTrace();
+                System.out.println("exception in accept response");
+                e.printStackTrace();
                 closeEveryThing();
             }
         }).start();
     }
     
     public void sendResponse(String response)  {
+        if (response == null) {
+            return;
+        }
         try {
             if (!socket.isClosed()) {
                 bufferedWriter.write(response);
@@ -63,7 +68,7 @@ public class PlayerHandler {
                 bufferedWriter.flush();
             }
         } catch (IOException ex) {
-            //Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void broadcastResponse(String response) {
@@ -95,7 +100,7 @@ public class PlayerHandler {
           }
         } catch (Exception e) {
             System.out.println("exception");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }

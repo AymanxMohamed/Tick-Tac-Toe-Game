@@ -11,10 +11,8 @@ import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Network.ResponseCreator;
 import static tictactoegameserver.Network.ResponseCreator.drawSingleMovesResponse;
 import static tictactoegameserver.Network.ResponseCreator.enableSingleButtonsResponse;
-import static tictactoegameserver.Network.ResponseCreator.endMultiModeGameResponse;
 import static tictactoegameserver.Network.ResponseCreator.endSingleModeGameResponse;
 import static tictactoegameserver.Network.ResponseCreator.goToWelcomeViewResponse;
-import static tictactoegameserver.Network.ResponseCreator.removeSingleButtonResponse;
 import static tictactoegameserver.Network.ResponseCreator.updateAvilablePlayersList;
 import static tictactoegameserver.Network.ResponseCreator.updatePlayerDataResponse;
 
@@ -32,6 +30,7 @@ public class SingleModeGameHandler {
     public static ArrayList<SingleModeGameHandler> currentGames = new ArrayList<>();
     private ArrayList<Integer> avilableMoves;
     
+   
     public static void  addSingleModeGameHandler(String gameID, PlayerHandler playerHandler, String playerType, String difficulty) {
         currentGames.add(new SingleModeGameHandler(gameID, playerHandler, playerType, difficulty));
     }
@@ -226,12 +225,18 @@ public class SingleModeGameHandler {
     }
     public String getGameID() { return this.gameID; }
 
-     public void forceEndGame() {
+    public void endGame() {
         DatabaseManager.openDataBaseConnection();
         playerHandler.player.decreaseBonusPoints();
         playerHandler.sendResponse(updatePlayerDataResponse(playerHandler.player));
-        playerHandler.sendResponse(goToWelcomeViewResponse());
+        System.out.println(playerHandler);
+        System.out.println(currentGames);
         currentGames.remove(this);
+        System.out.println(playerHandler);
+        System.out.println(currentGames);
+        
         DatabaseManager.closeDataBaseConnection();
     }
+    public String getPlayerType() { return playerType; }
+    public ArrayList<Integer> getGameMoves() { return gameMoves; }
 }

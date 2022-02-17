@@ -18,26 +18,25 @@ import javafx.scene.control.Label;
  *
  * @author elsho
  */
-public class EndSingleModeGameController {
+public class quitGameController {
 
-    @FXML
-    private Label endGameMessage;
-    
-    @FXML
-    public void sendRequestAgain() {
-        try {
-            App.setRoot("chooseXorOSingle");
-        } catch (IOException ex) {
-            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    @FXML void goToOnlineView() {
+    @FXML 
+    void sendForceEndSingleGame() {
+        Client.sendRequest(forceEndSingleGame());
         Client.singleModeGameID = "";
         try {
-            App.setRoot("onlineHome");
+            App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(quitGameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @FXML
+    public void cancel() {
+        try {
+            Client.sendRequest(cancelEndSingleGame());
+            App.setRoot("TicTackToe");
+        } catch (IOException ex) {
+            Logger.getLogger(quitGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

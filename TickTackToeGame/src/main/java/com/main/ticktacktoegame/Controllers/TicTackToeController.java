@@ -10,6 +10,7 @@ import static com.main.ticktacktoegame.Network.RequestCreator.forceEndSingleGame
 import static com.main.ticktacktoegame.Network.RequestCreator.multiMove;
 import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
 import com.main.ticktacktoegame.Network.ResponseHandler;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javax.swing.SwingUtilities;
 
@@ -86,7 +89,11 @@ public class TicTackToeController implements Initializable {
 
     @FXML
     void quitGame() {
-        Client.sendRequest(forceEndSingleGame());
+        try {
+            App.setRoot("Force End Game");
+        } catch (IOException ex) {
+            Logger.getLogger(TicTackToeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
    
@@ -103,6 +110,8 @@ public class TicTackToeController implements Initializable {
     }
 
     public static  void enableAllButtons() {
+        System.out.println(buttons);
+        System.out.println("in controller enable buttons");
         buttons.forEach(button -> {
             if (button.getText().equals("")) {
                 button.setDisable(false);

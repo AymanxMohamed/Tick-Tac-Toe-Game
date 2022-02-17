@@ -103,7 +103,7 @@
                     <Image url="@images/exitIcon.png" />
                 </image>
             </ImageView>
-            <Button layoutX="104.0" layoutY="15.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="93.0" styleClass="exitBtn" text="Exit" textFill="WHITE">
+            <Button layoutX="104.0" layoutY="15.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" onAction="#exit" prefHeight="13.0" prefWidth="93.0" styleClass="exitBtn" text="Exit" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="30.0" />
                 </font>

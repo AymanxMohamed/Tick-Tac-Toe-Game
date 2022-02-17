@@ -155,6 +155,8 @@ public class ResponseHandler {
             case "end single mode game":
                 handleEndSingleModeGame(data);
                 break;
+            case "ContinueGame":
+                handleContinueGame();
             case "go to welcome view":
                 handleGoToWelcomeView();
                 break;
@@ -266,6 +268,7 @@ public class ResponseHandler {
 
     /* _____ * _____ Game invitation for sender Responses _____ * _____ */
     private static void handlePlayerInGame(JSONObject data) {
+        System.out.println("in handle player in game");
         try {
             String invitedPlayer = (String) data.get("invitedPlayer");
             System.out.println(invitedPlayer + " is currently in game");
@@ -278,11 +281,13 @@ public class ResponseHandler {
     }
 
     private static void handleInvitationSended(JSONObject data) {
+        System.out.println("in handle invitation sended multi single mode game");
         String invitationReciever = (String) data.get("invitationReciever");
         System.out.println("The invitation to " + invitationReciever + " has been sent successfuly");
     }
 
     private static void handleInvitationRejected(JSONObject data) {
+        System.out.println("in handle invitation rejected multi single mode game");
         try {
             String invitationReciever = (String) data.get("invitationReciever");
             System.out.println(invitationReciever + " reject your invitation");
@@ -295,6 +300,7 @@ public class ResponseHandler {
     }
 
     private static void handleChooseXOrO(JSONObject data) {
+        System.out.println("in handle chooseXorO multi single mode game");
         try {
             String invitationReciever = (String) data.get("invitationReciever");
             Client.opponnentName = invitationReciever;
@@ -307,6 +313,7 @@ public class ResponseHandler {
     /* _____ * _____ Game invitation for receiver Responses _____ * _____ */
 
     private static void handleGameInvitation(JSONObject data) {
+        System.out.println("in handle gane invitation multi single mode game");
         String invitationSender = (String) data.get("invitationSender");
         Client.opponnentName = invitationSender;
         try {
@@ -321,6 +328,7 @@ public class ResponseHandler {
     /* _____ * _____ Multi Mode Game Responses _____ * _____ */
 
     private static void handleStartMultiModeGame(JSONObject data) {
+        System.out.println("in handle start multi mode game");
         String gameID = (String) data.get("gameId");
         String playerX = (String) data.get("playerX");
         String playerO = (String) data.get("playerO");
@@ -339,10 +347,12 @@ public class ResponseHandler {
     }
 
     private static void handleDisapleAllButtons() {
+        System.out.println("in handle disaple all buttons multi single mode game");
         Platform.runLater(()-> Client.currentGame.disapleAllButtons());
     }
 
     private static void handleEndMultiModeGame(JSONObject data) {
+        System.out.println("in handle end  multi mode game");
         String winner = (String) data.get("winner");
         if (winner.equals(Client.player.getUserName())) {
             // display winner view that Show a nice message to
@@ -356,6 +366,7 @@ public class ResponseHandler {
     }
 
     public static void handleDrawMultiMovesHandler(JSONObject data) {
+        System.out.println("in handle draw multi single mode game");
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
         Platform.runLater(()-> Client.currentGame.drawMoves(gameMoves));
@@ -368,10 +379,12 @@ public class ResponseHandler {
 //    }
 
     private static void handleEnableMultiButtons() {
+        System.out.println("in handle enable multi single mode game");
         Platform.runLater(()-> TicTackToeController.enableAllButtons());
     }
 
     private static void handlePlayerLeftMultiGame(JSONObject data) {
+        System.out.println("in handle player left multi mode game");
         String playerName = (String) data.get("playerName");
         // this method will show up a message that say that
         System.out.println("unfortunatly " + playerName + " has left the game");
@@ -385,6 +398,7 @@ public class ResponseHandler {
 
     /* _____ * _____ Single Mode Game Responses _____ * _____ */
     private static void handleStartSingleModeGame(JSONObject data) {
+        System.out.println("in handle start single mode game");
         String gameID = (String) data.get("gameId");
         String choice = (String) data.get("choice");
         
@@ -417,16 +431,20 @@ public class ResponseHandler {
     }
 
     private static void handleEnableSingleButtons() {
-        Platform.runLater(()-> TicTackToeController.enableAllButtons());
         System.out.println("in handle enable buttons");
+        Platform.runLater(()-> TicTackToeController.enableAllButtons());
     }
-
+    private static void handleContinueGame() {
+        System.out.println("in handle continue Gmae");
+       Platform.runLater(()-> TicTackToeController.enableAllButtons()); 
+    }
     private static void handleDisapleAllButtonsSingle() {
         System.out.println("in handle disable all buttons");
         Platform.runLater(()-> TicTackToeController.disapleAllButtons());
     }
 
     private static void handleEndSingleModeGame(JSONObject data) {
+        System.out.println("in handle end single mode game");
         try {
             String playerCase = (String) data.get("playerCase");
             App.setRoot("End  Game View");
@@ -447,6 +465,8 @@ public class ResponseHandler {
     /* _____ * _____ start of Chat Room Responses _____ * _____ */
 
     private static void handleAddNewMessage(JSONObject data) {
+        System.out.println("in handle add new message");
+
         String message = (String) data.get("message");
         String sender = (String) data.get("sender");
         // This method will just add this message in the text area
@@ -460,6 +480,8 @@ public class ResponseHandler {
     }
 
     private static void handleOpenChatRoom(JSONObject data) {
+        System.out.println("in handle open chat room");
+
         String chatID = (String) data.get("chatID");
         String sender = (String) data.get("sender");
         String receiver = (String) data.get("receiver");
@@ -481,6 +503,7 @@ public class ResponseHandler {
     }
 
     private static void handlePlayerLeftChatRoom(JSONObject data) {
+        System.out.println("in handle player left chat");
         String playerName = (String) data.get("playerName");
         // this method will show up a message that say that
         System.out.println("unfortunatly " + playerName + " has left the chat");
@@ -488,6 +511,7 @@ public class ResponseHandler {
     }
 
     private static void handlePlayerInChat(JSONObject data) {
+        System.out.println("in handle playerinchat");
         // todo
         // this function will reveal an info message that tell the player
         // that the player that he invinted is currentlty in chat
@@ -504,8 +528,9 @@ public class ResponseHandler {
     /* _____ * _____ end of Chat Room Responses _____ * _____ */
     /* _____ * _____ general Responses _____ * _____ */
     private static void handleUpdatePlayerData(JSONObject data) {
-        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
-        Client.player.setPlayerRank((String) data.get("playerRank"));
+        System.out.println("in updatePlayerData ");
+//        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
+//        Client.player.setPlayerRank((String) data.get("playerRank"));
         // this is all what this handler do it only get the new data after the game
         // ended and set it in the player data
         // so when you switch to your home view you will be having the new rank
@@ -513,6 +538,8 @@ public class ResponseHandler {
     }
 
     private static void handleUpdateAvilablePlayersList(JSONObject data) {
+        
+        System.out.println("in handle update avilable players list");
         ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
         String update = (String) data.get("update");
         for (var playerName : playerNames) {
@@ -529,6 +556,8 @@ public class ResponseHandler {
     }
 
     private static void updateAvilablePlayersList() {
+        
+        System.out.println("in updateAvilableplayersListFunction");
         // this function will loob on the Opponent.onlinePlayers arrayList
         // every online player have 2 values name and inGame boolean
         // you have rebuild the players list with inGame mark next too each one

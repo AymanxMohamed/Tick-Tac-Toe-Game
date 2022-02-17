@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="playername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.quitGameController">
+   <children>
+      <Pane layoutX="422.0" layoutY="116.0" prefHeight="351.0" prefWidth="731.0" styleClass="container">
+         <children>
+            <Button layoutX="121.0" layoutY="237.0" mnemonicParsing="false" onAction="#sendForceEndSingleGame" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Yes" textFill="#cf3ee8">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Button>
+            <Label fx:id="endGameMessage1" layoutX="96.0" layoutY="55.0" prefHeight="57.0" prefWidth="527.0" text="Are you sure you want to end  the game" textFill="WHITE">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="endGameMessage11" layoutX="239.0" layoutY="127.0" prefHeight="57.0" prefWidth="253.0" text="You will lose points" textFill="WHITE">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Button layoutX="428.0" layoutY="237.0" mnemonicParsing="false" onAction="#cancel" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Cancel" textFill="#cf3ee8">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

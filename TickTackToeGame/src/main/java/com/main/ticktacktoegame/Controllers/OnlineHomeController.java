@@ -9,6 +9,8 @@ import com.main.ticktacktoegame.Network.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -52,6 +54,14 @@ public class OnlineHomeController implements Initializable {
         onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
         
 //        registerDateLabel.setText(Client.player.getRegisterDate());
+    }
+    @FXML
+    public void exit(){
+        try {
+            App.setRoot("exitView");
+        } catch (IOException ex) {
+            Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

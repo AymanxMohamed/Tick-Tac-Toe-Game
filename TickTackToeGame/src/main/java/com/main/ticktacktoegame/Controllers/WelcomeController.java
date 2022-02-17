@@ -52,6 +52,14 @@ public class WelcomeController implements Initializable {
             ex.printStackTrace();
         }
     }
+    @FXML
+    public void exit() {
+        try {
+            App.setRoot("exitView");
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
