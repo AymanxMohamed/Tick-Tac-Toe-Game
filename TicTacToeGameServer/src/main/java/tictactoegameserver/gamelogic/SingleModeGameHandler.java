@@ -12,6 +12,7 @@ import tictactoegameserver.Network.ResponseCreator;
 import static tictactoegameserver.Network.ResponseCreator.drawSingleMovesResponse;
 import static tictactoegameserver.Network.ResponseCreator.enableSingleButtonsResponse;
 import static tictactoegameserver.Network.ResponseCreator.endMultiModeGameResponse;
+import static tictactoegameserver.Network.ResponseCreator.endSingleModeGameResponse;
 import static tictactoegameserver.Network.ResponseCreator.goToWelcomeViewResponse;
 import static tictactoegameserver.Network.ResponseCreator.removeSingleButtonResponse;
 import static tictactoegameserver.Network.ResponseCreator.updateAvilablePlayersList;
@@ -113,12 +114,24 @@ public class SingleModeGameHandler {
                     break;
             }
             if (line.equals("xxx")) {
-                playerCase = playerType.equals("x") ? "winner" : "loser";
+                if (playerType.equals("X")) {
+                    playerCase = "winner";
+                } else {
+                    playerCase = "loser";
+                }
+                System.out.println("playerType is: " + playerType + " X Won" );
+                System.out.println("playerCase is: " + playerCase);
                 return true;
             } else if (line.equals("ooo")) {
-                playerCase = playerCase = playerType.equals("o") ? "winner" : "loser";
+                if (!playerType.equals("X")) {
+                    playerCase = "winner";
+                } else {
+                    playerCase = "loser";
+                }
+                System.out.println("playerType is: " + playerType + " o Won" );
+                System.out.println("playerCase is: " + playerCase);
                 return true;
-            } else if (gameMoves.size() == 9) {
+            } else if (avilableMoves.size() < 1) {
                 playerCase = "draw";
                 return true;
             }
@@ -128,9 +141,12 @@ public class SingleModeGameHandler {
     
     public void processMove(int index) {
         addMove(index);
+        System.out.println("player played in index: " + index);
         removeMove(index);
+        System.out.println("avilable moves: " + avilableMoves);
         playerHandler.sendResponse(drawSingleMovesResponse(gameMoves));
         if (isGameEnded()) {
+            System.out.println("game ended and the playerCase is: " + playerCase);
             handleEndGame();
             return;
         }
@@ -139,6 +155,9 @@ public class SingleModeGameHandler {
     private void processAiMove() {
         int aiIndex = generateMove();
         addMove(aiIndex);
+        System.out.println("computer played in index: " + aiIndex);
+        removeMove(aiIndex);
+        System.out.println("avilable moves: " + avilableMoves);
         if (isGameEnded()) {
             handleEndGame();
             return;
@@ -167,7 +186,7 @@ public class SingleModeGameHandler {
         playerHandler.sendResponse(updatePlayerDataResponse(playerHandler.player));
         
 
-        playerHandler.sendResponse(endMultiModeGameResponse(playerCase));
+        playerHandler.sendResponse(endSingleModeGameResponse(playerCase));
         currentGames.remove(this);
         DatabaseManager.closeDataBaseConnection();
     }
@@ -183,7 +202,7 @@ public class SingleModeGameHandler {
         }
         return -1;
     }
-    private void removeMove(int move) {
+    private void removeMove(Object move) {
         avilableMoves.remove((Integer) move);
         System.out.println("move " + move + " is removed");
     }
@@ -191,21 +210,18 @@ public class SingleModeGameHandler {
     private int generateEasyMove() {
         int index = (int)(Math.random() * avilableMoves.size());
         int move = avilableMoves.get(index);
-        removeMove(move);
         return move;
     }
 
     private int generateMediumMove() {
         int index = (int)(Math.random() * avilableMoves.size());
         int move = avilableMoves.get(index);
-        removeMove(move);
         return move;
     }
 
     private int generateHardMove() {
         int index = (int)(Math.random() * avilableMoves.size());
         int move = avilableMoves.get(index);
-        removeMove(move);
         return move;
     }
     public String getGameID() { return this.gameID; }

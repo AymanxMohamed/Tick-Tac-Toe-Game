@@ -7,6 +7,9 @@
 // xChoosen or o
 {"request":"XorOChoise","data":{"invitationSender":"ayman","invitationReciever":"shopaky","choise":"X"}}
 // send move
-{"request":"multiMove","data":{"gameId":"ab62363a-c342-4fae-93aa-a722127c3e39","index":"0"}}
+{"request":"multiMove","data":{"gameId":"998ce469-612c-4c32-9c4b-7fa2dfb5fbc5","index":"0"}}
 
-java.lang.ClassCastException: class java.lang.String cannot be cast to class java.lang.Long (java.lang.String and java.lang.Long are in module java.base of loader 'bootstrap')
+// single mode game test
+
+{"request":"play single mode game","data":{"difficulty":"easy","choice":"X"}}
+{"request":"singleMove","data":{"gameId":"e0e06df6-5f3f-4f76-94fd-cbe698441e5f","index":"0"}}

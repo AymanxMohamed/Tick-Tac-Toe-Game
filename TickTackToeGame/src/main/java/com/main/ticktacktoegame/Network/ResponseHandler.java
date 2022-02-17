@@ -12,6 +12,7 @@ import static com.main.ticktacktoegame.Network.RequestCreator.*;
 import static com.main.ticktacktoegame.Network.Utility.getIntegerArray;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -32,7 +33,7 @@ public class ResponseHandler {
 
     public static ArrayList<Button> singleGameModeButtons;
 
-    public static void inializeSingleModeGameButtons() {
+    public static void inializeSingleModeGameButtons(ArrayList<Button> multiModeGameButtons) {
         Button button0 = (Button) App.scene.lookup("#button0");
         Button button1 = (Button) App.scene.lookup("#button1");
         Button button2 = (Button) App.scene.lookup("#button2");
@@ -42,7 +43,7 @@ public class ResponseHandler {
         Button button6 = (Button) App.scene.lookup("#button6");
         Button button7 = (Button) App.scene.lookup("#button7");
         Button button8 = (Button) App.scene.lookup("#button8");
-        singleGameModeButtons = new ArrayList<>() {
+        multiModeGameButtons = new ArrayList<>() {
             {
                 add(button0);
                 add(button1);
@@ -113,7 +114,8 @@ public class ResponseHandler {
                 handleStartMultiModeGame(data);
                 break;
             case "disaple all buttons":
-                handleDisapleAllButtons();
+                //handleDisapleAllButtons();
+                handleDisapleAllButtonsSingle();
                 break;
             case "end multi mode game":
                 handleEndMultiModeGame(data);
@@ -125,13 +127,15 @@ public class ResponseHandler {
                 handleUpdateAvilablePlayersList(data);
                 break;
             case "remove multi button":
-                handleRemoveMultiButtons(data);
+//                handleRemoveMultiButtons(data);
                 break;
             case "draw multi moves":
-                handleDrawMultiMovesHandler(data);
+                //handleDrawMultiMovesHandler(data);
+                handleDrawSingleMoves(data);
                 break;
             case "enable multi buttons":
-                handleEnableMultiButtons();
+                //handleEnableMultiButtons();
+                handleEnableSingleButtons();
                 break;
             case "draw single moves":
                 handleDrawSingleMoves(data);
@@ -226,7 +230,7 @@ public class ResponseHandler {
     private static void handleAddNewPlayer(JSONObject data) {
         // todo
         String playerName = (String) data.get("playerName");
-        if (!playerName.equals(Client.player.getUserName())) {
+        if (Client.player != null && !playerName.equals(Client.player.getUserName())) {
             Opponent.addOpponent(playerName, false, false);
             updateAvilablePlayersList();
             System.out.println(playerName + " is online now");
@@ -262,76 +266,56 @@ public class ResponseHandler {
 
     /* _____ * _____ Game invitation for sender Responses _____ * _____ */
     private static void handlePlayerInGame(JSONObject data) {
-        // todo
-        // this function will reveal an info message that tell the player
-        // that the player that he invinted is currentlty in game
-        String invitedPlayer = (String) data.get("invitedPlayer");
-        System.out.println(invitedPlayer + " is currently in game");
-
-        // todo later
-        // we can send a list of current players names and update it frequently
-        // with the same logic of the online players and prevent the client from
-        // sending invitation request to the players that is in game
-
+        try {
+            String invitedPlayer = (String) data.get("invitedPlayer");
+            System.out.println(invitedPlayer + " is currently in game");
+            App.setRoot("PlayerIsCurrentlyInGameView");
+            Label receiverName = (Label)App.scene.lookup("#playerName");
+            receiverName.setText(invitedPlayer);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void handleInvitationSended(JSONObject data) {
-        // todo
-        // we can show a little info that tell the client that his invitation has been
-        // sended
         String invitationReciever = (String) data.get("invitationReciever");
         System.out.println("The invitation to " + invitationReciever + " has been sent successfuly");
     }
 
     private static void handleInvitationRejected(JSONObject data) {
-        // todo
-        // we will display a nice message or dialog or any thing that tell the
-        // client that the invitation rejected
-        // for example
-        String invitationReciever = (String) data.get("invitationReciever");
-        System.out.println(invitationReciever + " reject your invitation");
+        try {
+            String invitationReciever = (String) data.get("invitationReciever");
+            System.out.println(invitationReciever + " reject your invitation");
+            App.setRoot("InvitationRejectedView");
+            Label receiverName = (Label)App.scene.lookup("#playerName");
+            receiverName.setText(invitationReciever);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void handleChooseXOrO(JSONObject data) {
-        // this function will reveal a choose x or o view
-        String invitationSender = (String) data.get("invitationSender");
-        String invitationReciever = (String) data.get("invitationSender");
-        Client.opponnentName = invitationReciever;
-        // you will have to store the sender and receiver data to be able
-        // to pass it
-        // if the client pressed on x
-        // note when you use this method XChoosen or YChoosen you are the sender
-        // and the Client.opponentName is The reciever
-        Client.sendRequest(xChoosen(Client.player.getUserName(), Client.opponnentName));
-        // else if the client pressed on y
-        Client.sendRequest(oChoosen(Client.player.getUserName(), Client.opponnentName));
+        try {
+            String invitationReciever = (String) data.get("invitationReciever");
+            Client.opponnentName = invitationReciever;
+            App.setRoot("chooseXorOMulti");
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /* _____ * _____ Game invitation for receiver Responses _____ * _____ */
 
     private static void handleGameInvitation(JSONObject data) {
         String invitationSender = (String) data.get("invitationSender");
-        String invitationReciever = (String) data.get("invitationReciever");
         Client.opponnentName = invitationSender;
-        // todo
-        // this function should reveal a dialog box with a nice message
-        // this message will have 2 buttons one accept and one reject
-        // example for the message
-        System.out.println(invitationSender + " want to play with you");
-        // if he pressed on accept button you will send an accept invitation
-        // request by copy and paste the below line of code
-
-        // when you send accept or reject you are the receiver and the client is the
-        // sender
-        // this below code is correct
-
-        // Client.sendRequest(acceptInvitation(Client.opponnentName,
-        // Client.player.getUserName()));
-
-        // if he pressed on reject buttoon you will send an reject invitation
-        // by copy and paste the below line of code
-        // Client.sendRequest(rejectInvitation(Client.opponnentName,
-        // Client.player.getUserName()));
+        try {
+            App.setRoot("InvitationFromPlayer");
+            Label senderName = (Label)App.scene.lookup("#playerName");
+            senderName.setText(invitationSender);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /* _____ * _____ Multi Mode Game Responses _____ * _____ */
@@ -340,31 +324,22 @@ public class ResponseHandler {
         String gameID = (String) data.get("gameId");
         String playerX = (String) data.get("playerX");
         String playerO = (String) data.get("playerO");
-
-        // you will have to store the game id in the client
         Client.multiModeGameId = gameID;
-        if (playerX.equals(Client.player.getUserName())) {
-            // then this client is the player x
-            // highlight player X label to inform the client that he play
-            // with x
-        } else {
-            // this client is the player O
-            // highlight player o label to inform the client that he play
-            // with x
+        Client.singleModeGameID = "";
+        try {
+            App.setRoot("TicTackToe");
+//            inializeSingleModeGameButtons(Client.currentGame.buttons);
+            Label playerXLabel = (Label)App.scene.lookup("#playerX");
+            playerXLabel.setText(playerX);
+            Label playerOLabel = (Label)App.scene.lookup("#playerO");
+            playerOLabel.setText(playerO);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // Switch to the game view with player X on the left with his name
-        // and player o on the right with his name also
-        // you can also place any nice pic for each player on the left and
-        // the right
     }
 
     private static void handleDisapleAllButtons() {
-        // note: to make handle disaple moves and enable moves so ezz
-        // you will have to make an arraylist in the game controller
-        // this array list will have all buttons indexed from 0 to 8
-        // at disaple all buttons you will loop on the array and disaple all the buttons
-        // in it
+        Platform.runLater(()-> Client.currentGame.disapleAllButtons());
     }
 
     private static void handleEndMultiModeGame(JSONObject data) {
@@ -383,20 +358,17 @@ public class ResponseHandler {
     public static void handleDrawMultiMovesHandler(JSONObject data) {
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
-        // this is an array of game moves start drawing the x and o
-        // draw x then o and notice that the array have the indexes of the buttons
-        // so always first index in the array represent x
+        Platform.runLater(()-> Client.currentGame.drawMoves(gameMoves));
     }
 
-    private static void handleRemoveMultiButtons(JSONObject data) {
-        int index = ((Long) data.get("bonusPoints")).intValue();
-        // this handler will just remove the button From the buttons array
-        // in the controller
-    }
+//    private static void handleRemoveMultiButtons(JSONObject data) {
+//        int index = ((Long) data.get("bonusPoints")).intValue();
+//        // this handler will just remove the button From the buttons array
+//        // in the controller
+//    }
 
     private static void handleEnableMultiButtons() {
-        // this hanlder will just enable all buttons in the multimode controller
-        // buttons array
+        Platform.runLater(()-> TicTackToeController.enableAllButtons());
     }
 
     private static void handlePlayerLeftMultiGame(JSONObject data) {
@@ -415,7 +387,10 @@ public class ResponseHandler {
     private static void handleStartSingleModeGame(JSONObject data) {
         String gameID = (String) data.get("gameId");
         String choice = (String) data.get("choice");
+        
         Client.singleModeGameID = gameID;
+        Client.multiModeGameId  = "";
+        System.out.println("response accepted: , gameId = " + Client.singleModeGameID);
         try {
             App.setRoot("TicTackToe");
             if (choice.equals("X")) {
@@ -435,31 +410,36 @@ public class ResponseHandler {
     }
 
     private static void handleDrawSingleMoves(JSONObject data) {
+        System.out.println("in handle draw single moves");
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         ArrayList<Integer> gameMoves = getIntegerArray(objectArray);
         Platform.runLater(()-> TicTackToeController.drawMoves(gameMoves));
     }
 
     private static void handleEnableSingleButtons() {
-//        Platform.runLater(()-> Client.currentGame.enableAllButtons());
         Platform.runLater(()-> TicTackToeController.enableAllButtons());
+        System.out.println("in handle enable buttons");
     }
 
     private static void handleDisapleAllButtonsSingle() {
-//        Platform.runLater(()-> Client.currentGame.disapleAllButtons());
+        System.out.println("in handle disable all buttons");
         Platform.runLater(()-> TicTackToeController.disapleAllButtons());
     }
 
     private static void handleEndSingleModeGame(JSONObject data) {
-        String winner = (String) data.get("winner");
-        if (winner.equals(Client.player.getUserName())) {
-            // display winner view that Show a nice message to
-            // the player and said that he is the winner
-        } else if (winner.equals("draw")) {
-            // display the draw view
-        } else {
-            // display the loser view with a button that have play again and on press play
-            // again you will send another game invitation to the current player
+        try {
+            String playerCase = (String) data.get("playerCase");
+            App.setRoot("End  Game View");
+            Label endGameMessage = (Label)App.scene.lookup("#endGameMessage");
+            if (playerCase.equals("winner")) {
+                endGameMessage.setText("Congratulation you won ");
+            } else if (playerCase.equals("draw")) {
+                endGameMessage.setText("Draw");
+            } else {
+                endGameMessage.setText("Unforunately you lost");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /* _____ * _____ end of Single Mode Game Responses _____ * _____ */

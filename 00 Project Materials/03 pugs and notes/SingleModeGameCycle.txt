@@ -1,0 +1,15 @@
+1-From Client
+	*play single mode request: {"request":"play single mode game","data":{"difficulty":"easy","choice":"X"}}
+2-From Server
+	*response start single mode game sended: {"data":{"gameId":"59cbfef3-e954-427f-b80c-a5e4708f54b6","choice":"X"},"response":"start single mode game"}
+
+3- at client Handler:
+* 	response accepted: , gameId = 59cbfef3-e954-427f-b80c-a5e4708f54b6
+4-From Client:
+	*singleMove request sended: {"request":"singleMove","data":{"gameId":"2d18cd40-d0d7-43a9-b91a-4c6565448a81","index":0}}
+
+5-From Server:
+	*Request draw moves sended: {"data":{"gameMoves":[0]},"response":"draw single moves"}
+	*Request draw moves sended: {"data":{"gameMoves":[0,5]},"response":"draw single moves"}
+	*enable single buttons sended: {"response":"enable single buttons"}
+6-

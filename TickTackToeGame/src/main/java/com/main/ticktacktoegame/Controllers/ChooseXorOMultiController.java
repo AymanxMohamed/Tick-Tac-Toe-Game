@@ -4,8 +4,10 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
-import com.main.ticktacktoegame.App;
-import java.io.IOException;
+import com.main.ticktacktoegame.Network.Client;
+import static com.main.ticktacktoegame.Network.RequestCreator.oChoosen;
+import static com.main.ticktacktoegame.Network.RequestCreator.xChoosen;
+import javafx.fxml.FXML;
 
 /**
  * FXML Controller class
@@ -14,18 +16,14 @@ import java.io.IOException;
  */
 public class ChooseXorOMultiController {
 
-    public void startTheGame() {
-        try {
-            App.setRoot("TicTackToe");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+   @FXML
+    public void sendxChoosen(){ 
+        Client.sendRequest(xChoosen());
+        
     }
-    public void playerXHandler(){
-        startTheGame();
-    }
-    public void playerOHandler() {
-        startTheGame();
+   @FXML
+    public void sendOChoosen(){
+        Client.sendRequest(oChoosen());
     }
     
 }

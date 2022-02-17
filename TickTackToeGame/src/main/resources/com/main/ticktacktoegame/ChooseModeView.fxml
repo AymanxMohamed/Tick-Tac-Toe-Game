@@ -12,7 +12,7 @@
             <Font size="40.0" />
          </font>
       </Button>
-      <Button layoutX="618.0" layoutY="481.0" mnemonicParsing="false" onAction="#switchToMultiMode" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Multi Mode" textFill="WHITE">
+      <Button layoutX="618.0" layoutY="481.0" mnemonicParsing="false" onAction="#sendMultiModeGameInvitation" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Multi Mode" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>

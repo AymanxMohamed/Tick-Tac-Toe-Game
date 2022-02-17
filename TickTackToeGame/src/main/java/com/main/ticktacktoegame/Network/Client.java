@@ -4,7 +4,9 @@
  */
 package com.main.ticktacktoegame.Network;
 
+import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
+import com.main.ticktacktoegame.Controllers.TicTackToeMultiController;
 import com.main.ticktacktoegame.Models.*;
 import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
 import java.net.Socket;
@@ -29,7 +31,7 @@ public class Client {
     public static String singleModeGameID = "";
     public static String chatRoomId = "";
     public static DIFFICULTY difficulty;
-    public static TicTackToeController currentGame;
+    public static TicTackToeMultiController currentGame;
 
         
     public static void openConnection() throws IOException {
@@ -55,6 +57,9 @@ public class Client {
                 System.out.println("connection lost");
                 closeEveryThing();
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
+                closeEveryThing();
+                
             }
         }).start();
     }
@@ -69,6 +74,7 @@ public class Client {
     }
     public static void closeEveryThing() {
         try {
+            App.setRoot("ServerIsDownPopUp");
             if (bufferReader != null) {
                 bufferReader.close();
             }
@@ -78,8 +84,8 @@ public class Client {
             if (socket != null) {
                 socket.close();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 }

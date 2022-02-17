@@ -4,30 +4,23 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
-import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.forceEndSingleGame;
-import static com.main.ticktacktoegame.Network.RequestCreator.multiMove;
-import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
-import com.main.ticktacktoegame.Network.ResponseHandler;
-import javafx.event.ActionEvent;
+import static com.main.ticktacktoegame.Network.RequestCreator.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
-import javax.swing.SwingUtilities;
 
 /**
  * FXML Controller class
  *
  * @author ayman
  */
-public class TicTackToeController implements Initializable {
+public class TicTackToeMultiController implements Initializable {
 
     @FXML
     private Button button0;
@@ -62,7 +55,7 @@ public class TicTackToeController implements Initializable {
     @FXML
     private Label playerO;
     
-    public static ArrayList<Button> buttons;
+    public  ArrayList<Button> buttons;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,9 +73,8 @@ public class TicTackToeController implements Initializable {
             setupButton(button);
             button.setFocusTraversable(false);
         });
+        Client.currentGame = this;
     }
-
-
 
     @FXML
     void quitGame() {
@@ -94,15 +86,19 @@ public class TicTackToeController implements Initializable {
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             button.setDisable(true);
-            button.setText("");
         });
     }
 
-    public static void disapleAllButtons() {
-        buttons.forEach(button -> button.setDisable(true));
+    public  void disapleAllButtons() {
+        buttons.forEach(button -> {
+            if (button == null) {
+                return;
+            }
+            button.setDisable(true);
+        });
     }
 
-    public static  void enableAllButtons() {
+    public   void enableAllButtons() {
         buttons.forEach(button -> {
             if (button.getText().equals("")) {
                 button.setDisable(false);
@@ -112,7 +108,7 @@ public class TicTackToeController implements Initializable {
         });
     }
 
-    public static void drawMoves(ArrayList<Integer> gameMoves) {
+    public  void drawMoves(ArrayList<Integer> gameMoves) {
         int buttonIndex;
         for (int i = 0; i < gameMoves.size(); i++) {
             if (i % 2 == 0) {
@@ -133,75 +129,48 @@ public class TicTackToeController implements Initializable {
 
     @FXML
     void send0Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(0));
-        else
-            Client.sendRequest(multiMove(0));
-
+        Client.sendRequest(multiMove(0));
+        //System.out.println(multiMove(0));
     }
 
     @FXML
     void send1Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(1));
-        else
-            Client.sendRequest(multiMove(1));
+        Client.sendRequest(multiMove(1));
     }
 
     @FXML
     void send2Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(2));
-        else
-            Client.sendRequest(multiMove(2));
+        Client.sendRequest(multiMove(2));
     }
 
     @FXML
     void send3Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(3));
-        else
-            Client.sendRequest(multiMove(3));
+        Client.sendRequest(multiMove(3));
     }
 
     @FXML
     void send4Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(4));
-        else
-            Client.sendRequest(multiMove(4));
+        Client.sendRequest(multiMove(4));
     }
 
     @FXML
     void send5Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(5));
-        else
-            Client.sendRequest(multiMove(5));
+        Client.sendRequest(multiMove(5));
     }
 
     @FXML
     void send6Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(6));
-        else
-            Client.sendRequest(multiMove(6));
+        Client.sendRequest(multiMove(6));
     }
 
     @FXML
     void send7Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(7));
-        else
-            Client.sendRequest(multiMove(7));
+        Client.sendRequest(multiMove(7));
     }
 
     @FXML
     void send8Move() {
-        if (!Client.singleModeGameID.equals(""))
-            Client.sendRequest(singleMove(8));
-        else
-            Client.sendRequest(multiMove(8));
+        Client.sendRequest(multiMove(8));
     }
 
 }

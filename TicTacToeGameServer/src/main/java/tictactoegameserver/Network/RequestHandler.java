@@ -167,10 +167,11 @@ public class RequestHandler {
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
-        
-        recieverHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
+
+        playerXHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
+        playerOHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
         playerOHandler.sendResponse(disapleAllButtonsResponse());
-        return startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName());
+        return doNothingResponse();
     }
                     /*_____ * _____ game process _____ * _____ */
     
@@ -195,6 +196,7 @@ public class RequestHandler {
     /*_____ * _____  Single Mode Game Requests _____ * _____ */
     
     private static String handlePlaySingleModeGame(JSONObject data, PlayerHandler playerHandler) {
+        System.out.println("Request accepted: ");
         String difficulty = (String) data.get("difficulty");
         String choice = (String) data.get("choice");
         String gameID = generateUniqueId();
@@ -210,7 +212,7 @@ public class RequestHandler {
         String gameID = (String) data.get("gameId");
         int index = ((Long) data.get("index")).intValue();
         getSingleModeGameHandler(gameID).processMove(index);
-        return disapleAllButtonsResponse();
+        return doNothingResponse();
     }
     private static void handleForceEndSingleModeGame(JSONObject data) {
         String gameId = (String) data.get("gameId");

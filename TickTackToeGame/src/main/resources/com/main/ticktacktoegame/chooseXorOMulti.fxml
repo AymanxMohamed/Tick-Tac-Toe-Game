@@ -9,7 +9,7 @@
    <children>
       <Pane layoutX="126.0" layoutY="97.0" prefHeight="608.0" prefWidth="608.0" styleClass="xContainer">
          <children>
-            <Button layoutX="168.0" layoutY="145.0" mnemonicParsing="false" onAction="#playerXHandler" prefHeight="304.0" prefWidth="270.0" styleClass="xBtn">
+            <Button layoutX="168.0" layoutY="145.0" mnemonicParsing="false" onAction="#sendxChoosen" prefHeight="304.0" prefWidth="270.0" styleClass="xBtn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -18,7 +18,7 @@
       </Pane>
       <Pane layoutX="796.0" layoutY="97.0" prefHeight="608.0" prefWidth="608.0" styleClass="oContainer">
          <children>
-            <Button layoutX="148.0" layoutY="125.0" mnemonicParsing="false" onAction="#playerOHandler" prefHeight="344.0" prefWidth="304.0" styleClass="oBtn">
+            <Button layoutX="148.0" layoutY="125.0" mnemonicParsing="false" onAction="#sendOChoosen" prefHeight="344.0" prefWidth="304.0" styleClass="oBtn">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

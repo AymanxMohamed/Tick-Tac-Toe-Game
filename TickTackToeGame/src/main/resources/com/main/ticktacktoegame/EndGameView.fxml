@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="playername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.EndSingleModeGameController">
+   <children>
+      <Pane layoutX="422.0" layoutY="116.0" prefHeight="351.0" prefWidth="731.0" styleClass="container">
+         <children>
+            <Label fx:id="popupLabel" layoutX="125.0" layoutY="81.0" text="message her for wining" textFill="WHITE">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Button layoutX="432.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToOnlineView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Home" textFill="#cf3ee8">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Button>
+            <Button layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#sendRequestAgain" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Play Again" textFill="#cf3ee8">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

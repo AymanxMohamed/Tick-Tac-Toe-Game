@@ -156,6 +156,7 @@ public class ResponseCreator {
     public static String disapleAllButtonsResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "disaple all buttons");
+        System.out.println("response disaple all buttons multi sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     
@@ -211,6 +212,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "start single mode game");
         responseObject.put("data", data);
+        System.out.println("response start single mode game sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     public static String removeSingleButtonResponse(int index) {
@@ -219,20 +221,23 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "remove single button");
         responseObject.put("data", data);
+        System.out.println("remove single button sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     public static String disapleAllButtonsSingleResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "disaple all buttons single");
+        System.out.println("disaple all buttons single: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     
     public static String endSingleModeGameResponse(String winner) {
         JSONObject data = new JSONObject();
-        data.put("winner", winner);
+        data.put("playerCase", winner);
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "end single mode game");
         responseObject.put("data", data);
+        System.out.println("end single mode game sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     public static String drawSingleMovesResponse(ArrayList<Integer> gameMoves) {
@@ -241,11 +246,13 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "draw single moves");
         responseObject.put("data", data);
+        System.out.println("Request draw moves sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     public static String enableSingleButtonsResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "enable single buttons");
+        System.out.println("enable single buttons sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     
@@ -256,6 +263,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "chat invitation");
         responseObject.put("data", data);
+        System.out.println("chat invitation sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
         
     }
@@ -269,6 +277,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "open chat room");
         responseObject.put("data", data);
+        System.out.println("open chat room sended: " + JSONValue.toJSONString(responseObject));
 
         return JSONValue.toJSONString(responseObject);
     }
@@ -280,6 +289,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "add new message");
         responseObject.put("data", data);
+        System.out.println("add new message sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     public static String playerLeftChatResponse(String playerName) {
@@ -288,6 +298,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "player left chat");
         responseObject.put("data", data);
+        System.out.println("player left chat sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     
@@ -300,6 +311,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "update player data");
         responseObject.put("data", data);
+        System.out.println("update player data sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
         
     }
@@ -310,6 +322,7 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "updateAvilablePlayesList");
         responseObject.put("data", data);
+        System.out.println("updateAvilablePlayesList sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     
@@ -320,12 +333,14 @@ public class ResponseCreator {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "player left the game");
         responseObject.put("data", dataObject);
+        System.out.println("player left the game sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     public static String updateOnlinePlayersResponse() {
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "update online players");
         responseObject.put("data", getOnlinePlayersJsonObject());
+        System.out.println("update online players sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
     }
     /*_____ * _____ Logout  Responses _____ * _____ */
