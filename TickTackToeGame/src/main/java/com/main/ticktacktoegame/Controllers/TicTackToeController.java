@@ -3,27 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package com.main.ticktacktoegame.Controllers;
-
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
-import static com.main.ticktacktoegame.Network.RequestCreator.forceEndSingleGame;
 import static com.main.ticktacktoegame.Network.RequestCreator.multiMove;
 import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
-import com.main.ticktacktoegame.Network.ResponseHandler;
 import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
-import javax.swing.SwingUtilities;
 
 /**
  * FXML Controller class
@@ -126,16 +119,15 @@ public class TicTackToeController implements Initializable {
         for (int i = 0; i < gameMoves.size(); i++) {
             if (i % 2 == 0) {
                 // x moves
-                buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
                 buttonIndex = gameMoves.get(i);
                 System.out.println("place X on Button " + buttonIndex);
                 buttons.get(buttonIndex).setText("X");
-
+                buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
             } else {
                 // O moves
-                buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
                 buttonIndex = gameMoves.get(i);
                 buttons.get(buttonIndex).setText("O");
+                buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
             }
         }
     }

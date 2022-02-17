@@ -529,8 +529,8 @@ public class ResponseHandler {
     /* _____ * _____ general Responses _____ * _____ */
     private static void handleUpdatePlayerData(JSONObject data) {
         System.out.println("in updatePlayerData ");
-//        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
-//        Client.player.setPlayerRank((String) data.get("playerRank"));
+        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
+        Client.player.setPlayerRank((String) data.get("playerRank"));
         // this is all what this handler do it only get the new data after the game
         // ended and set it in the player data
         // so when you switch to your home view you will be having the new rank
