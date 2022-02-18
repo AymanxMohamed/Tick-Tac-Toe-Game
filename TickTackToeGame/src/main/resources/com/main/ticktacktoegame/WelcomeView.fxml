@@ -129,11 +129,16 @@
                     <Font name="System Bold" size="38.0" />
                 </font>
             </Label>
-            <Button layoutX="452.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToPlayModeView" prefHeight="83.0" prefWidth="283.0" styleClass="playBtn">
+            <Button layoutX="649.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToPlayModeView" prefHeight="83.0" prefWidth="283.0" styleClass="playBtn">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
             </Button>
+         <Button layoutX="137.0" layoutY="301.0" mnemonicParsing="false" onAction="#goToSingleModeHistory" prefHeight="83.0" prefWidth="283.0" styleClass="playBtn">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Button>
         </Pane>
     </children>
 </AnchorPane>

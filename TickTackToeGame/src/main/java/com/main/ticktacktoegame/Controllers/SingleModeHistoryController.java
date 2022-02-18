@@ -74,6 +74,9 @@ public class SingleModeHistoryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        usernameLabel.setText(Client.player.getUserName());
+        bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
+        rankLabel.setText(Client.player.getPlayerRank());
         refreshTable();
     }
     

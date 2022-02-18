@@ -66,4 +66,14 @@ public class WelcomeController implements Initializable {
         rankLabel.setText(Client.player.getPlayerRank());
         usernameWelcomeLabel.setText(Client.player.getUserName());
     }
+    
+    @FXML
+    public void goToSingleModeHistory() {
+        try {
+//          App.setRoot("singleModeHistoryView");
+            App.setRoot("multiModeHistoryView");
+        } catch (IOException ex) {
+            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
