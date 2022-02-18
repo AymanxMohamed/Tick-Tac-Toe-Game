@@ -5,6 +5,7 @@
 package com.main.ticktacktoegame.Controllers;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Models.SingleModeGameModel;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.*;
 import java.io.IOException;
@@ -45,6 +46,24 @@ public class EndSingleModeGameController {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
             Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    void goToTicTackToeReplay() {
+         try {
+            App.setRoot("TicTackToeReplay");
+            Label playerXLabel = (Label)App.scene.lookup("#playerX");
+            Label playerOLabel = (Label)App.scene.lookup("#playerO");
+            
+            if (Client.cuurentCase.equals("X")) {
+                playerXLabel.setText(Client.player.getUserName());
+                playerOLabel.setText("Computer");
+            } else {
+                playerOLabel.setText(Client.player.getUserName());
+                playerXLabel.setText("Computer");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SingleModeGameModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

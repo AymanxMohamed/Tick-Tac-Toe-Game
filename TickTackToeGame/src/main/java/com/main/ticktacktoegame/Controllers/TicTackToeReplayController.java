@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 /**
@@ -85,7 +86,11 @@ public class TicTackToeReplayController implements Initializable {
 
     @FXML
     void quitGame() {
-       // switch to quit game view in record
+        try {
+            App.setRoot("onlineHome");
+        } catch (IOException ex) {
+            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
    
@@ -103,33 +108,29 @@ public class TicTackToeReplayController implements Initializable {
 
 
     public static void drawMoves(ArrayList<Integer> gameMoves) {
-        new Thread (() -> {
-            int buttonIndex;
-            for (int i = 0; i < gameMoves.size(); i++) {
-                if (i % 2 == 0) {
-                    // x moves
-                    buttonIndex = gameMoves.get(i);
-                    System.out.println("place X on Button " + buttonIndex);
-                    buttons.get(buttonIndex).setText("X");
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
-                } else {
-                    // O moves
-                    buttonIndex = gameMoves.get(i);
-                    buttons.get(buttonIndex).setText("O");
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
-                }
+        int buttonIndex;
+        for (int i = 0; i < gameMoves.size(); i++) {
+            if (i % 2 == 0) {
+                // x moves
+                buttonIndex = gameMoves.get(i);
+                buttons.get(buttonIndex).setText("X");
+                buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
+            } else {
+                // O moves
+                buttonIndex = gameMoves.get(i);
+                buttons.get(buttonIndex).setText("O");
+                buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
             }
-        }).start();
-        System.out.println("game ended");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            App.setRoot("gameReplayEnded");
+        } catch (IOException ex) {
+            Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

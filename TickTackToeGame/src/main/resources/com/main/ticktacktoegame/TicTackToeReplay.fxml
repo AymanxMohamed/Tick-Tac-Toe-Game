@@ -15,45 +15,45 @@
    <children>
       <FlowPane columnHalignment="CENTER" layoutX="521.0" layoutY="160.0" prefHeight="485.0" prefWidth="490.0" styleClass="FlowPane">
          <children>
-            <Button fx:id="button0" mnemonicParsing="false" onAction="#send0Move" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
+            <Button fx:id="button0" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin></Button>
-            <Button fx:id="button1" mnemonicParsing="false" onAction="#send1Move" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+            <Button fx:id="button1" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="button2" mnemonicParsing="false" onAction="#send2Move" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
+            <Button fx:id="button2" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="button3" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" onAction="#send3Move" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+            <Button fx:id="button3" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin></Button>
-            <Button fx:id="button4" mnemonicParsing="false" onAction="#send4Move" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+            <Button fx:id="button4" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="button5" mnemonicParsing="false" onAction="#send5Move" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+            <Button fx:id="button5" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="button6" mnemonicParsing="false" onAction="#send6Move" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
+            <Button fx:id="button6" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="button7" mnemonicParsing="false" onAction="#send7Move" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+            <Button fx:id="button7" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="button8" mnemonicParsing="false" onAction="#send8Move" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+            <Button fx:id="button8" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </FlowPane.margin>

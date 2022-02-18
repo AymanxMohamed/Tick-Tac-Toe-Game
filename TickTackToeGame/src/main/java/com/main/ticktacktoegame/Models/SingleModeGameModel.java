@@ -4,10 +4,20 @@
  */
 package com.main.ticktacktoegame.Models;
 
+import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Controllers.TicTackToeReplayController;
+import com.main.ticktacktoegame.Network.Client;
+import static com.main.ticktacktoegame.Network.Utility.getIntegerArray;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Label;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -53,7 +63,26 @@ public class SingleModeGameModel {
         return gameMovesJsonString;
     }
     public void playGame() {
-        
+        Client.cuurentCase = playerType;
+
+        JSONObject data = (JSONObject) JSONValue.parse(gameMovesJsonString);
+        ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
+        TicTackToeReplayController.gameMoves = getIntegerArray(objectArray);
+        try {
+            App.setRoot("TicTackToeReplay");
+            Label playerXLabel = (Label)App.scene.lookup("#playerX");
+            Label playerOLabel = (Label)App.scene.lookup("#playerO");
+            
+            if (Client.cuurentCase.equals("X")) {
+                playerXLabel.setText(Client.player.getUserName());
+                playerOLabel.setText("Computer");
+            } else {
+                playerOLabel.setText(Client.player.getUserName());
+                playerXLabel.setText("Computer");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SingleModeGameModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public void printData() {
         System.out.println("############################################");
