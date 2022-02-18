@@ -134,6 +134,7 @@
                     <Cursor fx:constant="HAND" />
                 </cursor>
             </Button>
+
          <Button layoutX="222.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToChooseHistoryModeView" prefHeight="83.0" prefWidth="283.0" styleClass="historyBtn">
             <cursor>
                <Cursor fx:constant="HAND" />
