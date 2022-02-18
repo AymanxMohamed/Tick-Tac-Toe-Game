@@ -576,11 +576,11 @@ public class ResponseHandler {
     }
 
     private static void handlePlayerLeftTheGame(JSONObject data) {
-        String playerName = (String) data.get("playerName");
-        if (!playerName.equals(Client.player.getUserName())) {
-            Opponent.removeOpponent(playerName);
-            System.out.println(playerName + " left the game");
-        }
+//        String playerName = (String) data.get("playerName");
+//        if (!playerName.equals(Client.player.getUserName())) {
+//            Opponent.removeOpponent(playerName);
+//            System.out.println(playerName + " left the game");
+//        }
     }
     /* _____ * _____ end of general Responses _____ * _____ */
 

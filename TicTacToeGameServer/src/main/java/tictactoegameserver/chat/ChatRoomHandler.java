@@ -7,6 +7,7 @@ package tictactoegameserver.chat;
 import java.util.ArrayList;
 import tictactoegameserver.Network.PlayerHandler;
 import static tictactoegameserver.Network.ResponseCreator.*;
+import tictactoegameserver.models.PlayerModel;
 
 /**
  *
@@ -44,6 +45,7 @@ public class ChatRoomHandler {
         ArrayList<String> chatPlayers = new ArrayList<>();
         chatPlayers.add(stayerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(chatPlayers, "inChat"));
+        PlayerModel.getPlayerModel(stayerHandler.player.getUserName()).toogleInChatStatus();
         currentRooms.remove(this);
     }
     public void endChat(String playerName) {
@@ -63,7 +65,11 @@ public class ChatRoomHandler {
         ArrayList<String> chatPlayers = new ArrayList<>();
         chatPlayers.add(leaverHandler.player.getUserName());
         chatPlayers.add(stayerHandler.player.getUserName());
+        
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(chatPlayers, "inChat"));
+        
+        PlayerModel.getPlayerModel(stayerHandler.player.getUserName()).toogleInChatStatus();
+        PlayerModel.getPlayerModel(leaverHandler.player.getUserName()).toogleInChatStatus();
         
         stayerHandler.sendResponse(updatePlayerDataResponse(stayerHandler.player));
         leaverHandler.sendResponse(updatePlayerDataResponse(leaverHandler.player));

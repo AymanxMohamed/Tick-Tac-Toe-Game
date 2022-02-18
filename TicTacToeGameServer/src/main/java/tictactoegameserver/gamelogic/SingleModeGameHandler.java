@@ -9,12 +9,10 @@ import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.DIFFICULTY;
 import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Network.ResponseCreator;
-import static tictactoegameserver.Network.ResponseCreator.drawSingleMovesResponse;
-import static tictactoegameserver.Network.ResponseCreator.enableSingleButtonsResponse;
-import static tictactoegameserver.Network.ResponseCreator.endSingleModeGameResponse;
-import static tictactoegameserver.Network.ResponseCreator.goToWelcomeViewResponse;
-import static tictactoegameserver.Network.ResponseCreator.updateAvilablePlayersList;
-import static tictactoegameserver.Network.ResponseCreator.updatePlayerDataResponse;
+
+import static tictactoegameserver.Network.ResponseCreator.*;
+
+import tictactoegameserver.models.PlayerModel;
 
 /**
  *
@@ -181,7 +179,7 @@ public class SingleModeGameHandler {
         XOPlayers.add(playerHandler.player.getUserName());
         
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
-        
+        PlayerModel.getPlayerModel(playerHandler.player.getUserName()).togleInGameStatus();
         PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerHandler.player));
 
         playerHandler.sendResponse(endSingleModeGameResponse(playerCase));
@@ -231,7 +229,7 @@ public class SingleModeGameHandler {
         ArrayList<String> XOPlayers = new ArrayList<>();
         XOPlayers.add(playerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
-        
+        PlayerModel.getPlayerModel(playerHandler.player.getUserName()).togleInGameStatus();
         PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerHandler.player));
         
         System.out.println(playerHandler);

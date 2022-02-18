@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import tictactoegameserver.Database.DatabaseManager;
+import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
+import tictactoegameserver.Database.Entities.Player;
 import static tictactoegameserver.Network.ResponseCreator.*;
 import static tictactoegameserver.Network.Utility.*;
 import tictactoegameserver.chat.ChatRoomHandler;
@@ -16,6 +18,7 @@ import  tictactoegameserver.gamelogic.MultiModeGameHandler;
 import static tictactoegameserver.gamelogic.MultiModeGameHandler.addMultiModeGameHandler;
 import tictactoegameserver.gamelogic.SingleModeGameHandler;
 import static tictactoegameserver.gamelogic.SingleModeGameHandler.addSingleModeGameHandler;
+import tictactoegameserver.models.PlayerModel;
 
 /**
  *
@@ -106,6 +109,7 @@ public class RequestHandler {
         ArrayList<String> newOnlinePlayers = new ArrayList<>();
         newOnlinePlayers.add(playerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(newOnlinePlayers, "playerStatus"));
+        PlayerModel.getPlayerModel(playerHandler.player.getUserName()).tooglePlayerStatus();
         
         return allPlayersListResponse();
     }
@@ -122,7 +126,9 @@ public class RequestHandler {
         } else {
             DatabaseManager.addNewPlayer(userName, password);
         }
-        PlayerHandler.broadcastResponse(addNewPlayerResponse(userName, DatabaseManager.getPlayer(userName)));
+        Player player = DatabaseManager.getPlayer(userName);
+        PlayerModel.addPlayer(player.getUserName(), player.getBonusPoints(), MappingFunctions.mapPlayerRank(player.getPlayerRank()));
+        PlayerHandler.broadcastResponse(addNewPlayerResponse(userName, player));
         DatabaseManager.closeDataBaseConnection();
         
         return registerSuccessResponse();
@@ -196,6 +202,9 @@ public class RequestHandler {
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        PlayerModel.getPlayerModel(playerXHandler.player.getUserName()).togleInGameStatus();
+        PlayerModel.getPlayerModel(playerOHandler.player.getUserName()).togleInGameStatus();
+
 
         playerXHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
         playerOHandler.sendResponse(startMultiModeGameResponse(gameID, playerXHandler.player.getUserName(), playerOHandler.player.getUserName()));
@@ -241,6 +250,7 @@ public class RequestHandler {
         ArrayList<String> XOPlayers = new ArrayList<>();
         XOPlayers.add(playerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        PlayerModel.getPlayerModel(playerHandler.player.getUserName()).togleInGameStatus();
         
         playerHandler.sendResponse(startSingleModeGameResponse(gameID, choice));
         addSingleModeGameHandler(gameID, playerHandler, choice, difficulty);
@@ -321,6 +331,9 @@ public class RequestHandler {
         chatPlayers.add(recieverHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(chatPlayers, "inChat"));
         
+        PlayerModel.getPlayerModel(senderHandler.player.getUserName()).toogleInChatStatus();
+        PlayerModel.getPlayerModel(recieverHandler.player.getUserName()).toogleInChatStatus();
+        
         senderHandler.sendResponse(openChatRoomResponse(chatID, senderHandler.player.getUserName(), recieverHandler.player.getUserName()));
         return openChatRoomResponse(chatID, senderHandler.player.getUserName(), recieverHandler.player.getUserName());
     }
@@ -367,8 +380,13 @@ public class RequestHandler {
         }
         
         ArrayList<String> newOnlinePlayers = new ArrayList<>();
+        
         newOnlinePlayers.add(playerHandler.player.getUserName());
+        
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(newOnlinePlayers, "playerStatus"));
+        
+        PlayerModel.getPlayerModel(playerHandler.player.getUserName()).tooglePlayerStatus();
+        
         System.out.println("in logout before close every thing");
         playerHandler.closeEveryThing();
         playerHandler = null;

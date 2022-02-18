@@ -9,6 +9,7 @@ import tictactoegameserver.Network.PlayerHandler;
 import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Network.ResponseCreator;
 import static tictactoegameserver.Network.ResponseCreator.*;
+import tictactoegameserver.models.PlayerModel;
 
 /**
  *
@@ -142,6 +143,9 @@ public class MultiModeGameHandler {
         XOPlayers.add(playerXHandler.player.getUserName());
         XOPlayers.add(playerOHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        PlayerModel.getPlayerModel(playerXHandler.player.getUserName()).togleInGameStatus();
+        PlayerModel.getPlayerModel(playerOHandler.player.getUserName()).togleInGameStatus();
+
         
         PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerXHandler.player));
         PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerOHandler.player));
@@ -172,6 +176,8 @@ public class MultiModeGameHandler {
         XOPlayers.add(winnerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
+        PlayerModel.getPlayerModel(winnerHandler.player.getUserName()).togleInGameStatus();
+        
         PlayerHandler.broadcastResponse(updatePlayerDataResponse(winnerHandler.player));
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
@@ -196,7 +202,9 @@ public class MultiModeGameHandler {
         XOPlayers.add(leaverHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
-        
+        PlayerModel.getPlayerModel(winnerHandler.player.getUserName()).togleInGameStatus();
+        PlayerModel.getPlayerModel(leaverHandler.player.getUserName()).togleInGameStatus();
+                
         DatabaseManager.openDataBaseConnection();
         winnerHandler.player.increaseBonusPoints();
         leaverHandler.player.decreaseBonusPoints();
