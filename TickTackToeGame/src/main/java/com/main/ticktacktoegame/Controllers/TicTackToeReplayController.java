@@ -4,20 +4,23 @@
  */
 package com.main.ticktacktoegame.Controllers;
 import com.main.ticktacktoegame.App;
-import com.main.ticktacktoegame.Network.Client;
-import static com.main.ticktacktoegame.Network.RequestCreator.multiMove;
-import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Timer;
 import java.util.TimerTask;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import javafx.scene.control.Label;
 
 /**
@@ -61,9 +64,10 @@ public class TicTackToeReplayController implements Initializable {
     private Label playerO;
     
     public static ArrayList<Button> buttons;
-    
+    public int index = 0;
     public static ArrayList<Integer> gameMoves;
-
+    public static String replayEndMessage;
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buttons = new ArrayList<>();
@@ -81,20 +85,18 @@ public class TicTackToeReplayController implements Initializable {
             button.setFocusTraversable(false);
         });
         disapleAllButtons();
-        drawMoves(gameMoves);
     }
 
 
     @FXML
     void quitGame() {
         try {
-            App.setRoot("onlineHome");
+            App.setRoot("WelcomeView");
         } catch (IOException ex) {
             Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-   
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
@@ -107,39 +109,26 @@ public class TicTackToeReplayController implements Initializable {
         buttons.forEach(button -> button.setDisable(true));
     }
 
-
-    public static void drawMoves(ArrayList<Integer> gameMoves) {
-        
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            public void run() {
-                System.out.println();
-            }
-        };
-        timer.schedule(task, 1000);
-        int buttonIndex;
-        for (int i = 0; i < gameMoves.size(); i++) {
-            if (i % 2 == 0) {
-                // x moves
-                buttonIndex = gameMoves.get(i);
-                buttons.get(buttonIndex).setText("X");
-                buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
-            } else {
-                // O moves
-                buttonIndex = gameMoves.get(i);
-                buttons.get(buttonIndex).setText("O");
-                buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
-            }
+    @FXML
+    public void DrawNextMove() {
+        if (index == gameMoves.size()) {
             try {
-                Thread.sleep(2000);
-            } catch (InterruptedException ex) {
+                App.setRoot("gameReplayEnded");
+                Label endGameMessage = (Label)App.scene.lookup("#endGameMessage");
+                endGameMessage.setText(replayEndMessage);
+            } catch (IOException ex) {
                 Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        try {
-            App.setRoot("gameReplayEnded");
-        } catch (IOException ex) {
-            Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
+        int buttonIndex = gameMoves.get(index);
+        if (index % 2 == 0) {
+            // x moves 
+            buttons.get(buttonIndex).setText("X");
+            buttons.get(gameMoves.get(index)).getStyleClass().add("xMove");
+        } else {
+            buttons.get(buttonIndex).setText("O");
+            buttons.get(gameMoves.get(index)).getStyleClass().add("oMove");
         }
+        index++;
     }
 }

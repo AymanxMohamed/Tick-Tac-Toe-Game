@@ -567,7 +567,7 @@ public class ResponseHandler {
         ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
         String update = (String) data.get("update");
         for (var playerName : playerNames) {
-            if (!playerName.equals(Client.player.getUserName())) {
+            if (Client.player != null && !playerName.equals(Client.player.getUserName())) {
                 Opponent player = Opponent.getOpponent(playerName);
                 
                 if (player == null)
@@ -604,6 +604,8 @@ public class ResponseHandler {
 
      /* _____ * _____ Game History  _____ * _____ */
     private static void handelSingleModeGameHistory(JSONObject data) {
+        System.out.println("in handle single mode history");
+        System.out.println(data);
         JSONArray gameHistoryObjects = (JSONArray) data.get("gameHistoryObjects");
         SingleModeGameModel.singleModeHistory = new ArrayList<>();
         for (int i = 0; i < gameHistoryObjects.size(); i++) {
@@ -618,6 +620,8 @@ public class ResponseHandler {
     }
 
     private static void handelMultiModeGameHistory(JSONObject data) {
+        System.out.println("in handelMultiModeGameHistory");
+        System.out.println(data);
         JSONArray gameHistoryObjects = (JSONArray) data.get("gameHistoryObjects");
         MultiModeGameModel.multiModeHistory = new ArrayList<>();
         for (int i = 0; i < gameHistoryObjects.size(); i++) {

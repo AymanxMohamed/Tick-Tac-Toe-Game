@@ -43,6 +43,7 @@ public class Server {
     synchronized public static void closeServer() {
         isClosed = true;
         PlayerHandler.broadcastResponse(serverIsClosed());
+        PlayerHandler.playerHandlers.forEach(handler -> handler.closeEveryThing());
         try {
             if (!serverSocket.isClosed())
             {

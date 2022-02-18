@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -69,7 +70,15 @@ public class MultiModeGameModel {
         JSONObject data = (JSONObject) JSONValue.parse(gameRecordJsonString);
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         TicTackToeReplayController.gameMoves = getIntegerArray(objectArray);
-
+        
+        if (playerCase.equals("winner")) {
+            TicTackToeReplayController.replayEndMessage = "You were Winner";
+        } else if (playerCase.equals("draw")){
+            TicTackToeReplayController.replayEndMessage = "The Game was draw";
+        } else {
+            TicTackToeReplayController.replayEndMessage = "You were loser";
+        }
+        
         try {
             App.setRoot("TicTackToeReplay");
             Label playerXLabel = (Label)App.scene.lookup("#playerX");

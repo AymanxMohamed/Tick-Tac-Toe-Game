@@ -98,7 +98,6 @@ public class MultiModeHistoryController implements Initializable {
                     Logger.getLogger(MultiModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
         }).start();
     }
 
@@ -108,7 +107,6 @@ public class MultiModeHistoryController implements Initializable {
             playerType.setCellValueFactory(new PropertyValueFactory<>("playerType"));
             opponent.setCellValueFactory(new PropertyValueFactory<>("opponent"));
             playerCase.setCellValueFactory(new PropertyValueFactory<>("playerCase"));
-
             multiModeHistoryTabel.setItems(multiModeHistory);
         } else {
             multiModeHistoryTabel.setPlaceholder(new Label("You didn't play any multi mode game"));

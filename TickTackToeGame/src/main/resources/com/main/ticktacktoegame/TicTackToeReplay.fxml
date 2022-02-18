@@ -65,7 +65,7 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="694.0" layoutY="685.0" onAction="#quitGame" prefWidth="159.0" scaleShape="false" text="Quit" textFill="WHITE">
+      <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="851.0" layoutY="687.0" onAction="#quitGame" prefWidth="159.0" scaleShape="false" text="Quit" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -103,5 +103,13 @@
             <Font size="40.0" />
          </font>
       </Label>
+      <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="528.0" layoutY="687.0" onAction="#DrawNextMove" prefWidth="159.0" scaleShape="false" text="Next Move" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

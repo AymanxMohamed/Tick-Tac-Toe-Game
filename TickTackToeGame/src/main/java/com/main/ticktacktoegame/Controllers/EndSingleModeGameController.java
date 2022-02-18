@@ -48,6 +48,17 @@ public class EndSingleModeGameController {
             Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    void goToWelcomeView() {
+        try {
+            App.setRoot("WelcomeView");
+        } catch (IOException ex) {
+            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     @FXML
     void goToTicTackToeReplay() {
          try {

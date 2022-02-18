@@ -10,12 +10,12 @@
    <children>
       <Pane layoutX="422.0" layoutY="116.0" prefHeight="351.0" prefWidth="731.0" styleClass="container">
          <children>
-            <Label fx:id="endGameMessage" layoutX="167.0" layoutY="83.0" text="Game Replay Ended" textFill="WHITE">
+            <Label layoutX="167.0" layoutY="63.0" text="Game Replay Ended" textFill="WHITE">
                <font>
                   <Font size="45.0" />
                </font>
             </Label>
-            <Button layoutX="432.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToOnlineView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Home" textFill="#cf3ee8">
+            <Button layoutX="432.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToWelcomeView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Home" textFill="#cf3ee8">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -25,6 +25,11 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Button>
+            <Label fx:id="endGameMessage" layoutX="176.0" layoutY="143.0" prefHeight="66.0" prefWidth="432.0" text="You were winner" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

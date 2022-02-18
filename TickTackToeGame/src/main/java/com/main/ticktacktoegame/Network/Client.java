@@ -10,6 +10,8 @@ import com.main.ticktacktoegame.Models.*;
 import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
 import java.net.Socket;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -55,10 +57,10 @@ public class Client {
             } catch (IOException ex) {
                 System.out.println("connection lost");
                 closeEveryThing();
-                //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception e) {
                 closeEveryThing();
-               // e.printStackTrace();
+                e.printStackTrace();
             }
         }).start();
     }
@@ -71,7 +73,7 @@ public class Client {
             bufferedWriter.flush();
         } catch (IOException ex) {
             closeEveryThing();
-           /// Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void closeEveryThing() {

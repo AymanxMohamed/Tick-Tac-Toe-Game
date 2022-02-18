@@ -13,8 +13,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -68,6 +70,13 @@ public class SingleModeGameModel {
         JSONObject data = (JSONObject) JSONValue.parse(gameMovesJsonString);
         ArrayList<Object> objectArray = (ArrayList<Object>) data.get("gameMoves");
         TicTackToeReplayController.gameMoves = getIntegerArray(objectArray);
+        if (playerCase.equals("winner")) {
+            TicTackToeReplayController.replayEndMessage = "You were Winner";
+        } else if (playerCase.equals("draw")){
+            TicTackToeReplayController.replayEndMessage = "The Game was draw";
+        } else {
+            TicTackToeReplayController.replayEndMessage = "You were loser";
+        }
         try {
             App.setRoot("TicTackToeReplay");
             Label playerXLabel = (Label)App.scene.lookup("#playerX");
@@ -83,7 +92,10 @@ public class SingleModeGameModel {
         } catch (IOException ex) {
             Logger.getLogger(SingleModeGameModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
+  
     }
+    
     public void printData() {
         System.out.println("############################################");
         System.out.println("gameDate: "  + gameDate);

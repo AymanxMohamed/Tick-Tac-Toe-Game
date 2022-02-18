@@ -135,9 +135,15 @@ public class MultiModeGameHandler {
         }
         DatabaseManager.openDataBaseConnection();
         DatabaseManager.addMultiModeGameRecord(gameID, playerXHandler.player.getUserName(),playerOHandler.player.getUserName(), winner, ResponseCreator.createGameMovesJson(gameMoves));
+        DatabaseManager.closeDataBaseConnection();
+        
         playerXHandler.sendResponse(wholeMultiGamesHistoryResponse(playerXHandler.player.getUserName()));
+        System.out.println(wholeMultiGamesHistoryResponse(playerXHandler.player.getUserName()));
+        System.out.println(" sended to " + playerXHandler.player.getUserName());
+        
         playerOHandler.sendResponse(wholeMultiGamesHistoryResponse(playerOHandler.player.getUserName()));
-
+        System.out.println(wholeMultiGamesHistoryResponse(playerOHandler.player.getUserName()));
+        System.out.println(" sended to " + playerOHandler.player.getUserName());
 
         
         playerXHandler.inGame = false;
@@ -157,7 +163,7 @@ public class MultiModeGameHandler {
         playerXHandler.sendResponse(endMultiModeGameResponse(winner));
         playerOHandler.sendResponse(endMultiModeGameResponse(winner));
         currentGames.remove(this);
-        DatabaseManager.closeDataBaseConnection();
+      
     }
     
     public void forceEndGameOnlogout(String playerName) {
