@@ -38,32 +38,30 @@ public class MultiModeHistoryController implements Initializable {
      */
     @FXML
     Label usernameLabel;
-    
+
     @FXML
     Label bonusPointsLabel;
-    
+
     @FXML
     Label rankLabel;
 
     @FXML
     TableView<MultiModeGameModel> multiModeHistoryTabel;
-    
+
     @FXML
     TableColumn<MultiModeGameModel, String> gameDate;
-    
+
     @FXML
     TableColumn<MultiModeGameModel, String> playerType;
-    
+
     @FXML
     TableColumn<MultiModeGameModel, String> opponent;
-    
+
     @FXML
     TableColumn<MultiModeGameModel, String> playerCase;
-    
-    
-    
+
     ObservableList<MultiModeGameModel> multiModeHistory = FXCollections.observableArrayList(MultiModeGameModel.multiModeHistory);
-    
+
     @FXML
     public void switchToWelcomeView() {
         try {
@@ -73,25 +71,34 @@ public class MultiModeHistoryController implements Initializable {
         }
     }
 
+    @FXML
+    public void SwitchToPreviousView() {
+        try {
+            App.setRoot("chooseHistoryMode");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         refreshTable();
     }
-    
-    
+
     public void refreshTable() {
         new Thread(() -> {
-         while (true) {
-             refresh();
-             try {
-                 Thread.sleep(1000);
-             } catch (InterruptedException ex) {
-                 Logger.getLogger(MultiModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }
-            
+            while (true) {
+                refresh();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MultiModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }).start();
     }
+
     private void refresh() {
         if (!SingleModeGameModel.singleModeHistory.isEmpty()) {
             gameDate.setCellValueFactory(new PropertyValueFactory<>("gameDate"));
@@ -100,20 +107,20 @@ public class MultiModeHistoryController implements Initializable {
             playerCase.setCellValueFactory(new PropertyValueFactory<>("playerCase"));
 
             multiModeHistoryTabel.setItems(multiModeHistory);
-        }
-        else 
+        } else {
             multiModeHistoryTabel.setPlaceholder(new Label("You didn't play any multi mode game"));
+        }
     }
-    
+
     @FXML
-    public void exit(){
+    public void exit() {
         try {
             App.setRoot("exitView");
         } catch (IOException ex) {
             Logger.getLogger(MultiModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }  
-    
+    }
+
     @FXML
     public void playGame() {
         MultiModeGameModel selectedGame = multiModeHistoryTabel.getSelectionModel().getSelectedItem();
