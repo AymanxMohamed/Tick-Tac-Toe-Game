@@ -575,8 +575,6 @@ public class ResponseHandler {
         }
     }
 
-
-
     private static void handlePlayerLeftTheGame(JSONObject data) {
         String playerName = (String) data.get("playerName");
         if (!playerName.equals(Client.player.getUserName())) {
