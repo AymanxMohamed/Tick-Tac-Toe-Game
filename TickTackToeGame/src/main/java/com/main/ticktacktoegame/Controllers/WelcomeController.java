@@ -35,9 +35,18 @@ public class WelcomeController implements Initializable {
 
 //    @FXML static Label onlinePlayer0;
     @FXML
-    private void switchToPlayModeView() {
+    private void switchToSingleMode() {
+//        try {
+            switchToChooseDifficultyView();
+
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+    }
+
+    public void switchToChooseDifficultyView() {
         try {
-            App.setRoot("ChooseModeView");
+            App.setRoot("chooseLevelView");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -51,6 +60,16 @@ public class WelcomeController implements Initializable {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    private void switchToChooseHistoryModeView() {
+        try {
+            App.setRoot("chooseHistoryMode");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @FXML
     public void exit() {
         try {
@@ -59,6 +78,7 @@ public class WelcomeController implements Initializable {
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         usernameLabel.setText(Client.player.getUserName());

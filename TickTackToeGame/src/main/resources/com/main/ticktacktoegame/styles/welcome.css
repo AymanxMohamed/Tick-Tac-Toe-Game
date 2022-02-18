@@ -48,3 +48,11 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+.historyBtn{
+        -fx-background-color: none;
+    -fx-background-image: url(../images/historybutton.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

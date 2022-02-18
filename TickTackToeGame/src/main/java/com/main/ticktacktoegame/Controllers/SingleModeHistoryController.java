@@ -37,36 +37,43 @@ public class SingleModeHistoryController implements Initializable {
      */
     @FXML
     Label usernameLabel;
-    
+
     @FXML
     Label bonusPointsLabel;
-    
+
     @FXML
     Label rankLabel;
 
     @FXML
     TableView<SingleModeGameModel> singleModeHistoryTabel;
-    
+
     @FXML
     TableColumn<SingleModeGameModel, String> gameDate;
-    
+
     @FXML
     TableColumn<SingleModeGameModel, String> playerType;
-    
+
     @FXML
     TableColumn<SingleModeGameModel, String> difficulty;
-    
+
     @FXML
     TableColumn<SingleModeGameModel, String> playerCase;
-    
-    
-    
+
     ObservableList<SingleModeGameModel> singleModeHistory = FXCollections.observableArrayList(SingleModeGameModel.singleModeHistory);
-    
+
     @FXML
     public void switchToWelcomeView() {
         try {
             App.setRoot("WelcomeView");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void SwitchToPreviousView() {
+        try {
+            App.setRoot("chooseHistoryMode");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -79,21 +86,21 @@ public class SingleModeHistoryController implements Initializable {
         rankLabel.setText(Client.player.getPlayerRank());
         refreshTable();
     }
-    
-    
+
     public void refreshTable() {
         new Thread(() -> {
-         while (true) {
-             refresh();
-             try {
-                 Thread.sleep(1000);
-             } catch (InterruptedException ex) {
-                 Logger.getLogger(SingleModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }
-            
+            while (true) {
+                refresh();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SingleModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }).start();
     }
+
     private void refresh() {
         if (!SingleModeGameModel.singleModeHistory.isEmpty()) {
             gameDate.setCellValueFactory(new PropertyValueFactory<>("gameDate"));
@@ -102,20 +109,20 @@ public class SingleModeHistoryController implements Initializable {
             playerCase.setCellValueFactory(new PropertyValueFactory<>("playerCase"));
 
             singleModeHistoryTabel.setItems(singleModeHistory);
-        }
-        else 
+        } else {
             singleModeHistoryTabel.setPlaceholder(new Label("You didn't play any single mode game"));
+        }
     }
-    
+
     @FXML
-    public void exit(){
+    public void exit() {
         try {
             App.setRoot("exitView");
         } catch (IOException ex) {
             Logger.getLogger(SingleModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }  
-    
+    }
+
     @FXML
     public void playGame() {
         SingleModeGameModel selectedGame = singleModeHistoryTabel.getSelectionModel().getSelectedItem();
