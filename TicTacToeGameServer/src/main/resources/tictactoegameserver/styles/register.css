@@ -1,0 +1,54 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@font-face {
+    font-family: 'Righteous', cursive;
+    font-style: normal;
+    font-weight: bold;
+    src: local('Righteous'), url('https://fonts.googleapis.com/css2?family=Righteous&display=swap';) format('truetype');
+}
+
+*{
+    -fx-font-family: Righteous;
+}*/
+
+.body{
+    -fx-background-image: url(../images/mainbg.png);
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+.container{
+    -fx-background-image: url(../images/frame.png);
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+
+.textInput {
+    -fx-text-fill: #00b4ff;
+    -fx-highlight-fill: derive(-fx-control-inner-background,-20%);
+    -fx-highlight-text-fill: -fx-text-inner-color;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+    -fx-background-color: transparent;
+
+    -fx-cursor: hand;
+    /*-fx-padding: 0.333333em 0.583em 0.333333em 0.583em;  4 7 4 7 */
+}
+/*.textInput:focused {
+    -fx-highlight-fill: -fx-accent;
+    -fx-highlight-text-fill: white;
+    -fx-prompt-text-fill: transparent;
+}*/
+.playBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/register.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.registerLink{
+    -fx-background-color: none;
+
+}

@@ -1,0 +1,50 @@
+/*
+ * Empty Stylesheet file.
+ */
+/*@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+@font-face {
+    font-family: 'Righteous', cursive;
+    font-style: normal;
+    font-weight: bold;
+    src: local('Righteous'), url('https://fonts.googleapis.com/css2?family=Righteous&display=swap';) format('truetype');
+}
+
+*{
+    -fx-font-family: Righteous;
+}*/
+
+
+.body{
+    -fx-background-image: url(../images/bg.png);
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.onlineBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/online.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.exitBtn{
+    -fx-background-color: none;
+}
+
+.mainContainer{
+    -fx-background-image: url(../images/mainborder.png );
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.playBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/playbutton.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

@@ -6,25 +6,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import tictactoegameserver.Network.Server;
+import tictactoegameserver.models.PlayerModel;
+
 
 /**
  * JavaFX App
  */
 public class App extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("onlineHome"));
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
@@ -34,13 +34,7 @@ public class App extends Application {
     }
 
       public static void main(String[] args) {
-        try {
-            Server.startServer();
-        } catch (IOException ex) {
-            Server.closeServer();
-            System.exit(0);
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //launch();
+        PlayerModel.initilizePlayersList();
+        launch();
     }
 }

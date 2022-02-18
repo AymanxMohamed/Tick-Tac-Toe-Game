@@ -70,7 +70,7 @@ public class PlayerModel {
         } 
     }
     
-    public void initilizePlayersList() {
+    public static void initilizePlayersList() {
         DatabaseManager.openDataBaseConnection();
         ArrayList<Player> playersList =  DatabaseManager.getAllPlayers();
         if (playersList != null) {
