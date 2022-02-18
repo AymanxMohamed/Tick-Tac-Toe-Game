@@ -16,7 +16,6 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        
         <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
             <ImageView fitHeight="78.0" fitWidth="261.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -129,10 +128,6 @@
                     <Font name="System Bold" size="38.0" />
                 </font>
             </Label>
-<<<<<<< HEAD
-
-=======
->>>>>>> 0d25cb8ed9f5b678633ddcf16486a59ec1397aa7
             <Button layoutX="622.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToSingleMode" prefHeight="83.0" prefWidth="283.0" styleClass="playBtn">
                 <cursor>
                     <Cursor fx:constant="HAND" />
