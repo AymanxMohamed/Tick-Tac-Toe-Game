@@ -15,6 +15,8 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static tictactoegameserver.Security.Password.ecryptPassword;
+import tictactoegameserver.models.MultiModeGameModel;
+import tictactoegameserver.models.SingleModeGameModel;
 
 /**
  *
@@ -297,6 +299,29 @@ public class DatabaseManager {
         }
         return singleModeGameArray;
     }
+    
+    public static ArrayList<SingleModeGameModel> getSingleModeGameHistory(String playerName) {
+        ArrayList<SingleModeGameModel> singleModeGameArray = new ArrayList<>();
+        try {
+            
+            PreparedStatement pst = sqlServerConnection
+                    .prepareStatement("SELECT game_date, player_type, difficulty, player_case, game_record FROM single_mode_game WHERE user_name = ?");
+            pst.setString(1, playerName);
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()) {
+                singleModeGameArray.add(new SingleModeGameModel(
+                        resultSet.getTimestamp("game_date"),
+                        resultSet.getString("player_type"),
+                        resultSet.getString("difficulty"),
+                        resultSet.getString("player_case"),
+                        resultSet.getString("game_record")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return singleModeGameArray;
+    }
     /* _____ *_____ End of Signle mode game Database Methods _____ * _____ */
 
     /* _____ *_____ Multi mode game Database Methods _____ * _____ */
@@ -377,5 +402,62 @@ public class DatabaseManager {
         }
         return multiModeGameArray;
     }
+    
+      public static ArrayList<MultiModeGameModel> getMultiModeGameHistory(String playerName) {
+        ArrayList<MultiModeGameModel> multiModeGameArray = new ArrayList<>();
+        try {
+            PreparedStatement pst = sqlServerConnection
+                    .prepareStatement("select game_date, player_o_user_name, winner, game_record from multi_mode_game where player_x_user_name = ?");
+            pst.setString(1, playerName);
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()) {
+                multiModeGameArray.add(new MultiModeGameModel(
+                        resultSet.getTimestamp("game_date"), "X",
+                        resultSet.getString("player_o_user_name"),
+                        resultSet.getString("winner"),
+                        resultSet.getString("game_record")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            PreparedStatement pst = sqlServerConnection
+                    .prepareStatement("select game_date, player_x_user_name, winner, game_record from multi_mode_game where player_o_user_name = ?");
+            pst.setString(1, playerName);
+            ResultSet resultSet = pst.executeQuery();
+            while (resultSet.next()) {
+                multiModeGameArray.add(new MultiModeGameModel(
+                        resultSet.getTimestamp("game_date"), "O",
+                        resultSet.getString("player_x_user_name"),
+                        resultSet.getString("winner"),
+                        resultSet.getString("game_record")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return multiModeGameArray;
+    }
+//    public static ArrayList<MultiModeGameModel> getOMultiModeGameHistory(String playerName) {
+//        ArrayList<MultiModeGameModel> multiModeGameArray = new ArrayList<>();
+//        try {
+//            PreparedStatement pst = sqlServerConnection
+//                    .prepareStatement("select game_date, player_x_user_name, winner, game_record from multi_mode_game where player_x_user_name = ?");
+//            pst.setString(1, playerName);
+//            ResultSet resultSet = pst.executeQuery();
+//            while (resultSet.next()) {
+//                multiModeGameArray.add(new MultiModeGameModel(
+//                        resultSet.getTimestamp("game_date"), "O",
+//                        resultSet.getString("player_x_user_name"),
+//                        resultSet.getString("winner"),
+//                        resultSet.getString("game_record")));
+//            }
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return multiModeGameArray;
+//    }
     /* _____ *_____ End of Multi mode game Database Methods _____ * _____ */
 }

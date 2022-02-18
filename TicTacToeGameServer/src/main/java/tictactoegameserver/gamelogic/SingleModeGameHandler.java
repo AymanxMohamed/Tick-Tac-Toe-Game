@@ -171,7 +171,7 @@ public class SingleModeGameHandler {
         }
         DatabaseManager.openDataBaseConnection();
         DatabaseManager.addSingleModeGameRecord(gameID, playerHandler.player.getUserName(), playerType, difficulty, playerCase, ResponseCreator.createGameMovesJson(gameMoves));
-
+        playerHandler.sendResponse(wholeSingleGamesHistoryResponse(playerHandler.player.getUserName()));
         playerHandler.inGame = false;
         
         // addPlayerX and playerO To the avilable players

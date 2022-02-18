@@ -108,6 +108,8 @@ public class RequestHandler {
         
         ArrayList<String> newOnlinePlayers = new ArrayList<>();
         newOnlinePlayers.add(playerHandler.player.getUserName());
+        playerHandler.sendResponse(wholeMultiGamesHistoryResponse(userName));
+        playerHandler.sendResponse(wholeSingleGamesHistoryResponse(userName));
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(newOnlinePlayers, "playerStatus"));
         PlayerModel.getPlayerModel(playerHandler.player.getUserName()).tooglePlayerStatus();
         

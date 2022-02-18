@@ -7,8 +7,10 @@ package com.main.ticktacktoegame.Network;
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Controllers.OnlineHomeController;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
+import com.main.ticktacktoegame.Models.MultiModeGameModel;
 import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.Player;
+import com.main.ticktacktoegame.Models.SingleModeGameModel;
 import static com.main.ticktacktoegame.Network.RequestCreator.logout;
 import static com.main.ticktacktoegame.Network.Utility.getIntegerArray;
 import java.io.IOException;
@@ -140,6 +142,12 @@ public class ResponseHandler {
                 break;
             case "serverIsClosed":
                 handleServerIsClosed();
+                break;
+            case "single mode game history":
+                handelSingleModeGameHistory(data);
+                break;
+            case "multi mode game history":
+                handelMultiModeGameHistory(data);
                 break;
             default:
                 break;
@@ -593,6 +601,36 @@ public class ResponseHandler {
         Client.closeEveryThing();
     }
     /* _____ * _____ end of general Responses _____ * _____ */
+
+     /* _____ * _____ Game History  _____ * _____ */
+    private static void handelSingleModeGameHistory(JSONObject data) {
+        JSONArray gameHistoryObjects = (JSONArray) data.get("gameHistoryObjects");
+        SingleModeGameModel.singleModeHistory = new ArrayList<>();
+        for (int i = 0; i < gameHistoryObjects.size(); i++) {
+            JSONObject obj = (JSONObject) gameHistoryObjects.get(i);
+            String gameDate = (String) obj.get("gameDate");
+            String playerType = (String) obj.get("playerType");
+            String difficulty = (String) obj.get("difficulty");
+            String playerCase = (String) obj.get("playerCase");
+            String gameMoves  = (String) obj.get("gameMoves");
+            SingleModeGameModel.addSingleModeGame(gameDate, playerType, difficulty, playerCase, gameMoves);
+        }
+    }
+
+    private static void handelMultiModeGameHistory(JSONObject data) {
+        JSONArray gameHistoryObjects = (JSONArray) data.get("gameHistoryObjects");
+        MultiModeGameModel.multiModeHistory = new ArrayList<>();
+        for (int i = 0; i < gameHistoryObjects.size(); i++) {
+            JSONObject obj = (JSONObject) gameHistoryObjects.get(i);
+            String gameDate = (String) obj.get("gameDate");
+            String playerType = (String) obj.get("playerType");
+            String opponent = (String) obj.get("opponent");
+            String playerCase = (String) obj.get("playerCase");
+            String gameMoves  = (String) obj.get("gameMoves");
+            MultiModeGameModel.addMultiModeGame(gameDate, playerType, opponent, playerCase, gameMoves);
+        }
+    }
+    /* _____ * _____ End of Game History  _____ * _____ */
 
 
 }

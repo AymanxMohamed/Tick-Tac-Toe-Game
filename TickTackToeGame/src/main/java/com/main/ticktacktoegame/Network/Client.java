@@ -6,13 +6,11 @@ package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Controllers.ChatController;
-import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.*;
 import com.main.ticktacktoegame.Models.Enums.DIFFICULTY;
 import java.net.Socket;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -21,8 +19,8 @@ import java.util.logging.Logger;
 public class Client {
     
     private static  Socket socket;
-    private static final String serverIP = "localhost";
-    private static final int ServerPort = 9000;
+    private static final String SERVER_IP = "localhost";
+    private static final int SERVER_PORT = 9000;
     private static BufferedReader bufferReader;
     private static BufferedWriter bufferedWriter;
     public static Player player;
@@ -33,11 +31,10 @@ public class Client {
     public static DIFFICULTY difficulty;
     public static String cuurentCase = "";
     public static ChatController chatRoom;
-    //public static TicTackToeMultiController currentGame;
 
         
     public static void openConnection() throws IOException {
-        socket = new Socket(serverIP, ServerPort);
+        socket = new Socket(SERVER_IP, SERVER_PORT);
         try {
             bufferReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -58,10 +55,10 @@ public class Client {
             } catch (IOException ex) {
                 System.out.println("connection lost");
                 closeEveryThing();
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception e) {
                 closeEveryThing();
-                e.printStackTrace();
+               // e.printStackTrace();
             }
         }).start();
     }
@@ -74,7 +71,7 @@ public class Client {
             bufferedWriter.flush();
         } catch (IOException ex) {
             closeEveryThing();
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+           /// Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void closeEveryThing() {
@@ -90,7 +87,7 @@ public class Client {
                 socket.close();
             }
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }

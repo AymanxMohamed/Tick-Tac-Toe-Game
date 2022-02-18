@@ -4,13 +4,9 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
-import com.main.ticktacktoegame.App;
-import java.io.IOException;
-import javafx.fxml.FXML;
+
 import javafx.scene.control.Label;
-import com.main.ticktacktoegame.Network.Client;
-import com.main.ticktacktoegame.Network.RequestCreator;
-import java.io.IOException;
+
 import javafx.fxml.FXML;
 
 /**

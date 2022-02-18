@@ -13,6 +13,8 @@ import tictactoegameserver.Database.DatabaseManager;
 import tictactoegameserver.Database.Entities.Enums.MappingFunctions;
 import tictactoegameserver.Database.Entities.Player;
 import static tictactoegameserver.Network.Utility.getPlayerHandler;
+import tictactoegameserver.models.MultiModeGameModel;
+import tictactoegameserver.models.SingleModeGameModel;
 
 /**
  *
@@ -61,6 +63,21 @@ public class ResponseCreator {
         responseObject.put("data", getAllPlayersJsonObject());
         return JSONValue.toJSONString(responseObject);
     }
+        
+    public static String wholeSingleGamesHistoryResponse(String playerName) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "single mode game history");
+        responseObject.put("data", getSingleModeGameHistoryJSONObject(playerName));
+        return JSONValue.toJSONString(responseObject);
+    }
+    
+    public static String wholeMultiGamesHistoryResponse(String playerName) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "multi mode game history");
+        responseObject.put("data", getMultiModeGameHistoryJSONObject(playerName));
+        return JSONValue.toJSONString(responseObject);
+    }
+    
     
     public static String addNewPlayerResponse(String userName, Player player) {
         JSONObject responseObject = new JSONObject();
@@ -68,6 +85,9 @@ public class ResponseCreator {
         responseObject.put("data", getPlayerJsonObject(userName, player));
         return JSONValue.toJSONString(responseObject);
     }
+    
+    
+   
     
     
     /*_____ * _____ end of Login  Responses _____ * _____ */
@@ -461,7 +481,66 @@ public class ResponseCreator {
         return JSONValue.toJSONString(responseObject);
     }  
 
+    public static JSONObject getMultiModeGameHistoryJSONObject(String playerName) {
+        ArrayList<MultiModeGameModel> multiModeHistory;
+        DatabaseManager.openDataBaseConnection();
+        multiModeHistory = DatabaseManager.getMultiModeGameHistory(playerName);
+        DatabaseManager.closeDataBaseConnection();
+        
+        JSONArray allMultiModeGamesObjects =  new JSONArray();
+        for (var game : multiModeHistory) {
+            JSONObject data = new JSONObject();
+            data.put("gameDate", game.getGameDate());
+            data.put("playerType", game.getPlayerType());
+            data.put("opponent", game.getOpponent());
+            data.put("playerCase", game.getPlayerCase());
+            data.put("gameMoves", game.getGameRecordJsonString());
+            allMultiModeGamesObjects.add(data);
+        }
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("gameHistoryObjects", allMultiModeGamesObjects);
+        return dataObject;
+    }
 
+    public static JSONObject getSingleModeGameHistoryJSONObject(String playerName) {
+        ArrayList<SingleModeGameModel> singleModeHistory;
+        DatabaseManager.openDataBaseConnection();
+        singleModeHistory = DatabaseManager.getSingleModeGameHistory(playerName);
+        DatabaseManager.closeDataBaseConnection();
+        JSONArray allSingleModeGamesObjects =  new JSONArray();
+        for (var game : singleModeHistory) {
+            JSONObject data = new JSONObject();
+            data.put("gameDate", game.getGameDate());
+            data.put("playerType", game.getPlayerType());
+            data.put("difficulty", game.getDifficulty());
+            data.put("playerCase", game.getPlayerCase());
+            data.put("gameMoves", game.getGameMovesJsonString());
+            allSingleModeGamesObjects.add(data);
+        }
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("gameHistoryObjects", allSingleModeGamesObjects);
+        return dataObject;
+    }
+    public static JSONObject getSingleGameJSONObject(String gameDate, String playeType, String difficulty, String playerCase, String gameMoves) {
+        JSONObject data = new JSONObject();
+        data.put("gameDate", gameDate);
+        data.put("playerType", playeType);
+        data.put("difficulty", difficulty);
+        data.put("playerCase", playerCase);
+        data.put("gameMoves", gameMoves);
+        return data;
+    }
+    
+    public static JSONObject getMultiGameJSONObject(String gameDate, String playeType, String opponent, String playerCase, String gameMoves) {
+        JSONObject data = new JSONObject();
+        data.put("gameDate", gameDate);
+        data.put("playerType", playeType);
+        data.put("opponent", opponent);
+        data.put("playerCase", playerCase);
+        data.put("gameMoves", gameMoves);
+        return data;
+    }
+    
 
 }
 

@@ -135,6 +135,10 @@ public class MultiModeGameHandler {
         }
         DatabaseManager.openDataBaseConnection();
         DatabaseManager.addMultiModeGameRecord(gameID, playerXHandler.player.getUserName(),playerOHandler.player.getUserName(), winner, ResponseCreator.createGameMovesJson(gameMoves));
+        playerXHandler.sendResponse(wholeMultiGamesHistoryResponse(playerXHandler.player.getUserName()));
+        playerOHandler.sendResponse(wholeMultiGamesHistoryResponse(playerOHandler.player.getUserName()));
+
+
         
         playerXHandler.inGame = false;
         playerOHandler.inGame = false;
