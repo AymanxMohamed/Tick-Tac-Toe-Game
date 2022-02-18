@@ -14,9 +14,10 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 /**
@@ -108,6 +109,14 @@ public class TicTackToeReplayController implements Initializable {
 
 
     public static void drawMoves(ArrayList<Integer> gameMoves) {
+        
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                System.out.println();
+            }
+        };
+        timer.schedule(task, 1000);
         int buttonIndex;
         for (int i = 0; i < gameMoves.size(); i++) {
             if (i % 2 == 0) {
