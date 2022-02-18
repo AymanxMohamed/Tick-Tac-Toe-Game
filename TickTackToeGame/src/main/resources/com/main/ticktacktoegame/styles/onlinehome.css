@@ -131,6 +131,10 @@
     -fx-background-position: center;
 }
 
+.button{
+    -fx-cursor:hand;
+}
+
 .backBtn{
     -fx-background-color: none;
     -fx-background-image: url(../images/back.png);

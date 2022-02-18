@@ -51,4 +51,12 @@ public class ChooseLevelViewController implements Initializable {
         }
     }    
     
+        @FXML
+    public void SwitchToPreviousView() {
+        try {
+            App.setRoot("chooseHistoryMode");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

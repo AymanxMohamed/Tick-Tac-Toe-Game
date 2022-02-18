@@ -15,9 +15,6 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/onlinehome.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.OnlineHomeController">
     <children>
         <Button layoutX="1426.0" layoutY="223.0" mnemonicParsing="false" onAction="#switchToWelcomeView" prefHeight="106.0" prefWidth="289.0" styleClass="onlineBtn">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
         </Button>
         
         <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
@@ -110,9 +107,6 @@
                 <font>
                     <Font name="System Bold" size="30.0" />
                 </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
             </Button>     
         </Pane>
         
@@ -127,17 +121,11 @@
                 <font>
                     <Font name="System Bold" size="40.0" />
                 </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
             </Button>
             <Button alignment="CENTER" layoutX="964.0" layoutY="277.0" mnemonicParsing="false" onAction="#sendInvitationForPlay" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play With" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="40.0" />
                 </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
             </Button>
             <TableView fx:id="onlinePlayersTable" layoutX="66.0" layoutY="65.0" prefHeight="389.0" prefWidth="820.0">
                 <columns>

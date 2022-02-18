@@ -2,35 +2,42 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="playername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.InvitationFromPlayerController">
-   <children>
-      <Pane layoutX="402.0" layoutY="81.0" prefHeight="474.0" prefWidth="816.0" styleClass="container">
-         <children>
-            <Label fx:id="popupLabel" layoutX="211.0" layoutY="230.0" text="is currently in Game" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Button layoutX="306.0" layoutY="356.0" mnemonicParsing="false" onAction="#goToOnlinePlayersView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="OK" textFill="#cf3ee8">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Button>
-            <Label fx:id="playerName" alignment="CENTER" layoutX="312.0" layoutY="157.0" prefHeight="73.0" prefWidth="191.0" text="Ayman" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Label fx:id="popupLabel1" layoutX="279.0" layoutY="79.0" text="Unforunately" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <Pane layoutX="287.0" layoutY="106.0" prefHeight="556.0" prefWidth="1043.0" styleClass="container">
+            <children>
+                <Label fx:id="popupLabel" layoutX="240.0" layoutY="307.0" text="is currently in another Game" textFill="WHITE">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <Button layoutX="433.0" layoutY="415.0" mnemonicParsing="false" onAction="#goToOnlinePlayersView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="OK" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Button>
+                <Label fx:id="playerName" alignment="CENTER" layoutX="579.0" layoutY="238.0" prefHeight="73.0" prefWidth="191.0" text="Ayman" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <Label fx:id="popupLabel1" layoutX="308.0" layoutY="241.0" text="Unforunately," textFill="WHITE">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="114.0" fitWidth="118.0" layoutX="476.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/busy.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

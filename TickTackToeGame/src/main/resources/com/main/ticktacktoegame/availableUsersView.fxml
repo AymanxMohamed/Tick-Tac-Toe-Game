@@ -26,5 +26,6 @@
          </children>
       </Pane>
       <Button layoutX="664.0" layoutY="633.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="276.0" styleClass="playBtn" />
+      <Button layoutX="75.0" layoutY="63.0" mnemonicParsing="false" onAction="#SwitchToPreviousView" prefHeight="43.0" prefWidth="23.0" styleClass="backBtn" />
    </children>
 </AnchorPane>

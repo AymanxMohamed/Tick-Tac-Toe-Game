@@ -12,9 +12,6 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/welcome.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.WelcomeController">
     <children>
         <Button layoutX="1426.0" layoutY="223.0" mnemonicParsing="false" onAction="#switchToOnlineView" prefHeight="106.0" prefWidth="289.0" styleClass="onlineBtn">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
         </Button>
         <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
             <ImageView fitHeight="78.0" fitWidth="261.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
@@ -79,7 +76,7 @@
                     <Image url="@images/historyIcon.png" />
                 </image>
             </ImageView>
-            <Label fx:id="rankLabel" layoutX="109.0" layoutY="26.0" text="History" textFill="WHITE">
+            <Label fx:id="rankLabel" layoutX="109.0" layoutY="26.0" text="Rank" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="28.0" />
                 </font>
@@ -106,9 +103,6 @@
                 <font>
                     <Font name="System Bold" size="30.0" />
                 </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
             </Button>     
         </Pane>
         
@@ -129,15 +123,9 @@
                 </font>
             </Label>
             <Button layoutX="622.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToSingleMode" prefHeight="83.0" prefWidth="283.0" styleClass="playBtn">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
             </Button>
 
          <Button layoutX="222.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToChooseHistoryModeView" prefHeight="83.0" prefWidth="283.0" styleClass="historyBtn">
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
          </Button>
         </Pane>
     </children>

@@ -14,9 +14,6 @@
             </image>
         </ImageView>
         <Button defaultButton="true" layoutX="1132.0" layoutY="583.0" mnemonicParsing="false" onAction="#switchToLoginView" prefHeight="95.0" prefWidth="299.0" styleClass="loginBtn">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
         </Button>
     </children>
 </AnchorPane>

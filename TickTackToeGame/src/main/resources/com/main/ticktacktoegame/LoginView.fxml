@@ -38,18 +38,12 @@
                     <Image url="@images/password.png" />
                 </image>
             </ImageView>
-            <Button defaultButton="true" layoutX="161.0" layoutY="414.0" mnemonicParsing="false" onAction="#sendLoginRequest" prefHeight="70.0" prefWidth="234.0" styleClass="playBtn">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
+            <Button defaultButton="true" layoutX="161.0" layoutY="414.0" mnemonicParsing="false" onAction="#sendLoginRequest" prefHeight="70.0" prefWidth="234.0" styleClass="playBtn">             
             </Button>
             <Button layoutX="184.0" layoutY="511.0" mnemonicParsing="false" onAction="#switchToRegistrationView" prefHeight="30.0" prefWidth="190.0" styleClass="registerLink" text="New Player? REGISTER" textFill="#00b4ff">
                 <font>
                     <Font size="15.0" />
                 </font>
-                <cursor>
-                   <Cursor fx:constant="HAND" />
-                </cursor>
             </Button>
          <Label fx:id="loginErrorLabel" layoutX="208.0" layoutY="368.0" textFill="#ff3c3c">
             <font>

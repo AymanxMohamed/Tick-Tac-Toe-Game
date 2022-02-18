@@ -72,3 +72,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .label{
     -fx-font-weight: bold;
 }
+
+.button{
+    -fx-cursor:hand;
+}
+
+.backBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/back.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

@@ -12,17 +12,11 @@
             <font>
                 <Font size="40.0" />
             </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
         </Button>
         <Button layoutX="618.0" layoutY="481.0" mnemonicParsing="false" onAction="#switchToMultiModeHistoryView" prefHeight="122.0" prefWidth="407.0" styleClass="modeBtn" text="Multi History" textFill="WHITE">
             <font>
                 <Font size="40.0" />
             </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
         </Button>
         <Label layoutX="623.0" layoutY="184.0" text="History Mode" textFill="WHITE">
             <font>

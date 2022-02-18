@@ -12,104 +12,101 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/game.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.TicTackToeReplayController">
-   <children>
-      <FlowPane columnHalignment="CENTER" layoutX="521.0" layoutY="160.0" prefHeight="485.0" prefWidth="490.0" styleClass="FlowPane">
-         <children>
-            <Button fx:id="button0" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin></Button>
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button fx:id="button2" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button fx:id="button3" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin></Button>
-            <Button fx:id="button4" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button fx:id="button5" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button fx:id="button6" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button fx:id="button7" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-            <Button fx:id="button8" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </FlowPane.margin>
-            </Button>
-         </children>
-      </FlowPane>
-      <Text fx:id="winnerText" fill="WHITE" layoutX="593.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="361.1444091796875">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Text>
-      <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="851.0" layoutY="687.0" onAction="#quitGame" prefWidth="159.0" scaleShape="false" text="Quit" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Line endX="48.0" layoutX="376.0" layoutY="510.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: red;" styleClass="XunderLine" />
-      <Line endX="48.0" layoutX="1263.0" layoutY="501.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: #00b4ff;" styleClass="XunderLine" />
-      <Label alignment="CENTER" layoutX="309.0" layoutY="311.0" prefHeight="70.0" prefWidth="89.0" text="X">
-         <styleClass>
-            <String fx:value="XLabel" />
-            <String fx:value="XturnHighlight" />
-         </styleClass>
-      </Label>
-      <Label alignment="CENTER" layoutX="1183.0" layoutY="311.0" prefHeight="219.0" prefWidth="119.0" styleClass="OLabel" text="O" textAlignment="CENTER" />
-      <Label alignment="CENTER" layoutX="335.0" layoutY="226.0" text="1" textFill="RED">
-         <font>
-            <Font size="70.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="1218.0" layoutY="226.0" text="2" textFill="#00b4ff">
-         <font>
-            <Font size="70.0" />
-         </font>
-      </Label>
-      <Line endX="48.0" layoutX="376.0" layoutY="337.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: red;" styleClass="XunderLine" />
-      <Line endX="48.0" layoutX="1261.0" layoutY="337.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: #00b4ff;" styleClass="XunderLine" />
-      <Label fx:id="playerX" alignment="CENTER" layoutX="254.0" layoutY="532.0" prefHeight="67.0" prefWidth="203.0" text="Reem" textFill="RED">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Label fx:id="playerO" alignment="CENTER" layoutX="1148.0" layoutY="536.0" prefHeight="56.0" prefWidth="189.0" text="Computer" textAlignment="CENTER" textFill="#00b4ff">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Label>
-      <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="528.0" layoutY="687.0" onAction="#DrawNextMove" prefWidth="159.0" scaleShape="false" text="Next Move" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-   </children>
+    <children>
+        <FlowPane columnHalignment="CENTER" layoutX="521.0" layoutY="160.0" prefHeight="485.0" prefWidth="490.0" styleClass="FlowPane">
+            <children>
+                <Button fx:id="button0" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button1" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button2" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button3" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button4" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button5" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button6" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="xMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button7" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+                <Button fx:id="button8" mnemonicParsing="false" prefHeight="153.0" prefWidth="153.0" styleClass="oMove">
+                    <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </FlowPane.margin>
+                </Button>
+            </children>
+        </FlowPane>
+        <Text fx:id="winnerText" fill="WHITE" layoutX="593.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="361.1444091796875">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Text>
+        <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="851.0" layoutY="687.0" onAction="#quitGame" prefWidth="159.0" scaleShape="false" text="Quit" textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Line endX="48.0" layoutX="376.0" layoutY="510.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: red;" styleClass="XunderLine" />
+        <Line endX="48.0" layoutX="1263.0" layoutY="501.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: #00b4ff;" styleClass="XunderLine" />
+        <Label alignment="CENTER" layoutX="309.0" layoutY="311.0" prefHeight="70.0" prefWidth="89.0" text="X">
+            <styleClass>
+                <String fx:value="XLabel" />
+                <String fx:value="XturnHighlight" />
+            </styleClass>
+        </Label>
+        <Label alignment="CENTER" layoutX="1183.0" layoutY="311.0" prefHeight="219.0" prefWidth="119.0" styleClass="OLabel" text="O" textAlignment="CENTER" />
+        <Label alignment="CENTER" layoutX="335.0" layoutY="226.0" text="1" textFill="RED">
+            <font>
+                <Font size="70.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="1218.0" layoutY="226.0" text="2" textFill="#00b4ff">
+            <font>
+                <Font size="70.0" />
+            </font>
+        </Label>
+        <Line endX="48.0" layoutX="376.0" layoutY="337.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: red;" styleClass="XunderLine" />
+        <Line endX="48.0" layoutX="1261.0" layoutY="337.0" startX="-89.199951171875" strokeLineCap="ROUND" strokeWidth="2.0" style="-fx-stroke: #00b4ff;" styleClass="XunderLine" />
+        <Label fx:id="playerX" alignment="CENTER" layoutX="254.0" layoutY="532.0" prefHeight="67.0" prefWidth="203.0" text="Reem" textFill="RED">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </Label>
+        <Label fx:id="playerO" alignment="CENTER" layoutX="1148.0" layoutY="536.0" prefHeight="56.0" prefWidth="189.0" text="Computer" textAlignment="CENTER" textFill="#00b4ff">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </Label>
+        <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="528.0" layoutY="687.0" onAction="#DrawNextMove" prefWidth="159.0" scaleShape="false" text="Next Move" textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

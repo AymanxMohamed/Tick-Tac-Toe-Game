@@ -13,6 +13,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-position: center;
 }
 
+.Button{
+    -fx-cursor:hand;
+}
+
+.backBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/back.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 .text-area,.text-field{
     -fx-background-color: linear-gradient(to right,rgba(0,0,0,0.3),rgba(0,0,0,0.6));
     -fx-background-radius: 10,5,5,10;

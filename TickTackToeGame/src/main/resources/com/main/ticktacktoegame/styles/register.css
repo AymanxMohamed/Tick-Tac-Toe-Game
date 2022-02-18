@@ -52,3 +52,15 @@
     -fx-background-color: none;
 
 }
+
+.button{
+    -fx-cursor:hand;
+}
+
+.backBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/back.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

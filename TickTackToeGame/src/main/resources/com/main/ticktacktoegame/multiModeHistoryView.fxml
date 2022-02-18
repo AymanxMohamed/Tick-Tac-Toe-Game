@@ -138,9 +138,6 @@
             </TableView>
         </Pane>
         <Button layoutX="55.0" layoutY="113.0" mnemonicParsing="false" onAction="#SwitchToPreviousView" prefHeight="43.0" prefWidth="23.0" styleClass="backBtn">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
         </Button>
     </children>
 </AnchorPane>

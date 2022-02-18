@@ -2,35 +2,42 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="playername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.InvitationFromPlayerController">
-   <children>
-      <Pane layoutX="422.0" layoutY="116.0" prefHeight="351.0" prefWidth="731.0" styleClass="container">
-         <children>
-            <Label fx:id="popupLabel" layoutX="61.0" layoutY="76.0" text="You Have Chat Invitation From" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Button layoutX="432.0" layoutY="242.0" mnemonicParsing="false" onAction="#sendRejectChatInvitation" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Reject" textFill="#cf3ee8">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Button>
-            <Button layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#sendAcceptChatInvitation" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Accept" textFill="#cf3ee8">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Button>
-            <Label fx:id="playerName" alignment="CENTER" layoutX="281.0" layoutY="154.0" prefHeight="73.0" prefWidth="191.0" text="Ayman" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <Pane layoutX="287.0" layoutY="106.0" prefHeight="556.0" prefWidth="1043.0" styleClass="container">
+            <children>
+                <Label fx:id="popupLabel" layoutX="218.0" layoutY="237.0" text="You Have Chat Invitation From" textFill="WHITE">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <Button layoutX="589.0" layoutY="413.0" mnemonicParsing="false" onAction="#sendRejectChatInvitation" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Reject" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Button>
+                <Button layoutX="253.0" layoutY="413.0" mnemonicParsing="false" onAction="#sendAcceptChatInvitation" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Accept" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Button>
+                <Label fx:id="playerName" alignment="CENTER" layoutX="438.0" layoutY="315.0" prefHeight="73.0" prefWidth="191.0" text="Ayman" textAlignment="CENTER" textFill="#00b4ff">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="95.0" fitWidth="115.0" layoutX="482.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/chat.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

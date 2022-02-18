@@ -2,35 +2,42 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="playername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/popup.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.EndSingleModeGameController">
-   <children>
-      <Pane layoutX="422.0" layoutY="116.0" prefHeight="351.0" prefWidth="731.0" styleClass="container">
-         <children>
-            <Label layoutX="167.0" layoutY="63.0" text="Game Replay Ended" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Button layoutX="432.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToWelcomeView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Home" textFill="#cf3ee8">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Button>
-            <Button layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToTicTackToeReplay" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Play Again" textFill="#cf3ee8">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Button>
-            <Label fx:id="endGameMessage" layoutX="176.0" layoutY="143.0" prefHeight="66.0" prefWidth="432.0" text="You were winner" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <Pane layoutX="287.0" layoutY="106.0" prefHeight="556.0" prefWidth="1043.0" styleClass="container">
+            <children>
+                <Label layoutX="326.0" layoutY="245.0" text="Game Replay Ended" textFill="WHITE">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <Button layoutX="596.0" layoutY="422.0" mnemonicParsing="false" onAction="#goToWelcomeView" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Home" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Button>
+                <Button layoutX="260.0" layoutY="421.0" mnemonicParsing="false" onAction="#goToTicTackToeReplay" prefHeight="65.0" prefWidth="203.0" styleClass="closeBtn" text="Play Again" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Button>
+                <Label fx:id="endGameMessage" layoutX="366.0" layoutY="311.0" prefHeight="73.0" prefWidth="336.0" text="You were winner" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="122.0" fitWidth="122.0" layoutX="468.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/finish.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>
