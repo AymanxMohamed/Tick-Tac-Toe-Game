@@ -31,7 +31,7 @@ public class Opponent {
         this.inChat = inChat;
         
         this.inGameText = inGame ? "yes" : "No";
-        this.inChatText = inGame ? "yes" : "No";
+        this.inChatText = inChat ? "yes" : "No";
         this.isOnlineText = playerStatus;
     }
     
@@ -59,7 +59,7 @@ public class Opponent {
     }
     public void toogleInChatStatus() { 
         inChat = !inChat; 
-        this.inChatText = inGame ? "yes" : "No";
+        this.inChatText = inChat ? "yes" : "No";
     }
     public void tooglePlayerStatus() {
         isOnline = !isOnline;
@@ -67,11 +67,12 @@ public class Opponent {
         if (!isOnline) {
             inGame = false;
             inChat = false;
-            this.inChatText = inGame ? "yes" : "No";
+            this.inChatText = inChat ? "yes" : "No";
             this.inGameText = inGame ? "yes" : "No";
         } 
     }
-    
+    public void setPlayerRank(String value) { playerRank = value; }
+    public void setBonusPoints(int value) { bonusPoints = value; }
     public String getPlayerName() { return playerName; }
     public String getInGameText() { return inGameText; }
     public String getInChatText() { return inChatText; }

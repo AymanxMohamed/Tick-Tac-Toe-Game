@@ -143,16 +143,15 @@ public class MultiModeGameHandler {
         XOPlayers.add(playerOHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
-        playerXHandler.sendResponse(updatePlayerDataResponse(playerXHandler.player));
-        
-        playerOHandler.sendResponse(updatePlayerDataResponse(playerOHandler.player));
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerXHandler.player));
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerOHandler.player));
 
         playerXHandler.sendResponse(endMultiModeGameResponse(winner));
         playerOHandler.sendResponse(endMultiModeGameResponse(winner));
         currentGames.remove(this);
         DatabaseManager.closeDataBaseConnection();
     }
-
+    
     public void forceEndGameOnlogout(String playerName) {
         PlayerHandler winnerHandler;
         PlayerHandler leaverHandler;
@@ -173,7 +172,7 @@ public class MultiModeGameHandler {
         XOPlayers.add(winnerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
-        winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(winnerHandler.player));
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
         DatabaseManager.closeDataBaseConnection();
@@ -201,8 +200,10 @@ public class MultiModeGameHandler {
         DatabaseManager.openDataBaseConnection();
         winnerHandler.player.increaseBonusPoints();
         leaverHandler.player.decreaseBonusPoints();
-        winnerHandler.sendResponse(updatePlayerDataResponse(winnerHandler.player));
-        leaverHandler.sendResponse(updatePlayerDataResponse(leaverHandler.player));
+        
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerXHandler.player));
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerOHandler.player));
+        
         winnerHandler.sendResponse(playerLeftMultiGameResponse(playerName));
         currentGames.remove(this);
         DatabaseManager.closeDataBaseConnection();

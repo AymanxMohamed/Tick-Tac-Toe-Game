@@ -243,6 +243,7 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "logout");
         request.put("data", data);
+        System.out.println("logout sended");
         return JSONValue.toJSONString(request);  
     }
     /*_____ * _____  end of Logout Requests _____ * _____ */

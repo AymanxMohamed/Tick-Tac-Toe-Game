@@ -70,14 +70,6 @@ public class ResponseCreator {
     }
     
     
-//    public static String addNewPlayerResponse(String userName) {
-//        JSONObject dataObject = new JSONObject();
-//        dataObject.put("playerName", userName);
-//        JSONObject responseObject = new JSONObject();
-//        responseObject.put("response", "add new player");
-//        responseObject.put("data", dataObject);
-//        return JSONValue.toJSONString(responseObject);
-//    }
     /*_____ * _____ end of Login  Responses _____ * _____ */
 
     /*_____ * _____ Register Responses _____ * _____ */
@@ -100,6 +92,16 @@ public class ResponseCreator {
 
         JSONObject responseObject = new JSONObject();
         responseObject.put("response", "player in game");
+        responseObject.put("data", dataObject);
+
+        return JSONValue.toJSONString(responseObject);
+    }
+    public static String playerIsOfflineResponse(String invitedPlayerName) {
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("invitedPlayer", invitedPlayerName);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "player is offline");
         responseObject.put("data", dataObject);
 
         return JSONValue.toJSONString(responseObject);
@@ -330,6 +332,7 @@ public class ResponseCreator {
      /*_____ * _____ general Responses _____ * _____ */
     public static String updatePlayerDataResponse(Player player) {
         JSONObject data = new JSONObject();
+        data.put("playerName", player.getUserName());
         data.put("bonusPoints", player.getBonusPoints());
         data.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
         JSONObject responseObject = new JSONObject();

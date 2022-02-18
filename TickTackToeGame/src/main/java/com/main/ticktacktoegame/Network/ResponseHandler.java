@@ -5,6 +5,7 @@
 package com.main.ticktacktoegame.Network;
 
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Controllers.OnlineHomeController;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.Player;
@@ -22,7 +23,7 @@ import org.json.simple.*;
  * @author ayman
  */
 public class ResponseHandler {
-
+    public static OnlineHomeController onlineController;
     public static void handleResponse(String responseString) {
 
         JSONObject requestObject = (JSONObject) JSONValue.parse(responseString);
@@ -62,6 +63,9 @@ public class ResponseHandler {
                 break;
             case "player in game":
                 handlePlayerInGame(data);
+                break;
+            case "player is offline":
+                handlePlayerIsOffline(data);
                 break;
             case "game invitation":
                 handleGameInvitation(data);
@@ -170,8 +174,6 @@ public class ResponseHandler {
     }
  
     private static void onlinePlayersList(JSONObject data) {
-        // todo
-        // this function will be send in the beiggining when player logged in
         JSONArray onlinePlayersDataObjects = (JSONArray) data.get("onlinePlayersDataObjects");
         for (int i = 0; i < onlinePlayersDataObjects.size(); i++) {
             JSONObject obj = (JSONObject) onlinePlayersDataObjects.get(i);
@@ -183,7 +185,6 @@ public class ResponseHandler {
             boolean inChat = (boolean) obj.get("inChat");
             if (!playerName.equals(Client.player.getUserName())) {
                 Opponent.addOpponent(playerName, bonusPoints, playerRank, playerStatus, inGame, inChat);
-                updateAvilablePlayersList();
                 System.out.println(playerName + " is " + playerStatus);
                 System.out.println(playerName + " is online");
                 System.out.println("is " + playerName + " in game " + inGame);
@@ -205,23 +206,17 @@ public class ResponseHandler {
             boolean inChat = (boolean) obj.get("inChat");
             if (!playerName.equals(Client.player.getUserName())) {
                 Opponent.addOpponent(playerName, bonusPoints, playerRank, playerStatus, inGame, inChat);
-                updateAvilablePlayersList();
-                System.out.println(playerName + " is " + playerStatus);
-                System.out.println("is " + playerName + " in game " + inGame);
-                System.out.println("is " + playerName + " in chat " + inChat);
             }
         }
     }
 
     private static void handleAddNewPlayer(JSONObject data) {
-        String playerName = (String) data.get("playerName");
+        String playerName = (String) data.get("userName");
         if (Client.player != null && !playerName.equals(Client.player.getUserName())) {
             String name = (String) data.get("userName");
             int bonusPoints = ((Long) data.get("bonusPoints")).intValue();
             String playerRank = (String) data.get("playerRank");
             Opponent.addOpponent(name, bonusPoints, playerRank, "Offline", false, false);
-            updateAvilablePlayersList();
-            System.out.println(playerName + " has been added");
         }
     }
 
@@ -256,8 +251,18 @@ public class ResponseHandler {
         System.out.println("in handle player in game");
         try {
             String invitedPlayer = (String) data.get("invitedPlayer");
-            System.out.println(invitedPlayer + " is currently in game");
             App.setRoot("PlayerIsCurrentlyInGameView");
+            Label receiverName = (Label)App.scene.lookup("#playerName");
+            receiverName.setText(invitedPlayer);
+        } catch (IOException ex) {
+            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private static void handlePlayerIsOffline(JSONObject data) {
+        System.out.println("in handle player in game");
+        try {
+            String invitedPlayer = (String) data.get("invitedPlayer");
+            App.setRoot("PlayerIsOfflineView");
             Label receiverName = (Label)App.scene.lookup("#playerName");
             receiverName.setText(invitedPlayer);
         } catch (IOException ex) {
@@ -532,20 +537,27 @@ public class ResponseHandler {
     
     private static void handleUpdatePlayerData(JSONObject data) {
         System.out.println("in updatePlayerData ");
-        Client.player.setBonusPoints(((Long) data.get("bonusPoints")).intValue());
-        Client.player.setPlayerRank((String) data.get("playerRank"));
-        // this is all what this handler do it only get the new data after the game
-        // ended and set it in the player data
-        // so when you switch to your home view you will be having the new rank
-        // and the new bonus points
+        String playerName = (String) data.get("playerName");
+        String playerRank = (String) data.get("playerRank");
+        int bonusPoints = ((Long) data.get("bonusPoints")).intValue();
+        if (Client.player != null && Client.player.getUserName().equals(playerName)) {
+            Client.player.setPlayerRank(playerRank);
+            Client.player.setBonusPoints(bonusPoints);
+        } else {
+            Opponent player = Opponent.getOpponent(playerName);
+            if (player != null) {
+                player.setBonusPoints(bonusPoints);
+                player.setPlayerRank(playerRank);
+            }
+        }
     }
     private static void handleUpdateAvilablePlayersList(JSONObject data) {
-        System.out.println("in handle update avilable players list");
         ArrayList<String> playerNames = (ArrayList<String>) data.get("playersNames");
         String update = (String) data.get("update");
         for (var playerName : playerNames) {
             if (!playerName.equals(Client.player.getUserName())) {
                 Opponent player = Opponent.getOpponent(playerName);
+                
                 if (player == null)
                     continue;
                 switch(update) {
@@ -561,19 +573,14 @@ public class ResponseHandler {
                 }
             }
         }
-        updateAvilablePlayersList();
     }
 
-    private static void updateAvilablePlayersList() {
-//        System.out.println("in updateAvilableplayersListFunction");
-//        ArrayList<Opponent> onlinePlayers = Opponent.onlinePlayers;
-    }
+
 
     private static void handlePlayerLeftTheGame(JSONObject data) {
         String playerName = (String) data.get("playerName");
         if (!playerName.equals(Client.player.getUserName())) {
             Opponent.removeOpponent(playerName);
-            updateAvilablePlayersList();
             System.out.println(playerName + " left the game");
         }
     }

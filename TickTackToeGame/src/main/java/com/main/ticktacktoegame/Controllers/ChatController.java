@@ -4,12 +4,16 @@
  */
 package com.main.ticktacktoegame.Controllers;
 
+import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.leaveChat;
 import static com.main.ticktacktoegame.Network.RequestCreator.sendNewMessage;
 import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -42,6 +46,10 @@ public class ChatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (quitChatController.fieldContent != null) {
+            this.fieldContent = quitChatController.fieldContent;
+            textArea.setText(this.fieldContent.toString());
+        }
         Client.chatRoom = this;
         textArea.setDisable(true);
     }
@@ -58,7 +66,12 @@ public class ChatController implements Initializable {
     
     @FXML
     public void  leave() {
-        Client.sendRequest(leaveChat());
+        quitChatController.fieldContent = this.fieldContent;
+        try {
+            App.setRoot("LeaveChatView");
+        } catch (IOException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

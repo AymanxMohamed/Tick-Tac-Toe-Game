@@ -9,6 +9,7 @@ import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayer;
 import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayerForChat;
+import com.main.ticktacktoegame.Network.ResponseHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,6 +78,7 @@ public class OnlineHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ResponseHandler.onlineController = this;
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
@@ -91,11 +93,25 @@ public class OnlineHomeController implements Initializable {
         }
         else 
             onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
+        refreshTable();
     }
     
     
     public void refreshTable() {
-         if (!Opponent.opponentPlayers.isEmpty()) {
+        new Thread(() -> {
+         while (true) {
+             refresh();
+             try {
+                 Thread.sleep(1000);
+             } catch (InterruptedException ex) {
+                 Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
+            
+        }).start();
+    }
+    private void refresh() {
+        if (!Opponent.opponentPlayers.isEmpty()) {
             playerName.setCellValueFactory(new PropertyValueFactory<>("playerName"));
             bonusPoints.setCellValueFactory(new PropertyValueFactory<>("bonusPoints"));
             playerRank.setCellValueFactory(new PropertyValueFactory<>("playerRank"));
@@ -122,12 +138,16 @@ public class OnlineHomeController implements Initializable {
         Opponent selectedOpponent = onlinePlayersTable.getSelectionModel().getSelectedItem();
         if (selectedOpponent != null) {
             System.out.println(selectedOpponent.getPlayerName());
-              if (!selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
+              if (selectedOpponent.isOnline() && !selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
+                    System.out.println(selectedOpponent.isOnline());
                     Client.opponnentName = selectedOpponent.getPlayerName();
                     Client.sendRequest(invitePlayerForChat(selectedOpponent.getPlayerName()));
             } else {
                 try {
-                    if (selectedOpponent.isInGame()) {
+                    if (!selectedOpponent.isOnline()) {
+                        App.setRoot("PlayerIsOfflineView");
+                    }
+                    else if (selectedOpponent.isInGame()) {
                         App.setRoot("PlayerIsCurrentlyInGameView");
                     } else {
                         App.setRoot("PlayerIsCurrentlyInChatView");
@@ -147,12 +167,15 @@ public class OnlineHomeController implements Initializable {
         Opponent selectedOpponent = onlinePlayersTable.getSelectionModel().getSelectedItem();
         if (selectedOpponent != null) {
             System.out.println(selectedOpponent.getPlayerName());
-              if (!selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
+              if (selectedOpponent.isOnline() && !selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
                 Client.opponnentName = selectedOpponent.getPlayerName();
                 Client.sendRequest(invitePlayer(selectedOpponent.getPlayerName()));
             } else {
                 try {
-                 if (selectedOpponent.isInGame()) {
+                    if (!selectedOpponent.isOnline()) {
+                        App.setRoot("PlayerIsOfflineView");
+                    }
+                    else if (selectedOpponent.isInGame()) {
                         App.setRoot("PlayerIsCurrentlyInGameView");
                     } else {
                         App.setRoot("PlayerIsCurrentlyInChatView");

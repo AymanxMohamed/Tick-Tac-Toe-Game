@@ -182,8 +182,7 @@ public class SingleModeGameHandler {
         
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
         
-        playerHandler.sendResponse(updatePlayerDataResponse(playerHandler.player));
-        
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerHandler.player));
 
         playerHandler.sendResponse(endSingleModeGameResponse(playerCase));
         currentGames.remove(this);
@@ -228,7 +227,13 @@ public class SingleModeGameHandler {
     public void endGame() {
         DatabaseManager.openDataBaseConnection();
         playerHandler.player.decreaseBonusPoints();
-        playerHandler.sendResponse(updatePlayerDataResponse(playerHandler.player));
+        
+        ArrayList<String> XOPlayers = new ArrayList<>();
+        XOPlayers.add(playerHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        
+        PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerHandler.player));
+        
         System.out.println(playerHandler);
         System.out.println(currentGames);
         currentGames.remove(this);

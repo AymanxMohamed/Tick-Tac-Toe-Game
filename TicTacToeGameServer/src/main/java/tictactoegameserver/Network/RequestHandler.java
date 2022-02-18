@@ -135,7 +135,9 @@ public class RequestHandler {
          System.out.println("in handel game Invitation");
         String invitationReciever = (String) data.get("invitationReciever");
         PlayerHandler receiverHandler = getPlayerHandler(invitationReciever);
-        
+        if (receiverHandler == null) {
+            return playerIsOfflineResponse(invitationReciever);
+        }
         if (receiverHandler.inGame) {
             return playerInGameResponse(invitationReciever);
         }
@@ -235,6 +237,11 @@ public class RequestHandler {
         String difficulty = (String) data.get("difficulty");
         String choice = (String) data.get("choice");
         String gameID = generateUniqueId();
+        
+        ArrayList<String> XOPlayers = new ArrayList<>();
+        XOPlayers.add(playerHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(XOPlayers, "inGame"));
+        
         playerHandler.sendResponse(startSingleModeGameResponse(gameID, choice));
         addSingleModeGameHandler(gameID, playerHandler, choice, difficulty);
         if (choice.equals("o")) {
@@ -362,8 +369,9 @@ public class RequestHandler {
         ArrayList<String> newOnlinePlayers = new ArrayList<>();
         newOnlinePlayers.add(playerHandler.player.getUserName());
         PlayerHandler.broadcastResponse(updateAvilablePlayersList(newOnlinePlayers, "playerStatus"));
-        
+        System.out.println("in logout before close every thing");
         playerHandler.closeEveryThing();
+        playerHandler = null;
     }
     /*_*____ * _____  end of Logout Requests _____ * _____ */
 
