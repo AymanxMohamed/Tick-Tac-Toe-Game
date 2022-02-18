@@ -82,17 +82,6 @@ public class OnlineHomeController implements Initializable {
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
-        if (!Opponent.opponentPlayers.isEmpty()) {
-            playerName.setCellValueFactory(new PropertyValueFactory<>("playerName"));
-            bonusPoints.setCellValueFactory(new PropertyValueFactory<>("bonusPoints"));
-            playerRank.setCellValueFactory(new PropertyValueFactory<>("playerRank"));
-            InGame.setCellValueFactory(new PropertyValueFactory<>("inGameText"));
-            InChat.setCellValueFactory(new PropertyValueFactory<>("inChatText"));
-            isOnline.setCellValueFactory(new PropertyValueFactory<>("isOnlineText"));
-            onlinePlayersTable.setItems(opponentList);
-        }
-        else 
-            onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
         refreshTable();
     }
     

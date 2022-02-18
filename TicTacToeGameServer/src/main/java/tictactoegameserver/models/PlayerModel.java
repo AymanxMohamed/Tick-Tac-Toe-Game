@@ -41,6 +41,7 @@ public class PlayerModel {
     public static ArrayList<PlayerModel> playersList = new ArrayList<>();
     
     public static void addPlayer(String playerName, int bonusPoints, String playerRank) {
+        System.out.println("new player added");
        playersList.add(new PlayerModel(playerName, bonusPoints, playerRank));
     }
     public static PlayerModel getPlayerModel(String opponent) {

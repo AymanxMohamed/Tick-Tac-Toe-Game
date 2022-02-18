@@ -4,10 +4,13 @@
  */
 package tictactoegameserver.Controllers;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import tictactoegameserver.Network.Server;
 import tictactoegameserver.models.PlayerModel;
+import tictactoegameserver.Network.Server;
 
 /**
  * FXML Controller class
@@ -62,19 +65,7 @@ public class OnlineHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        if (!PlayerModel.playersList.isEmpty()) {
-            playerName.setCellValueFactory(new PropertyValueFactory<>("playerName"));
-            bonusPoints.setCellValueFactory(new PropertyValueFactory<>("bonusPoints"));
-            playerRank.setCellValueFactory(new PropertyValueFactory<>("playerRank"));
-            InGame.setCellValueFactory(new PropertyValueFactory<>("inGameText"));
-            InChat.setCellValueFactory(new PropertyValueFactory<>("inChatText"));
-            isOnline.setCellValueFactory(new PropertyValueFactory<>("isOnlineText"));
-            onlinePlayersTable.setItems(playersList);
-        }
-        else 
-            onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
-        //refreshTable();
+        refreshTable();
     }
     
     
@@ -83,7 +74,7 @@ public class OnlineHomeController implements Initializable {
          while (true) {
              refresh();
              try {
-                 Thread.sleep(1000);
+                 Thread.sleep(300);
              } catch (InterruptedException ex) {
                  Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -109,11 +100,15 @@ public class OnlineHomeController implements Initializable {
     @FXML
     public void toggleServerStatus() {
         if (serverStatusToggle.getText().equals("Open Server")) {
-            Server.startServer();
+            System.out.println("open is called");
             serverStatusToggle.setText("Close Server");
+            new Thread(() -> {
+                Server.startServer();
+            }).start();
         } else {
-             Server.closeServer();
-             serverStatusToggle.setText("Close Server");
+            System.out.println("close is called");
+            serverStatusToggle.setText("Open Server");
+            Server.closeServer();
         }
     }
 

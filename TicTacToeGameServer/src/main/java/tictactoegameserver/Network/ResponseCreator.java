@@ -455,7 +455,11 @@ public class ResponseCreator {
         return dataObject;
     }
     
-    
+    public static String serverIsClosed() {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "serverIsClosed");
+        return JSONValue.toJSONString(responseObject);
+    }  
 
 
 

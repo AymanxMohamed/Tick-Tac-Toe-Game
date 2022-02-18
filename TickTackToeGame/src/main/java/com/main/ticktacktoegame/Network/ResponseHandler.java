@@ -9,6 +9,7 @@ import com.main.ticktacktoegame.Controllers.OnlineHomeController;
 import com.main.ticktacktoegame.Controllers.TicTackToeController;
 import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.Player;
+import static com.main.ticktacktoegame.Network.RequestCreator.logout;
 import static com.main.ticktacktoegame.Network.Utility.getIntegerArray;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -136,6 +137,9 @@ public class ResponseHandler {
                 break;
             case "player in chat":
                 handlePlayerInChat(data);
+                break;
+            case "serverIsClosed":
+                handleServerIsClosed();
                 break;
             default:
                 break;
@@ -581,6 +585,12 @@ public class ResponseHandler {
 //            Opponent.removeOpponent(playerName);
 //            System.out.println(playerName + " left the game");
 //        }
+    }
+    private static void handleServerIsClosed() {
+        if (Client.player != null) {
+            Client.sendRequest(logout());
+        }
+        Client.closeEveryThing();
     }
     /* _____ * _____ end of general Responses _____ * _____ */
 

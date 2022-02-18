@@ -10,42 +10,45 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static tictactoegameserver.Network.PlayerHandler.addPlayerHandler;
+import static tictactoegameserver.Network.ResponseCreator.serverIsClosed;
 
 /**
  *
  * @author ayman
  */
 public class Server {
-    private static ServerSocket serverSocket;
-    private static final int SERVER_PORT = 9000;
-
+    public static ServerSocket serverSocket = null;
+    public static final int SERVER_PORT = 9000;
+    public static boolean isClosed = true;
+    
     public static void startServer() {
+        isClosed = false;
         try {
-            serverSocket = new ServerSocket(SERVER_PORT);
-            new Thread(() -> {
-                try {
-                    while (!serverSocket.isClosed()) {
-                        Socket socket = serverSocket.accept();
-                        addPlayerHandler(socket);
-                        System.out.println("Cann't launch the server on This port");
-                        System.out.println("May be this port is used by another program");
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            Server.serverSocket = new ServerSocket(Server.SERVER_PORT);
+            while (serverSocket != null && !serverSocket.isClosed()) {
+                Socket socket = serverSocket.accept();
+                if (isClosed) {
+                    socket.close();
+                    break;
                 }
-            }).start();
+                addPlayerHandler(socket);
+            }
         } catch (IOException ex) {
+            System.out.println("Cann't launch the server on This port");
+            System.out.println("May be this port is used by another program");
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void closeServer() {
-        System.out.println("server is closed");
+    synchronized public static void closeServer() {
+        isClosed = true;
+        PlayerHandler.broadcastResponse(serverIsClosed());
         try {
             if (!serverSocket.isClosed())
-                PlayerHandler.playerHandlers.forEach(handler -> handler.closeEveryThing());
+            {
+                new Socket(serverSocket.getInetAddress(), serverSocket.getLocalPort()).close();
                 serverSocket.close();
-                
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
