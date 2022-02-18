@@ -40,9 +40,12 @@ public class Server {
     }
 
     public static void closeServer() {
+        System.out.println("server is closed");
         try {
-            if (serverSocket != null)
+            if (!serverSocket.isClosed())
+                PlayerHandler.playerHandlers.forEach(handler -> handler.closeEveryThing());
                 serverSocket.close();
+                
         } catch (IOException e) {
             e.printStackTrace();
         }

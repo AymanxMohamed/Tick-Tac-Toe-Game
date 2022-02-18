@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,7 +31,9 @@ public class OnlineHomeController implements Initializable {
      * Initializes the controller class.
      */
 
-
+    @FXML
+    private Button serverStatusToggle;
+    
     @FXML
     TableView<PlayerModel> onlinePlayersTable;
     
@@ -102,15 +105,16 @@ public class OnlineHomeController implements Initializable {
             onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
     }
     
-
-    @FXML
-    public void openServer() {
-        Server.startServer();
-    }
     
     @FXML
-    public void closeServer() {
-        Server.closeServer();
+    public void toggleServerStatus() {
+        if (serverStatusToggle.getText().equals("Open Server")) {
+            Server.startServer();
+            serverStatusToggle.setText("Close Server");
+        } else {
+             Server.closeServer();
+             serverStatusToggle.setText("Close Server");
+        }
     }
 
 }

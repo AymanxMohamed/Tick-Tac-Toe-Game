@@ -14,37 +14,7 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/onlinehome.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoegameserver.Controllers.OnlineHomeController">
     <children>
         
-        <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
-         <children>
-            <Pane layoutX="16.0" layoutY="-5.0" prefHeight="118.0" prefWidth="327.0">
-               <children>
-                  <ImageView fitHeight="131.0" fitWidth="318.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Rectangle%203.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="106.0" fitWidth="318.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/upperContainer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="67.0" fitWidth="53.0" layoutX="24.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/exitIcon.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="67.0" layoutY="19.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" onAction="#openServer" prefHeight="72.0" prefWidth="239.0" styleClass="exitBtn" text="Open Server" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="30.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </Pane>
-         </children>
-        </Pane>
+        <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0" />
         
         <Pane layoutX="99.0" layoutY="270.0" prefHeight="458.0" prefWidth="1327.0">
             <Label layoutX="66.0" styleClass="fontStyle" text="Players List :" textFill="#00b4ff">
@@ -67,31 +37,32 @@
            </columns>
          </TableView>
         </Pane>
-        
-                          <Pane layoutX="1062.0" layoutY="64.0" prefHeight="118.0" prefWidth="327.0">   
+      <Pane layoutX="601.0" layoutY="71.0" prefHeight="118.0" prefWidth="327.0">
+         <children>
             <ImageView fitHeight="131.0" fitWidth="318.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@images/Rectangle%203.png" />
-                </image>
+               <image>
+                  <Image url="@images/Rectangle%203.png" />
+               </image>
             </ImageView>
             <ImageView fitHeight="106.0" fitWidth="318.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true">
-                <image>
-                    <Image url="@images/upperContainer.png" />
-                </image>
+               <image>
+                  <Image url="@images/upperContainer.png" />
+               </image>
             </ImageView>
             <ImageView fitHeight="67.0" fitWidth="53.0" layoutX="24.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@images/exitIcon.png" />
-                </image>
+               <image>
+                  <Image url="@images/exitIcon.png" />
+               </image>
             </ImageView>
-            <Button layoutX="58.0" layoutY="28.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" onAction="#closeServer" prefHeight="54.0" prefWidth="239.0" styleClass="exitBtn" text="Close Server" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="30.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>     
-        </Pane>
+            <Button fx:id="serverStatusToggle" layoutX="67.0" layoutY="19.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" onAction="#toggleServerStatus" prefHeight="72.0" prefWidth="239.0" styleClass="exitBtn" text="Open Server" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
