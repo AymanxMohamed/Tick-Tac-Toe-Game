@@ -35,25 +35,36 @@ public class OnlineHomeController implements Initializable {
      */
     @FXML
     Label usernameLabel;
+    
     @FXML
     Label bonusPointsLabel;
+    
     @FXML
     Label rankLabel;
-//    @FXML Label registerDateLabel;
 
     @FXML
     TableView<Opponent> onlinePlayersTable;
     
     @FXML
     TableColumn<Opponent, String> playerName;
-
+    
+    @FXML
+    TableColumn<Opponent, Integer> bonusPoints;
+    
+    @FXML
+    TableColumn<Opponent, String> playerRank;
+    
+    @FXML
+    TableColumn<Opponent, String> isOnline;
+    
     @FXML
     TableColumn<Opponent, String> InGame;
     
     @FXML
     TableColumn<Opponent, String> InChat;
     
-    ObservableList<Opponent> opponentList = FXCollections.observableArrayList(Opponent.onlinePlayers);
+    
+    ObservableList<Opponent> opponentList = FXCollections.observableArrayList(Opponent.opponentPlayers);
     
     @FXML
     public void switchToWelcomeView() {
@@ -69,15 +80,34 @@ public class OnlineHomeController implements Initializable {
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
-        if (!Opponent.onlinePlayers.isEmpty()) {
+        if (!Opponent.opponentPlayers.isEmpty()) {
             playerName.setCellValueFactory(new PropertyValueFactory<>("playerName"));
+            bonusPoints.setCellValueFactory(new PropertyValueFactory<>("bonusPoints"));
+            playerRank.setCellValueFactory(new PropertyValueFactory<>("playerRank"));
             InGame.setCellValueFactory(new PropertyValueFactory<>("inGameText"));
             InChat.setCellValueFactory(new PropertyValueFactory<>("inChatText"));
+            isOnline.setCellValueFactory(new PropertyValueFactory<>("isOnlineText"));
             onlinePlayersTable.setItems(opponentList);
         }
         else 
             onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
     }
+    
+    
+    public void refreshTable() {
+         if (!Opponent.opponentPlayers.isEmpty()) {
+            playerName.setCellValueFactory(new PropertyValueFactory<>("playerName"));
+            bonusPoints.setCellValueFactory(new PropertyValueFactory<>("bonusPoints"));
+            playerRank.setCellValueFactory(new PropertyValueFactory<>("playerRank"));
+            InGame.setCellValueFactory(new PropertyValueFactory<>("inGameText"));
+            InChat.setCellValueFactory(new PropertyValueFactory<>("inChatText"));
+            isOnline.setCellValueFactory(new PropertyValueFactory<>("isOnlineText"));
+            onlinePlayersTable.setItems(opponentList);
+        }
+        else 
+            onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
+    }
+    
     @FXML
     public void exit(){
         try {

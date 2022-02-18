@@ -54,15 +54,30 @@ public class ResponseCreator {
         responseObject.put("data", getOnlinePlayersJsonObject());
         return JSONValue.toJSONString(responseObject);
     }
-
-    public static String addNewPlayerResponse(String userName) {
-        JSONObject dataObject = new JSONObject();
-        dataObject.put("playerName", userName);
+    
+    public static String allPlayersListResponse() {
         JSONObject responseObject = new JSONObject();
-        responseObject.put("response", "add new player");
-        responseObject.put("data", dataObject);
+        responseObject.put("response", "all players list");
+        responseObject.put("data", getAllPlayersJsonObject());
         return JSONValue.toJSONString(responseObject);
     }
+    
+    public static String addNewPlayerResponse(String userName, Player player) {
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("response", "add new player");
+        responseObject.put("data", getPlayerJsonObject(userName, player));
+        return JSONValue.toJSONString(responseObject);
+    }
+    
+    
+//    public static String addNewPlayerResponse(String userName) {
+//        JSONObject dataObject = new JSONObject();
+//        dataObject.put("playerName", userName);
+//        JSONObject responseObject = new JSONObject();
+//        responseObject.put("response", "add new player");
+//        responseObject.put("data", dataObject);
+//        return JSONValue.toJSONString(responseObject);
+//    }
     /*_____ * _____ end of Login  Responses _____ * _____ */
 
     /*_____ * _____ Register Responses _____ * _____ */
@@ -322,8 +337,8 @@ public class ResponseCreator {
         responseObject.put("data", data);
         System.out.println("update player data sended: " + JSONValue.toJSONString(responseObject));
         return JSONValue.toJSONString(responseObject);
-        
     }
+    
     public static String updateAvilablePlayersList(ArrayList<String> playersNames, String update) {
         JSONObject data = new JSONObject();
         data.put("playersNames", playersNames);
@@ -374,6 +389,9 @@ public class ResponseCreator {
         dataObject.put("registerDate", formatedDateTime);
         return dataObject;
     }
+    
+
+    
     public static JSONObject getOnlinePlayersJsonObject() {
         ArrayList<Player> onlinePlayers = null;
         DatabaseManager.openDataBaseConnection();
@@ -389,6 +407,9 @@ public class ResponseCreator {
             boolean inChat = playerHandler.inChat;
             JSONObject data = new JSONObject();
             data.put("name", player.getUserName());
+            data.put("bonusPoints", player.getBonusPoints());
+            data.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
+            data.put("playerStatus", player.getPlayerStatus());
             data.put("inGame", inGame);
             data.put("inChat", inChat);
             onlinePlayersDataObjects.add(data);
@@ -398,6 +419,39 @@ public class ResponseCreator {
 
         return dataObject;
     }
+    public static JSONObject getAllPlayersJsonObject() {
+        ArrayList<Player> allPlayers = null;
+        DatabaseManager.openDataBaseConnection();
+        allPlayers = DatabaseManager.getAllPlayers();
+        System.out.println("after getting the array in get all players json creator");
+        System.out.println(allPlayers);
+        DatabaseManager.closeDataBaseConnection();
+
+        JSONArray allPlayersDataObjects = new JSONArray();
+        for (var player : allPlayers) {
+            PlayerHandler playerHandler = getPlayerHandler(player.getUserName());
+            boolean inGame = false;
+            boolean inChat = false;
+            if (playerHandler != null)
+            {
+                inGame = playerHandler.inGame;
+                inChat = playerHandler.inChat;
+            }
+            JSONObject data = new JSONObject();
+            data.put("name", player.getUserName());
+            data.put("bonusPoints", player.getBonusPoints());
+            data.put("playerRank", MappingFunctions.mapPlayerRank(player.getPlayerRank()));
+            data.put("playerStatus", player.getPlayerStatus());
+            data.put("inGame", inGame);
+            data.put("inChat", inChat);
+            allPlayersDataObjects.add(data);
+        }
+        JSONObject dataObject = new JSONObject();
+        dataObject.put("allPlayersDataObjects", allPlayersDataObjects);
+
+        return dataObject;
+    }
+    
     
 
 

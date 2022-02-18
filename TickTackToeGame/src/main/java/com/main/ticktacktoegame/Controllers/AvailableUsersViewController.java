@@ -43,7 +43,7 @@ public class AvailableUsersViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ArrayList<Opponent> onlinePlayers  = Opponent.onlinePlayers;
+        ArrayList<Opponent> onlinePlayers  = Opponent.opponentPlayers;
         System.out.println(onlinePlayers);
         if (!onlinePlayers.isEmpty()) {
             onlinePlayers.forEach(player -> {

@@ -51,6 +51,9 @@ public class ResponseHandler {
             case "online players list":
                 onlinePlayersList(data);
                 break;
+            case "all players list":
+                handleAllPlayersList(data);
+                break;
             case "add new player":
                 handleAddNewPlayer(data);
                 break;
@@ -165,34 +168,60 @@ public class ResponseHandler {
             ex.printStackTrace();
         }
     }
-
+ 
     private static void onlinePlayersList(JSONObject data) {
         // todo
         // this function will be send in the beiggining when player logged in
         JSONArray onlinePlayersDataObjects = (JSONArray) data.get("onlinePlayersDataObjects");
         for (int i = 0; i < onlinePlayersDataObjects.size(); i++) {
             JSONObject obj = (JSONObject) onlinePlayersDataObjects.get(i);
-            String name = (String) obj.get("name");
+            String playerName = (String) obj.get("name");
+            int bonusPoints = ((Long) data.get("bonusPoints")).intValue();
+            String playerRank = (String) obj.get("playerRank");
+            String playerStatus = (String) obj.get("playerStatus");
             boolean inGame = (boolean) obj.get("inGame");
             boolean inChat = (boolean) obj.get("inChat");
-            if (!name.equals(Client.player.getUserName())) {
-                Opponent.addOpponent(name, inGame, inChat);
+            if (!playerName.equals(Client.player.getUserName())) {
+                Opponent.addOpponent(playerName, bonusPoints, playerRank, playerStatus, inGame, inChat);
                 updateAvilablePlayersList();
-                System.out.println(name + " is online");
-                System.out.println("is " + name + " in game " + inGame);
-                System.out.println("is " + name + " in chat " + inChat);
+                System.out.println(playerName + " is " + playerStatus);
+                System.out.println(playerName + " is online");
+                System.out.println("is " + playerName + " in game " + inGame);
+                System.out.println("is " + playerName + " in chat " + inChat);
 
+            }
+        }
+    }
+    
+    private static void handleAllPlayersList(JSONObject data) {
+        JSONArray allPlayersDataObjects = (JSONArray) data.get("allPlayersDataObjects");
+        for (int i = 0; i < allPlayersDataObjects.size(); i++) {
+            JSONObject obj = (JSONObject) allPlayersDataObjects.get(i);
+            String playerName = (String) obj.get("name");
+            int bonusPoints = ((Long) obj.get("bonusPoints")).intValue();
+            String playerRank = (String) obj.get("playerRank");
+            String playerStatus = (String) obj.get("playerStatus");
+            boolean inGame = (boolean) obj.get("inGame");
+            boolean inChat = (boolean) obj.get("inChat");
+            if (!playerName.equals(Client.player.getUserName())) {
+                Opponent.addOpponent(playerName, bonusPoints, playerRank, playerStatus, inGame, inChat);
+                updateAvilablePlayersList();
+                System.out.println(playerName + " is " + playerStatus);
+                System.out.println("is " + playerName + " in game " + inGame);
+                System.out.println("is " + playerName + " in chat " + inChat);
             }
         }
     }
 
     private static void handleAddNewPlayer(JSONObject data) {
-        // todo
         String playerName = (String) data.get("playerName");
         if (Client.player != null && !playerName.equals(Client.player.getUserName())) {
-            Opponent.addOpponent(playerName, false, false);
+            String name = (String) data.get("userName");
+            int bonusPoints = ((Long) data.get("bonusPoints")).intValue();
+            String playerRank = (String) data.get("playerRank");
+            Opponent.addOpponent(name, bonusPoints, playerRank, "Offline", false, false);
             updateAvilablePlayersList();
-            System.out.println(playerName + " is online now");
+            System.out.println(playerName + " has been added");
         }
     }
 
@@ -519,10 +548,16 @@ public class ResponseHandler {
                 Opponent player = Opponent.getOpponent(playerName);
                 if (player == null)
                     continue;
-                if (update.equals("inGame")) {
-                    player.togleInGameStatus();
-                } else {
-                    player.toogleInChatStatus();
+                switch(update) {
+                    case "inGame":
+                        player.togleInGameStatus();
+                        break;
+                    case "playerStatus":
+                        player.tooglePlayerStatus();
+                        break;
+                    case "inChat":
+                        player.toogleInChatStatus();
+                        break;
                 }
             }
         }

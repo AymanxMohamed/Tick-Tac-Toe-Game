@@ -101,8 +101,13 @@ public class RequestHandler {
         DatabaseManager.togglePlayerStatus(playerHandler.player);
         DatabaseManager.closeDataBaseConnection();
         playerHandler.sendResponse(loginSuccessResponse(userName, playerHandler.player));
-        PlayerHandler.broadcastResponse(addNewPlayerResponse(userName));
-        return onlinePlayersListResponse();
+        
+        
+        ArrayList<String> newOnlinePlayers = new ArrayList<>();
+        newOnlinePlayers.add(playerHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(newOnlinePlayers, "playerStatus"));
+        
+        return allPlayersListResponse();
     }
     
     public static String handleRegister(JSONObject data) {
@@ -117,7 +122,9 @@ public class RequestHandler {
         } else {
             DatabaseManager.addNewPlayer(userName, password);
         }
+        PlayerHandler.broadcastResponse(addNewPlayerResponse(userName, DatabaseManager.getPlayer(userName)));
         DatabaseManager.closeDataBaseConnection();
+        
         return registerSuccessResponse();
     }
     /*_____ * _____ end of Login & Register Requests _____ * _____ */
@@ -250,7 +257,6 @@ public class RequestHandler {
         String gameID = (String) data.get("gameId");
         SingleModeGameHandler gameHandler = getSingleModeGameHandler(gameID);
         playerHandler.sendResponse(continueGameResponse(gameHandler.getGameMoves()));
-        //playerHandler.sendResponse(drawSingleMovesResponse(gameHandler.getGameMoves()));
         return doNothingResponse();
     }
     
@@ -352,6 +358,11 @@ public class RequestHandler {
         if (playerHandler.inChat) {
             handleForceEndChatOnLogout(chatRoomId, playerName);
         }
+        
+        ArrayList<String> newOnlinePlayers = new ArrayList<>();
+        newOnlinePlayers.add(playerHandler.player.getUserName());
+        PlayerHandler.broadcastResponse(updateAvilablePlayersList(newOnlinePlayers, "playerStatus"));
+        
         playerHandler.closeEveryThing();
     }
     /*_*____ * _____  end of Logout Requests _____ * _____ */
