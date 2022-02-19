@@ -220,10 +220,10 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
       <img src="https://avatars.githubusercontent.com/u/72627215?v=4"> </img>
     </td>
     <td>
+    </td>
+    <td>
       <img src="https://avatars.githubusercontent.com/u/58668061?v=4"></img>
     </td>
-   <td>
-   </td>
   </tr>
   <tr>
     <td>
