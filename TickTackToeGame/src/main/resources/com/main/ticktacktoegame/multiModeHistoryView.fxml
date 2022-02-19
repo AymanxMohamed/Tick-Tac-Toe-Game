@@ -117,7 +117,7 @@
         </Pane>
         
         <Pane layoutX="99.0" layoutY="270.0" prefHeight="458.0" prefWidth="1327.0">
-            <Label layoutX="66.0" layoutY="-30.0" styleClass="fontStyle" text="Players List :" textFill="#00b4ff">
+            <Label layoutX="66.0" layoutY="-30.0" styleClass="fontStyle" text="Multi Mode Game History" textFill="#00b4ff">
                 <font>
                     <Font name="System Bold" size="50.0" />
                 </font>

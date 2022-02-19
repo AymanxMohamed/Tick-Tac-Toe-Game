@@ -57,10 +57,8 @@ public class Client {
             } catch (IOException ex) {
                 System.out.println("connection lost");
                 closeEveryThing();
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception e) {
                 closeEveryThing();
-                e.printStackTrace();
             }
         }).start();
     }
@@ -73,7 +71,7 @@ public class Client {
             bufferedWriter.flush();
         } catch (IOException ex) {
             closeEveryThing();
-           Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("connection lost because of send request");
         }
     }
     public static void closeEveryThing() {
@@ -89,7 +87,8 @@ public class Client {
                 socket.close();
             }
         } catch (IOException ex) {
-            //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in closing socket");
+
         } 
     }
 }

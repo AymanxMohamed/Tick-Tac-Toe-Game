@@ -159,7 +159,7 @@ public class ResponseHandler {
         try {
             App.setRoot("PlayerNotExistView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("can't set player not exits view");
         }
     }
 
@@ -167,7 +167,7 @@ public class ResponseHandler {
         try {
             App.setRoot("WrongPasswordView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("can't set WrongPasswordView");
         }
     }
 
@@ -181,7 +181,7 @@ public class ResponseHandler {
             System.out.println("player logged in successfuly");
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("can't set welcomeView in handle login");
         }
     }
  
@@ -197,11 +197,6 @@ public class ResponseHandler {
             boolean inChat = (boolean) obj.get("inChat");
             if (!playerName.equals(Client.player.getUserName())) {
                 Opponent.addOpponent(playerName, bonusPoints, playerRank, playerStatus, inGame, inChat);
-                System.out.println(playerName + " is " + playerStatus);
-                System.out.println(playerName + " is online");
-                System.out.println("is " + playerName + " in game " + inGame);
-                System.out.println("is " + playerName + " in chat " + inChat);
-
             }
         }
     }
@@ -236,7 +231,7 @@ public class ResponseHandler {
         try {
             App.setRoot("PlayerAlreadyOnlineView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("can't set PlayerAlreadyOnlineView");
         }
     }
     /* _____ * _____ end of Login Responses _____ * _____ */
@@ -246,28 +241,27 @@ public class ResponseHandler {
         try {
             App.setRoot("PlayerExistView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("can't set PlayerExistView");
         }
     }
     private static void handleRegisterSuccess() {
         try {
             App.setRoot("RegisterSuccessView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("can't set RegisterSuccessView");
         }
     }
     /* _____ * _____ end of Register Responses _____ * _____ */
 
     /* _____ * _____ Game invitation for sender Responses _____ * _____ */
     private static void handlePlayerInGame(JSONObject data) {
-        System.out.println("in handle player in game");
         try {
             String invitedPlayer = (String) data.get("invitedPlayer");
             App.setRoot("PlayerIsCurrentlyInGameView");
             Label receiverName = (Label)App.scene.lookup("#playerName");
             receiverName.setText(invitedPlayer);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set PlayerIsCurrentlyInGameView");
         }
     }
     private static void handlePlayerIsOffline(JSONObject data) {
@@ -278,14 +272,12 @@ public class ResponseHandler {
             Label receiverName = (Label)App.scene.lookup("#playerName");
             receiverName.setText(invitedPlayer);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set PlayerIsOfflineView");
         }
     }
 
     private static void handleInvitationSended(JSONObject data) {
-        System.out.println("in handle invitation sended multi single mode game");
-        String invitationReciever = (String) data.get("invitationReciever");
-        System.out.println("The invitation to " + invitationReciever + " has been sent successfuly");
+//        String invitationReciever = (String) data.get("invitationReciever");
     }
 
     private static void handleInvitationRejected(JSONObject data) {
@@ -296,7 +288,7 @@ public class ResponseHandler {
             Label receiverName = (Label)App.scene.lookup("#playerName");
             receiverName.setText(invitationReciever);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+             System.out.println("can't set InvitationRejectedView");
         }
     }
 
@@ -306,7 +298,7 @@ public class ResponseHandler {
             Client.opponnentName = invitationReciever;
             App.setRoot("chooseXorOMulti");
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set chooseXorOMulti");
         }
     }
 
@@ -320,14 +312,13 @@ public class ResponseHandler {
             Label senderName = (Label)App.scene.lookup("#playerName");
             senderName.setText(invitationSender);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set InvitationFromPlayer");
         }
     }
 
     /* _____ * _____ Multi Mode Game Responses _____ * _____ */
 
     private static void handleStartMultiModeGame(JSONObject data) {
-        System.out.println("in handle start multi mode game");
         String gameID = (String) data.get("gameId");
         String playerX = (String) data.get("playerX");
         String playerO = (String) data.get("playerO");
@@ -345,12 +336,11 @@ public class ResponseHandler {
             Label playerOLabel = (Label)App.scene.lookup("#playerO");
             playerOLabel.setText(playerO);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+             System.out.println("can't set TicTackToe");
         }
     }
 
     private static void handleEndMultiModeGame(JSONObject data) {
-        System.out.println("in handle end  multi mode game");
         String winner = (String) data.get("winner");
         try {
             App.setRoot("End  Game View");
@@ -363,7 +353,7 @@ public class ResponseHandler {
                 endGameMessage.setText("Unforunately you lost");
             }
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set End  Game View");
         }
     }
 
@@ -375,7 +365,7 @@ public class ResponseHandler {
             Label playerNameLabel = (Label)App.scene.lookup("#playerName");
             playerNameLabel.setText(playerName);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set PlayerLeftGameView");
         }
     }
 
@@ -383,14 +373,12 @@ public class ResponseHandler {
 
     /* _____ * _____ Single Mode Game Responses _____ * _____ */
     private static void handleStartSingleModeGame(JSONObject data) {
-        System.out.println("in handle start single mode game");
         String gameID = (String) data.get("gameId");
         String choice = (String) data.get("choice");
         Client.singleModeGameID = gameID;
         Client.multiModeGameId  = "";
         Client.opponnentName = "Computer";
         Client.cuurentCase = choice;
-        System.out.println("response accepted: , gameId = " + Client.singleModeGameID);
         try {
             App.setRoot("TicTackToe");
             if (choice.equals("X")) {
@@ -405,7 +393,7 @@ public class ResponseHandler {
                 playerOLabel.setText(Client.player.getUserName());
             }
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set TicTackToe");
         }
     }
 
@@ -437,7 +425,7 @@ public class ResponseHandler {
             Platform.runLater(()-> TicTackToeController.drawMoves(gameMoves));
             Platform.runLater(()-> TicTackToeController.enableAllButtons());
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set TicTackToe");
         }
     }
     private static void handleDisapleAllButtonsSingle() {
@@ -457,7 +445,7 @@ public class ResponseHandler {
                 endGameMessage.setText("Unforunately you lost");
             }
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+             System.out.println("can't set End  Game View");
         }
     }
     /* _____ * _____ end of Single Mode Game Responses _____ * _____ */
@@ -474,15 +462,13 @@ public class ResponseHandler {
             Label senderName = (Label)App.scene.lookup("#playerName");
             senderName.setText(invitationSender);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set InvitationFromPlayerToChat");
         }
     }
 
     private static void handleAddNewMessage(JSONObject data) {
-        System.out.println("in handle add new message");
         String message = (String) data.get("message");
         String sender = (String) data.get("sender");
-        // This method will just add this message in the text area
         String messageToAdd;
         if (sender.equals(Client.player.getUserName())) {
             messageToAdd = "me: " + message.trim();
@@ -510,14 +496,13 @@ public class ResponseHandler {
                 Label PlayerTwoLabel = (Label)App.scene.lookup("#PlayerTwoLabel");
                 PlayerTwoLabel.setText(Client.opponnentName);
             }catch (IOException ex) {
-                Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("can't set chat");
             }
         });
             
     }
 
     private static void handlePlayerLeftChatRoom(JSONObject data) {
-        System.out.println("in handle player left chat");
         String playerName = (String) data.get("playerName");
         try {
             Client.opponnentName = "";
@@ -525,19 +510,18 @@ public class ResponseHandler {
             Label playerNameLabel = (Label)App.scene.lookup("#playerName");
             playerNameLabel.setText(playerName);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set PlayerLeftChatView");
         }
     }
 
     private static void handlePlayerInChat(JSONObject data) {
-        System.out.println("in handle playerinchat");
         String invitedPlayer = (String) data.get("invitedPlayer");
         try {
             App.setRoot("PlayerIsCurrentlyInChatView");
             Label playerName = (Label)App.scene.lookup("#playerName");
             playerName.setText(invitedPlayer);
         } catch (IOException ex) {
-            Logger.getLogger(ResponseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("can't set PlayerIsCurrentlyInChatView");
         }
 
     }
@@ -548,7 +532,6 @@ public class ResponseHandler {
     
     
     private static void handleUpdatePlayerData(JSONObject data) {
-        System.out.println("in updatePlayerData ");
         String playerName = (String) data.get("playerName");
         String playerRank = (String) data.get("playerRank");
         int bonusPoints = ((Long) data.get("bonusPoints")).intValue();
@@ -588,11 +571,6 @@ public class ResponseHandler {
     }
 
     private static void handlePlayerLeftTheGame(JSONObject data) {
-//        String playerName = (String) data.get("playerName");
-//        if (!playerName.equals(Client.player.getUserName())) {
-//            Opponent.removeOpponent(playerName);
-//            System.out.println(playerName + " left the game");
-//        }
     }
     private static void handleServerIsClosed() {
         if (Client.player != null) {

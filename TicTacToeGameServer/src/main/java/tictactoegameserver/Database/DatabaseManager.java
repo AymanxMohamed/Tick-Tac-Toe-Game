@@ -129,8 +129,6 @@ public class DatabaseManager {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("in get all players database manager");
-        System.out.println(playersArray);
         return playersArray;
 
     }

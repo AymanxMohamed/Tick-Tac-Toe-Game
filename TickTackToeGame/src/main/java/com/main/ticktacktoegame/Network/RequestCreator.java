@@ -54,7 +54,6 @@ public class RequestCreator {
         JSONObject data = new JSONObject();
         data.put("invitationSender", Client.player.getUserName());
         data.put("invitationReciever", Client.opponnentName);
-        System.out.println(Client.player.getUserName() + Client.opponnentName);
         data.put("choise", "X");
         JSONObject request = new JSONObject();
         request.put("request", "XorOChoise");
@@ -76,16 +75,13 @@ public class RequestCreator {
     public static String acceptInvitation() {
         JSONObject data = new JSONObject();
         data.put("invitationSender", Client.opponnentName);
-        System.out.println("opponent: " + Client.opponnentName);
         data.put("invitationReciever", Client.player.getUserName());
-        System.out.println("receiver: " + Client.player.getUserName());
         JSONObject request = new JSONObject();
         request.put("request", "acceptInvitation");
         request.put("data", data);
         return JSONValue.toJSONString(request);
     }
     public static String rejectInvitation() {
-        System.out.println("in reject invitation function");
         JSONObject data = new JSONObject();
         data.put("invitationSender", Client.opponnentName);
         data.put("invitationReciever", Client.player.getUserName());
@@ -101,8 +97,6 @@ public class RequestCreator {
     public static String multiMove(int index) {
         JSONObject data = new JSONObject();
         data.put("gameId", Client.multiModeGameId);
-        System.out.println(Client.multiModeGameId);
-        System.out.println(index);
         data.put("index", index);
         JSONObject request = new JSONObject();
         request.put("request", "multiMove");
@@ -124,7 +118,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "cancelEndMultiGame");
         request.put("data", data);
-        System.out.println("cancelEndMultiGame request sended: " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request);   
     }
     
@@ -142,7 +135,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "play single mode game");
         request.put("data", data);
-        System.out.println("play single mode request: " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request);
     }
   
@@ -153,7 +145,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "singleMove");
         request.put("data", data);
-        System.out.println("singleMove request sended: " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request);   
     }    
     public static String cancelEndSingleGame() {
@@ -162,7 +153,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "cancelEndSingleGame");
         request.put("data", data);
-        System.out.println("cancelEndSingleGame request sended: " + JSONValue.toJSONString(request));
         
         return JSONValue.toJSONString(request);   
     }
@@ -172,7 +162,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "end single mode game");
         request.put("data", data);
-        System.out.println("End Game has been sended " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request); 
     }
     /*_____ * _____  end of Single Mode Game Requests _____ * _____ */
@@ -185,7 +174,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "chat invitation");
         request.put("data", data);
-        System.out.println("invitation for chat sended");
         return JSONValue.toJSONString(request);
     }
     public static String sendNewMessage(String message){
@@ -196,8 +184,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "send new message");
         request.put("data", data);
-        System.out.println("invitation for chat sended");
-        System.out.println("send new message sended: " + JSONValue.toJSONString(request));
         return JSONValue.toJSONString(request);
     }
     
@@ -243,7 +229,6 @@ public class RequestCreator {
         JSONObject request = new JSONObject();
         request.put("request", "logout");
         request.put("data", data);
-        System.out.println("logout sended");
         return JSONValue.toJSONString(request);  
     }
     /*_____ * _____  end of Logout Requests _____ * _____ */

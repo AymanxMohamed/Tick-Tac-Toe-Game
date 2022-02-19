@@ -36,7 +36,6 @@ public class Server {
         } catch (IOException ex) {
             System.out.println("Cann't launch the server on This port");
             System.out.println("May be this port is used by another program");
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -51,7 +51,6 @@ public class PlayerHandler {
                     }
             } catch (Exception e) {
                 System.out.println("exception in accept response");
-                e.printStackTrace();
                 closeEveryThing();
             }
         }).start();
@@ -101,7 +100,6 @@ public class PlayerHandler {
           }
         } catch (Exception e) {
             System.out.println("exception");
-            e.printStackTrace();
         }
     }
 }

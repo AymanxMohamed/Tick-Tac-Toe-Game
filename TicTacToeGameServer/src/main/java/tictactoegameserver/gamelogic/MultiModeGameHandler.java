@@ -104,7 +104,6 @@ public class MultiModeGameHandler {
     }    
     public void getMovesJsonObject(){
         for (var move : gameMoves){
-            System.out.println(move);
         }
     }
     public void processMove(int index) {
@@ -138,12 +137,8 @@ public class MultiModeGameHandler {
         DatabaseManager.closeDataBaseConnection();
         
         playerXHandler.sendResponse(wholeMultiGamesHistoryResponse(playerXHandler.player.getUserName()));
-        System.out.println(wholeMultiGamesHistoryResponse(playerXHandler.player.getUserName()));
-        System.out.println(" sended to " + playerXHandler.player.getUserName());
         
         playerOHandler.sendResponse(wholeMultiGamesHistoryResponse(playerOHandler.player.getUserName()));
-        System.out.println(wholeMultiGamesHistoryResponse(playerOHandler.player.getUserName()));
-        System.out.println(" sended to " + playerOHandler.player.getUserName());
 
         
         playerXHandler.inGame = false;

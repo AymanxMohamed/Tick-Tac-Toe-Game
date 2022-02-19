@@ -116,8 +116,6 @@ public class SingleModeGameHandler {
                 } else {
                     playerCase = "loser";
                 }
-                System.out.println("playerType is: " + playerType + " X Won" );
-                System.out.println("playerCase is: " + playerCase);
                 return true;
             } else if (line.equals("ooo")) {
                 if (!playerType.equals("X")) {
@@ -125,8 +123,6 @@ public class SingleModeGameHandler {
                 } else {
                     playerCase = "loser";
                 }
-                System.out.println("playerType is: " + playerType + " o Won" );
-                System.out.println("playerCase is: " + playerCase);
                 return true;
             } else if (avilableMoves.size() < 1) {
                 playerCase = "draw";
@@ -138,12 +134,9 @@ public class SingleModeGameHandler {
     
     public void processMove(int index) {
         addMove(index);
-        System.out.println("player played in index: " + index);
         removeMove(index);
-        System.out.println("avilable moves: " + avilableMoves);
         playerHandler.sendResponse(drawSingleMovesResponse(gameMoves));
         if (isGameEnded()) {
-            System.out.println("game ended and the playerCase is: " + playerCase);
             handleEndGame();
             return;
         }
@@ -152,9 +145,7 @@ public class SingleModeGameHandler {
     private void processAiMove() {
         int aiIndex = generateMove();
         addMove(aiIndex);
-        System.out.println("computer played in index: " + aiIndex);
         removeMove(aiIndex);
-        System.out.println("avilable moves: " + avilableMoves);
         if (isGameEnded()) {
             handleEndGame();
             return;
@@ -200,7 +191,6 @@ public class SingleModeGameHandler {
     }
     private void removeMove(Object move) {
         avilableMoves.remove((Integer) move);
-        System.out.println("move " + move + " is removed");
     }
 
     private int generateEasyMove() {
@@ -232,11 +222,7 @@ public class SingleModeGameHandler {
         PlayerModel.getPlayerModel(playerHandler.player.getUserName()).togleInGameStatus();
         PlayerHandler.broadcastResponse(updatePlayerDataResponse(playerHandler.player));
         
-        System.out.println(playerHandler);
-        System.out.println(currentGames);
         currentGames.remove(this);
-        System.out.println(playerHandler);
-        System.out.println(currentGames);
         
         DatabaseManager.closeDataBaseConnection();
     }

@@ -87,7 +87,6 @@ public class RequestHandler {
     /*_____ * _____ Login & Register Requests _____ * _____ */
     
     private static String handleLogin(JSONObject data, PlayerHandler playerHandler) {
-         System.out.println("in handel login");
         String userName = (String) data.get("username");
         String password = (String) data.get("password");
         if (getPlayerHandler(userName) != null) {
@@ -117,7 +116,6 @@ public class RequestHandler {
     }
     
     public static String handleRegister(JSONObject data) {
-         System.out.println("in handel register");
 
         String userName = (String) data.get("username");
         String password = (String) data.get("password");
@@ -140,7 +138,6 @@ public class RequestHandler {
     /*_____ * _____ Multi Mode Game Requests _____ * _____ */
     
     private static String handleGameInvitation(JSONObject data) {
-         System.out.println("in handel game Invitation");
         String invitationReciever = (String) data.get("invitationReciever");
         PlayerHandler receiverHandler = getPlayerHandler(invitationReciever);
         if (receiverHandler == null) {
@@ -158,7 +155,6 @@ public class RequestHandler {
              /*_____ * _____ receiver _____ * _____ */
     
     private static String handleAcceptInvitation(JSONObject data) {
-         System.out.println("in handel accept invitation");
          
         String invitationSender = (String) data.get("invitationSender");
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
@@ -168,7 +164,6 @@ public class RequestHandler {
     
     private static String handleRejectInvitation(JSONObject data) {
         
-         System.out.println("in handel reject invitation");
         String invitationSender = (String) data.get("invitationSender");        
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
         senderHandler.sendResponse(invitationRejectedResponse(data));
@@ -178,7 +173,6 @@ public class RequestHandler {
     
     private static String handleXOrOChoise(JSONObject data) {
         
-         System.out.println("in handel XorO Choise");
          
         String invitationSender = (String) data.get("invitationSender");
         String invitationReciever = (String) data.get("invitationReciever");
@@ -216,7 +210,6 @@ public class RequestHandler {
                     /*_____ * _____ game process _____ * _____ */
     
     private static String handleMultiModeGameMove(JSONObject data) {
-        System.out.println("in handel multiModeGameMove");
         String gameID = (String) data.get("gameId");
         int index = ((Long) data.get("index")).intValue();
         MultiModeGameHandler gameHandler = Utility.getMultiModeGameHandler(gameID);
@@ -226,12 +219,10 @@ public class RequestHandler {
 
     private static void handleForceEndMultiModeGameOnLogout(String multiGameId, String playerName) {
         
-         System.out.println("in handel EndMultiiModeGameOnLogout");
         getMultiModeGameHandler(multiGameId).forceEndGameOnlogout(playerName);
     }
 
     private static void handleForceEndMultiModeGame(JSONObject data, PlayerHandler playerHandler) {
-        System.out.println("in handel endMultiModeGame");
         String gameId = (String) data.get("gameId");
         if (getMultiModeGameHandler(gameId) == null)
             return;
@@ -243,8 +234,6 @@ public class RequestHandler {
     
     private static String handlePlaySingleModeGame(JSONObject data, PlayerHandler playerHandler) {
         
-         System.out.println("in handel play single mode game");
-        System.out.println("Request accepted: ");
         String difficulty = (String) data.get("difficulty");
         String choice = (String) data.get("choice");
         String gameID = generateUniqueId();
@@ -264,7 +253,6 @@ public class RequestHandler {
     
     private static String handleSingleModeGameMove(JSONObject data) {
         
-         System.out.println("in handel single mode game move");
         String gameID = (String) data.get("gameId");
         int index = ((Long) data.get("index")).intValue();
         getSingleModeGameHandler(gameID).processMove(index);
@@ -272,7 +260,6 @@ public class RequestHandler {
     }
     
     private static String handelCancelEndSingleGame(JSONObject data, PlayerHandler playerHandler) {
-        System.out.println("in handel cancel end singlemode game");
         String gameID = (String) data.get("gameId");
         SingleModeGameHandler gameHandler = getSingleModeGameHandler(gameID);
         playerHandler.sendResponse(continueGameResponse(gameHandler.getGameMoves()));
@@ -280,7 +267,6 @@ public class RequestHandler {
     }
     
     private static void handleEndSingleModeGame(JSONObject data) {
-        System.out.println("in handel end single game");
         String gameId = (String) data.get("gameId");
         getSingleModeGameHandler(gameId).endGame();
     }
@@ -305,7 +291,6 @@ public class RequestHandler {
         return invitationSendedResponse(data);
     }
     private static void handleSendNewMessage(JSONObject data) {
-        System.out.println("in handel SendNewMessage");
         String chatId = (String) data.get("chatId");
         String sender = (String) data.get("sender");
         String message = (String) data.get("message");
@@ -316,7 +301,6 @@ public class RequestHandler {
                /*_____ * _____ receiver _____ * _____ */   
     
     private static String handleAcceptChatInvitation(JSONObject data) {
-        System.out.println("in handel accept chat invitation");
         String invitationSender = (String) data.get("invitationSender");
         String invitationReciever = (String) data.get("invitationReciever");
         PlayerHandler senderHandler = getPlayerHandler(invitationSender);
@@ -389,14 +373,12 @@ public class RequestHandler {
         
         PlayerModel.getPlayerModel(playerHandler.player.getUserName()).tooglePlayerStatus();
         
-        System.out.println("in logout before close every thing");
         playerHandler.closeEveryThing();
         playerHandler = null;
     }
     /*_*____ * _____  end of Logout Requests _____ * _____ */
 
     private static String handelCancelEndMultiGame(JSONObject data, PlayerHandler playerHandler) {
-        System.out.println("in handel cancel end multi mode game");
         String gameID = (String) data.get("gameId");
         MultiModeGameHandler gameHandler = getMultiModeGameHandler(gameID);
         playerHandler.sendResponse(continueGameResponse(gameHandler.getGameRecord()));
