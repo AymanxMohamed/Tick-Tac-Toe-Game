@@ -4,10 +4,9 @@
  */
 package tictactoegameserver.Controllers;
 
-
-
-
+import java.io.IOException;
 import javafx.fxml.FXML;
+import tictactoegameserver.App;
 import tictactoegameserver.Network.Server;
 
 /**
@@ -16,17 +15,22 @@ import tictactoegameserver.Network.Server;
  * @author Roo
  */
 public class IndexController {
-    
-    
+
     @FXML
     public void openServer() {
-        Server.startServer();
+        new Thread(() -> {
+            Server.startServer();
+        }).start();
+
+        try {
+            App.setRoot("onlineHome");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
-    
-    @FXML
-    public void closeServer() {
-        Server.closeServer();
-    }
-    
-    
+
+//    @FXML
+//    public void closeServer() {
+//        Server.closeServer();
+//    }
 }

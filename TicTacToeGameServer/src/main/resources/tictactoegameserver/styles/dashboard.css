@@ -16,7 +16,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .switchBtn{
     -fx-background-color: transparent;
+    -fx-background-image: url(../images/on.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
+
+.optionBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/border.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.backBtn{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/back.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 
 .table-view{
     -fx-background-color:#0000002d;
@@ -51,6 +72,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .table-view .table-cell{
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
+    -fx-alignment: CENTER;
 }
 
 .table-view .virtual-flow .scroll-bar:vertical,
@@ -100,4 +122,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-text-fill: white;
     -fx-font-size: 15;
     -fx-font-weight: bold;
+}
+
+.button{
+    -fx-cursor:hand;
 }
