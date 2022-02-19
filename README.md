@@ -222,12 +222,15 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
     <td>
       <img src="https://avatars.githubusercontent.com/u/58668061?v=4"></img>
     </td>
-
+   <td>
+   </td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/AymanxMohamed"> Ayman kheirEldeen </a>
     </td>
+   <td>
+   </td>
     <td>
       <a href="https://github.com/ahmedelshopaky"> Ahmed ElShopaky </a>
     </td>
@@ -237,12 +240,18 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
       <img src="https://avatars.githubusercontent.com/u/72516521?v=4"></img>
     </td>
     <td>
+      <img src="https://avatars.githubusercontent.com/u/97949259?v=4"></img>
+    </td>
+    <td>
       <img src="https://avatars.githubusercontent.com/u/97365136?v=4"></img>
     </td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/reemadelsamak"> Reem Adel </a>
+    </td>
+      <td>
+      <a href="https://github.com/dina810"> Dina Reda </a>
     </td>
      <td>
       <a href="https://github.com/MaiiEmad"> Mai Emad </a>
