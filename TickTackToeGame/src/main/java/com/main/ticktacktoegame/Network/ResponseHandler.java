@@ -178,7 +178,6 @@ public class ResponseHandler {
                     ((Long) playerData.get("bonusPoints")).intValue(),
                     (String) playerData.get("playerRank"),
                     (String) playerData.get("registerDate"));
-            System.out.println("player logged in successfuly");
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
             System.out.println("can't set welcomeView in handle login");
@@ -265,7 +264,6 @@ public class ResponseHandler {
         }
     }
     private static void handlePlayerIsOffline(JSONObject data) {
-        System.out.println("in handle player in game");
         try {
             String invitedPlayer = (String) data.get("invitedPlayer");
             App.setRoot("PlayerIsOfflineView");
@@ -283,7 +281,6 @@ public class ResponseHandler {
     private static void handleInvitationRejected(JSONObject data) {
         try {
             String invitationReciever = (String) data.get("invitationReciever");
-            System.out.println(invitationReciever + " reject your invitation");
             App.setRoot("InvitationRejectedView");
             Label receiverName = (Label)App.scene.lookup("#playerName");
             receiverName.setText(invitationReciever);
@@ -479,7 +476,6 @@ public class ResponseHandler {
     }
 
     private static void handleOpenChatRoom(JSONObject data) {
-        System.out.println("in handle open chat room");
         String chatID = (String) data.get("chatID");
         String sender = (String) data.get("sender");
         String receiver = (String) data.get("receiver");
@@ -582,8 +578,6 @@ public class ResponseHandler {
 
      /* _____ * _____ Game History  _____ * _____ */
     private static void handelSingleModeGameHistory(JSONObject data) {
-        System.out.println("in handle single mode history");
-        System.out.println(data);
         JSONArray gameHistoryObjects = (JSONArray) data.get("gameHistoryObjects");
         SingleModeGameModel.singleModeHistory = new ArrayList<>();
         for (int i = 0; i < gameHistoryObjects.size(); i++) {
@@ -598,8 +592,6 @@ public class ResponseHandler {
     }
 
     private static void handelMultiModeGameHistory(JSONObject data) {
-        System.out.println("in handelMultiModeGameHistory");
-        System.out.println(data);
         JSONArray gameHistoryObjects = (JSONArray) data.get("gameHistoryObjects");
         MultiModeGameModel.multiModeHistory = new ArrayList<>();
         for (int i = 0; i < gameHistoryObjects.size(); i++) {

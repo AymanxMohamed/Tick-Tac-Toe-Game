@@ -116,6 +116,7 @@ public class TicTackToeReplayController implements Initializable {
                 App.setRoot("gameReplayEnded");
                 Label endGameMessage = (Label)App.scene.lookup("#endGameMessage");
                 endGameMessage.setText(replayEndMessage);
+                return;
             } catch (IOException ex) {
                 Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -37,4 +37,9 @@ public class ExitController {
             Logger.getLogger(ExitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
+    void sendExit() {
+        Client.sendRequest(logout());
+        System.exit(0);
+    }
 }

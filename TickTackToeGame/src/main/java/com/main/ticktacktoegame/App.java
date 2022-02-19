@@ -1,6 +1,7 @@
 package com.main.ticktacktoegame;
 
 import com.main.ticktacktoegame.Network.Client;
+import static com.main.ticktacktoegame.Network.RequestCreator.logout;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,6 +24,12 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("index"));
         stage.setMaximized(true);
+        stage.setOnCloseRequest(e-> {
+            if (Client.player != null) {
+                Client.sendRequest(logout());
+            }
+            System.exit(0);
+        });
         stage.setScene(scene);
         stage.show();
     }
