@@ -6,11 +6,13 @@ package com.main.ticktacktoegame.Controllers;
  */
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -36,12 +38,8 @@ public class WelcomeController implements Initializable {
 //    @FXML static Label onlinePlayer0;
     @FXML
     private void switchToSingleMode() {
-//        try {
-            switchToChooseDifficultyView();
+        switchToChooseDifficultyView();
 
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
     }
 
     public void switchToChooseDifficultyView() {
@@ -81,6 +79,8 @@ public class WelcomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        AudioPlayer.stop();
+        AudioPlayer.changeAudio("welcomeSound.wav");
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
@@ -95,5 +95,10 @@ public class WelcomeController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    public void toogleAudio() {
+        AudioPlayer.toogleAudio();
     }
 }

@@ -9,6 +9,7 @@ import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.leaveChat;
 import static com.main.ticktacktoegame.Network.RequestCreator.sendNewMessage;
 import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +47,8 @@ public class ChatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        AudioPlayer.stop();
+        AudioPlayer.changeAudio("chatSound.wav");
         if (quitChatController.fieldContent != null) {
             this.fieldContent = quitChatController.fieldContent;
             textArea.setText(this.fieldContent.toString());
@@ -72,6 +75,11 @@ public class ChatController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    public void toogleAudio() {
+        AudioPlayer.toogleAudio();
     }
     
 }

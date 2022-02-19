@@ -2,6 +2,8 @@ package com.main.ticktacktoegame;
 
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.logout;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +13,13 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 /**
@@ -19,7 +28,7 @@ import java.util.logging.Logger;
 public class App extends Application {
 
     public static Scene scene;
-
+    
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("index"));
@@ -42,9 +51,9 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        
+    
+    public static void main(String[] args){
         launch();
     }
 }
+

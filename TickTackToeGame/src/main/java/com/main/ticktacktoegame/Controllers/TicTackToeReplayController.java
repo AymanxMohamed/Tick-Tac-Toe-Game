@@ -4,6 +4,7 @@
  */
 package com.main.ticktacktoegame.Controllers;
 import com.main.ticktacktoegame.App;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -70,6 +71,8 @@ public class TicTackToeReplayController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        AudioPlayer.stop();
+        AudioPlayer.changeAudio("gameSound.wav");
         buttons = new ArrayList<>();
         buttons.add(button0);
         buttons.add(button1);
@@ -132,4 +135,10 @@ public class TicTackToeReplayController implements Initializable {
         }
         index++;
     }
+    
+    @FXML
+    public void toogleAudio() {
+        AudioPlayer.toogleAudio();
+    }
+    
 }

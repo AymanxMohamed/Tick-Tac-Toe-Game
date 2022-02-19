@@ -12,6 +12,7 @@ import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayer;
 import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayerForChat;
 import com.main.ticktacktoegame.Network.ResponseHandler;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -128,5 +129,10 @@ public class MultiModeHistoryController implements Initializable {
         if (selectedGame != null) {
             selectedGame.playGame();
         }
+    }
+    
+    @FXML
+    public void toogleAudio() {
+        AudioPlayer.toogleAudio();
     }
 }

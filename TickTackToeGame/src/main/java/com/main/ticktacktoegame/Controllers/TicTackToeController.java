@@ -7,6 +7,7 @@ import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.multiMove;
 import static com.main.ticktacktoegame.Network.RequestCreator.singleMove;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,6 +63,8 @@ public class TicTackToeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        AudioPlayer.stop();
+        AudioPlayer.changeAudio("gameSound.wav");
         buttons = new ArrayList<>();
         buttons.add(button0);
         buttons.add(button1);
@@ -133,6 +136,11 @@ public class TicTackToeController implements Initializable {
                 buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
             }
         }
+    }
+    
+    @FXML
+    public void toogleAudio() {
+        AudioPlayer.toogleAudio();
     }
 
     @FXML
