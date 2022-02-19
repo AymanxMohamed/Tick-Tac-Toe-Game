@@ -164,7 +164,7 @@ this is the first view in the client app and it won't go to the `login` view if 
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/06.jpg" alt="Build Status">
 </p>
 
-   player can play with the computer and specify the difficulty
+    player can play with the computer and specify the difficulty
    
    
 
@@ -180,11 +180,11 @@ https://user-images.githubusercontent.com/72627215/154819657-1707f18c-8bc8-4832-
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/07.jpg" alt="Build Status">
 </p>
 
-   send chat invitation process
+    send chat invitation process
 
 https://user-images.githubusercontent.com/72627215/154819356-b5f4c291-c308-4e3c-b691-4b417e711ec1.mp4
    
-   send game invitation process
+    send game invitation process
    
    
 
