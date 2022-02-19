@@ -1,2 +1,0 @@
-cyan >> #00B4FF
-magenta >> #CF3EE8

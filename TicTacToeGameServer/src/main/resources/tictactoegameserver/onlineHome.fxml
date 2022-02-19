@@ -5,24 +5,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/onlinehome.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoegameserver.Controllers.OnlineHomeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoegameserver.Controllers.OnlineHomeController">
     <children>
         
         <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0" />
+      <Button fx:id="serverStatusToggle" layoutX="690.0" layoutY="60.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" onAction="#toggleServerStatus" prefHeight="152.0" prefWidth="158.0" styleClass="switchBtn" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Button>
         
-        <Pane layoutX="99.0" layoutY="270.0" prefHeight="458.0" prefWidth="1327.0">
-            <Label layoutX="66.0" styleClass="fontStyle" text="Players List :" textFill="#00b4ff">
+        <Pane layoutX="264.0" layoutY="252.0" prefHeight="458.0" prefWidth="1070.0">
+            <Label layoutX="349.0" layoutY="-17.0" styleClass="fontStyle" text="Players List" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="60.0" />
                 </font>
             </Label>
-         <TableView fx:id="onlinePlayersTable" layoutX="66.0" layoutY="105.0" prefHeight="303.0" prefWidth="946.0">
+         <TableView fx:id="onlinePlayersTable" layoutX="86.0" layoutY="105.0" prefHeight="347.0" prefWidth="848.0">
            <columns>
              <TableColumn fx:id="playerName" prefWidth="120.0" text="PlayerName" />
                <TableColumn fx:id="bonusPoints" prefWidth="120.0" text="BonusPoints" />
@@ -37,32 +40,5 @@
            </columns>
          </TableView>
         </Pane>
-      <Pane layoutX="601.0" layoutY="71.0" prefHeight="118.0" prefWidth="327.0">
-         <children>
-            <ImageView fitHeight="131.0" fitWidth="318.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/Rectangle%203.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="106.0" fitWidth="318.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true">
-               <image>
-                  <Image url="@images/upperContainer.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="67.0" fitWidth="53.0" layoutX="24.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/exitIcon.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="serverStatusToggle" layoutX="67.0" layoutY="19.0" minHeight="54.0" minWidth="69.0" mnemonicParsing="false" onAction="#toggleServerStatus" prefHeight="72.0" prefWidth="239.0" styleClass="exitBtn" text="Open Server" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
     </children>
 </AnchorPane>
