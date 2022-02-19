@@ -61,7 +61,7 @@ only if this player is `online` and if the player is not in `game` or in `chat`.
 
 ### Application Design
  - in this game the client is actualy nothing 
- - The `Server` is the big bos her :)
+ - The `Server` is the big boss her :)
 #### Client Application
 
 The client application consists mainly of 4 packages
