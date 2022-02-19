@@ -164,6 +164,15 @@ this is the first view in the client app and it won't go to the `login` view if 
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/06.jpg" alt="Build Status">
 </p>
 
+   player can play with the computer and specify the difficulty
+   
+   
+
+https://user-images.githubusercontent.com/72627215/154819657-1707f18c-8bc8-4832-ae6a-d0b96940f892.mp4
+
+
+
+
     player can navigate to the online home view to see the players list and if their
     is player online he can send a private chat invitation or game invitation to him
 
@@ -171,8 +180,27 @@ this is the first view in the client app and it won't go to the `login` view if 
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/07.jpg" alt="Build Status">
 </p>
 
+   send chat invitation process
+
+https://user-images.githubusercontent.com/72627215/154819356-b5f4c291-c308-4e3c-b691-4b417e711ec1.mp4
+   
+   send game invitation process
+   
+   
+
+https://user-images.githubusercontent.com/72627215/154819699-19a22273-abfc-40f0-a9c8-e325bd89a9c8.mp4
+
+
+
+
+
     player also can navigate to his histry to start see his previous game with 
     the ability to click on any game and play it
+
+
+
+https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-b37e-f70c306c72e1.mp4
+
 
 
 <p align="center">
@@ -182,18 +210,6 @@ this is the first view in the client app and it won't go to the `login` view if 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/09.jpg" alt="Build Status">
 </p>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Contributors
