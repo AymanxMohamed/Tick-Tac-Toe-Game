@@ -63,8 +63,6 @@ public class TicTackToeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        AudioPlayer.stop();
-        AudioPlayer.changeAudio("gameSound.wav");
         buttons = new ArrayList<>();
         buttons.add(button0);
         buttons.add(button1);

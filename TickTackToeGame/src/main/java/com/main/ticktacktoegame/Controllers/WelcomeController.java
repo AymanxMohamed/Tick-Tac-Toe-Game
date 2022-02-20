@@ -79,8 +79,6 @@ public class WelcomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AudioPlayer.stop();
-        AudioPlayer.changeAudio("welcomeSound.wav");
         usernameLabel.setText(Client.player.getUserName());
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());

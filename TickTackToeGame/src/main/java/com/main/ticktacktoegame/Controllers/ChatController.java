@@ -47,8 +47,7 @@ public class ChatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AudioPlayer.stop();
-        AudioPlayer.changeAudio("chatSound.wav");
+
         if (quitChatController.fieldContent != null) {
             this.fieldContent = quitChatController.fieldContent;
             textArea.setText(this.fieldContent.toString());

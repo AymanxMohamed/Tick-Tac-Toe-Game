@@ -25,7 +25,7 @@ public class IndexController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AudioPlayer.changeAudio("indexSound.wav");
+        AudioPlayer.changeAudio("chatSound.wav");
     }
     public void switchToLoginView() {
         try {
