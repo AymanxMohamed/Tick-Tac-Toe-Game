@@ -111,13 +111,13 @@ The  server has mainly 4 packages
 
 ### In Server Side
 
-   Server must be oppendd first because without oppening the server the client won't be able to go to his login screen and he will get an error 
+    Server must be oppendd first because without oppening the server the client won't be able to go to his login screen and he will get an error 
    
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/serverViews/00.jpg" alt="Build Status">
 </p>
 
-   After opening the server you will have the whole players list with the status of each player
+    After opening the server you will have the whole players list with the status of each player
    
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/serverViews/01.jpg" alt="Build Status">
@@ -144,7 +144,7 @@ this is the first view in the client app and it won't go to the `login` view if 
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/register/05.jpg" alt="Build Status">
 </p>
 
-    if the passwor dosn't match he will got an error
+    if the password dosn't match he will got an error
 
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/register/06.jpg" alt="Build Status">
@@ -152,20 +152,20 @@ this is the first view in the client app and it won't go to the `login` view if 
 
 #### login
 
-    If the server is opend so the player will  go to the authontication stage
+    If the server is opened so the player will  go to the authontication stage
     
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/login/02.jpg" alt="Build Status">
 </p>
 
-    if the player name is wrong he will got an error from server
+    if the player name is wrong he will get an error from server
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/login/03.jpg" alt="Build Status">
 </p>
 
-    and if the password is wrong he will also got an error
+    and if the password is wrong he will also get an error
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/login/04.jpg" alt="Build Status">
