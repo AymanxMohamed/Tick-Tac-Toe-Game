@@ -239,7 +239,7 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
     - databaename: TicTacToe
     - or simbly create new database but in this case you have to change the configuration in DatabaseManager.openDatabaseConnection Method
 <p align="center">
-       <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/08.jpg" alt="Build Status">
+       <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/serverViews/03.jpg" alt="Build Status">
 </p>
 
 
