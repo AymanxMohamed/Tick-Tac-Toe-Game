@@ -11,6 +11,7 @@ import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayer;
 import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayerForChat;
 import com.main.ticktacktoegame.Network.ResponseHandler;
 import com.main.ticktacktoegame.Utilites.AudioPlayer;
+//import static com.main.ticktacktoegame.Utilites.AudioPlayer.changeAudio;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,37 +39,39 @@ public class OnlineHomeController implements Initializable {
      */
     @FXML
     Label usernameLabel;
-    
+
     @FXML
     Label bonusPointsLabel;
-    
+
     @FXML
     Label rankLabel;
 
     @FXML
     TableView<Opponent> onlinePlayersTable;
-    
+
     @FXML
     TableColumn<Opponent, String> playerName;
-    
+
     @FXML
     TableColumn<Opponent, Integer> bonusPoints;
-    
+
     @FXML
     TableColumn<Opponent, String> playerRank;
-    
+
     @FXML
     TableColumn<Opponent, String> isOnline;
-    
+
     @FXML
     TableColumn<Opponent, String> InGame;
-    
+
     @FXML
     TableColumn<Opponent, String> InChat;
-    
-    
+
+    @FXML
+    Button soundBtn;
+
     ObservableList<Opponent> opponentList = FXCollections.observableArrayList(Opponent.opponentPlayers);
-    
+
     @FXML
     public void switchToWelcomeView() {
         try {
@@ -84,22 +88,23 @@ public class OnlineHomeController implements Initializable {
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         refreshTable();
+//        AudioPlayer.changeAudio("welcomeSound.wav");
     }
-    
-    
+
     public void refreshTable() {
         new Thread(() -> {
-         while (true) {
-             refresh();
-             try {
-                 Thread.sleep(1000);
-             } catch (InterruptedException ex) {
-                 Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }
-            
+            while (true) {
+                refresh();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }).start();
     }
+
     private void refresh() {
         if (!Opponent.opponentPlayers.isEmpty()) {
             playerName.setCellValueFactory(new PropertyValueFactory<>("playerName"));
@@ -109,68 +114,66 @@ public class OnlineHomeController implements Initializable {
             InChat.setCellValueFactory(new PropertyValueFactory<>("inChatText"));
             isOnline.setCellValueFactory(new PropertyValueFactory<>("isOnlineText"));
             onlinePlayersTable.setItems(opponentList);
-        }
-        else 
+        } else {
             onlinePlayersTable.setPlaceholder(new Label("No Online Players Right Now"));
+        }
     }
-    
+
     @FXML
-    public void exit(){
+    public void exit() {
         try {
             App.setRoot("exitView");
         } catch (IOException ex) {
             Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }  
-    
+    }
+
     @FXML
     public void sendInvitationForChat() {
         Opponent selectedOpponent = onlinePlayersTable.getSelectionModel().getSelectedItem();
         if (selectedOpponent != null) {
             System.out.println(selectedOpponent.getPlayerName());
-              if (selectedOpponent.isOnline() && !selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
-                    System.out.println(selectedOpponent.isOnline());
-                    Client.opponnentName = selectedOpponent.getPlayerName();
-                    Client.sendRequest(invitePlayerForChat(selectedOpponent.getPlayerName()));
+            if (selectedOpponent.isOnline() && !selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
+                System.out.println(selectedOpponent.isOnline());
+                Client.opponnentName = selectedOpponent.getPlayerName();
+                Client.sendRequest(invitePlayerForChat(selectedOpponent.getPlayerName()));
             } else {
                 try {
                     if (!selectedOpponent.isOnline()) {
                         App.setRoot("PlayerIsOfflineView");
-                    }
-                    else if (selectedOpponent.isInGame()) {
+                    } else if (selectedOpponent.isInGame()) {
                         App.setRoot("PlayerIsCurrentlyInGameView");
                     } else {
                         App.setRoot("PlayerIsCurrentlyInChatView");
                     }
-                    Label playerName = (Label)App.scene.lookup("#playerName");
+                    Label playerName = (Label) App.scene.lookup("#playerName");
                     playerName.setText(selectedOpponent.getPlayerName());
                 } catch (IOException ex) {
                     Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         }
     }
-    
+
     @FXML
     public void sendInvitationForPlay() {
         Opponent selectedOpponent = onlinePlayersTable.getSelectionModel().getSelectedItem();
         if (selectedOpponent != null) {
             System.out.println(selectedOpponent.getPlayerName());
-              if (selectedOpponent.isOnline() && !selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
+            if (selectedOpponent.isOnline() && !selectedOpponent.isInChat() && !selectedOpponent.isInGame()) {
                 Client.opponnentName = selectedOpponent.getPlayerName();
                 Client.sendRequest(invitePlayer(selectedOpponent.getPlayerName()));
             } else {
                 try {
                     if (!selectedOpponent.isOnline()) {
                         App.setRoot("PlayerIsOfflineView");
-                    }
-                    else if (selectedOpponent.isInGame()) {
+                    } else if (selectedOpponent.isInGame()) {
                         App.setRoot("PlayerIsCurrentlyInGameView");
                     } else {
                         App.setRoot("PlayerIsCurrentlyInChatView");
                     }
-                    Label playerName = (Label)App.scene.lookup("#playerName");
+                    Label playerName = (Label) App.scene.lookup("#playerName");
                     playerName.setText(selectedOpponent.getPlayerName());
                 } catch (IOException ex) {
                     Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,9 +181,16 @@ public class OnlineHomeController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     public void toogleAudio() {
+        if (soundBtn.getStyleClass().contains("muteSound")) {
+            soundBtn.getStyleClass().remove("muteSound");
+            soundBtn.getStyleClass().add("unmuteSound");
+        } else {
+            soundBtn.getStyleClass().remove("unmuteSound");
+            soundBtn.getStyleClass().add("muteSound");
+        }
         AudioPlayer.toogleAudio();
     }
 

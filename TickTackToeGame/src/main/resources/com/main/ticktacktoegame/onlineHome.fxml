@@ -141,5 +141,6 @@
                 </columns>
             </TableView>
         </Pane>
+        <Button fx:id="soundBtn" layoutX="1463.0" layoutY="338.0" mnemonicParsing="false" onAction="#toogleAudio" prefHeight="40.0" prefWidth="42.0" styleClass="muteSound" />
     </children>
 </AnchorPane>

@@ -5,6 +5,7 @@ package com.main.ticktacktoegame.Controllers;
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 import com.main.ticktacktoegame.App;
+import static com.main.ticktacktoegame.Controllers.TicTackToeController.buttons;
 import com.main.ticktacktoegame.Network.Client;
 import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
@@ -34,6 +36,9 @@ public class WelcomeController implements Initializable {
 
     @FXML
     Label usernameWelcomeLabel;
+
+    @FXML
+    Button soundBtn;
 
 //    @FXML static Label onlinePlayer0;
     @FXML
@@ -83,8 +88,9 @@ public class WelcomeController implements Initializable {
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         usernameWelcomeLabel.setText(Client.player.getUserName());
+        //        AudioPlayer.changeAudio("welcomeSound.wav");
     }
-    
+
     @FXML
     public void goToSingleModeHistory() {
         try {
@@ -94,9 +100,17 @@ public class WelcomeController implements Initializable {
             Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     public void toogleAudio() {
+        if (soundBtn.getStyleClass().contains("muteSound")) {
+            soundBtn.getStyleClass().remove("muteSound");
+            soundBtn.getStyleClass().add("unmuteSound");
+        } else {
+            soundBtn.getStyleClass().remove("unmuteSound");
+            soundBtn.getStyleClass().add("muteSound");
+        }
+//        AudioPlayer.changeAudio("welcomeSound.wav");
         AudioPlayer.toogleAudio();
     }
 }

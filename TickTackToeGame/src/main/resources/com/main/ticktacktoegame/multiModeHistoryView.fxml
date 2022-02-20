@@ -15,9 +15,6 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="body" stylesheets="@styles/onlinehome.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.ticktacktoegame.Controllers.MultiModeHistoryController">
     <children>
         <Button layoutX="1426.0" layoutY="223.0" mnemonicParsing="false" onAction="#switchToWelcomeView" prefHeight="106.0" prefWidth="289.0" styleClass="onlineBtn">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
         </Button>
         
         <Pane layoutX="118.0" layoutY="78.0" prefHeight="90.0" prefWidth="275.0">
@@ -110,9 +107,6 @@
                 <font>
                     <Font name="System Bold" size="30.0" />
                 </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
             </Button>     
         </Pane>
         
@@ -139,5 +133,6 @@
         </Pane>
         <Button layoutX="55.0" layoutY="113.0" mnemonicParsing="false" onAction="#SwitchToPreviousView" prefHeight="43.0" prefWidth="23.0" styleClass="backBtn">
         </Button>
+        <Button fx:id="soundBtn" layoutX="1463.0" layoutY="338.0" mnemonicParsing="false" onAction="#toogleAudio" prefHeight="40.0" prefWidth="42.0" styleClass="muteSound" />
     </children>
 </AnchorPane>

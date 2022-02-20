@@ -115,22 +115,23 @@
                     <Font name="System Bold" size="50.0" />
                 </font>
             </Label>
-         <Line endX="-100.0" endY="328.39996337890625" layoutX="930.0" layoutY="92.0" startX="-100.0" stroke="#00b4ff" strokeLineCap="ROUND" strokeWidth="2.0" />
-         <Button alignment="CENTER" layoutX="906.0" layoutY="201.0" mnemonicParsing="false" onAction="#playGame" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play Game" textFill="WHITE">
-            <font>
-               <Font name="System Bold" size="40.0" />
-            </font>
-         </Button>
-         <TableView fx:id="singleModeHistoryTabel" layoutX="66.0" layoutY="65.0" prefHeight="367.0" prefWidth="639.0">
-           <columns>
-             <TableColumn fx:id="gameDate" prefWidth="173.6000213623047" text="gameDate" />
-               <TableColumn fx:id="playerType" prefWidth="132.0" text="Type" />
-               <TableColumn fx:id="difficulty" prefWidth="150.4000244140625" text="difficulty" />
-               <TableColumn fx:id="playerCase" prefWidth="150.4000244140625" text="Case" />
-           </columns>
-         </TableView>
+            <Line endX="-100.0" endY="328.39996337890625" layoutX="930.0" layoutY="92.0" startX="-100.0" stroke="#00b4ff" strokeLineCap="ROUND" strokeWidth="2.0" />
+            <Button alignment="CENTER" layoutX="906.0" layoutY="201.0" mnemonicParsing="false" onAction="#playGame" prefHeight="105.0" prefWidth="341.0" styleClass="withBtn" text="Play Game" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="40.0" />
+                </font>
+            </Button>
+            <TableView fx:id="singleModeHistoryTabel" layoutX="66.0" layoutY="65.0" prefHeight="367.0" prefWidth="639.0">
+                <columns>
+                    <TableColumn fx:id="gameDate" prefWidth="173.6000213623047" text="gameDate" />
+                    <TableColumn fx:id="playerType" prefWidth="132.0" text="Type" />
+                    <TableColumn fx:id="difficulty" prefWidth="150.4000244140625" text="difficulty" />
+                    <TableColumn fx:id="playerCase" prefWidth="150.4000244140625" text="Case" />
+                </columns>
+            </TableView>
         </Pane>
-      <Button layoutX="45.0" layoutY="103.0" mnemonicParsing="false" onAction="#SwitchToPreviousView" prefHeight="43.0" prefWidth="23.0" styleClass="backBtn">
-      </Button>
+        <Button layoutX="45.0" layoutY="103.0" mnemonicParsing="false" onAction="#SwitchToPreviousView" prefHeight="43.0" prefWidth="23.0" styleClass="backBtn">
+        </Button>
+        <Button fx:id="soundBtn" layoutX="1463.0" layoutY="338.0" mnemonicParsing="false" onAction="#toogleAudio" prefHeight="40.0" prefWidth="42.0" styleClass="muteSound" />
     </children>
 </AnchorPane>
