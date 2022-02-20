@@ -230,10 +230,10 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
 ## How to play
 
 - First Clone The Project
-- Create the dataabase schema 
+- Create the database schema 
   - you have to use Microsoft sql server
   - go to the /'00 Project Materials'/'00 Database'/'02 Database quires' and open 'new Database Schema.sql' file in your database management studio
-  - after creating the data base you have to add user to the data base with the name
+  - after creating the data base you have to add user to the database
     - username: ayman
     - password: @01208538504@
     - databaename: TicTacToe
@@ -244,7 +244,7 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
 
 
   - After creating the database you can now build and run the server project using netbeans or intellij idea as a maven project
-  - you can lunch the Client App using the executable jar file or using netbeans orr intellij idea
+  - you can lunch the Client App using the executable jar file or using netbeans or intellij idea
   - if you have any problems in running the game feel free to contact us
   - note that the server is runing by default on port 9000  you can change this in the Server class
   - note: you will never be able to try the game without the server you have to open the server first 
