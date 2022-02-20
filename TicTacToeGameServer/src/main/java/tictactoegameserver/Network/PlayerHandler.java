@@ -24,7 +24,7 @@ public class PlayerHandler {
     public Player player;
     public boolean inGame;
     public boolean inChat;
-    volatile public static ArrayList<PlayerHandler> playerHandlers = new ArrayList<>();
+    volatile public static ArrayList<PlayerHandler> playerHandlers;
     
     public static void addPlayerHandler(Socket socket) {
         playerHandlers.add(new PlayerHandler(socket));

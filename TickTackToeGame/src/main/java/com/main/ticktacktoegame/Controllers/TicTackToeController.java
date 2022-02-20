@@ -107,8 +107,6 @@ public class TicTackToeController implements Initializable {
     }
 
     public static  void enableAllButtons() {
-        System.out.println(buttons);
-        System.out.println("in controller enable buttons");
         buttons.forEach(button -> {
             if (button.getText().equals("")) {
                 button.setDisable(false);
@@ -124,13 +122,11 @@ public class TicTackToeController implements Initializable {
             if (i % 2 == 0) {
                 // x moves
                 buttonIndex = gameMoves.get(i);
-                System.out.println("place X on Button " + buttonIndex);
                 buttons.get(buttonIndex).setText("X");
                 buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
             } else {
                 // O moves
                 buttonIndex = gameMoves.get(i);
-                buttons.get(buttonIndex).setText("O");
                 buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
             }
         }

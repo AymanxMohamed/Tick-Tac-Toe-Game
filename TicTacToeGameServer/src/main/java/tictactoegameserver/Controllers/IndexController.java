@@ -28,9 +28,4 @@ public class IndexController {
             ex.printStackTrace();
         }
     }
-
-//    @FXML
-//    public void closeServer() {
-//        Server.closeServer();
-//    }
 }

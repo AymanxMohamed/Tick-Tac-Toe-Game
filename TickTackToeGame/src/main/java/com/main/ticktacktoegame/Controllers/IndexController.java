@@ -10,9 +10,6 @@ import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.fxml.Initializable;
 
 /**
@@ -25,7 +22,7 @@ public class IndexController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AudioPlayer.changeAudio("chatSound.wav");
+
     }
     public void switchToLoginView() {
         try {

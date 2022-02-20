@@ -7,9 +7,9 @@ package tictactoegameserver.Network;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import static tictactoegameserver.Network.PlayerHandler.addPlayerHandler;
+import static tictactoegameserver.Network.PlayerHandler.playerHandlers;
 import static tictactoegameserver.Network.ResponseCreator.serverIsClosed;
 
 /**
@@ -22,6 +22,7 @@ public class Server {
     public static boolean isClosed = true;
     
     public static void startServer() {
+        playerHandlers = new ArrayList<>();
         isClosed = false;
         try {
             Server.serverSocket = new ServerSocket(Server.SERVER_PORT);
@@ -31,9 +32,11 @@ public class Server {
                     socket.close();
                     break;
                 }
+                
                 addPlayerHandler(socket);
             }
         } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println("Cann't launch the server on This port");
             System.out.println("May be this port is used by another program");
         }
@@ -42,7 +45,10 @@ public class Server {
     synchronized public static void closeServer() {
         isClosed = true;
         PlayerHandler.broadcastResponse(serverIsClosed());
-        PlayerHandler.playerHandlers.forEach(handler -> handler.closeEveryThing());
+        for (int i = 0; i < PlayerHandler.playerHandlers.size(); i++) {
+            playerHandlers.get(i).closeEveryThing();
+        }
+        playerHandlers = new ArrayList<>();
         try {
             if (!serverSocket.isClosed())
             {
@@ -50,7 +56,7 @@ public class Server {
                 serverSocket.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("problem in closing the server");
         }
     }
 }
