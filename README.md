@@ -28,7 +28,7 @@ The Application done mainliy using `javafx` the server has `MS-SQL-SERVER` datab
 
 - Updated list of the whole single and multi mode game history
 
-- The ability to play any previous game from the `history` list
+- The ability to replay any previous game from the `history` list
 
 - in Server Application you have the same players  list with the ability to `toggle` server tatus
 ### Application Features details
@@ -50,7 +50,7 @@ only if this player is `online` and if the player is not in `game` or in `chat`.
 
 - The server handle all most of the possible senarios that can happen in the appication during the  game or because of any issue.
 
-- The player can play any game from the history.
+- The player can replay any game from the history.
 
 ## Designs
 
