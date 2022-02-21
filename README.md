@@ -245,6 +245,7 @@ https://user-images.githubusercontent.com/72627215/154819722-d28422cd-a888-4a81-
 
   - After creating the database you can now build and run the server project using netbeans or intellij idea as a maven project
   - you can lunch the Client App using the executable jar file or using netbeans or intellij idea
+  - You can download the jar file from this link: https://drive.google.com/drive/folders/1kxtF2Oac1KPSkNlT367PQZKnHkjNJ6Zg?usp=sharing
   - if you have any problems in running the game feel free to contact us
   - note that the server is runing by default on port 9000  you can change this in the Server class
   - note: you will never be able to try the game without the server you have to open the server first 
