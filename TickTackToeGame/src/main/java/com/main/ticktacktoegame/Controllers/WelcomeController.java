@@ -103,10 +103,12 @@ public class WelcomeController implements Initializable {
 
     @FXML
     public void toogleAudio() {
-        if (AudioPlayer.clip.isRunning()) {
+        if (soundBtn.getStyleClass().contains("muteSound")) {
+            soundBtn.getStyleClass().remove("muteSound");
             soundBtn.getStyleClass().add("unmuteSound");
         } else {
-            soundBtn.getStyleClass().remove("muteSound");
+            soundBtn.getStyleClass().remove("unmuteSound");
+            soundBtn.getStyleClass().add("muteSound");
         }
         AudioPlayer.toogleAudio();
     }
