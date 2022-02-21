@@ -127,6 +127,6 @@
          <Button layoutX="222.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToChooseHistoryModeView" prefHeight="83.0" prefWidth="283.0" styleClass="historyBtn">
          </Button>
         </Pane>
-      <Button layoutX="85.0" layoutY="238.0" mnemonicParsing="false" onAction="#toogleAudio" text="sound" />
+      <Button fx:id="soundBtn" layoutX="1463.0" layoutY="338.0" mnemonicParsing="false" onAction="#toogleAudio" prefHeight="40.0" prefWidth="42.0" styleClass="muteSound" />
     </children>
 </AnchorPane>

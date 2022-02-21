@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -67,7 +66,7 @@
                 <Font size="50.0" />
             </font>
         </Text>
-        <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="694.0" layoutY="685.0" onAction="#quitGame" prefWidth="159.0" scaleShape="false" text="Quit" textFill="WHITE">
+        <Button alignment="CENTER" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="781.0" layoutY="687.0" onAction="#quitGame" prefWidth="159.0" scaleShape="false" text="Quit" textFill="WHITE">
             <font>
                 <Font size="20.0" />
             </font>
@@ -103,5 +102,6 @@
                 <Font size="40.0" />
             </font>
         </Label>
+        <Button fx:id="soundBtn" layoutX="596.0" layoutY="687.0" mnemonicParsing="false" onAction="#toogleAudio" prefHeight="56.0" prefWidth="159.0" styleClass="muteSound" />
     </children>
 </AnchorPane>

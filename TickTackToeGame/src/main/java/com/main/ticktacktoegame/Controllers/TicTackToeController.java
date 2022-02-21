@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package com.main.ticktacktoegame.Controllers;
+
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.multiMove;
@@ -52,13 +53,16 @@ public class TicTackToeController implements Initializable {
 
     @FXML
     private Button button8;
-    
+
     @FXML
     private Label playerX;
-    
+
     @FXML
     private Label playerO;
-    
+
+    @FXML
+    Button soundBtn;
+
     public static ArrayList<Button> buttons;
 
     @Override
@@ -79,21 +83,18 @@ public class TicTackToeController implements Initializable {
         });
     }
 
-
-
     @FXML
     void quitGame() {
         try {
-        if (!Client.singleModeGameID.equals(""))
-            App.setRoot("Force End Game");
-        else
-            App.setRoot("Force End Game");
+            if (!Client.singleModeGameID.equals("")) {
+                App.setRoot("Force End Game");
+            } else {
+                App.setRoot("Force End Game");
+            }
         } catch (IOException ex) {
             Logger.getLogger(TicTackToeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-   
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
@@ -106,7 +107,7 @@ public class TicTackToeController implements Initializable {
         buttons.forEach(button -> button.setDisable(true));
     }
 
-    public static  void enableAllButtons() {
+    public static void enableAllButtons() {
         buttons.forEach(button -> {
             if (button.getText().equals("")) {
                 button.setDisable(false);
@@ -131,83 +132,99 @@ public class TicTackToeController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     public void toogleAudio() {
+        if (soundBtn.getStyleClass().contains("muteSound")) {
+            soundBtn.getStyleClass().remove("muteSound");
+            soundBtn.getStyleClass().add("unmuteSound");
+        } else {
+            soundBtn.getStyleClass().remove("unmuteSound");
+            soundBtn.getStyleClass().add("muteSound");
+        }
         AudioPlayer.toogleAudio();
     }
 
     @FXML
     void send0Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(0));
-        else
+        } else {
             Client.sendRequest(multiMove(0));
+        }
 
     }
 
     @FXML
     void send1Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(1));
-        else
+        } else {
             Client.sendRequest(multiMove(1));
+        }
     }
 
     @FXML
     void send2Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(2));
-        else
+        } else {
             Client.sendRequest(multiMove(2));
+        }
     }
 
     @FXML
     void send3Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(3));
-        else
+        } else {
             Client.sendRequest(multiMove(3));
+        }
     }
 
     @FXML
     void send4Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(4));
-        else
+        } else {
             Client.sendRequest(multiMove(4));
+        }
     }
 
     @FXML
     void send5Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(5));
-        else
+        } else {
             Client.sendRequest(multiMove(5));
+        }
     }
 
     @FXML
     void send6Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(6));
-        else
+        } else {
             Client.sendRequest(multiMove(6));
+        }
     }
 
     @FXML
     void send7Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(7));
-        else
+        } else {
             Client.sendRequest(multiMove(7));
+        }
     }
 
     @FXML
     void send8Move() {
-        if (!Client.singleModeGameID.equals(""))
+        if (!Client.singleModeGameID.equals("")) {
             Client.sendRequest(singleMove(8));
-        else
+        } else {
             Client.sendRequest(multiMove(8));
+        }
     }
-
+    
 }

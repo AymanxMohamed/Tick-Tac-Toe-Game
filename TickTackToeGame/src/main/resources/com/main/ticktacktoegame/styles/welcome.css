@@ -50,7 +50,7 @@
 }
 
 .historyBtn{
-        -fx-background-color: none;
+    -fx-background-color: none;
     -fx-background-image: url(../images/historybutton.png);
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
@@ -64,6 +64,22 @@
 .backBtn{
     -fx-background-color: none;
     -fx-background-image: url(../images/back.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.muteSound{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/mute.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.unmuteSound{
+    -fx-background-color: none;
+    -fx-background-image: url(../images/unmute.png);
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;

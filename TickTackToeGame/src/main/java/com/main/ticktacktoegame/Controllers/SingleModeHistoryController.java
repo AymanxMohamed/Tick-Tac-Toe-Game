@@ -21,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -59,6 +60,9 @@ public class SingleModeHistoryController implements Initializable {
 
     @FXML
     TableColumn<SingleModeGameModel, String> playerCase;
+
+    @FXML
+    Button soundBtn;
 
     ObservableList<SingleModeGameModel> singleModeHistory = FXCollections.observableArrayList(SingleModeGameModel.singleModeHistory);
 
@@ -131,9 +135,16 @@ public class SingleModeHistoryController implements Initializable {
             selectedGame.playGame();
         }
     }
-    
+
     @FXML
     public void toogleAudio() {
+        if (soundBtn.getStyleClass().contains("muteSound")) {
+            soundBtn.getStyleClass().remove("muteSound");
+            soundBtn.getStyleClass().add("unmuteSound");
+        } else {
+            soundBtn.getStyleClass().remove("unmuteSound");
+            soundBtn.getStyleClass().add("muteSound");
+        }
         AudioPlayer.toogleAudio();
     }
 }
