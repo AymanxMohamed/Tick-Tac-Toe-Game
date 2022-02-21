@@ -124,11 +124,13 @@ public class TicTackToeController implements Initializable {
                 // x moves
                 buttonIndex = gameMoves.get(i);
                 buttons.get(buttonIndex).setText("X");
+                buttons.get(gameMoves.get(i)).getStyleClass().remove("oMove");
                 buttons.get(gameMoves.get(i)).getStyleClass().add("xMove");
             } else {
                 // O moves
                 buttonIndex = gameMoves.get(i);
                 buttons.get(buttonIndex).setText("O");
+                buttons.get(gameMoves.get(i)).getStyleClass().remove("xMove");
                 buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
             }
         }
@@ -136,12 +138,10 @@ public class TicTackToeController implements Initializable {
 
     @FXML
     public void toogleAudio() {
-        if (soundBtn.getStyleClass().contains("muteSound")) {
-            soundBtn.getStyleClass().remove("muteSound");
+        if (AudioPlayer.clip.isRunning()) {
             soundBtn.getStyleClass().add("unmuteSound");
         } else {
-            soundBtn.getStyleClass().remove("unmuteSound");
-            soundBtn.getStyleClass().add("muteSound");
+            soundBtn.getStyleClass().remove("muteSound");
         }
         AudioPlayer.toogleAudio();
     }

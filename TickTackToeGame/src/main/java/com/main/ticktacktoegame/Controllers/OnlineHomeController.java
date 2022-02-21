@@ -88,6 +88,7 @@ public class OnlineHomeController implements Initializable {
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         refreshTable();
+//        AudioPlayer.changeAudio("welcomeSound.wav");
     }
 
     public void refreshTable() {
@@ -183,12 +184,10 @@ public class OnlineHomeController implements Initializable {
 
     @FXML
     public void toogleAudio() {
-        if (soundBtn.getStyleClass().contains("muteSound")) {
-            soundBtn.getStyleClass().remove("muteSound");
+        if (AudioPlayer.clip.isRunning()) {
             soundBtn.getStyleClass().add("unmuteSound");
         } else {
-            soundBtn.getStyleClass().remove("unmuteSound");
-            soundBtn.getStyleClass().add("muteSound");
+            soundBtn.getStyleClass().remove("muteSound");
         }
         AudioPlayer.toogleAudio();
     }

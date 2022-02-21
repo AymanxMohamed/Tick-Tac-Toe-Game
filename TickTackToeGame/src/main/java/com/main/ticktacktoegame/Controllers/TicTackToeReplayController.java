@@ -129,9 +129,11 @@ public class TicTackToeReplayController implements Initializable {
         if (index % 2 == 0) {
             // x moves 
             buttons.get(buttonIndex).setText("X");
+            buttons.get(gameMoves.get(index)).getStyleClass().remove("oMove");
             buttons.get(gameMoves.get(index)).getStyleClass().add("xMove");
         } else {
             buttons.get(buttonIndex).setText("O");
+            buttons.get(gameMoves.get(index)).getStyleClass().remove("xMove");
             buttons.get(gameMoves.get(index)).getStyleClass().add("oMove");
         }
         index++;
@@ -139,12 +141,10 @@ public class TicTackToeReplayController implements Initializable {
     
     @FXML
     public void toogleAudio() {
-        if (soundBtn.getStyleClass().contains("muteSound")) {
-            soundBtn.getStyleClass().remove("muteSound");
+        if (AudioPlayer.clip.isRunning()) {
             soundBtn.getStyleClass().add("unmuteSound");
         } else {
-            soundBtn.getStyleClass().remove("unmuteSound");
-            soundBtn.getStyleClass().add("muteSound");
+            soundBtn.getStyleClass().remove("muteSound");
         }
         AudioPlayer.toogleAudio();
     }

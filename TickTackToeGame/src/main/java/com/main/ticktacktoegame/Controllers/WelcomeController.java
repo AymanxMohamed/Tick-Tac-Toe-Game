@@ -88,6 +88,7 @@ public class WelcomeController implements Initializable {
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         usernameWelcomeLabel.setText(Client.player.getUserName());
+        //        AudioPlayer.changeAudio("welcomeSound.wav");
     }
 
     @FXML
@@ -102,12 +103,10 @@ public class WelcomeController implements Initializable {
 
     @FXML
     public void toogleAudio() {
-        if (soundBtn.getStyleClass().contains("muteSound")) {
-            soundBtn.getStyleClass().remove("muteSound");
+        if (AudioPlayer.clip.isRunning()) {
             soundBtn.getStyleClass().add("unmuteSound");
         } else {
-            soundBtn.getStyleClass().remove("unmuteSound");
-            soundBtn.getStyleClass().add("muteSound");
+            soundBtn.getStyleClass().remove("muteSound");
         }
         AudioPlayer.toogleAudio();
     }
