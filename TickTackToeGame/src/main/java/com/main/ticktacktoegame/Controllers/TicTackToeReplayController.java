@@ -64,6 +64,9 @@ public class TicTackToeReplayController implements Initializable {
     @FXML
     private Label playerO;
     
+    @FXML
+    Button soundBtn;
+    
     public static ArrayList<Button> buttons;
     public int index = 0;
     public static ArrayList<Integer> gameMoves;
@@ -119,7 +122,7 @@ public class TicTackToeReplayController implements Initializable {
                 endGameMessage.setText(replayEndMessage);
                 return;
             } catch (IOException ex) {
-                Logger.getLogger(TicTackToeReplayController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("problem in Tic Tac toe controller");
             }
         }
         int buttonIndex = gameMoves.get(index);
@@ -136,6 +139,13 @@ public class TicTackToeReplayController implements Initializable {
     
     @FXML
     public void toogleAudio() {
+        if (soundBtn.getStyleClass().contains("muteSound")) {
+            soundBtn.getStyleClass().remove("muteSound");
+            soundBtn.getStyleClass().add("unmuteSound");
+        } else {
+            soundBtn.getStyleClass().remove("unmuteSound");
+            soundBtn.getStyleClass().add("muteSound");
+        }
         AudioPlayer.toogleAudio();
     }
     

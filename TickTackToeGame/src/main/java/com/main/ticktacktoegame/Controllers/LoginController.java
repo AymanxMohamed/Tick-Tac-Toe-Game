@@ -30,7 +30,7 @@ public class LoginController {
     Label loginErrorLabel;
 
     @FXML
-    private void sendLoginRequest() {
+    public void sendLoginRequest() {
         username = usernameField.getText();
         password = passwordField.getText();
         try {
@@ -40,7 +40,7 @@ public class LoginController {
                 Client.sendRequest(RequestCreator.login(username, password));
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in login controller");
         }
     }
 
@@ -48,7 +48,7 @@ public class LoginController {
         try {
             App.setRoot("RegistrationView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in login controller");
         }
     }
 }

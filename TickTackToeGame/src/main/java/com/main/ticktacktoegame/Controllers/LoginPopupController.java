@@ -18,7 +18,7 @@ public class LoginPopupController {
         try {
             App.setRoot("LoginView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+           System.out.println("problem in login popup");
         }
     }
 

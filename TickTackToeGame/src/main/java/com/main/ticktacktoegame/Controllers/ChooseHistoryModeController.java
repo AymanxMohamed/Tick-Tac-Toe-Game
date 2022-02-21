@@ -22,20 +22,20 @@ public class ChooseHistoryModeController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
-    private void switchToSingleModeHistoryView() {
+    public void switchToSingleModeHistoryView() {
         try {
             App.setRoot("singleModeHistoryView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in history mode controller ");
         }
     }
 
     @FXML
-    private void switchToMultiModeHistoryView() {
+    public void switchToMultiModeHistoryView() {
         try {
             App.setRoot("multiModeHistoryView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in history mode controller ");
         }
     }
 
@@ -44,7 +44,7 @@ public class ChooseHistoryModeController implements Initializable {
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in history mode controller ");
         }
     }
 

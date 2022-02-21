@@ -128,6 +128,7 @@ public class TicTackToeController implements Initializable {
             } else {
                 // O moves
                 buttonIndex = gameMoves.get(i);
+                buttons.get(buttonIndex).setText("O");
                 buttons.get(gameMoves.get(i)).getStyleClass().add("oMove");
             }
         }

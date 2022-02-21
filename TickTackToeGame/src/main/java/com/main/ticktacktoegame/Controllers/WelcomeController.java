@@ -88,7 +88,6 @@ public class WelcomeController implements Initializable {
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         usernameWelcomeLabel.setText(Client.player.getUserName());
-        //        AudioPlayer.changeAudio("welcomeSound.wav");
     }
 
     @FXML
@@ -97,7 +96,7 @@ public class WelcomeController implements Initializable {
 //          App.setRoot("singleModeHistoryView");
             App.setRoot("multiModeHistoryView");
         } catch (IOException ex) {
-            Logger.getLogger(WelcomeController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in WelcomeController");
         }
     }
 
@@ -110,7 +109,6 @@ public class WelcomeController implements Initializable {
             soundBtn.getStyleClass().remove("unmuteSound");
             soundBtn.getStyleClass().add("muteSound");
         }
-//        AudioPlayer.changeAudio("welcomeSound.wav");
         AudioPlayer.toogleAudio();
     }
 }

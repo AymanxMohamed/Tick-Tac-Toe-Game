@@ -47,7 +47,7 @@ public class ChooseLevelViewController implements Initializable {
         try {
             App.setRoot("chooseXorOSingle");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in choose level controller");
         }
     }    
     
@@ -56,7 +56,7 @@ public class ChooseLevelViewController implements Initializable {
         try {
             App.setRoot("chooseHistoryMode");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in choose level controller");
         }
     }
 }

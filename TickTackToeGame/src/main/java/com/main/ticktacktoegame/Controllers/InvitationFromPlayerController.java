@@ -29,7 +29,7 @@ public class InvitationFromPlayerController {
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
-            Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in invitation from player controller");
         }
     }
        @FXML
@@ -38,7 +38,7 @@ public class InvitationFromPlayerController {
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
-            Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in invitation from player controller");
         }
     }
     
@@ -48,7 +48,7 @@ public class InvitationFromPlayerController {
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
-            Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in invitation from player controller");
         }
     }
     @FXML
@@ -59,7 +59,7 @@ public class InvitationFromPlayerController {
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
-            Logger.getLogger(InvitationFromPlayerController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in invitation from player controller");
         }
     }
 

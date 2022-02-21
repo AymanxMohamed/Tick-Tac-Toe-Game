@@ -18,7 +18,7 @@ public class RegisterPopupController {
         try {
             App.setRoot("RegistrationView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in RegisterView");
         }
     }
 

@@ -23,11 +23,11 @@ public class quitChatController {
     @FXML 
     void sendForceEndSingleGame() {
         Client.sendRequest(leaveChat());
-        this.fieldContent = null;
+        fieldContent = null;
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            Logger.getLogger(quitChatController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in quitChatController");
         }
     }
     @FXML
@@ -35,7 +35,7 @@ public class quitChatController {
         try {
             App.setRoot("chat");
         } catch (IOException ex) {
-            Logger.getLogger(quitChatController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in quitGameController");
         }
     }
 }

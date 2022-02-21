@@ -32,11 +32,10 @@ public class IndexController implements Initializable {
         } catch (IOException ex) {
             // If the server is down -> close everything and pop-up a failure message
             Client.closeEveryThing();
-            ex.printStackTrace();
             try {
                 App.setRoot("ServerIsDownPopUp");
             } catch (IOException ex1) {
-                ex1.printStackTrace();
+            System.out.println("problem in index controller");
             }
         }
     }

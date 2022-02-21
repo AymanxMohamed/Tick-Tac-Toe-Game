@@ -16,7 +16,7 @@ public class ServerIsDownPopUpController {
         try {
             App.setRoot("index");
         } catch (IOException ex1) {
-            ex1.printStackTrace();
+            System.out.println("problem in serverPopUpController");
         }
     }
 }

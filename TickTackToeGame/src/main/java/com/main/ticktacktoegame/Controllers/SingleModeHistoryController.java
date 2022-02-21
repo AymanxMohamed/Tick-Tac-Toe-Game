@@ -80,7 +80,7 @@ public class SingleModeHistoryController implements Initializable {
         try {
             App.setRoot("chooseHistoryMode");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in singleModeHistoryController");
         }
     }
 

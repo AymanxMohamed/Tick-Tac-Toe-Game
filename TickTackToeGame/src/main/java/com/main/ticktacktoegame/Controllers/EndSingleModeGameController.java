@@ -33,7 +33,7 @@ public class EndSingleModeGameController {
             try {
                 App.setRoot("chooseXorOSingle");
             } catch (IOException ex) {
-                Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("problem in end single mode game");
             }
         }
     }
@@ -45,7 +45,7 @@ public class EndSingleModeGameController {
         try {
             App.setRoot("onlineHome");
         } catch (IOException ex) {
-            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("problem in end single mode game");
         }
     }
     
@@ -54,7 +54,7 @@ public class EndSingleModeGameController {
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            Logger.getLogger(EndSingleModeGameController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("problem in end single mode game");
         }
     }
     
@@ -74,7 +74,7 @@ public class EndSingleModeGameController {
                 playerXLabel.setText("Computer");
             }
         } catch (IOException ex) {
-            Logger.getLogger(SingleModeGameModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in end single mode game");
         }
     }
 

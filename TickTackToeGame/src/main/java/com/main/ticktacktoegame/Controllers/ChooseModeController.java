@@ -6,9 +6,6 @@ package com.main.ticktacktoegame.Controllers;
  */
 
 import com.main.ticktacktoegame.App;
-import com.main.ticktacktoegame.Network.Client;
-import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayer;
-import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayerForChat;
 import java.io.IOException;
 import javafx.fxml.FXML;
 

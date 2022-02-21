@@ -29,7 +29,7 @@ public class RegistrationViewController {
     Label registerErrorLabel;
     
     @FXML
-    private void sendRegisterRequest() {
+    public void sendRegisterRequest() {
         username = usernameField.getText();
         password = passwordField.getText();
         confirmedPassword = confirmedPasswordField.getText();
@@ -40,7 +40,7 @@ public class RegistrationViewController {
                 App.setRoot("PasswordDoseNotMatchView");
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+           System.out.println("problem in RegisterController");
         }
     }
     
@@ -48,7 +48,7 @@ public class RegistrationViewController {
         try {
             App.setRoot("LoginView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in RegisterController");
         }
     }
 }

@@ -31,7 +31,7 @@ public class quitGameController {
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            Logger.getLogger(quitGameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in quitGameController");
         }
     }
     @FXML

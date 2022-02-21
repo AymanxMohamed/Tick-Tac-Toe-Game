@@ -6,12 +6,8 @@ package com.main.ticktacktoegame.Controllers;
 
 import com.main.ticktacktoegame.App;
 import com.main.ticktacktoegame.Models.MultiModeGameModel;
-import com.main.ticktacktoegame.Models.Opponent;
 import com.main.ticktacktoegame.Models.SingleModeGameModel;
 import com.main.ticktacktoegame.Network.Client;
-import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayer;
-import static com.main.ticktacktoegame.Network.RequestCreator.invitePlayerForChat;
-import com.main.ticktacktoegame.Network.ResponseHandler;
 import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import java.io.IOException;
 import java.net.URL;
@@ -72,7 +68,7 @@ public class MultiModeHistoryController implements Initializable {
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in multi mode history controller");
         }
     }
 
@@ -81,7 +77,7 @@ public class MultiModeHistoryController implements Initializable {
         try {
             App.setRoot("chooseHistoryMode");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("problem in multi mode history controller");
         }
     }
 
@@ -100,7 +96,7 @@ public class MultiModeHistoryController implements Initializable {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(MultiModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("problem in multi mode history controller");
                 }
             }
         }).start();
@@ -123,7 +119,7 @@ public class MultiModeHistoryController implements Initializable {
         try {
             App.setRoot("exitView");
         } catch (IOException ex) {
-            Logger.getLogger(MultiModeHistoryController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in multi mode history controller");
         }
     }
 

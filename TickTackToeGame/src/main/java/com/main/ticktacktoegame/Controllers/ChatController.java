@@ -77,7 +77,7 @@ public class ChatController implements Initializable {
         try {
             App.setRoot("LeaveChatView");
         } catch (IOException ex) {
-            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in history mode controller ");
         }
     }
 

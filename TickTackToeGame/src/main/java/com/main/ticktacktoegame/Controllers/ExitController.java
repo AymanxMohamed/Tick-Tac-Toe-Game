@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+
 
 /**
  * FXML Controller class
@@ -25,7 +25,7 @@ public class ExitController {
         try {
             App.setRoot("WelcomeView");
         } catch (IOException ex) {
-            Logger.getLogger(ExitController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in exit controller");
         }
     }
 
@@ -34,7 +34,7 @@ public class ExitController {
             Client.sendRequest(logout());
             App.setRoot("index");
         } catch (IOException ex) {
-            Logger.getLogger(ExitController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("problem in exit controller");
         }
     }
     @FXML

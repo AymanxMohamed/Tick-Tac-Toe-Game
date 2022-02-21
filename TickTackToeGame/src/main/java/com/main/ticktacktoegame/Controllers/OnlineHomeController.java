@@ -88,7 +88,6 @@ public class OnlineHomeController implements Initializable {
         bonusPointsLabel.setText(String.valueOf(Client.player.getBonusPoints()));
         rankLabel.setText(Client.player.getPlayerRank());
         refreshTable();
-//        AudioPlayer.changeAudio("welcomeSound.wav");
     }
 
     public void refreshTable() {
@@ -173,10 +172,10 @@ public class OnlineHomeController implements Initializable {
                     } else {
                         App.setRoot("PlayerIsCurrentlyInChatView");
                     }
-                    Label playerName = (Label) App.scene.lookup("#playerName");
-                    playerName.setText(selectedOpponent.getPlayerName());
+                    Label playerName2 = (Label) App.scene.lookup("#playerName");
+                    playerName2.setText(selectedOpponent.getPlayerName());
                 } catch (IOException ex) {
-                    Logger.getLogger(OnlineHomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("problem in onlineHomeController");
                 }
             }
         }

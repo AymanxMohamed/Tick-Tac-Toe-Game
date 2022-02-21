@@ -2,6 +2,7 @@ package com.main.ticktacktoegame;
 
 import com.main.ticktacktoegame.Network.Client;
 import static com.main.ticktacktoegame.Network.RequestCreator.logout;
+import com.main.ticktacktoegame.Utilites.AudioPlayer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,6 +42,7 @@ public class App extends Application {
     }
     
     public static void main(String[] args){
+        AudioPlayer.changeAudio("chatSound.wav");
         launch();
     }
 }

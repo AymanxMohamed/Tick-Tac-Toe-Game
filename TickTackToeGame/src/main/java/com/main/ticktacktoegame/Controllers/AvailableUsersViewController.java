@@ -49,7 +49,6 @@ public class AvailableUsersViewController implements Initializable {
             onlinePlayers.forEach(player -> {
                 if (!player.isInGame() && !player.isInChat())
                 {
-                    System.out.println(player.getPlayerName() + " is online and avilable");
                     Button btn = new Button();
                     btn.setText(player.getPlayerName());
                     btn.setOnMouseClicked(mouseEvent -> {
