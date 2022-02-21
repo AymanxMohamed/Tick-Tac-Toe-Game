@@ -58,6 +58,8 @@ public class Client {
                 System.out.println("connection lost");
                 closeEveryThing();
             } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("connection lost problem in accept response");
                 closeEveryThing();
             }
         }).start();
