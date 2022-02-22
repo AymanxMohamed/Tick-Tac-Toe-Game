@@ -111,13 +111,13 @@ The  server has mainly 4 packages
 
 ### In Server Side
 
-    Server must be oppendd first because without oppening the server the client won't be able to go to his login screen and he will get an error 
+>Server must be oppendd first because without oppening the server the client won't be able to go to his login screen and he will get an error 
    
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/serverViews/00.jpg" alt="Build Status">
 </p>
 
-    After opening the server you will have the whole players list with the status of each player
+> After opening the server you will have the whole players list with the status of each player
    
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/serverViews/01.jpg" alt="Build Status">
@@ -138,13 +138,13 @@ this is the first view in the client app and it won't go to the `login` view if 
 
 
 #### register
-    if the player is new to the game he can register first  
+>if the player is new to the game he can register first  
 
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/register/05.jpg" alt="Build Status">
 </p>
 
-    if the password dosn't match he will got an error
+>if the password dosn't match he will got an error
 
 <p align="center">
     <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/register/06.jpg" alt="Build Status">
@@ -152,33 +152,33 @@ this is the first view in the client app and it won't go to the `login` view if 
 
 #### login
 
-    If the server is opened so the player will  go to the authontication stage
+>If the server is opened so the player will  go to the authontication stage
     
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/login/02.jpg" alt="Build Status">
 </p>
 
-    if the player name is wrong he will get an error from server
+>if the player name is wrong he will get an error from server
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/login/03.jpg" alt="Build Status">
 </p>
 
-    and if the password is wrong he will also get an error
+>and if the password is wrong he will also get an error
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/login/04.jpg" alt="Build Status">
 </p>
 
 
-    after the player login successfuly he will get the welcome screen and informed
-    with the information with his current rank and bonus points
+>after the player login successfuly he will get the welcome screen and informed
+>with the information with his current rank and bonus points
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/06.jpg" alt="Build Status">
 </p>
 
-    player can play with the computer and specify the difficulty
+>player can play with the computer and specify the difficulty
    
    
 
@@ -187,18 +187,18 @@ https://user-images.githubusercontent.com/72627215/154819657-1707f18c-8bc8-4832-
 
 
 
-    player can navigate to the online home view to see the players list and if their
-    is player online he can send a private chat invitation or game invitation to him
+>player can navigate to the online home view to see the players list and if their
+>is player online he can send a private chat invitation or game invitation to him
 
 <p align="center">
        <img src="https://github.com/AymanxMohamed/Tick-Tac-Toe-Game/blob/main/00%20Project%20Materials/05%20Images/00%20Client/After%20Login/07.jpg" alt="Build Status">
 </p>
 
-    send chat invitation process
+>send chat invitation process
 
 https://user-images.githubusercontent.com/72627215/154819356-b5f4c291-c308-4e3c-b691-4b417e711ec1.mp4
    
-    send game invitation process
+>send game invitation process
    
    
 
@@ -208,8 +208,8 @@ https://user-images.githubusercontent.com/72627215/154819699-19a22273-abfc-40f0-
 
 
 
-    player also can navigate to his histry to start see his previous game with 
-    the ability to click on any game and play it
+>player also can navigate to his histry to start see his previous game with 
+>the ability to click on any game and play it
 
 
 
