@@ -7,9 +7,8 @@
 
 ## Description:
  
-A NetWork based Tic-Tac-Toe application that consists mainly of two applications `server` and `client`. 
-The Game have a nice  looking user interaface.
-The Application done mainliy using `javafx` the server has `MS-SQL-SERVER` database that stores all  the information about the players. and The games they are played. The application designed using the  `MVC` pattern. The communication between the server and the client in this game done using `json objects` to make it easy to send and recieve requests and responses.
+A NetWork-based Tic-Tac-Toe application that consists mainly of two applications server and a client. The Game has nice-looking user interfaces. The Application is done mainly using `JavaFX` the server has an `MS-SQL-SERVER` database that stores all the information about the players. and The games they are played. The application was designed using the MVC pattern. The communication between the server and the client in this game is done using `JSON objects` to make it easy to send and receive requests and responses.
+
 ## main features
 
 - Nice looking User Interface
